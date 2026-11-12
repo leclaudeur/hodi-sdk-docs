@@ -68,8 +68,32 @@ icon: 'file-braces'
 - **`icon`** is a [Lucide](https://lucide.dev/icons) icon, by its name.
 - **A code block** becomes a window with **Copier**: name its file with `title="web/index.tsx"` after the language.
 - **A link** to another page uses its address, such as `/fr/guide/publish/`.
+- **A type's fields or a component's props** are a table whose second column is `Type`: the site draws it as a
+  field list. Put `<!-- prettier-ignore -->` above it so Prettier keeps one row per line.
 
 French spaces before `:`, `;`, `!`, `?` and `»` are added when the site is built: write plain spaces.
+
+## Components
+
+A component's page shows it drawn by Hodi's own code, above the code that gives it. Name it after the code block's
+language:
+
+````text
+```tsx title="web/index.tsx" render="button" kind="page" play="button"
+````
+
+- **`render`** is the component's key in `src/demo/renders.json`. Its DOM is copied there at a computer's and a
+  phone's width, and the page shows it in a shadow root with Hodi's CSS, without a script.
+- **`kind`** sizes the frame: `rows`, `page`, `modal` or `toast`.
+- **`play`** adds « Personnaliser » to the props under it: each control draws the real component again. Its controls
+  are in `src/scripts/play.ts`.
+
+`src/demo/` is written by `demo/build.sh` from Hodi's components, never by hand. Run it when a component changes, with
+a clone of Hodi whose dependencies are installed:
+
+```bash
+HODI_DIR=../hodi sh demo/build.sh
+```
 
 ## Versions
 
