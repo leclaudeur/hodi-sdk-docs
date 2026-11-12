@@ -1,0 +1,371 @@
+/* The bar: fixed, the frame's width, its line across the whole screen; a sheet below it on tablets and phones. */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  padding-top: env(safe-area-inset-top, 0px);
+  border-bottom: 1px solid var(--grid-line);
+  background: color-mix(in srgb, var(--bg) 76%, transparent);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+}
+.nav-in {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: var(--frame);
+  height: var(--bar);
+  margin: 0 auto;
+  padding-inline: max(clamp(16px, 3vw, 28px), env(safe-area-inset-left, 0px))
+    max(clamp(16px, 3vw, 28px), env(safe-area-inset-right, 0px));
+}
+/* Clip, not hidden: bars that run across the whole width never widen the page, and sticky still works. */
+main {
+  overflow-x: clip;
+  padding-top: calc(var(--bar) + 1px + env(safe-area-inset-top, 0px));
+}
+
+/* The logo, then « SDK » in superscript: 5 px after it, its top 2 px above the logo's. */
+.brand {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 5px;
+  color: var(--text);
+  text-decoration: none;
+}
+.brand .logo {
+  display: block;
+  width: auto;
+  height: 22px;
+}
+.brand .word {
+  fill: var(--text);
+}
+.brand .dot {
+  fill: var(--rust);
+}
+.brand .sdk-sup {
+  display: block;
+  margin-top: -2px;
+  color: var(--rust);
+  font: 400 11px/1 var(--font-mono);
+  letter-spacing: 0.08em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2px;
+  margin-left: 20px;
+}
+.nav-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: var(--text-2);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    color var(--duration) var(--ease),
+    background-color var(--duration) var(--ease);
+}
+.nav-links a:hover {
+  background: var(--control);
+  color: var(--text);
+}
+/* The section on screen: its link lit, a brand dot under it, as the app's active tab. */
+.nav-links a[aria-current='true'] {
+  color: var(--text);
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--rust);
+  opacity: 0;
+  transform: translateY(3px);
+  transition:
+    opacity var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
+}
+.nav-links a[aria-current='true']::after {
+  opacity: 1;
+  transform: none;
+}
+
+.nav-end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.nav-sep {
+  width: 1px;
+  height: 20px;
+  margin: 0 4px;
+  background: var(--border);
+}
+.round.lang {
+  font: 500 11.5px/1 var(--font-mono);
+  letter-spacing: 0.04em;
+}
+.burger {
+  display: none;
+}
+
+/* The version: the app's profile switcher, at the bar's 34 px; the label at 600, chevrons in grey. */
+.menu-w {
+  position: relative;
+}
+.ver {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 10px 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--control);
+  color: var(--text);
+  font: 600 13px/1 var(--font-body);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+.ver svg {
+  color: var(--text-3);
+}
+.ver[aria-expanded='true'] {
+  background: var(--card);
+}
+@media (hover: hover) {
+  .ver:hover {
+    background: var(--control-hover);
+  }
+}
+
+/* The app's Menu: a card, 44 px rows with a line between them, the chosen one at 650 with a check. */
+.vm {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 8px);
+  right: 0;
+  display: none;
+  flex-direction: column;
+  min-width: 220px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow:
+    0 16px 40px var(--shadow),
+    0 2px 8px var(--shadow);
+}
+.vm.open {
+  display: flex;
+  animation: vm-in var(--duration) var(--ease);
+}
+@keyframes vm-in {
+  from {
+    opacity: 0;
+  }
+}
+.vm > a,
+.vm > button {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--text);
+  font: 500 14px/1 var(--font-body);
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.vm .lb {
+  flex: 1;
+}
+.vm [aria-checked='true'] .lb {
+  font-weight: 650;
+}
+.vm .end {
+  visibility: hidden;
+}
+.vm [aria-checked='true'] .end {
+  visibility: visible;
+}
+.vm > * + *::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8px;
+  right: 8px;
+  height: 1px;
+  background: var(--divider);
+}
+@media (hover: hover) {
+  .vm > :hover {
+    background: var(--card-hover);
+  }
+  .vm > :hover::before,
+  .vm > :hover + *::before {
+    visibility: hidden;
+  }
+}
+
+/* ui/Chip, its success look: « Dernière » beside the newest version. */
+.chip {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--control);
+  color: var(--text-2);
+  font: 400 10px/1 var(--font-mono);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.chip.success {
+  border-color: var(--topic-science-border);
+  background: var(--topic-science-surface);
+  color: var(--topic-science);
+}
+
+/* ui/Segmented. */
+.seg {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--control);
+}
+.seg > * {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-2);
+  font: 600 12px/1 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+.seg > [aria-pressed='true'] {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.sheet,
+.sheet-scrim {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .nav-links,
+  .nav .hide-md {
+    display: none;
+  }
+  .burger {
+    display: inline-flex;
+  }
+  .sheet {
+    display: block;
+    position: fixed;
+    inset: calc(var(--bar) + 1px + env(safe-area-inset-top, 0px)) 0 auto;
+    z-index: 29;
+    max-height: calc(100dvh - var(--bar));
+    overflow: auto;
+    padding: 8px max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px));
+    border-bottom: 1px solid var(--grid-line);
+    background: var(--bg);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition:
+      opacity 200ms var(--ease),
+      transform 200ms var(--ease);
+  }
+  .sheet.open {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .sheet a.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    border-bottom: 1px solid var(--divider);
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .sheet a.row svg {
+    color: var(--text-3);
+  }
+  .sheet .set-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: 56px;
+    border-bottom: 1px solid var(--divider);
+    color: var(--text-2);
+    font-size: 15px;
+  }
+  .sheet-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 28;
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms var(--ease);
+  }
+  body:has(.sheet.open) .sheet-scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav .hide-sm {
+    display: none;
+  }
+  .ver {
+    gap: 6px;
+  }
+  .ver .pre {
+    display: none;
+  }
+}

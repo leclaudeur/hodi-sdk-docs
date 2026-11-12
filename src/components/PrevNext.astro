@@ -1,0 +1,33 @@
+---
+import { orderOf, type Doc } from '../lib/docs.ts'
+import { t } from '../lib/i18n.ts'
+import Icon from './Icon.astro'
+
+// The page before and the page after, in the sidebar's order, at the foot of each page.
+interface Props {
+  doc: Doc
+}
+
+const { doc } = Astro.props
+const order = orderOf(doc.version, doc.lang)
+const at = order.findIndex(other => other.path === doc.path)
+const previous = at > 0 ? order[at - 1] : undefined
+const next = order[at + 1]
+---
+
+<nav class="dev-pn" aria-label={`${t(doc.lang, 'previous')} / ${t(doc.lang, 'next')}`}>
+  {previous ? (
+    <a class="btn icon" href={previous.url} rel="prev">
+      <Icon name="arrow-left" />
+      {previous.entry.data.title}
+    </a>
+  ) : (
+    <span />
+  )}
+  {next && (
+    <a class="btn icon next" href={next.url} rel="next">
+      {next.entry.data.title}
+      <Icon name="arrow-right" />
+    </a>
+  )}
+</nav>

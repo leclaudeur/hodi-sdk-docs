@@ -1,0 +1,83 @@
+---
+import '@fontsource/bebas-neue/latin-400.css'
+import '../styles/fonts.css'
+import '../styles/tokens.css'
+import '../styles/site.css'
+import '../styles/base.css'
+import '../styles/header.css'
+import '../styles/docs.css'
+import '../styles/prose.css'
+import '../styles/code.css'
+import bebas from '@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2?url'
+import geist from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url'
+import type { Lang } from '../lib/i18n.ts'
+
+// Every page's document: what search engines and link cards read, and the theme set before the first paint.
+interface Props {
+  lang: Lang
+  title: string
+  description: string
+  // The address search engines should list: the latest version's page.
+  canonical: string
+  alternates?: { lang: Lang; url: string }[]
+  noindex?: boolean
+  jsonLd?: object
+}
+
+const { lang, title, description, canonical, alternates = [], noindex = false, jsonLd } = Astro.props
+const site = Astro.site ?? new URL('http://localhost:4321')
+const absolute = (path: string) => new URL(path, site).href
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <!-- The text's and the titles' fonts load with the page, not after the CSS: no jump when they arrive. -->
+    <link rel="preload" href={geist} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={bebas} as="font" type="font/woff2" crossorigin />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={absolute(canonical)} />
+    {alternates.map(page => (
+      <link rel="alternate" hreflang={page.lang} href={absolute(page.url)} />
+    ))}
+    {alternates.length > 0 && (
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={absolute((alternates.find(page => page.lang === 'fr') ?? alternates[0])?.url ?? canonical)}
+      />
+    )}
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Hodi SDK" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={absolute(canonical)} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_BE' : 'en_GB'} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#0f0f10" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fbf8f2" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <script is:inline>
+      // The theme chosen on this device, before the first paint: no flash of the other one.
+      try {
+        const theme = localStorage.getItem('hodi-sdk-theme')
+        if (theme === 'dark' || theme === 'light' || theme === 'powder') document.documentElement.dataset.theme = theme
+      } catch {
+        // Storage blocked: the system's theme applies.
+      }
+    </script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/site.ts'
+    </script>
+  </body>
+</html>

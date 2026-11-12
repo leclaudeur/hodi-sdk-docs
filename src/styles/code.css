@@ -1,0 +1,62 @@
+/* A code block is a window: three dots, the file's name, Copier, then the code, highlighted with the site's colours. */
+
+.term {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0 24px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--column);
+  box-shadow: 0 30px 80px -40px var(--shadow);
+}
+.term .tb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px 10px 16px;
+  border-bottom: 1px solid var(--divider);
+}
+.term .tb .d {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--raised);
+}
+.term .tb .mono {
+  margin-left: 6px;
+}
+.term .tb .btn {
+  margin-left: auto;
+}
+.term .btn.copied {
+  border-color: var(--approve-border);
+  background: var(--approve);
+  color: var(--approve-text);
+}
+/* A line never wraps: when it is wider than the window, the window scrolls sideways. */
+.term pre {
+  flex: 1;
+  margin: 0;
+  padding: 22px 22px 24px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  background: transparent !important;
+  font: 400 13px/1.85 var(--font-mono);
+  white-space: pre;
+  --astro-code-foreground: var(--text);
+  --astro-code-background: transparent;
+  --astro-code-token-keyword: var(--rust);
+  --astro-code-token-string: var(--topic-science);
+  --astro-code-token-string-expression: var(--topic-science);
+  --astro-code-token-function: var(--topic-travel);
+  --astro-code-token-constant: var(--topic-belgium);
+  --astro-code-token-parameter: var(--topic-culture);
+  --astro-code-token-punctuation: var(--text-3);
+  --astro-code-token-comment: var(--text-3);
+  --astro-code-token-link: var(--topic-travel);
+}
+.term pre code {
+  font: inherit;
+}

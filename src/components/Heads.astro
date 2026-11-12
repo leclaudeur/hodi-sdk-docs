@@ -1,0 +1,20 @@
+---
+import type { MarkdownHeading } from 'astro'
+
+// The current page's titles, under its row in the sidebar; the script lights the one on screen.
+interface Props {
+  headings: MarkdownHeading[]
+}
+
+const { headings } = Astro.props
+---
+
+{headings.length > 0 && (
+  <div class="subs heads">
+    {headings.map(heading => (
+      <a class:list={[`h${heading.depth}`]} href={`#${heading.slug}`} data-head={heading.slug}>
+        {heading.text}
+      </a>
+    ))}
+  </div>
+)}

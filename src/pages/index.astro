@@ -1,0 +1,9 @@
+---
+import { latest, orderOf } from '../lib/docs.ts'
+import Redirect from '../layouts/Redirect.astro'
+
+// The root: the latest version's guide, in French until English pages exist.
+const first = orderOf(latest, 'fr')[0]
+---
+
+<Redirect to={first?.url ?? '/fr/'} />

@@ -1,0 +1,49 @@
+---
+import type { MarkdownHeading } from 'astro'
+import { groupsOf, type Doc } from '../lib/docs.ts'
+import { t } from '../lib/i18n.ts'
+import Heads from './Heads.astro'
+import Icon from './Icon.astro'
+
+// The app's first column: 36 px rows with a 24 px square, the page on a card, its titles under it.
+interface Props {
+  doc: Doc
+  headings: MarkdownHeading[]
+}
+
+const { doc, headings } = Astro.props
+const groups = groupsOf(doc.version, doc.lang)
+const heads = headings.filter(heading => heading.depth === 2 || heading.depth === 3)
+const isOpen = (page: Doc) => page.path === doc.path || page.path === doc.parent
+---
+
+<nav class="dev-side" aria-label={t(doc.lang, 'documentation')}>
+  {groups.map(group => (
+    <div class="grp">
+      <span class="mono">{t(doc.lang, group.key)}</span>
+      {group.docs.map(({ doc: page, children }) => (
+        <>
+          <a href={page.url} aria-current={page.path === doc.path ? 'page' : undefined}>
+            <span class="sq">
+              <Icon name={page.entry.data.icon} size={14} />
+            </span>
+            {page.entry.data.title}
+          </a>
+          {isOpen(page) && children.length > 0 && (
+            <div class="subs">
+              {children.map(child => (
+                <>
+                  <a href={child.url} aria-current={child.path === doc.path ? 'page' : undefined}>
+                    {child.entry.data.title}
+                  </a>
+                  {child.path === doc.path && <Heads headings={heads} />}
+                </>
+              ))}
+            </div>
+          )}
+          {page.path === doc.path && <Heads headings={heads} />}
+        </>
+      ))}
+    </div>
+  ))}
+</nav>

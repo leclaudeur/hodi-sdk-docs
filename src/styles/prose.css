@@ -1,0 +1,124 @@
+/* The guide's text is the legal pages' text: same sizes, colours, titles and lists. */
+
+.prose {
+  color: var(--text-2);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.prose > :first-child {
+  margin-top: 0;
+}
+/* As in the READMEs: never a word alone on a paragraph's last line. */
+.prose p,
+.prose li {
+  text-wrap: pretty;
+}
+.prose h2 {
+  margin: 48px 0 12px;
+  color: var(--text);
+  font: 400 clamp(32px, 3.4vw, 44px)/1 var(--font-display);
+  letter-spacing: 0.005em;
+}
+.prose h3 {
+  margin: 28px 0 8px;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.prose p {
+  margin: 0 0 14px;
+}
+.prose ul,
+.prose ol {
+  margin: 0 0 14px;
+  padding-left: 24px;
+}
+.prose li {
+  margin: 6px 0;
+  padding-left: 4px;
+}
+.prose li::marker {
+  color: var(--rust);
+}
+.prose strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.prose em {
+  color: var(--text);
+}
+.prose a:not(.slot) {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--rust);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.prose :not(pre) > code {
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--control);
+  color: var(--text);
+  font: 500 0.8em var(--font-mono);
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .prose {
+    font-size: 16px;
+  }
+}
+
+/* A title's link: on hover, a link icon in the margin to its left. */
+.prose :is(h2, h3) {
+  position: relative;
+  scroll-margin-top: 96px;
+}
+.prose :is(h2, h3) .anchor {
+  position: absolute;
+  top: 50%;
+  left: -34px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-top: -15px;
+  border-radius: 8px;
+  color: var(--text-3);
+  opacity: 0;
+  text-decoration: none;
+  transition:
+    opacity var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+.prose h3 .anchor {
+  left: -30px;
+  margin-top: -13px;
+}
+.prose h3 .anchor svg {
+  width: 14px;
+  height: 14px;
+}
+.prose :is(h2, h3):hover .anchor,
+.prose .anchor:focus-visible {
+  opacity: 1;
+}
+.prose .anchor:hover {
+  color: var(--rust);
+}
+@media (max-width: 1023px) {
+  .prose :is(h2, h3) {
+    scroll-margin-top: 130px;
+  }
+  .prose :is(h2, h3) .anchor {
+    left: auto;
+    right: 100%;
+    margin-right: 4px;
+  }
+}
+@media (hover: none) {
+  .prose .anchor {
+    display: none;
+  }
+}
