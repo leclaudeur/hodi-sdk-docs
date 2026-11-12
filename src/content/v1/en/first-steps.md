@@ -1,5 +1,5 @@
 ---
-title: "First steps"
+title: "Getting started"
 description: "Your first Hodi plugin in four steps: its manifest, its route, its card, then installing it."
 intro: "Your first plugin in four steps, in an editor that shows Hodi next to your code."
 order: 0
