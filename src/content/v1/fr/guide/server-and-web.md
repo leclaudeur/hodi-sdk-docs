@@ -107,4 +107,4 @@ Chaque texte va dans `locales/fr.json`, la référence, et dans `locales/en.json
 2. **Un Hodi de test**, le tien, avec _Serveur › Plugins › Mode développeur_ activé.
 3. **Le SDK** : `npm install --save-dev @hodi-app/plugin-sdk` dans son dossier.
 
-Pour voir les quatre étapes en vrai, suis les [premiers pas](/fr/first-steps/) : un plugin complet en 15 minutes.
+Pour voir les quatre étapes en vrai, suis les [premiers pas](/fr/getting-started/) : un plugin complet en 15 minutes.
