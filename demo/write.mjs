@@ -5,7 +5,7 @@ const [work, out] = process.argv.slice(2)
 const capture = JSON.parse(readFileSync(`${work}/capture.json`, 'utf8'))
 const shadow = readFileSync(new URL('./shadow.css', import.meta.url), 'utf8')
 
-writeFileSync(`${out}/renders.json`, JSON.stringify({ d: capture.d, p: capture.p }))
+writeFileSync(`${out}/renders.json`, JSON.stringify({ fr: capture.fr, en: capture.en }))
 writeFileSync(`${out}/app.css`, `${shadow}\n${capture.css}\n`)
 // The page already has Hodi's fonts: the playground's own copies would only weigh.
 const play = readFileSync(

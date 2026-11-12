@@ -18,7 +18,10 @@ const hooks = `const { t } = usePluginTranslation()\nconst api = usePluginApi()`
     <a class="cc" data-topic={page.entry.data.topic} href={page.url}>
       <span class="cc-prev" aria-hidden="true">
         {page.entry.data.preview ? (
-          <span class={`cmp-render thumb ${page.path.split('/').pop()}`} set:html={shadowOf(page.entry.data.preview)} />
+          <span
+            class={`cmp-render thumb ${page.path.split('/').pop()}`}
+            set:html={shadowOf(page.entry.data.preview, page.lang)}
+          />
         ) : (
           <Code class="cc-code" code={hooks} lang="tsx" theme="css-variables" />
         )}

@@ -26,7 +26,7 @@ const seg = (key: string, options: (string | [string, string])[], value: string)
 // Each prop of the list that a control drives, by its name in the list.
 const CONTROLS: Record<string, Record<string, Control>> = {
   button: {
-    children: text('label', 'Enregistrer'),
+    children: text('label', t(lang, 'playSampleLabel')),
     'look?': seg('look', ['neutral', 'primary', 'danger', 'ai'], 'primary'),
     'icon?': seg('icon', [['none', t(lang, 'playNone')], 'Check', 'Download', 'Trash2'], 'Check'),
     'busy?': toggle('busy'),
@@ -34,8 +34,8 @@ const CONTROLS: Record<string, Record<string, Control>> = {
     'wide?': toggle('wide')
   },
   stepPage: {
-    title: text('title', 'Ton prénom'),
-    intro: text('intro', 'Hodi le met dans chaque salutation.'),
+    title: text('title', t(lang, 'playSampleTitle')),
+    intro: text('intro', t(lang, 'playSampleIntro')),
     'step?': toggle('progress', true),
     'onBack?': toggle('back', true),
     'start?': toggle('later'),

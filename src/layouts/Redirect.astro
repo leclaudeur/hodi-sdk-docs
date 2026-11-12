@@ -2,9 +2,11 @@
 // An address with no page of its own (the root, a language, a section): sends the browser on to its first page.
 interface Props {
   to: string
+  // The root only: where a browser that doesn't ask for French goes instead.
+  english?: string | undefined
 }
 
-const { to } = Astro.props
+const { to, english } = Astro.props
 ---
 
 <!doctype html>
@@ -13,6 +15,9 @@ const { to } = Astro.props
     <meta charset="utf-8" />
     <title>Hodi SDK</title>
     <meta name="robots" content="noindex, follow" />
+    {english && <script is:inline define:vars={{ english }}>
+      if (!navigator.languages.some(language => language.startsWith('fr'))) location.replace(english)
+    </script>}
     <meta http-equiv="refresh" content={`0; url=${to}`} />
     <link rel="canonical" href={to} />
   </head>

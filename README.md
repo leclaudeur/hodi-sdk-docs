@@ -3,7 +3,7 @@
 # 📘 Hodi SDK docs
 
 **The website of [Hodi](https://github.com/leclaudeur/hodi)'s plugin SDK, `@hodi-app/plugin-sdk`.**<br>
-A guide, the components and the types, in French first. _Static pages, served by nginx from one Docker image._
+A guide, the components and the types, in French and English. _Static pages, served by nginx from one Docker image._
 
 [![CI](https://github.com/leclaudeur/hodi-sdk-docs/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/leclaudeur/hodi-sdk-docs/actions/workflows/ci.yml)
 [![Plugin SDK](https://img.shields.io/npm/v/@hodi-app/plugin-sdk?label=%40hodi-app%2Fplugin-sdk)](https://www.npmjs.com/package/@hodi-app/plugin-sdk)
@@ -89,7 +89,7 @@ language:
 ```tsx title="web/index.tsx" render="button" kind="page" play="button"
 ````
 
-- **`render`** is the component's key in `src/demo/renders.json`. Its DOM is copied there at a computer's and a
+- **`render`** is the component's key in `src/demo/renders.json`. Its DOM is copied there in French and in English, at a computer's and a
   phone's width, and the page shows it in a shadow root with Hodi's CSS, without a script.
 - **`kind`** sizes the frame: `rows`, `page`, `modal` or `toast`.
 - **`play`** adds « Personnaliser » to the props under it: each control draws the real component again. Its controls
@@ -131,7 +131,8 @@ After a merge, the stack's **Pull and redeploy** takes the new image.
 
 ## Rules
 
-- **French first.** The French pages are the reference, and say « tu ».
+- **French first.** The French pages are the reference, and say « tu ». Each one has its English twin at the same
+  path under `en/`: change both in the same pull request.
 - **Technical terms stay as they are**: `ctx`, `definePlugin()`, _hooks_, never translated.
 - **One page, one subject.** Link to the page that covers a subject instead of repeating it.
 - **Code blocks unrolled.** An object or an array with more than one entry puts one entry per line.

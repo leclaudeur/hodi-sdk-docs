@@ -1,0 +1,34 @@
+---
+import { latest, orderOf } from '../lib/docs.ts'
+import { t, type Lang } from '../lib/i18n.ts'
+import Base from '../layouts/Base.astro'
+import Brand from './Brand.astro'
+
+// The page nginx answers an unknown address with, in the language of the address's folder.
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const home = orderOf(latest, lang)[0]?.url ?? '/'
+---
+
+<Base
+  lang={lang}
+  title={`${t(lang, 'notFoundTitle')} · Hodi SDK`}
+  description={t(lang, 'notFoundText')}
+  canonical={lang === 'fr' ? '/404.html' : `/${lang}/404/`}
+  noindex
+>
+  <main class="lost">
+    <Brand href={home} label={t(lang, 'home')} />
+    <h1 class="title">
+      {t(lang, 'notFoundTitle')}
+      <span class="dot" aria-hidden="true"></span>
+    </h1>
+    <p>{t(lang, 'notFoundText')}</p>
+    <a class="btn primary" href={home}>
+      {t(lang, 'toGuide')}
+    </a>
+  </main>
+</Base>

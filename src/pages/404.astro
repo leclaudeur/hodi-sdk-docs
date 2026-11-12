@@ -1,30 +1,7 @@
 ---
-import Brand from '../components/Brand.astro'
-import { latest, orderOf } from '../lib/docs.ts'
-import { t } from '../lib/i18n.ts'
-import Base from '../layouts/Base.astro'
+import NotFound from '../components/NotFound.astro'
 
-// nginx answers every unknown address with this page, in French: the language of the first pages.
-const first = orderOf(latest, 'fr')[0]
-const home = first?.url ?? '/'
+// Every unknown address outside /en/: French, the reference language.
 ---
 
-<Base
-  lang="fr"
-  title={`${t('fr', 'notFoundTitle')} · Hodi SDK`}
-  description={t('fr', 'notFoundText')}
-  canonical="/404.html"
-  noindex
->
-  <main class="lost">
-    <Brand href={home} label={t('fr', 'home')} />
-    <h1 class="title">
-      {t('fr', 'notFoundTitle')}
-      <span class="dot" aria-hidden="true"></span>
-    </h1>
-    <p>{t('fr', 'notFoundText')}</p>
-    <a class="btn primary" href={home}>
-      {t('fr', 'toGuide')}
-    </a>
-  </main>
-</Base>
+<NotFound lang="fr" />
