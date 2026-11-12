@@ -1,0 +1,30 @@
+/* The site's own tokens on top of Hodi's: the frame's lines and width, the fonts and timings of base.css. */
+
+:root,
+:root[data-theme='dark'] {
+  --grid-line: #232325;
+}
+
+:root[data-theme='light'] {
+  --grid-line: #e6ddce;
+}
+
+:root[data-theme='powder'] {
+  --grid-line: #2b1f24;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --grid-line: #e6ddce;
+  }
+}
+
+:root {
+  --frame: 1200px;
+  --bar: 64px;
+  --font-body: 'Geist Hodi', 'Geist Variable', system-ui, sans-serif;
+  --font-mono: 'Geist Mono Hodi', 'Geist Mono Variable', ui-monospace, monospace;
+  --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --duration: 160ms;
+}

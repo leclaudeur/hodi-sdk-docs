@@ -1,0 +1,203 @@
+/* Reset, text and the app's shared pieces: ui/Button, ui/RoundButton, titles ending on the logo's dot. */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 2px;
+}
+
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.mono {
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ui/Button: 44 px, compact 34 px; neutral or primary. */
+.btn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--control);
+  color: var(--text);
+  font: 600 14px/1 var(--font-body);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    scale 120ms ease;
+}
+
+.btn.icon {
+  padding: 0 18px 0 14px;
+}
+
+.btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.btn.compact {
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  font-size: 13px;
+  line-height: 14px;
+}
+
+.btn.compact.icon {
+  padding: 0 14px 0 11px;
+}
+
+.btn.compact svg {
+  width: 15px;
+  height: 15px;
+}
+
+.btn:active {
+  scale: 0.97;
+}
+
+.btn.primary {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* The copy button's two seconds of « Copié »: the app's green chip colours. */
+.btn.copied {
+  border-color: var(--approve-border);
+  background: var(--approve);
+  color: var(--approve-text);
+}
+
+@media (hover: hover) {
+  .btn:not(.primary, .copied):hover {
+    background: var(--control-hover);
+  }
+
+  .btn.primary:hover {
+    background: color-mix(in srgb, var(--text) 86%, var(--bg));
+  }
+}
+
+/* ui/RoundButton: 34 px in the bar. */
+.round {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--control);
+  color: var(--text-2);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.round svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (hover: hover) {
+  .round:hover {
+    background: var(--control-hover);
+    color: var(--text);
+  }
+}
+
+/* Screen titles: Bebas Neue as in the app, ended by the logo's round dot. */
+.title {
+  margin: 0;
+  font: 400 1em/0.92 var(--font-display);
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+.title .dot {
+  display: inline-block;
+  width: round(0.13em, 1px);
+  height: round(0.13em, 1px);
+  margin-left: 0.06em;
+  border-radius: 50%;
+  background: var(--rust);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kicker::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rust);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--rust) 20%, transparent);
+}
