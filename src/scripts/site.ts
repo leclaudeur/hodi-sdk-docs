@@ -1,3 +1,4 @@
+import { wireSearch } from './search.ts'
 import { fitSidebar, spyHeadings } from './sidebar.ts'
 
 const THEME_KEY = 'hodi-sdk-theme'
@@ -110,5 +111,6 @@ wireTheme()
 wireSheet()
 wireCopy()
 wireTree()
+wireSearch()
 fitSidebar()
 spyHeadings()

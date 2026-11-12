@@ -1,0 +1,301 @@
+/* The header's search field: a 34 px pill like the version switcher, only its loupe below the computer size. */
+.sdk-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 184px;
+  height: 34px;
+  padding: 0 4px 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--control);
+  color: var(--text-3);
+  font: 400 13px var(--font-body);
+  cursor: pointer;
+  transition:
+    border-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+.sdk-search svg {
+  flex: none;
+}
+.sdk-search .ph {
+  flex: 1;
+  text-align: left;
+}
+.sdk-search kbd {
+  display: inline-grid;
+  place-items: center;
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-3);
+  font-size: 11px;
+  line-height: 1;
+}
+@media (hover: hover) {
+  .sdk-search:hover {
+    border-color: var(--border-strong);
+    color: var(--text-2);
+  }
+}
+@media (max-width: 1023px) {
+  .sdk-search {
+    width: 34px;
+    padding: 0;
+    justify-content: center;
+  }
+  .sdk-search .ph,
+  .sdk-search kbd {
+    display: none;
+  }
+}
+
+/* The spotlight: a card high on the page over a blurred one; full screen on a phone. */
+html:has(dialog.sx[open]) {
+  overflow: hidden;
+}
+.sx {
+  width: min(640px, calc(100% - 32px));
+  max-width: none;
+  max-height: min(560px, 76vh);
+  margin: 12vh auto auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 30px 80px -20px var(--shadow);
+  overflow: hidden;
+}
+.sx[open] {
+  display: flex;
+  flex-direction: column;
+  animation: sx-in 180ms var(--ease);
+}
+@keyframes sx-in {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+}
+.sx::backdrop {
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(6px);
+}
+.sx-h {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 60px;
+  padding: 0 12px 0 20px;
+  border-bottom: 1px solid var(--divider);
+  color: var(--text-3);
+}
+.sx-h > svg {
+  flex: none;
+}
+.sx-h input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: var(--text);
+  font: 400 16px var(--font-body);
+}
+.sx-h input::placeholder {
+  color: var(--text-3);
+}
+.sx-h input::-webkit-search-cancel-button {
+  display: none;
+}
+.sx-x {
+  padding: 4px 7px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: none;
+  color: var(--text-3);
+  font-size: 10px;
+  cursor: pointer;
+}
+.sx-close {
+  display: none;
+}
+.sx-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  scrollbar-width: thin;
+}
+.sx-g {
+  padding: 12px 12px 6px;
+  color: var(--text-3);
+  font: 500 10.5px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* A result: the sidebar's square, a title and one line, a line between two rows as between the app's articles. */
+.sx-r {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  color: var(--text);
+  text-decoration: none;
+}
+.sx-r + .sx-r::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 12px;
+  left: 12px;
+  height: 1px;
+  background: var(--divider);
+}
+.sx-r .sq {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-2);
+}
+.sx-r .tx {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.sx-r b {
+  font-size: 14px;
+  font-weight: 500;
+}
+.sx-r .tx span {
+  overflow: hidden;
+  color: var(--text-3);
+  font-size: 12.5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.sx-r mark {
+  background: none;
+  color: var(--rust);
+}
+.sx-r > svg {
+  color: var(--text-3);
+  opacity: 0;
+}
+.sx-r[aria-selected='true'] {
+  background: var(--card-hover);
+}
+.sx-r[aria-selected='true'] > svg {
+  opacity: 1;
+}
+/* The line steps aside beside the chosen row. */
+.sx-r[aria-selected='true']::before,
+.sx-r[aria-selected='true'] + .sx-r::before {
+  visibility: hidden;
+}
+
+/* Nothing found: the app's empty state, an icon tile, a title and one line. */
+.sx-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 48px 20px 52px;
+  text-align: center;
+}
+.sx-empty[hidden] {
+  display: none;
+}
+.sx-empty .ic {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 2px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--tile);
+  color: var(--text-2);
+}
+.sx-empty b {
+  color: var(--text);
+  font: 650 22px/1.05 var(--font-body);
+}
+.sx-empty > span:last-child {
+  max-width: 320px;
+  color: var(--text-2);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.sx-f {
+  flex: none;
+  display: flex;
+  gap: 18px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--divider);
+  color: var(--text-3);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.sx-f span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.sx-f kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font: 500 10.5px var(--font-mono);
+}
+
+@media (max-width: 600px) {
+  .sx {
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: var(--bg);
+    box-shadow: none;
+  }
+  .sx-h {
+    height: calc(64px + env(safe-area-inset-top, 0px));
+    padding: env(safe-area-inset-top, 0px) 12px 0 16px;
+  }
+  .sx-x,
+  .sx-f {
+    display: none;
+  }
+  .sx-close {
+    display: grid;
+    flex: none;
+    width: 38px;
+    height: 38px;
+  }
+  .sx-list:has(.sx-empty:not([hidden])) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 80px;
+  }
+}
