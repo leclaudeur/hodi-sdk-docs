@@ -1,0 +1,31 @@
+---
+import type { Doc } from '../../lib/docs.ts'
+import { firstStepsUrl } from '../../lib/first-steps.ts'
+import { t } from '../../lib/i18n.ts'
+import Icon from '../Icon.astro'
+
+// Back to the step before (the guide before the first), on to the next (the end after the last).
+interface Props {
+  doc: Doc
+  current: number
+  home: string
+}
+
+const { doc, current, home } = Astro.props
+const count = doc.entry.data.steps?.length ?? 0
+const slugOf = (index: number) => (index === 0 ? '' : String(index + 1))
+const back = current === 0 ? home : firstStepsUrl(doc, slugOf(current - 1))
+const isLast = current === count - 1
+const next = firstStepsUrl(doc, isLast ? 'done' : slugOf(current + 1))
+---
+
+<div class="tz-foot">
+  <a class="btn icon" href={back}>
+    <Icon name="arrow-left" />
+    {t(doc.lang, 'firstStepsBack')}
+  </a>
+  <a class="btn primary icon end" href={next}>
+    {t(doc.lang, isLast ? 'firstStepsFinish' : 'firstStepsNext')}
+    <Icon name={isLast ? 'check' : 'arrow-right'} />
+  </a>
+</div>

@@ -1,0 +1,64 @@
+---
+import Bar from '../components/first-steps/Bar.astro'
+import CodePane from '../components/first-steps/CodePane.astro'
+import Finish from '../components/first-steps/Finish.astro'
+import Foot from '../components/first-steps/Foot.astro'
+import PreviewPane from '../components/first-steps/PreviewPane.astro'
+import StepPane from '../components/first-steps/StepPane.astro'
+import { counterpart, languagesOf, latest, orderOf, type Doc } from '../lib/docs.ts'
+import { t } from '../lib/i18n.ts'
+import { plain } from '../lib/inline.ts'
+import Base from './Base.astro'
+import '../styles/first-steps.css'
+import '../styles/first-steps-end.css'
+
+// Premiers pas: a full-screen editor, the step on the left, the code in the middle, Hodi on the right.
+interface Props {
+  doc: Doc
+  // The step shown, from 0; the end shows the last one under its dialog.
+  current: number
+  done: boolean
+}
+
+const { doc, current, done } = Astro.props
+const { data } = doc.entry
+const home = orderOf(doc.version, doc.lang)[0]?.url ?? '/'
+const newest = doc.version === latest ? doc : counterpart(doc, latest, doc.lang)
+const step = data.steps?.[current]
+const first = current === 0 && !done
+const panes = [
+  { key: 'step', label: t(doc.lang, 'firstStepsStep') },
+  { key: 'code', label: t(doc.lang, 'firstStepsCode') },
+  { key: 'prev', label: t(doc.lang, 'firstStepsPreview') }
+]
+---
+
+<Base
+  lang={doc.lang}
+  title={first ? `${data.title} · Hodi SDK` : `${step?.name} · ${data.title} · Hodi SDK`}
+  description={plain(data.description)}
+  canonical={newest?.url ?? doc.url}
+  alternates={languagesOf(doc).map(page => ({ lang: page.lang, url: page.url }))}
+  noindex={!first || doc.version !== latest}
+>
+  <div class="tz" data-pagefind-body={first && doc.version === latest ? '' : undefined}>
+    <Bar doc={doc} current={current} done={done} home={home} />
+    <main class="tz-main show-step" data-pagefind-meta={`title:${data.title}`}>
+      <div class="tz-seg" role="radiogroup" aria-label={t(doc.lang, 'firstStepsShow')}>
+        {panes.map((pane, index) => (
+          <button type="button" role="radio" aria-checked={index === 0 ? 'true' : 'false'} data-show={pane.key}>
+            {pane.label}
+          </button>
+        ))}
+      </div>
+      <StepPane doc={doc} current={current} done={done} />
+      <Foot doc={doc} current={current} home={home} />
+      <CodePane doc={doc} current={current} />
+      <PreviewPane doc={doc} current={current} />
+    </main>
+    {done && <Finish doc={doc} home={home} />}
+  </div>
+  <script>
+    import '../scripts/first-steps.ts'
+  </script>
+</Base>

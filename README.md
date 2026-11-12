@@ -49,6 +49,7 @@ src/content/v1/fr/
     slots/          the pages under « Les emplacements »
   components/       the components
   types/            the types
+  first-steps.md    Premiers pas, the editor in four steps
 ```
 
 A page starts with its front matter. The intro is the paragraph under the title, and the description is what search
@@ -72,6 +73,10 @@ icon: 'file-braces'
   field list. Put `<!-- prettier-ignore -->` above it so Prettier keeps one row per line.
 
 French spaces before `:`, `;`, `!`, `?` and `»` are added when the site is built: write plain spaces.
+
+**Premiers pas** has no text of its own: its front matter holds the four `steps` (the file, the line they change, what
+Hodi shows) and the `finish` dialog. The site makes one full-screen page per step, then _/fr/first-steps/done/_. Only
+the first step is listed for search engines.
 
 ## Components
 

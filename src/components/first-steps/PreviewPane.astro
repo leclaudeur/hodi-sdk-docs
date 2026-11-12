@@ -1,0 +1,72 @@
+---
+import type { Doc } from '../../lib/docs.ts'
+import { t } from '../../lib/i18n.ts'
+import Icon from '../Icon.astro'
+
+// What Hodi shows at this step, drawn with the app's settings card, and the server's log under it.
+interface Props {
+  doc: Doc
+  current: number
+}
+
+const { doc, current } = Astro.props
+const step = doc.entry.data.steps?.[current]
+const preview = step?.preview
+// The log's last word is its status: green when it went well.
+const [logText, logStatus] = step?.log ? [step.log.replace(/\S+$/, ''), step.log.match(/\S+$/)?.[0]] : []
+---
+
+{preview && (
+  <section class="tz-prev" data-pane="prev" aria-label={t(doc.lang, 'firstStepsPreview')} data-pagefind-ignore>
+    <div class="tb">
+      <span class="mono">{`${t(doc.lang, 'firstStepsPreview')} · ${preview.crumb}`}</span>
+      <span class="mono live">{t(doc.lang, 'firstStepsLive')}</span>
+    </div>
+    <div class="body">
+      <div>
+        <h2>
+          {preview.title}
+          <span class="dot" aria-hidden="true"></span>
+        </h2>
+        <p class="intro">{preview.intro}</p>
+      </div>
+      <div class="s-card">
+        {preview.rows?.map(row => (
+          <div class="s-row">
+            <span class="t">
+              <b>{row.label}</b>
+              <span class:list={[!row.value ? 'h' : row.flash && 'flash']} data-answer={row.answer}>
+                {row.value ?? row.hint}
+              </span>
+            </span>
+            <button
+              class:list={['btn', 'compact', row.primary && 'primary']}
+              type="button"
+              data-answers={row.answer ? '' : undefined}
+            >
+              {row.button}
+            </button>
+          </div>
+        ))}
+        {preview.plugins?.map(plugin => (
+          <div class="s-row">
+            <span class="mark">
+              <Icon name={plugin.icon} size={20} />
+            </span>
+            <span class="t">
+              <b>{plugin.name}</b>
+              <span class="h">{plugin.hint}</span>
+            </span>
+            <span class:list={['chip', plugin.tone]}>{plugin.chip}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    {step?.log && (
+      <p class="tz-log">
+        {logText}
+        <span class="ok">{logStatus}</span>
+      </p>
+    )}
+  </section>
+)}
