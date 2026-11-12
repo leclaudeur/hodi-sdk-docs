@@ -69,4 +69,4 @@ export const languagesOf = (doc: Doc) => docs.filter(other => other.version === 
 
 // « Premiers pas »: the tutorial's page, once this version and language have one.
 export const firstStepsOf = (version: string, lang: Lang) =>
-  docs.find(doc => doc.version === version && doc.lang === lang && doc.path === 'first-steps')
+  docs.find(doc => doc.version === version && doc.lang === lang && doc.path === 'getting-started')
