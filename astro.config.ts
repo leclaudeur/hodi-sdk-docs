@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap'
 import { defineConfig } from 'astro/config'
 import { codeWindow } from './src/lib/code-window.ts'
 import { rehypeDocs } from './src/lib/rehype-docs.ts'
+import { rehypeFields } from './src/lib/rehype-fields.ts'
 
 // Pages that only send the browser on, and older versions (their canonical is the latest page): not listed.
 const unlisted = /^\/(?:(?:fr|en)\/(?:guide\/)?)?$|^\/v\d+\/|^\/404/
@@ -19,6 +20,6 @@ export default defineConfig({
     smartypants: false,
     shikiConfig: { theme: 'css-variables', transformers: [codeWindow()] },
     // Titles get their ids first, so their links can point at them.
-    rehypePlugins: [rehypeHeadingIds, rehypeDocs]
+    rehypePlugins: [rehypeHeadingIds, rehypeFields, rehypeDocs]
   }
 })
