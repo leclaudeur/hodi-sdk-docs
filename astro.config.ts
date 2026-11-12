@@ -4,8 +4,9 @@ import { defineConfig } from 'astro/config'
 import { codeWindow } from './src/lib/code-window.ts'
 import { rehypeDocs } from './src/lib/rehype-docs.ts'
 
-// Pages that only send the browser on, and older versions (their canonical is the latest page): not listed.
-const unlisted = /^\/(?:(?:fr|en)\/(?:guide\/)?)?$|^\/v\d+\/|^\/404/
+// Pages that only send the browser on, older versions and Premiers pas past its first step (their canonical is
+// another page): not listed.
+const unlisted = /^\/(?:(?:fr|en)\/(?:guide\/)?)?$|^\/v\d+\/|^\/404|\/first-steps\/[^/]+\/$/
 
 // Static pages only: nginx serves dist/ as plain files, nothing runs on the server.
 export default defineConfig({
