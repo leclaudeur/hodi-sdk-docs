@@ -1,5 +1,5 @@
 ---
-import { counterpart, groupsOf, languagesOf, latest, versions, type Doc } from '../lib/docs.ts'
+import { counterpart, firstStepsOf, groupsOf, languagesOf, latest, versions, type Doc } from '../lib/docs.ts'
 import { t } from '../lib/i18n.ts'
 import Brand from './Brand.astro'
 import Icon from './Icon.astro'
@@ -24,6 +24,7 @@ const themes = [
   { key: 'light', icon: 'sun' },
   { key: 'powder', icon: 'flower-2' }
 ] as const
+const firstSteps = firstStepsOf(version, lang)
 const github = 'https://github.com/leclaudeur/hodi'
 const label = (v: string) => `${v}.x`
 ---
@@ -67,6 +68,12 @@ const label = (v: string) => `${v}.x`
           ))}
         </div>
       </div>
+      {firstSteps && (
+        <a class="btn compact primary icon hide-sm" href={firstSteps.url}>
+          <Icon name="graduation-cap" />
+          {t(lang, 'firstSteps')}
+        </a>
+      )}
       <span class="nav-sep hide-md"></span>
       <a class="round hide-sm" href={github} aria-label={t(lang, 'github')}>
         <Icon name="github" />

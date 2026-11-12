@@ -185,6 +185,27 @@
   mask-image: linear-gradient(to bottom, transparent, #000 40px, #000 calc(100% - 40px), transparent);
 }
 
+/* « Premiers pas » on top: the header's primary button, with the rows' 10 px corners instead of a pill. */
+.dev-side .first-steps {
+  justify-content: center;
+  gap: 8px;
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  transition: background-color 120ms ease;
+}
+
+.dev-side .first-steps:hover {
+  color: var(--bg);
+}
+
+@media (hover: hover) {
+  .dev-side .first-steps:hover {
+    background: color-mix(in srgb, var(--text) 86%, var(--bg));
+  }
+}
+
 /* Tablet and phone: a bar under the header, the way up, where you are, and the pages in a panel. */
 .dev-crumb {
   display: none;

@@ -66,3 +66,7 @@ export const counterpart = (doc: Doc, version: string, lang: Lang) =>
   orderOf(version, lang)[0]
 
 export const languagesOf = (doc: Doc) => docs.filter(other => other.version === doc.version && other.path === doc.path)
+
+// « Premiers pas »: the tutorial's page, once this version and language have one.
+export const firstStepsOf = (version: string, lang: Lang) =>
+  docs.find(doc => doc.version === version && doc.lang === lang && doc.path === 'first-steps')
