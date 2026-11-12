@@ -1,0 +1,32 @@
+name: Publish image
+
+# Every push to main is what's online: the image is rebuilt, then Portainer's « Pull and redeploy » takes it.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/leclaudeur/hodi-sdk-docs
+
+jobs:
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Sign in to GitHub's registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+      # Only nginx's stage differs between processors, and it runs no command: no emulator needed.
+      - name: Build and push for amd64 and arm64
+        run: |
+          docker buildx create --use
+          docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            --build-arg SITE_URL="${{ vars.SITE_URL }}" \
+            --tag "$IMAGE:latest" \
+            --tag "$IMAGE:${{ github.sha }}" \
+            --push .

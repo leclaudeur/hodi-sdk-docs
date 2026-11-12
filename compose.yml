@@ -1,0 +1,8 @@
+# The Portainer stack: the image built by the CI, on port 8080 of the server.
+# Behind the reverse proxy, point sdk.<domain> at this port.
+services:
+  sdk-docs:
+    image: ghcr.io/leclaudeur/hodi-sdk-docs:latest
+    restart: unless-stopped
+    ports:
+      - '8080:80'
