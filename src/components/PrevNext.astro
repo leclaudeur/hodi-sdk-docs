@@ -15,7 +15,7 @@ const previous = at > 0 ? order[at - 1] : undefined
 const next = order[at + 1]
 ---
 
-<nav class="dev-pn" aria-label={`${t(doc.lang, 'previous')} / ${t(doc.lang, 'next')}`}>
+<nav class="dev-pn" data-pagefind-ignore aria-label={`${t(doc.lang, 'previous')} / ${t(doc.lang, 'next')}`}>
   {previous ? (
     <a class="btn icon" href={previous.url} rel="prev">
       <Icon name="arrow-left" />

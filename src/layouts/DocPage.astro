@@ -57,14 +57,18 @@ const jsonLd = {
       <section class="dev-view pad">
         <div class="dev-wrap">
           <Sidebar doc={doc} headings={headings} />
-          <article class="dev-main">
+          <article
+            class="dev-main"
+            data-pagefind-body={doc.version === latest ? '' : undefined}
+            data-pagefind-meta={`icon:${data.icon}`}
+          >
             <Crumb doc={doc} group={group} headings={headings} />
             {newest && newest !== doc && (
-              <p class="old">
+              <p class="old" data-pagefind-ignore>
                 {t(doc.lang, 'oldVersion')} <a href={newest.url}>{t(doc.lang, 'oldVersionLink')}</a>
               </p>
             )}
-            <header class="sec-head">
+            <header class="sec-head" data-pagefind-meta={`group:${kicker}`}>
               <span class="mono kicker">{kicker}</span>
               <h1 class="title">
                 {data.title}
