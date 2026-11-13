@@ -29,7 +29,9 @@ const parent = docs.find(other => other.version === doc.version && other.lang ==
         <span class="sep" aria-hidden="true">
           ›
         </span>
-        <a href={parent.url}>{parent.entry.data.title}</a>
+        <a class="mono" href={parent.url}>
+          {parent.entry.data.title}
+        </a>
       </>
     )}
   </span>
