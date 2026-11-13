@@ -50,8 +50,16 @@ export const AFTER: Record<string, (state: State, lang: Lang) => void> = {
       onConfirm: no
     }),
   toasts: state => {
-    // One toast at a time: each change replaces the last one.
+    // One toast at a time: each change replaces the last one, and it stays, as a render shows it.
     void loadSonner().then(({ toast }) => {
+      for (const type of ['success', 'error', 'info'] as const) {
+        const show = toast[type]
+        if (!('kept' in show))
+          toast[type] = Object.assign(
+            (...[message, data]: Parameters<typeof show>) => show(message, { ...data, duration: Infinity }),
+            { kept: true }
+          )
+      }
       toast.dismiss()
       if (state.error === true) showError(s(state, 'message'))
       else if (state.saved === true) showSaved()

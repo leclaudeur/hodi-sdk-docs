@@ -8,6 +8,21 @@ import { AFTER } from './draw-modals.tsx'
 import '../src/styles/index.ts'
 
 // The docs' playground: Hodi's real component, drawn again each time a control changes.
+
+// A dialog or the toasts drawn in a render stay in its window, as the render shows them: in the browser's top layer,
+// they would cover the docs' page and take its focus.
+const inRender = (element: Element) => element.getRootNode() instanceof ShadowRoot
+const { showModal } = HTMLDialogElement.prototype
+HTMLDialogElement.prototype.showModal = function (this: HTMLDialogElement) {
+  if (inRender(this)) this.setAttribute('open', '')
+  else showModal.call(this)
+}
+const { showPopover } = HTMLElement.prototype
+HTMLElement.prototype.showPopover = function (this: HTMLElement) {
+  if (inRender(this)) this.removeAttribute('popover')
+  else showPopover.call(this)
+}
+
 const roots = new WeakMap<Element, Root>()
 
 // Hodi's own words (Annuler, J'ai au moins 13 ans) follow the docs page, not the browser; a dialog or a toast asks

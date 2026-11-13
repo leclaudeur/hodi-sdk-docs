@@ -69,19 +69,5 @@ const loadBundle = (url: string) =>
     document.head.append(script)
   }))
 
-// The page's own font faces, for a frame that has none.
-const fontFaces = () =>
-  [...document.styleSheets]
-    .flatMap(sheet => {
-      try {
-        return [...sheet.cssRules]
-      } catch {
-        return []
-      }
-    })
-    .filter(rule => rule instanceof CSSFontFaceRule)
-    .map(rule => rule.cssText)
-    .join('\n')
-
-export { controlOf, fontFaces, lang, loadBundle, segment }
+export { controlOf, lang, loadBundle, segment }
 export type { Player }

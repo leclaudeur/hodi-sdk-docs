@@ -4,13 +4,14 @@ import { demoAssets, renders } from './demo.ts'
 import { langOf, type Lang } from './i18n.ts'
 
 // A component's frame gets the component itself, drawn by Hodi's code at build time, in a declarative shadow root:
-// the app's CSS stays inside it and the docs' styles stay out, with no script.
+// the app's CSS stays inside it and the docs' styles stay out, with no script. It is the playground's own CSS, so
+// « Personnaliser » draws the component again in the same root, exactly as it was.
 
 export const shadowOf = (key: string, lang: Lang, extra = '') => {
   const desktop = renders[lang].d[key] ?? ''
   const phone = renders[lang].p[key] ?? desktop
   const inner = desktop === phone ? desktop : `<div class="rv-d">${desktop}</div><div class="rv-p">${phone}</div>`
-  return `<template shadowrootmode="open"><link rel="stylesheet" href="${demoAssets.app.url}">${extra}<div class="in">${inner}</div></template>`
+  return `<template shadowrootmode="open"><link rel="stylesheet" href="${demoAssets.playCss.url}">${extra}<div class="in">${inner}</div></template>`
 }
 
 const visit = (node: Root | Element, lang: Lang) => {
@@ -18,7 +19,6 @@ const visit = (node: Root | Element, lang: Lang) => {
     if (child.type !== 'element') continue
     const key = child.properties.dataRender
     if (child.properties.dataPlay) {
-      child.properties.dataPlayCss = demoAssets.playCss.url
       child.properties.dataPlayJs = demoAssets.playJs.url
     }
     if (typeof key === 'string') {
