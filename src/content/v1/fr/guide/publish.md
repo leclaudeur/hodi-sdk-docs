@@ -173,7 +173,7 @@ Hodi regarde si le fichier est signé, et le dit à l'admin :
 | _Code non vérifié_ | Le fichier n'est pas signé, ou par une autre clé. | Le plugin s'installe après une confirmation de plus. Ses pages ne s'affichent pas. |
 | _Pas installable sans signature_ | Le fichier n'est pas signé et demande une permission réservée aux plugins signés. | Hodi refuse de l'installer. |
 
-Les permissions réservées aux plugins signés sont listées dans [Le manifeste](/fr/guide/manifest/#les-permissions--permissions).
+Les permissions réservées aux plugins signés sont listées dans [Le manifeste](/fr/guide/manifest/#les-permissions).
 
 ## Être vérifié
 

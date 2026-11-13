@@ -31,8 +31,8 @@
 }
 /* A key of the code as the page's title: the mono font keeps its case, as in the code. */
 .sec-head .title.code {
-  font: 500 clamp(32px, 4.2vw, 52px)/1.1 var(--font-mono);
-  letter-spacing: -0.02em;
+  font: 500 16px/1.4 var(--font-mono);
+  letter-spacing: 0;
   overflow-wrap: anywhere;
 }
 

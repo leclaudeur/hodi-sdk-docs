@@ -71,11 +71,15 @@ Hodi refuses an id that breaks one of these four rules:
 
 Once the plugin is published, the plugin's id never changes. For Hodi, another id means another plugin: Hodi would install the new plugin next to the old one, with an empty database, and the old plugin's data wouldn't follow.
 
-### `name` and `description`
+### `name`
 
-The plugin's name (60 characters at most) and its description (280 characters at most) are the two texts the server admin reads in _Server › Plugins_. The plugin registry also shows these two texts, before the install.
+The plugin's name, 60 characters at most. The server admin reads it in _Server › Plugins_, and the plugin registry shows it before the install.
 
-These two texts also exist in each language, in the plugin's `locales/` files, under the `manifest` key:
+### `description`
+
+The plugin's description, 280 characters at most. It shows in the same places as the name.
+
+The name and the description also exist in each language, in the plugin's `locales/` files, under the `manifest` key:
 
 ```json title="locales/en.json"
 {
@@ -100,7 +104,9 @@ This field says which version of the plugin API the plugin is written for. Today
 
 Hodi doesn't load a plugin written for another version of the API: that plugin's code would expect functions Hodi no longer has, or doesn't have yet. A plugin written for API 1 stays listed in _Server › Plugins_, with a message asking to update it.
 
-## Who sees the plugin: `audience`
+## Who sees the plugin
+
+### `audience`
 
 The `audience` field says which profiles of a household see the plugin: the plugin's page in Settings, its cards and its buttons. Hodi applies the same rule to the plugin's [routes](/en/guide/server-context/#routes): someone who doesn't see the plugin can't call its routes either.
 
@@ -114,9 +120,9 @@ The `audience` field has two possible values:
 
 With `"all"`, a route can still adapt its answer to the person asking: `request.who.kind` is `"adult"`, `"teen"` or `"child"`.
 
-## Settings: `settings`
+## Settings
 
-### What a setting is for
+### `settings`
 
 A setting is a value the server admin can change without touching the plugin's code. In Hello world, the `greeting` setting is the message the plugin answers.
 
@@ -228,9 +234,9 @@ The server part reads the settings with `ctx.settings()`. This function returns 
 
 `ctx.settings()` always gives the value of the moment: when the admin changes a setting, the next call already sees the new value.
 
-## Permissions: `permissions`
+## Permissions
 
-### What a permission is
+### `permissions`
 
 By default, a plugin can only do three things: keep its data in its database, read its settings and write in Hodi's log.
 

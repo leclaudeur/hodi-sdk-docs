@@ -116,7 +116,7 @@ For everything else, the server part goes through `ctx`, the context Hodi gives 
 | Ask the household's AI a question | With `ctx.ai.ask()`. It needs the `ai` permission. |
 | Write a line in the log | With `ctx.log()`, to follow what the plugin does. |
 
-Hodi checks each call: the plugin only gets what its [permissions](/en/guide/manifest/#permissions-permissions) open to it. [The server context](/en/guide/server-context/) describes everything `ctx` holds.
+Hodi checks each call: the plugin only gets what its [permissions](/en/guide/manifest/#permissions) open to it. [The server context](/en/guide/server-context/) describes everything `ctx` holds.
 
 ### npm packages in the server part
 
@@ -181,7 +181,7 @@ const HelloCard = () => {
 definePlugin({ settingsPage: HelloCard })
 ```
 
-### What the web part imports from `hodi:sdk`
+### What the web part imports
 
 The web part imports everything from `hodi:sdk`: Hodi's components (`Button`, `SettingRow`…), Hodi's hooks (`usePluginApi`…) and `definePlugin`. These components aren't copies: they are the components of Hodi's page itself. So the plugin looks like the rest of the app, in every theme and on every screen size.
 

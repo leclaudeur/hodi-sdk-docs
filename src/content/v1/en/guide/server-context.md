@@ -203,7 +203,7 @@ routes: {
 
 On the web side, `askToConfirm()` opens Hodi's window that asks for the password. Without it, the route answers 403 without having run. The plugin never sees the password.
 
-## What `ctx` gives
+## What the context gives
 
 ### To every plugin
 
@@ -211,13 +211,13 @@ On the web side, `askToConfirm()` opens Hodi's window that asks for the password
 | | |
 | --- | --- |
 | `ctx.db` | Its database, with `query`, `get` and `run`. |
-| `ctx.settings()` | Its [settings](/en/guide/manifest/#settings-settings), with their current value. |
+| `ctx.settings()` | Its [settings](/en/guide/manifest/#settings), with their current value. |
 | `ctx.log(message)` | A line in Hodi's log, which `hodi-plugin dev` shows too. |
 | `ctx.serverSettings()` | How many days Hodi keeps an article, a video and a backup copy. |
 
 ### With a permission
 
-Each of these functions only works if the plugin has the [permission](/en/guide/manifest/#permissions-permissions) shown. Otherwise, Hodi refuses the call.
+Each of these functions only works if the plugin has the [permission](/en/guide/manifest/#permissions) shown. Otherwise, Hodi refuses the call.
 
 <!-- prettier-ignore -->
 | Function | What it does |

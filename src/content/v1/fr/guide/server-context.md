@@ -203,7 +203,7 @@ routes: {
 
 Côté web, `askToConfirm()` ouvre la fenêtre de Hodi qui demande le mot de passe. Sans lui, la route répond 403 sans avoir tourné. Le plugin ne voit jamais le mot de passe.
 
-## Ce que `ctx` donne
+## Ce que le contexte donne
 
 ### À chaque plugin
 
@@ -211,13 +211,13 @@ Côté web, `askToConfirm()` ouvre la fenêtre de Hodi qui demande le mot de pas
 | | |
 | --- | --- |
 | `ctx.db` | Sa base, avec `query`, `get` et `run`. |
-| `ctx.settings()` | Ses [réglages](/fr/guide/manifest/#les-réglages--settings), avec leur valeur actuelle. |
+| `ctx.settings()` | Ses [réglages](/fr/guide/manifest/#les-réglages), avec leur valeur actuelle. |
 | `ctx.log(message)` | Une ligne dans le journal de Hodi, que `hodi-plugin dev` affiche aussi. |
 | `ctx.serverSettings()` | Combien de jours Hodi garde un article, une vidéo et une copie de sauvegarde. |
 
 ### Avec une permission
 
-Chacune de ces fonctions ne marche que si le plugin a la [permission](/fr/guide/manifest/#les-permissions--permissions) indiquée. Sinon, Hodi refuse l'appel.
+Chacune de ces fonctions ne marche que si le plugin a la [permission](/fr/guide/manifest/#les-permissions) indiquée. Sinon, Hodi refuse l'appel.
 
 <!-- prettier-ignore -->
 | Fonction | Ce qu'elle fait |

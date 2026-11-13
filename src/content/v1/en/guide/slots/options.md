@@ -13,7 +13,7 @@ key: "settingsPage"
 The server admin opens _Server › Plugins_, then a plugin's page. This page shows, from top to bottom:
 
 1. The plugin's name, its version and its switch.
-2. "Options": the [settings](/en/guide/manifest/#settings-settings) Hodi draws.
+2. "Options": the [settings](/en/guide/manifest/#settings) Hodi draws.
 3. The `settingsPage` card, which the plugin draws.
 4. The buttons to delete the plugin.
 
