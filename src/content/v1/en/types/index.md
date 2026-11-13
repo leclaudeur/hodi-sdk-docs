@@ -11,8 +11,10 @@ icon: "type"
 The types come from three paths, one per part of the plugin:
 
 - `@hodi-app/plugin-sdk/server`: the types of the server part and of the manifest.
-- `hodi:sdk`: the types of the web part. The plugin's `tsconfig.json` points `hodi:sdk` to `@hodi-app/plugin-sdk/hodi-sdk`.
+- `hodi:sdk`: the types of the web part.
 - `@hodi-app/plugin-sdk/testing`: the types of the test kit.
+
+The path `hodi:sdk` is not an npm package. The plugin's `tsconfig.json` points `hodi:sdk` to `@hodi-app/plugin-sdk/hodi-sdk`.
 
 ```ts title="server/index.ts"
 import type { PluginContext, PluginRequest, ServerPlugin } from '@hodi-app/plugin-sdk/server'
