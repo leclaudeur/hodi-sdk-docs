@@ -1,7 +1,7 @@
 ---
 title: "Dialogs and messages"
-description: "Windows, the question before deleting, toasts, messages and empty lists."
-intro: "A window for a form, a question before what can't be undone, a toast to say what happened: never one for the other."
+description: "Windows, messages in the page and empty lists."
+intro: "A window for a form, a message in the page to say what is happening, an empty list when there is nothing. The question before deleting and the toasts are in [Functions](/en/functions/)."
 order: 5
 icon: "message-square"
 topic: "travel"
@@ -47,50 +47,6 @@ A window's row of buttons, under a line. "Cancel" on the left, the action on the
 | --- | --- | --- |
 | `children` | `ReactNode` | The buttons, the main one last. |
 | `className?` | `string` | One more class. |
-
-## askToConfirm()
-
-Hodi's question before what can't be undone. The button is red by default. With `proof`, it also asks for the person's password: pass it to a route marked `proof: true` with `api(path, { proof })`, and Hodi checks it.
-
-```tsx title="web/index.tsx" render="asktoconfirm" kind="modal" play="asktoconfirm"
-import { askToConfirm, usePluginApi } from 'hodi:sdk'
-
-const api = usePluginApi()
-askToConfirm({
-  title: 'Clear the history?',
-  message: 'The last 30 hellos of this household will be deleted.',
-  label: 'Clear',
-  onConfirm: () => api('/history', { method: 'DELETE' })
-})
-```
-
-<!-- prettier-ignore -->
-| Props | Type | |
-| --- | --- | --- |
-| `title` | `string` | The question. |
-| `message` | `ReactNode` | What happens, in full: what, for whom, what remains. |
-| `label` | `string` | The button that does it: "Clear", "Delete". |
-| `onConfirm` | `(proof: Proof) => void \| Promise<void>` | After the click. With `proof`, gets the password and code typed; an error keeps the window open. |
-| `look?` | `'danger' \| 'primary'` | Red by default, `primary` for what adds. |
-| `proof?` | `{}` | Asks for the person's password, and their app's code with two-step verification. |
-| `onCancel?` | `() => void` | Escape, the cross, "Cancel" or a click beside it. |
-
-## showDone()
-
-Hodi's toasts say what happened, nothing more: never a question, never a form. `showDone` for an action done, with "Undo" if you give it `undo`. `showSaved` for a saved setting. `showError` for a failure, with a button if needed.
-
-```tsx title="web/index.tsx" render="toasts" kind="toast" play="toasts"
-import { showDone } from 'hodi:sdk'
-
-showDone('Greeting saved')
-```
-
-<!-- prettier-ignore -->
-| Functions | Type | |
-| --- | --- | --- |
-| `showDone` | `(message: string, undo?: () => void) => void` | An action done. With undo, an "Undo" button. |
-| `showSaved` | `(message?: string) => void` | "Saved", one at a time. |
-| `showError` | `(message: string, action?, id?: string) => void` | A failure: what to do next goes in the message or the button. `id` keeps only one of the same kind. |
 
 ## StatusLine
 

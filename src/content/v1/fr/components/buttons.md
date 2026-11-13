@@ -28,7 +28,7 @@ import { Check } from 'lucide-react'
 | `busy?` | `boolean` | Attend le serveur : l'icône devient un rond qui tourne, et le bouton ne se presse plus. |
 | `compact?` | `boolean` | 34 px de haut, pour une ligne ou un en-tête. |
 | `wide?` | `boolean` | Toute la largeur de son parent. |
-| `href?` | `string` | Un lien dessiné en bouton. Une adresse de Hodi vient de [usePluginLinks()](/fr/components/hooks/). |
+| `href?` | `string` | Un lien dessiné en bouton. Une adresse de Hodi vient de [usePluginLinks()](/fr/hooks/). |
 | `external?` | `boolean` | Le lien s'ouvre dans un nouvel onglet. |
 | `…` | `ButtonHTMLAttributes` | Ce qu'un `<button>` accepte : `onClick`… |
 

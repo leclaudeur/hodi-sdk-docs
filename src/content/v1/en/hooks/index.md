@@ -2,7 +2,7 @@
 title: "Hooks"
 description: "Your plugin's texts, its routes, its links and the server's settings."
 intro: "These hooks know which plugin calls them: they only work in its components."
-order: 7
+order: 2
 icon: "anchor"
 topic: "science"
 ---
