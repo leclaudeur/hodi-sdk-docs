@@ -86,11 +86,11 @@ Pour corriger une erreur dans une migration publiée, il faut en ajouter une nou
 `ctx.db` a trois fonctions. Chacune prend une requête SQL et ses paramètres, écrits `?` dans la requête :
 
 <!-- prettier-ignore -->
-| Fonction | Renvoie | Pour |
-| --- | --- | --- |
-| `ctx.db.query(sql, params)` | Toutes les lignes, un objet par ligne | Un `SELECT` qui renvoie plusieurs lignes |
-| `ctx.db.get(sql, params)` | La première ligne, ou `null` | Un `SELECT` qui renvoie une seule ligne |
-| `ctx.db.run(sql, params)` | `{ changes, lastInsertRowid }` | Un `INSERT`, un `UPDATE` ou un `DELETE` |
+| Fonction | À quoi elle sert |
+| --- | --- |
+| `ctx.db.query(sql, params)` | Pour un `SELECT` qui renvoie plusieurs lignes. Elle renvoie toutes les lignes, un objet par ligne. |
+| `ctx.db.get(sql, params)` | Pour un `SELECT` qui renvoie une seule ligne. Elle renvoie la première ligne, ou `null`. |
+| `ctx.db.run(sql, params)` | Pour un `INSERT`, un `UPDATE` ou un `DELETE`. Elle renvoie `{ changes, lastInsertRowid }`. |
 
 ```tsx title="server/index.ts"
 const rows = ctx.db.query('SELECT at FROM said WHERE household = ? ORDER BY at DESC', [household])
@@ -134,11 +134,11 @@ La méthode est `GET`, `POST`, `PUT`, `PATCH` ou `DELETE`. Une partie du chemin 
 Hodi sert les routes à trois endroits, chacun pour d'autres personnes :
 
 <!-- prettier-ignore -->
-| Champ | Qui peut l'appeler | Appelée avec |
-| --- | --- | --- |
-| `routes` | Les profils du foyer prévus par `audience` | `usePluginApi()` |
-| `serverRoutes` | L'admin du serveur seulement | `usePluginServerApi()` |
-| `publicRoutes` | Tout le monde, même sans être connecté | `usePluginPublicApi()`, avec la permission `publicRoutes` |
+| Champ | Qui peut appeler ces routes |
+| --- | --- |
+| `routes` | Les profils du foyer prévus par `audience`. La partie web les appelle avec `usePluginApi()`. |
+| `serverRoutes` | L'admin du serveur seulement. La partie web les appelle avec `usePluginServerApi()`. |
+| `publicRoutes` | Tout le monde, même sans être connecté. La partie web les appelle avec `usePluginPublicApi()`, et il faut la permission `publicRoutes`. |
 
 Une route publique ne sait pas qui l'appelle : `request.who` y vaut `null`. Hodi y limite chaque adresse à 30 requêtes par minute, et refuse une requête venue d'un autre site.
 
@@ -220,16 +220,16 @@ Côté web, `askToConfirm()` ouvre la fenêtre de Hodi qui demande le mot de pas
 Chacune de ces fonctions ne marche que si le plugin a la [permission](/fr/guide/manifest/#les-permissions) indiquée. Sinon, Hodi refuse l'appel.
 
 <!-- prettier-ignore -->
-| | Permission | |
-| --- | --- | --- |
-| `ctx.fetchText(url)` | `network` | Lit une page d'un site listé, et renvoie son texte. |
-| `ctx.http(url, options)` | `network` | Envoie une requête à un site listé, avec un corps, comme un échange OAuth. |
-| `ctx.articles` | `articles` | Retrouve un article listé par Hodi, et sa page. |
-| `ctx.ai.ask(question)` | `ai` | Pose une question à l'IA du foyer, une fois par clic. |
-| `ctx.notify(notice)` | `notify` | Envoie une notification à une personne, 10 par jour au plus. |
-| `ctx.mail.send(message)` | `mail` | Envoie un e-mail, 50 par heure au plus. |
-| `ctx.accounts` | `accounts` | Retrouve, crée et vérifie des comptes. |
-| `ctx.households` | `households` | Liste et crée des foyers. |
+| Fonction | Ce qu'elle fait |
+| --- | --- |
+| `ctx.fetchText(url)` | Lit une page d'un site listé, et renvoie son texte. Il faut la permission `network`. |
+| `ctx.http(url, options)` | Envoie une requête à un site listé, avec un corps, comme un échange OAuth. Il faut la permission `network`. |
+| `ctx.articles` | Retrouve un article listé par Hodi, et sa page. Il faut la permission `articles`. |
+| `ctx.ai.ask(question)` | Pose une question à l'IA du foyer, une fois par clic. Il faut la permission `ai`. |
+| `ctx.notify(notice)` | Envoie une notification à une personne, 10 par jour au plus. Il faut la permission `notify`. |
+| `ctx.mail.send(message)` | Envoie un e-mail, 50 par heure au plus. Il faut la permission `mail`. |
+| `ctx.accounts` | Retrouve, crée et vérifie des comptes. Il faut la permission `accounts`. |
+| `ctx.households` | Liste et crée des foyers. Il faut la permission `households`. |
 
 `ctx.fetchText()` et `ctx.http()` ne joignent que les sites listés dans `network`. Ils refusent une redirection vers un autre site, et n'envoient un corps ou un en-tête `Authorization` qu'en https.
 

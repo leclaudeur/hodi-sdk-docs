@@ -27,14 +27,14 @@ Settings lists its entries in six groups. The plugin adds an entry there, which 
 `group` is the Settings group, and `after` the entry the plugin goes after. Without `menu`, or with an unknown group, the entry goes at the end of the Household group.
 
 <!-- prettier-ignore -->
-| `group` | The group in Settings |
+| Value of `group` | Where the plugin's entry shows |
 | --- | --- |
-| `reading` | Reading |
-| `subjects` | Subjects |
-| `you` | You |
-| `household` | Household |
-| `device` | This device |
-| `about` | Hodi |
+| `reading` | The entry goes in the "Reading" group, next to Reading and display, Topics and Sources. |
+| `subjects` | The entry goes in the "Subjects" group, next to Followed and Muted subjects. |
+| `you` | The entry goes in the "You" group, next to My profile, Statistics, Account and data and Sharing. |
+| `household` | The entry goes in the "Household" group, next to Household, Profiles and AI & credits. It is the default group. |
+| `device` | The entry goes in the "This device" group, next to Notifications and Keyboard shortcuts. |
+| `about` | The entry goes in the "Hodi" group, next to Server and About. |
 
 ## Example
 

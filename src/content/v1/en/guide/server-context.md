@@ -86,11 +86,11 @@ To fix a mistake in a published migration, a new one that fixes it must be added
 `ctx.db` has three functions. Each takes an SQL query and its parameters, written `?` in the query:
 
 <!-- prettier-ignore -->
-| Function | Returns | For |
-| --- | --- | --- |
-| `ctx.db.query(sql, params)` | All the rows, one object per row | A `SELECT` that returns several rows |
-| `ctx.db.get(sql, params)` | The first row, or `null` | A `SELECT` that returns a single row |
-| `ctx.db.run(sql, params)` | `{ changes, lastInsertRowid }` | An `INSERT`, an `UPDATE` or a `DELETE` |
+| Function | What it is for |
+| --- | --- |
+| `ctx.db.query(sql, params)` | For a `SELECT` that returns several rows. It returns all the rows, one object per row. |
+| `ctx.db.get(sql, params)` | For a `SELECT` that returns a single row. It returns the first row, or `null`. |
+| `ctx.db.run(sql, params)` | For an `INSERT`, an `UPDATE` or a `DELETE`. It returns `{ changes, lastInsertRowid }`. |
 
 ```tsx title="server/index.ts"
 const rows = ctx.db.query('SELECT at FROM said WHERE household = ? ORDER BY at DESC', [household])
@@ -134,11 +134,11 @@ The method is `GET`, `POST`, `PUT`, `PATCH` or `DELETE`. A part of the path that
 Hodi serves routes in three places, each for other people:
 
 <!-- prettier-ignore -->
-| Field | Who can call it | Called with |
-| --- | --- | --- |
-| `routes` | The household's profiles in `audience` | `usePluginApi()` |
-| `serverRoutes` | The server admin only | `usePluginServerApi()` |
-| `publicRoutes` | Everyone, even signed out | `usePluginPublicApi()`, with the `publicRoutes` permission |
+| Field | Who can call these routes |
+| --- | --- |
+| `routes` | The household's profiles in `audience`. The web part calls them with `usePluginApi()`. |
+| `serverRoutes` | The server admin only. The web part calls them with `usePluginServerApi()`. |
+| `publicRoutes` | Everyone, even signed out. The web part calls them with `usePluginPublicApi()`, and it needs the `publicRoutes` permission. |
 
 A public route doesn't know who calls it: `request.who` is `null` there. Hodi limits each address to 30 requests a minute there, and refuses a request coming from another site.
 
@@ -220,16 +220,16 @@ On the web side, `askToConfirm()` opens Hodi's window that asks for the password
 Each of these functions only works if the plugin has the [permission](/en/guide/manifest/#permissions) shown. Otherwise, Hodi refuses the call.
 
 <!-- prettier-ignore -->
-| | Permission | |
-| --- | --- | --- |
-| `ctx.fetchText(url)` | `network` | Reads a page of a listed site, and returns its text. |
-| `ctx.http(url, options)` | `network` | Sends a request to a listed site, with a body, such as an OAuth exchange. |
-| `ctx.articles` | `articles` | Finds an article Hodi listed, and its page. |
-| `ctx.ai.ask(question)` | `ai` | Asks the household's AI a question, once per click. |
-| `ctx.notify(notice)` | `notify` | Sends a notification to a person, 10 a day at most. |
-| `ctx.mail.send(message)` | `mail` | Sends an e-mail, 50 an hour at most. |
-| `ctx.accounts` | `accounts` | Finds, creates and checks accounts. |
-| `ctx.households` | `households` | Lists and creates households. |
+| Function | What it does |
+| --- | --- |
+| `ctx.fetchText(url)` | Reads a page of a listed site, and returns its text. It needs the `network` permission. |
+| `ctx.http(url, options)` | Sends a request to a listed site, with a body, such as an OAuth exchange. It needs the `network` permission. |
+| `ctx.articles` | Finds an article Hodi listed, and its page. It needs the `articles` permission. |
+| `ctx.ai.ask(question)` | Asks the household's AI a question, once per click. It needs the `ai` permission. |
+| `ctx.notify(notice)` | Sends a notification to a person, 10 a day at most. It needs the `notify` permission. |
+| `ctx.mail.send(message)` | Sends an e-mail, 50 an hour at most. It needs the `mail` permission. |
+| `ctx.accounts` | Finds, creates and checks accounts. It needs the `accounts` permission. |
+| `ctx.households` | Lists and creates households. It needs the `households` permission. |
 
 `ctx.fetchText()` and `ctx.http()` only reach the sites listed in `network`. They refuse a redirect to another site, and only send a body or an `Authorization` header over https.
 

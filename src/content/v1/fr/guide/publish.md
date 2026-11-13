@@ -11,12 +11,12 @@ icon: "package"
 Un plugin passe par quatre étapes avant d'arriver chez les gens. Les trois premières se font seul, sur sa machine. La dernière passe par le mainteneur de Hodi.
 
 <!-- prettier-ignore -->
-| Étape | Ce qu'elle fait | La commande |
-| --- | --- | --- |
-| [Tester](#tester) | Vérifie la partie serveur, sans aucun Hodi. | `npm test` |
-| [Essayer](#essayer-sur-un-hodi-de-test) | Installe le plugin sur un Hodi de test, à chaque enregistrement. | `npx hodi-plugin dev` |
-| [Construire](#construire) | Fabrique le fichier `.hodi-plugin` à installer. | `npm run build` |
-| [Être vérifié](#être-vérifié) | Le mainteneur relit le code et signe le fichier. | Une pull request |
+| Étape | Ce qu'elle fait |
+| --- | --- |
+| [Tester](#tester) | Vérifie la partie serveur, sans aucun Hodi. La commande est `npm test`. |
+| [Essayer](#essayer-sur-un-hodi-de-test) | Installe le plugin sur un Hodi de test, à chaque enregistrement. La commande est `npx hodi-plugin dev`. |
+| [Construire](#construire) | Fabrique le fichier `.hodi-plugin` à installer. La commande est `npm run build`. |
+| [Être vérifié](#être-vérifié) | Le mainteneur relit le code et signe le fichier. Cela passe par une pull request. |
 
 Le [modèle de plugin](https://github.com/leclaudeur/hodi-plugin-template) contient déjà tout : le SDK, les scripts et la CI. Il n'y a rien à installer en plus.
 

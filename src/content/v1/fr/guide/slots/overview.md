@@ -53,11 +53,11 @@ definePlugin({
 ## Sa largeur
 
 <!-- prettier-ignore -->
-| `size` | Ordinateur | Tablette | Téléphone |
-| --- | --- | --- | --- |
-| `narrow` | Un tiers | La moitié | Toute la largeur |
-| `wide` | Deux tiers | La moitié | Toute la largeur |
-| `full` | Toute la largeur | Toute la largeur | Toute la largeur |
+| Valeur de `size` | La largeur de la carte |
+| --- | --- |
+| `narrow` | Un tiers de la largeur sur ordinateur, la moitié sur tablette, toute la largeur sur téléphone. |
+| `wide` | Deux tiers de la largeur sur ordinateur, la moitié sur tablette, toute la largeur sur téléphone. |
+| `full` | Toute la largeur, sur ordinateur, tablette et téléphone. |
 
 ## À savoir
 

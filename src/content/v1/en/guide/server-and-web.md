@@ -106,13 +106,13 @@ In this sandbox, only standard JavaScript exists: `JSON`, `Math`, `Date`, promis
 For everything else, the server part goes through `ctx`, the context Hodi gives each route. A few examples:
 
 <!-- prettier-ignore -->
-| Need | With `ctx` |
+| What the plugin wants to do | How to do it with `ctx` |
 | --- | --- |
-| Read or write its data | `ctx.db` |
-| Read its settings | `ctx.settings()` |
-| Read a site's page | `ctx.fetchText()`, with the `network` permission |
-| Ask the household's AI a question | `ctx.ai.ask()`, with the `ai` permission |
-| Write a line in the log | `ctx.log()` |
+| Read or write its data | With `ctx.db`, which gives access to its database. |
+| Read its settings | With `ctx.settings()`, which returns the value chosen for each setting. |
+| Read a site's page | With `ctx.fetchText()`. It needs the `network` permission. |
+| Ask the household's AI a question | With `ctx.ai.ask()`. It needs the `ai` permission. |
+| Write a line in the log | With `ctx.log()`, to follow what the plugin does. |
 
 Hodi checks each call: the plugin only gets what its [permissions](/en/guide/manifest/#permissions) open to it. [The server context](/en/guide/server-context/) describes everything `ctx` holds.
 
@@ -123,12 +123,12 @@ The server part can import npm packages. During the build, their code is copied 
 This only works for a package written in standard JavaScript. A package that needs Node.js crashes at its first call, because Node.js doesn't exist in the sandbox.
 
 <!-- prettier-ignore -->
-| Package | Works | Why |
-| --- | --- | --- |
-| `date-fns` | Yes | It computes dates in standard JavaScript. |
-| `zod` | Yes | It checks data in standard JavaScript. |
-| `sharp` | No | It resizes images with Node.js native code. |
-| `pg` | No | It opens a network connection to PostgreSQL. |
+| Package | Does it work? |
+| --- | --- |
+| `date-fns` | Yes. It computes dates in standard JavaScript. |
+| `zod` | Yes. It checks data in standard JavaScript. |
+| `sharp` | No. It resizes images with Node.js native code. |
+| `pg` | No. It opens a network connection to PostgreSQL. |
 
 When in doubt, `npm test` answers quickly: the tests run the plugin in the same sandbox as Hodi.
 
@@ -137,14 +137,14 @@ When in doubt, `npm test` answers quickly: the tests run the plugin in the same 
 A plugin must not be able to slow Hodi down. So the sandbox has limits:
 
 <!-- prettier-ignore -->
-| Limit | Value | Beyond it |
-| --- | --- | --- |
-| Memory | 16 MB, or up to 32 MB with `memoryMb` | The call fails. |
-| Length of a call | 10 seconds | Hodi stops the call. |
-| Size of an answer | 1 MB | The call fails. |
-| Size of the database | 256 MB | The write fails. |
-| Calls waiting | 8, behind the one running | Hodi answers `busy` without waiting. |
-| Crashes | 3 in 10 minutes | The plugin stops until Hodi's next start. |
+| Limit | What happens |
+| --- | --- |
+| Memory | The server part has 16 MB, or up to 32 MB with `memoryMb`. Beyond that, the call fails. |
+| Length of a call | A call lasts 10 seconds at most. Beyond that, Hodi stops it. |
+| Size of an answer | An answer is 1 MB at most. Beyond that, the call fails. |
+| Size of the database | The database is 256 MB at most. Beyond that, the write fails. |
+| Calls waiting | 8 calls can wait behind the one running. Beyond that, Hodi answers `busy` without waiting. |
+| Crashes | After 3 crashes in 10 minutes, the plugin stops until Hodi's next start. |
 
 The sandbox falls asleep after a minute without a call, and wakes up at the next one. When it falls asleep, it forgets everything that was in memory. So a global variable doesn't keep its value from one call to the next: what must last goes in the database, with `ctx.db`.
 

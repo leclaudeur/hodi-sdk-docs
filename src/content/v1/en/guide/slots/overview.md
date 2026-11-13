@@ -53,11 +53,11 @@ definePlugin({
 ## Its width
 
 <!-- prettier-ignore -->
-| `size` | Computer | Tablet | Phone |
-| --- | --- | --- | --- |
-| `narrow` | One third | Half | Full width |
-| `wide` | Two thirds | Half | Full width |
-| `full` | Full width | Full width | Full width |
+| Value of `size` | The card's width |
+| --- | --- |
+| `narrow` | One third of the width on a computer, half on a tablet, the full width on a phone. |
+| `wide` | Two thirds of the width on a computer, half on a tablet, the full width on a phone. |
+| `full` | The full width, on a computer, a tablet and a phone. |
 
 ## Good to know
 
