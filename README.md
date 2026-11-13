@@ -51,6 +51,7 @@ src/content/v1/fr/
     slots/          the pages under « Les emplacements »
   components/       the components
   types/            the types
+  getting-started.md  Premiers pas, the editor in four steps
 ```
 
 A page starts with its front matter. The intro is the paragraph under the title, and the description is what search

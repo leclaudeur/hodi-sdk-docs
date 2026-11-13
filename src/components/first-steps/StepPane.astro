@@ -1,0 +1,48 @@
+---
+import type { Doc } from '../../lib/docs.ts'
+import { t } from '../../lib/i18n.ts'
+import { inline } from '../../lib/inline.ts'
+import Icon from '../Icon.astro'
+
+// The step: its name, why it matters, then the three things to do, the last one still open.
+interface Props {
+  doc: Doc
+  current: number
+  done: boolean
+}
+
+const { doc, current, done } = Astro.props
+const steps = doc.entry.data.steps ?? []
+const step = steps[current]
+const last = (step?.todo.length ?? 0) - 1
+const stateOf = (index: number) => {
+  if (done || index < last) return 'done'
+  return 'cur'
+}
+---
+
+{step && (
+  <section class="tz-step" data-pane="step">
+    <span class="kick">
+      <span class="mono">{t(doc.lang, 'firstSteps')}</span>
+      <span class="mono of">{`${current + 1} / ${steps.length}`}</span>
+    </span>
+    <h1>
+      {step.name}
+      <span class="dot" aria-hidden="true"></span>
+      <a class="qh" href={step.guide} aria-label={t(doc.lang, 'firstStepsWhy')} title={t(doc.lang, 'firstStepsWhy')}>
+        <Icon name="circle-help" size={18} />
+      </a>
+    </h1>
+    <p set:html={inline(step.text, doc.lang)} />
+    <span class="v-label">{t(doc.lang, 'firstStepsTodo')}</span>
+    <ol class="v-list">
+      {step.todo.map((item, index) => (
+        <li class={stateOf(index)}>
+          <span class="b">{stateOf(index) === 'done' ? <Icon name="check" size={12} /> : index + 1}</span>
+          <span set:html={inline(item, doc.lang)} />
+        </li>
+      ))}
+    </ol>
+  </section>
+)}

@@ -1,19 +1,28 @@
 ---
 import { render } from 'astro:content'
 import { docs, type Doc } from '../lib/docs.ts'
+import { pagesOf } from '../lib/first-steps.ts'
 import DocPage from '../layouts/DocPage.astro'
+import FirstSteps from '../layouts/FirstSteps.astro'
 
 // One static page per Markdown file, at its address: /fr/guide/manifest/, or /v1/fr/… once v1 is not the latest.
-export const getStaticPaths = () => docs.map(doc => ({ params: { path: doc.url.slice(1, -1) }, props: { doc } }))
+// Premiers pas makes one per step and one for its end: /fr/getting-started/2/, /fr/getting-started/done/.
+export const getStaticPaths = () => docs.flatMap(pagesOf)
 
 interface Props {
   doc: Doc
+  current: number
+  done: boolean
 }
 
-const { doc } = Astro.props
+const { doc, current, done } = Astro.props
 const { Content, headings } = await render(doc.entry)
 ---
 
-<DocPage doc={doc} headings={headings}>
-  <Content />
-</DocPage>
+{doc.entry.data.steps ? (
+  <FirstSteps doc={doc} current={current} done={done} />
+) : (
+  <DocPage doc={doc} headings={headings}>
+    <Content />
+  </DocPage>
+)}

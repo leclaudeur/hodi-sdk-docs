@@ -1,0 +1,51 @@
+---
+import type { Doc } from '../../lib/docs.ts'
+import { highlight } from '../../lib/first-steps.ts'
+import { t } from '../../lib/i18n.ts'
+
+// The editor: one tab per file, the steps already done can be read again, the ones to come wait.
+interface Props {
+  doc: Doc
+  current: number
+}
+
+const { doc, current } = Astro.props
+const steps = doc.entry.data.steps ?? []
+const files = await Promise.all(
+  steps.map(async (step, index) => ({
+    file: step.file,
+    open: index <= current,
+    html: index <= current ? await highlight(step.code, step.lang, step.edit) : ''
+  }))
+)
+---
+
+<section class="tz-code" data-pane="code" aria-label={t(doc.lang, 'firstStepsCode')} data-pagefind-ignore>
+  <div class="tz-tabs" role="tablist">
+    {files.map((file, index) => (
+      <button
+        type="button"
+        role="tab"
+        id={`tz-tab-${index}`}
+        aria-controls={`tz-file-${index}`}
+        aria-selected={index === current ? 'true' : 'false'}
+        disabled={!file.open}
+      >
+        {file.file}
+      </button>
+    ))}
+  </div>
+  {files.map(
+    (file, index) =>
+      file.open && (
+        <div
+          class="tz-file"
+          role="tabpanel"
+          id={`tz-file-${index}`}
+          aria-labelledby={`tz-tab-${index}`}
+          hidden={index !== current}
+          set:html={file.html}
+        />
+      )
+  )}
+</section>

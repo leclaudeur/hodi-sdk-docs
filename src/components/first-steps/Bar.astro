@@ -1,0 +1,50 @@
+---
+import type { Doc } from '../../lib/docs.ts'
+import { firstStepsUrl } from '../../lib/first-steps.ts'
+import { t } from '../../lib/i18n.ts'
+import Brand from '../Brand.astro'
+import Icon from '../Icon.astro'
+
+// The editor's bar: the logo, the four steps (done, current, to come), then the guide and the way out.
+interface Props {
+  doc: Doc
+  current: number
+  done: boolean
+  home: string
+}
+
+const { doc, current, done, home } = Astro.props
+const steps = doc.entry.data.steps ?? []
+const stateOf = (index: number) => {
+  if (index < current || done) return 'done'
+  return index === current ? 'cur' : ''
+}
+---
+
+<header class="tz-bar">
+  <div class="tz-id">
+    <Brand href={home} label={t(doc.lang, 'home')} />
+  </div>
+  <ol class="tz-steps" aria-label={t(doc.lang, 'firstStepsProgress')}>
+    {steps.map((step, index) => (
+      <>
+        {index > 0 && <li class="ln" aria-hidden="true" />}
+        <li class={stateOf(index)} aria-current={stateOf(index) === 'cur' ? 'step' : undefined}>
+          <a class="nm" href={firstStepsUrl(doc, index === 0 ? '' : String(index + 1))}>
+            <span class="n">{stateOf(index) === 'done' ? <Icon name="check" size={12} /> : index + 1}</span>
+            <span class="tx">{step.name}</span>
+          </a>
+        </li>
+      </>
+    ))}
+  </ol>
+  <div class="tz-end">
+    <a class="btn compact icon wide-only" href={home}>
+      <Icon name="book-open" />
+      {t(doc.lang, 'guide')}
+    </a>
+    <a class="round" href={home} aria-label={t(doc.lang, 'firstStepsQuit')} title={t(doc.lang, 'firstStepsQuit')}>
+      <Icon name="x" />
+    </a>
+  </div>
+</header>
