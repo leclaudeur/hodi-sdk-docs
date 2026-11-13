@@ -156,7 +156,19 @@
   padding: 0 14px;
   font: 500 13px/1 var(--font-body);
 }
+.cmp-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  min-width: 0;
+}
+.cmp-note {
+  letter-spacing: 0;
+  text-transform: none;
+}
 .cmp-code[hidden],
+.cmp-note[hidden],
 .props[hidden] {
   display: none;
 }

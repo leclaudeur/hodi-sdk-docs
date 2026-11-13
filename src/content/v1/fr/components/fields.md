@@ -74,7 +74,14 @@ Une case par caractère d'un code. Le code complet se vérifie tout seul, sans b
 ```tsx title="web/index.tsx" render="pinfield" play="pinfield"
 import { PinField } from 'hodi:sdk'
 
-<PinField label="Code" length={6} value={code} onChange={setCode} onComplete={check} align="start" />
+<PinField
+  label="Code"
+  length={6}
+  value={code}
+  onChange={setCode}
+  onComplete={check}
+  align="start"
+/>
 ```
 
 <!-- prettier-ignore -->

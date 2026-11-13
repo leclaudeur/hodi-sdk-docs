@@ -3,6 +3,7 @@ import { createRoot, type Root } from 'react-dom/client'
 import { setChosenLanguage } from '../src/lib/i18n.ts'
 import { PluginScope } from '../src/plugins/scope.ts'
 import type { Lang, State } from './code.ts'
+import type { Set } from './draw-buttons.tsx'
 import { DRAW } from './draw.tsx'
 import { AFTER } from './draw-modals.tsx'
 import '../src/styles/index.ts'
@@ -39,11 +40,11 @@ const shown = (lang: Lang) =>
         i18next.on('languageChanged', changed)
       })
 
-const draw = (kind: string, el: Element, state: State, lang: Lang) => {
+const draw = (kind: string, el: Element, state: State, lang: Lang, set?: Set) => {
   setChosenLanguage(lang)
   let root = roots.get(el)
   if (!root) roots.set(el, (root = createRoot(el)))
-  root.render(<PluginScope.Provider value="hello-world">{DRAW[kind]?.(state, lang)}</PluginScope.Provider>)
+  root.render(<PluginScope.Provider value="hello-world">{DRAW[kind]?.(state, lang, set)}</PluginScope.Provider>)
   const after = AFTER[kind]
   if (after) void shown(lang).then(() => after(state, lang))
 }

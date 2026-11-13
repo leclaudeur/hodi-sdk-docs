@@ -20,6 +20,7 @@ const visit = (node: Root | Element, lang: Lang) => {
     const key = child.properties.dataRender
     if (child.properties.dataPlay) {
       child.properties.dataPlayJs = demoAssets.playJs.url
+      if (KINDS[String(child.properties.dataPlay)]?.fixed) child.properties.dataFixed = ''
     }
     if (typeof key === 'string') {
       // Its name, for what one kind needs (shadow.css); a card, a row or a field spans its window.
