@@ -48,7 +48,8 @@ definePlugin({ settingsPage: HelloCard })
 
 ## Good to know
 
-- **What it receives**: nothing. It reads its settings through its routes, and calls them with `usePluginApi()`.
+- **What it receives**: nothing.
+- **Its data**: it reads it through its routes, with `usePluginApi()`.
 - **Who sees it**: the server admin only, like the whole _Server › Plugins_ page.
 - **When it shows**: only while the plugin is on.
 - **How it looks**: `SettingRow`s, like the settings above it.

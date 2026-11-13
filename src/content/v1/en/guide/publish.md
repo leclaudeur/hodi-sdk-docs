@@ -208,7 +208,8 @@ The [registry's README](https://github.com/leclaudeur/hodi-plugin-registry#add-o
 
 ### Then
 
-- The plugin shows in _Server › Plugins › Available_ of every Hodi, ready to install in one click.
+- The plugin shows in _Server › Plugins › Available_ of every Hodi.
+- It installs from there in one click.
 - Each new version goes through a new pull request.
 
 That new version is read, then signed in turn.

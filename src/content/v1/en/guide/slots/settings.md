@@ -76,4 +76,4 @@ definePlugin({
 
 - **Who sees it**: the profiles in `audience`, as for its routes.
 - **Its title**: the plugin gives it, with `SectionPage`. Hodi adds nothing around it.
-- **If it crashes**: Hodi shows a message in its place, and the rest of Settings keeps working.
+- **If it crashes**: Hodi shows a message in its place, the rest keeps working.

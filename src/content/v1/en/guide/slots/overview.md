@@ -63,4 +63,4 @@ definePlugin({
 
 - **Who sees it**: the server admin only.
 - **Its data**: the card asks a `serverRoute` for it, with `from` and `to`.
-- **If it crashes**: Hodi shows a message in its place, and the rest of the dashboard keeps working.
+- **If it crashes**: Hodi shows a message in its place, the rest keeps working.

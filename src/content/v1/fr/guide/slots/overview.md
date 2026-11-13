@@ -63,4 +63,4 @@ definePlugin({
 
 - **Qui la voit** : l'admin du serveur seulement.
 - **Ses données** : la carte les demande à une `serverRoute`, avec `from` et `to`.
-- **Si elle plante** : Hodi affiche un message à sa place, et le reste du tableau de bord continue de marcher.
+- **Si elle plante** : Hodi affiche un message à sa place, le reste marche.

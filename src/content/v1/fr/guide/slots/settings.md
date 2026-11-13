@@ -76,4 +76,4 @@ definePlugin({
 
 - **Qui la voit** : les profils prévus par `audience`, comme pour ses routes.
 - **Son titre** : c'est le plugin qui le donne, avec `SectionPage`. Hodi n'ajoute rien autour.
-- **Si elle plante** : Hodi affiche un message à sa place, et le reste de Réglages continue de marcher.
+- **Si elle plante** : Hodi affiche un message à sa place, le reste marche.
