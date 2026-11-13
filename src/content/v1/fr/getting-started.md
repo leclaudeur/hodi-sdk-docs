@@ -1,17 +1,17 @@
 ---
 title: "Premiers pas"
-description: "Ton premier plugin Hodi en quatre étapes : son manifeste, sa route, sa carte, puis son installation."
-intro: "Ton premier plugin en quatre étapes, dans un éditeur qui montre Hodi à côté de ton code."
+description: "Un premier plugin Hodi en quatre étapes : son manifeste, sa route, sa carte, puis son installation."
+intro: "Un premier plugin en quatre étapes, dans un éditeur qui montre Hodi à côté du code."
 order: 0
 icon: "graduation-cap"
 steps:
   - name: "Le manifeste"
-    text: "Le manifeste dit à Hodi qui est ton plugin et quels réglages il a. Hodi dessine leur page tout seul."
+    text: "Le manifeste dit à Hodi qui est le plugin et quels réglages il a. Hodi dessine leur page tout seul."
     guide: "/fr/guide/manifest/"
     todo:
-      - "Ouvre `plugin.json`, dans les onglets au-dessus du code."
-      - "À la ligne 10, remplace « Bonjour » par « Salut ». C'est la valeur que le réglage a au départ."
-      - "Regarde l'aperçu : la ligne Salutation affiche déjà « Salut »."
+      - "Ouvrir `plugin.json`, dans les onglets au-dessus du code."
+      - "À la ligne 10, remplacer « Bonjour » par « Salut ». C'est la valeur que le réglage a au départ."
+      - "Dans l'aperçu, la ligne Salutation affiche alors « Salut »."
     file: "plugin.json"
     lang: "json"
     edit: 10
@@ -43,9 +43,9 @@ steps:
     text: "Une route, c'est une fonction : Hodi l'appelle, elle répond. Celle-ci lit le réglage « Salutation » et le renvoie."
     guide: "/fr/guide/server-context/"
     todo:
-      - "Ouvre `server/index.ts` : c'est la partie de ton plugin qui tourne sur le serveur."
-      - "À la ligne 7, ajoute un « ! » après `greeting`, dans le texte que la route renvoie."
-      - "Clique sur « Dire bonjour » dans l'aperçu : ta route répond « Salut ! »."
+      - "Ouvrir `server/index.ts` : c'est la partie du plugin qui tourne sur le serveur."
+      - "À la ligne 7, ajouter un « ! » après `greeting`, dans le texte que la route renvoie."
+      - "Cliquer sur « Dire bonjour » dans l'aperçu : la route répond « Salut ! »."
     file: "server/index.ts"
     lang: "ts"
     edit: 7
@@ -76,12 +76,12 @@ steps:
           answer: "Salut !"
           live: true
   - name: "La carte"
-    text: "La carte, c'est ce que Hodi affiche de ton plugin. Tu la dessines avec les composants de Hodi : elle a tout de suite l'air de l'app."
+    text: "La carte, c'est ce que Hodi affiche du plugin. Elle se dessine avec les composants de Hodi : elle a tout de suite l'air de l'app."
     guide: "/fr/components/"
     todo:
-      - "Ouvre `web/index.tsx` : c'est la partie de ton plugin qui s'affiche dans Hodi."
-      - "À la ligne 15, ajoute `look=\"primary\"` au bouton pour qu'il ressorte."
-      - "Regarde l'aperçu : le bouton « Dire bonjour » prend le style principal."
+      - "Ouvrir `web/index.tsx` : c'est la partie du plugin qui s'affiche dans Hodi."
+      - "À la ligne 15, ajouter `look=\"primary\"` au bouton pour qu'il ressorte."
+      - "Dans l'aperçu, le bouton « Dire bonjour » prend alors le style principal."
     file: "web/index.tsx"
     lang: "tsx"
     edit: 15
@@ -123,12 +123,12 @@ steps:
           live: true
     log: "POST /api/plugins/hello-world/hello  200"
   - name: "Installer"
-    text: "Le mode développeur installe ton plugin sur ton Hodi de test, puis le remet à jour à chaque sauvegarde : Hodi redémarre tout seul pour le charger."
+    text: "Le mode développeur installe le plugin sur un Hodi de test, puis le remet à jour à chaque sauvegarde : Hodi redémarre tout seul pour le charger."
     guide: "/fr/guide/publish/"
     todo:
-      - "Dans l'aperçu, le mode développeur de ton Hodi de test est actif : il te montre un code."
-      - "À la ligne 3, tape ce code après `--code`, pour lancer `npx hodi-plugin dev`."
-      - "Regarde Serveur › Plugins : Hello world y est, avec le badge « En développement »."
+      - "Dans l'aperçu, le mode développeur du Hodi de test est actif : il montre un code."
+      - "À la ligne 3, taper ce code après `--code`, pour lancer `npx hodi-plugin dev`."
+      - "Dans Serveur › Plugins, Hello world apparaît alors avec le badge « En développement »."
     file: "Terminal"
     lang: "text"
     edit: 3
@@ -169,7 +169,7 @@ steps:
     log: "Mode développeur : Hello world 0.1.0  ok"
 finish:
   title: "Tuto terminé !"
-  intro: "Bravo ! Tu viens de voir comment se construit un plugin Hodi. C'était une démo : aucun serveur ne tournait et rien n'a été installé."
+  intro: "Bravo ! Voilà comment se construit un plugin Hodi. C'était une démo : aucun serveur ne tournait et rien n'a été installé."
   recap:
     - name: "Le manifeste"
       text: "`plugin.json` donne au plugin son nom, sa version et son réglage."
@@ -178,7 +178,7 @@ finish:
     - name: "La carte"
       text: "`web/index.tsx` affiche le réglage et le bouton dans Réglages."
     - name: "L'installation"
-      text: "`npx hodi-plugin dev` l'envoie sur ton Hodi et le met à jour à chaque enregistrement."
+      text: "`npx hodi-plugin dev` l'envoie sur le Hodi de test et le met à jour à chaque enregistrement."
   real: "Pour le faire pour de vrai"
-  realText: "Il te faut ton propre Hodi et Node.js 24. Pars du modèle de plugin : le guide t'accompagne pas à pas, de l'installation à la publication."
+  realText: "Il faut un Hodi à soi et Node.js 24. Le modèle de plugin est le point de départ, et le guide accompagne pas à pas, de l'installation à la publication."
 ---
