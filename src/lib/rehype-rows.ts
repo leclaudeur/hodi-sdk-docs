@@ -57,24 +57,39 @@ const rowOf = (cells: Element[], names: string[]) => {
   )
 }
 
-const compareOf = (names: string[], rows: Element[][]) =>
-  el(
+// One card, one row per point compared: its name, then each thing's value side by side, so the rows line up. The
+// things' names head the columns; on a phone, where the values stack, each value carries its thing's name.
+const compareOf = (names: string[], rows: Element[][]) => {
+  const things = names.slice(1)
+  const head = el(
     'div',
-    ['compare'],
-    names.slice(1).map((name, index) =>
-      el(
-        'div',
-        ['props', 'rows'],
-        [
-          bar(name),
-          ...rows.map(cells => {
-            const cell = cells[index + 1]
-            return el('div', ['pr'], cell ? [line(cell, label(cells[0]))] : [])
-          })
-        ]
-      )
-    )
+    ['ph', 'mono', 'cmp-head'],
+    things.map(name => el('span', [], [{ type: 'text', value: name }]))
   )
+  const rowOfPoint = (cells: Element[]) =>
+    el(
+      'div',
+      ['pr'],
+      [
+        el('span', ['row-label', 'mono'], [{ type: 'text', value: label(cells[0]) }]),
+        el(
+          'div',
+          ['cmp-vals'],
+          things.map((name, index) =>
+            el(
+              'div',
+              ['cmp-val'],
+              [
+                el('span', ['cmp-thing', 'mono'], [{ type: 'text', value: name }]),
+                el('p', [], cells[index + 1]?.children ?? [])
+              ]
+            )
+          )
+        )
+      ]
+    )
+  return el('div', ['props', 'rows', 'compare'], [head, ...rows.map(rowOfPoint)])
+}
 
 export const rowsOf = (table: Element): Element => {
   const [head] = elements(table, 'thead').flatMap(part => elements(part, 'tr'))
