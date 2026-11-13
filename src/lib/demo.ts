@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import type { Lang } from './i18n.ts'
 
@@ -24,3 +24,8 @@ const asset = (name: string) => {
 }
 
 export const demoAssets = { app: asset('app.css'), playCss: asset('play.css'), playJs: asset('play.js') }
+
+// The playground's other files, which play.js imports by their own names: their hash is already in them.
+export const playChunks = readdirSync(join(process.cwd(), 'src/demo'))
+  .filter(name => /^play-.+\.js$/.test(name))
+  .map(name => ({ file: name, url: `/assets/${name}`, body: read(name) }))

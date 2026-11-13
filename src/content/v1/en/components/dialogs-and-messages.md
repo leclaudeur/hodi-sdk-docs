@@ -12,11 +12,11 @@ preview: "notice"
 
 Hodi's window, centred, with its tinted header and its cross. Escape, a click beside it or the cross call `onClose`. Its buttons go in `DialogActions`.
 
-```tsx title="web/index.tsx" render="dialog" kind="modal"
+```tsx title="web/index.tsx" render="dialog" kind="modal" play="dialog"
 import { Button, Dialog, DialogActions, TextField } from 'hodi:sdk'
 import { Hand } from 'lucide-react'
 
-<Dialog open={open} onClose={close} size="compact" title="New greeting" intro="It replaces \"Hi\".">
+<Dialog open={open} onClose={close} size="compact" title="New greeting" intro="It replaces "Hi".">
   <TextField icon={Hand} aria-label="Greeting" placeholder="Hey" />
   <DialogActions>
     <Button onClick={close}>Cancel</Button>
@@ -52,7 +52,7 @@ A window's row of buttons, under a line. "Cancel" on the left, the action on the
 
 Hodi's question before what can't be undone. The button is red by default. With `proof`, it also asks for the person's password: pass it to a route marked `proof: true` with `api(path, { proof })`, and Hodi checks it.
 
-```tsx title="web/index.tsx" render="asktoconfirm" kind="modal"
+```tsx title="web/index.tsx" render="asktoconfirm" kind="modal" play="asktoconfirm"
 import { askToConfirm, usePluginApi } from 'hodi:sdk'
 
 const api = usePluginApi()
@@ -79,13 +79,10 @@ askToConfirm({
 
 Hodi's toasts say what happened, nothing more: never a question, never a form. `showDone` for an action done, with "Undo" if you give it `undo`. `showSaved` for a saved setting. `showError` for a failure, with a button if needed.
 
-```tsx title="web/index.tsx" render="toasts" kind="toast"
-import { showDone, showError, showSaved } from 'hodi:sdk'
+```tsx title="web/index.tsx" render="toasts" kind="toast" play="toasts"
+import { showDone } from 'hodi:sdk'
 
 showDone('Greeting saved')
-showDone('Greeting deleted', () => restore(id))
-showSaved()
-showError('The server did not answer.')
 ```
 
 <!-- prettier-ignore -->
@@ -99,11 +96,10 @@ showError('The server did not answer.')
 
 A line under a field: blue for what is happening, red for a failure.
 
-```tsx title="web/index.tsx" render="statusline"
+```tsx title="web/index.tsx" render="statusline" play="statusline"
 import { StatusLine } from 'hodi:sdk'
 
 <StatusLine tone="info">Saved 2 min ago.</StatusLine>
-<StatusLine tone="error">The server did not answer.</StatusLine>
 ```
 
 <!-- prettier-ignore -->
@@ -116,11 +112,19 @@ import { StatusLine } from 'hodi:sdk'
 
 A box with an icon, for information that stays in the page.
 
-```tsx title="web/index.tsx" render="notice"
+```tsx title="web/index.tsx" render="notice" play="notice"
 import { Notice } from 'hodi:sdk'
 import { ExternalLink, Info } from 'lucide-react'
 
-<Notice title="New version" icon={Info} action={{ label: 'See', icon: ExternalLink, href: links.plugins }}>
+<Notice
+  title="New version"
+  icon={Info}
+  action={{
+    label: 'See',
+    icon: ExternalLink,
+    href: links.plugins
+  }}
+>
   Hello world 0.2 says hello in Dutch.
 </Notice>
 ```
@@ -140,13 +144,11 @@ import { ExternalLink, Info } from 'lucide-react'
 
 An empty list, or one that couldn't load: a title and a line, no more.
 
-```tsx title="web/index.tsx" render="emptystate"
+```tsx title="web/index.tsx" render="emptystate" play="emptystate"
 import { EmptyState } from 'hodi:sdk'
 import { Inbox } from 'lucide-react'
 
-<EmptyState icon={<Inbox size={28} />} title="No hellos" compact>
-  The household's greetings arrive here.
-</EmptyState>
+<EmptyState icon={<Inbox size={28} />} title="No hellos" compact>The household’s greetings arrive here.</EmptyState>
 ```
 
 <!-- prettier-ignore -->

@@ -115,7 +115,7 @@ dialog {
   box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.5);
 }
 
-/* A group's card on the Composants page: the same render, smaller, centred in its frame. */
+/* A group's card on the Composants page: the same render, centred in its frame. */
 :host(.thumb) {
   display: grid !important;
   place-items: center;
@@ -125,32 +125,12 @@ dialog {
   display: flex;
   justify-content: center;
 }
-:host(.thumb.buttons) .in {
-  zoom: 0.66;
-}
-:host(.thumb.buttons) .in div {
-  flex-wrap: nowrap !important;
-}
-:host(.thumb.settings-and-pages) .in {
-  zoom: 0.55;
-  width: 540px;
-  display: block;
-}
-:host(.thumb.step-pages) .in {
-  zoom: 0.8;
-  width: 400px;
-  display: block;
-}
-:host(.thumb.fields) .in {
-  zoom: 0.9;
-}
+/* Every card shows one component at the app's own size; a row, a step's buttons or a notice take the card's width. */
+:host(.thumb.settings-and-pages) .in,
+:host(.thumb.step-pages) .in,
 :host(.thumb.dialogs-and-messages) .in {
-  zoom: 0.8;
-  width: 400px;
   display: block;
-}
-:host(.thumb.small-elements) .in {
-  zoom: 0.9;
+  width: min(420px, 100% - 48px);
 }
 /* A render is a picture of the app: the wheel always scrolls the docs' page, never a box inside the picture. */
 .in * {

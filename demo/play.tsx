@@ -1,70 +1,36 @@
+import i18next from 'i18next'
 import { createRoot, type Root } from 'react-dom/client'
-import { ArrowRight, Check, Download, Hand, Pencil, Plus, Trash2 } from 'lucide-react'
-import Button from '../src/ui/Button.tsx'
-import SparkleIcon from '../src/ui/SparkleIcon.tsx'
-import StepPage from '../src/plugins/StepPage.tsx'
-import TextField from '../src/ui/TextField.tsx'
-import Toggle from '../src/ui/Toggle.tsx'
+import { setChosenLanguage } from '../src/lib/i18n.ts'
+import { PluginScope } from '../src/plugins/scope.ts'
+import type { Lang, State } from './code.ts'
+import { DRAW } from './draw.tsx'
+import { AFTER } from './draw-modals.tsx'
 import '../src/styles/index.ts'
 
-// The real Button, drawn again each time a control of the docs' playground changes.
-const ICONS = { none: undefined, Check, Download, Pencil, Plus, Trash2, SparkleIcon } as const
-type Props = {
-  label: string
-  look: 'neutral' | 'primary' | 'danger' | 'ai'
-  icon: keyof typeof ICONS
-  compact: boolean
-  busy: boolean
-  wide: boolean
-  disabled: boolean
-}
-
+// The docs' playground: Hodi's real component, drawn again each time a control changes.
 const roots = new WeakMap<Element, Root>()
-const button = (el: Element, p: Props) => {
+
+// Hodi's own words (Annuler, J'ai au moins 13 ans) follow the docs page, not the browser; a dialog or a toast asks
+// for them once they are loaded.
+const shown = (lang: Lang) =>
+  i18next.language === lang
+    ? Promise.resolve()
+    : new Promise<void>(resolve => {
+        const changed = (language: string) => {
+          if (language !== lang) return
+          i18next.off('languageChanged', changed)
+          resolve()
+        }
+        i18next.on('languageChanged', changed)
+      })
+
+const draw = (kind: string, el: Element, state: State, lang: Lang) => {
+  setChosenLanguage(lang)
   let root = roots.get(el)
   if (!root) roots.set(el, (root = createRoot(el)))
-  root.render(
-    <Button look={p.look} icon={ICONS[p.icon]} compact={p.compact} busy={p.busy} wide={p.wide} disabled={p.disabled}>
-      {p.label || ' '}
-    </Button>
-  )
+  root.render(<PluginScope.Provider value="hello-world">{DRAW[kind]?.(state, lang)}</PluginScope.Provider>)
+  const after = AFTER[kind]
+  if (after) void shown(lang).then(() => after(state, lang))
 }
 
-type StepProps = {
-  title: string
-  intro: string
-  progress: boolean
-  back: boolean
-  later: boolean
-  body: 'none' | 'field' | 'toggle'
-}
-const noop = () => {}
-// The docs page's language: the sample words match the page around the playground.
-const w = (french: string, other: string) => (document.documentElement.lang === 'en' ? other : french)
-const stepPage = (el: Element, p: StepProps) => {
-  let root = roots.get(el)
-  if (!root) roots.set(el, (root = createRoot(el)))
-  root.render(
-    <StepPage
-      step={p.progress ? 2 : undefined}
-      total={p.progress ? 3 : undefined}
-      title={p.title || ' '}
-      intro={p.intro}
-      onBack={p.back ? noop : undefined}
-      start={p.later ? <Button>{w('Plus tard', 'Later')}</Button> : undefined}
-      actions={
-        <Button look="primary">
-          {w('Continuer', 'Continue')}
-          <ArrowRight size={16} aria-hidden="true" />
-        </Button>
-      }
-    >
-      {p.body === 'field' && <TextField icon={Hand} aria-label={w('Prénom', 'First name')} placeholder="Anna" />}
-      {p.body === 'toggle' && (
-        <Toggle checked label={w('Saluer le matin', 'Say hello in the morning')} onChange={noop} />
-      )}
-    </StepPage>
-  )
-}
-
-;(window as unknown as { HodiPlay: unknown }).HodiPlay = { button, stepPage }
+;(window as unknown as { HodiPlay: unknown }).HodiPlay = { draw }

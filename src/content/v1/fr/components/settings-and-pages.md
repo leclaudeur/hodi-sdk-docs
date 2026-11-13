@@ -12,17 +12,23 @@ preview: "settingrow"
 
 Une page de réglages : son titre, la ligne qui l'explique, puis ses cartes. Sur téléphone, le titre passe dans l'en-tête de Hodi. Elle reçoit `layout` de l'emplacement qui la dessine.
 
-```tsx title="web/index.tsx" render="sectionpage"
+```tsx title="web/index.tsx" render="sectionpage" play="sectionpage"
 import { SectionPage, SettingRow, SettingsCard } from 'hodi:sdk'
 import { Pencil } from 'lucide-react'
 
-const Page = ({ layout }: { layout: 'desktop' | 'phone' }) => (
-  <SectionPage title="Hello world" intro="Une salutation, chaque fois que tu ouvres Hodi." layout={layout}>
-    <SettingsCard>
-      <SettingRow label="Salutation" value="Salut" action={{ label: 'Changer', icon: Pencil, onClick: edit }} />
-    </SettingsCard>
-  </SectionPage>
-)
+<SectionPage title="Hello world" intro="Une salutation, chaque fois que tu ouvres Hodi." layout="desktop">
+  <SettingsCard>
+    <SettingRow
+      label="Salutation"
+      value="Salut"
+      action={{
+        label: 'Changer',
+        icon: Pencil,
+        onClick: edit
+      }}
+    />
+  </SettingsCard>
+</SectionPage>
 ```
 
 <!-- prettier-ignore -->
@@ -38,15 +44,20 @@ const Page = ({ layout }: { layout: 'desktop' | 'phone' }) => (
 
 Un groupe de lignes : son nom en petites capitales, puis ses lignes dans une carte.
 
-```tsx title="web/index.tsx" render="settingscard"
-import { SettingRow, SettingsCard, Toggle } from 'hodi:sdk'
+```tsx title="web/index.tsx" render="settingscard" play="settingscard"
+import { SettingRow, SettingsCard } from 'hodi:sdk'
 import { Pencil } from 'lucide-react'
 
 <SettingsCard label="Salutation">
-  <SettingRow label="Texte" value="Salut" action={{ label: 'Changer', icon: Pencil, onClick: edit }} />
-  <SettingRow label="Notifications" hint="Un rappel le matin.">
-    <Toggle checked={on} label="Notifications" onChange={setOn} />
-  </SettingRow>
+  <SettingRow
+    label="Texte"
+    value="Salut"
+    action={{
+      label: 'Changer',
+      icon: Pencil,
+      onClick: edit
+    }}
+  />
 </SettingsCard>
 ```
 
@@ -60,24 +71,19 @@ import { Pencil } from 'lucide-react'
 
 Une ligne de réglage. Sous son nom, une ligne de 14 px : sa valeur, ou à défaut une aide courte, jamais les deux. Son action est un bouton avec un libellé, qui devient un rond de 38 px sur téléphone. Un choix (`Segmented`) passe sous le texte sur téléphone.
 
-```tsx title="web/index.tsx" render="settingrow" kind="rows"
-import { Segmented, SettingRow, SettingsCard } from 'hodi:sdk'
-import { Download, Pencil, Trash2 } from 'lucide-react'
+```tsx title="web/index.tsx" render="settingrow" kind="rows" play="settingrow"
+import { SettingRow, SettingsCard } from 'hodi:sdk'
+import { Pencil } from 'lucide-react'
 
 <SettingsCard>
-  <SettingRow label="Texte" value="Salut" action={{ label: 'Changer', icon: Pencil, onClick: edit }} />
   <SettingRow
-    label="Historique"
-    hint="Les 30 derniers bonjours."
-    action={[
-      { label: 'Exporter', icon: Download, onClick: exportAll },
-      { label: 'Vider', icon: Trash2, look: 'danger', onClick: clear }
-    ]}
-  />
-  <SettingRow
-    label="Moment"
-    hint="Quand dire bonjour."
-    choice={<Segmented label="Moment" value={moment} options={MOMENTS} onChange={setMoment} />}
+    label="Texte"
+    value="Salut"
+    action={{
+      label: 'Changer',
+      icon: Pencil,
+      onClick: edit
+    }}
   />
 </SettingsCard>
 ```
@@ -98,12 +104,12 @@ import { Download, Pencil, Trash2 } from 'lucide-react'
 
 La dernière ligne d'une liste qui ne montre que ses premiers éléments : un clic ouvre le reste.
 
-```tsx title="web/index.tsx" render="morerow"
+```tsx title="web/index.tsx" render="morerow" play="morerow"
 import { MoreRow, SettingRow, SettingsCard } from 'hodi:sdk'
 
 <SettingsCard>
-  {shown.map(p => <SettingRow key={p.id} label={p.name} value={p.greeting} />)}
-  {!all && <MoreRow label={t('more', { count: rest.length })} onClick={() => setAll(true)} />}
+  <SettingRow label="Anna" value="Salut !" />
+  <MoreRow label="Voir les 4 autres" onClick={showAll} />
 </SettingsCard>
 ```
 
@@ -117,17 +123,12 @@ import { MoreRow, SettingRow, SettingsCard } from 'hodi:sdk'
 
 Une carte de [Vue d’ensemble](/fr/guide/slots/overview/) : son titre, un nombre, une puce au bout, puis le contenu du plugin.
 
-```tsx title="web/index.tsx" render="overviewcard"
-import { Chip, OverviewCard, usePluginTranslation } from 'hodi:sdk'
+```tsx title="web/index.tsx" render="overviewcard" play="overviewcard"
+import { Chip, OverviewCard } from 'hodi:sdk'
 
-const Greetings = ({ from, to }: { from: string; to: string }) => {
-  const { t } = usePluginTranslation()
-  return (
-    <OverviewCard title={t('overview.title')} count={128} aside={<Chip tone="success">Actif</Chip>}>
-      <p className="mono">34 aujourd'hui</p>
-    </OverviewCard>
-  )
-}
+<OverviewCard title="Bonjours" count={128} aside={<Chip tone="success">Actif</Chip>}>
+  <p className="mono">34 aujourd'hui</p>
+</OverviewCard>
 ```
 
 <!-- prettier-ignore -->

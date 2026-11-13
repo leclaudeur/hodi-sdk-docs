@@ -12,11 +12,17 @@ preview: "segmented"
 
 Un champ d'une ligne, en pilule, avec son icône. Son `aria-label` le nomme.
 
-```tsx title="web/index.tsx" render="textfield"
+```tsx title="web/index.tsx" render="textfield" play="textfield"
 import { TextField } from 'hodi:sdk'
 import { Mail } from 'lucide-react'
 
-<TextField icon={Mail} aria-label="E-mail" placeholder="toi@exemple.be" value={email} onChange={e => setEmail(e.target.value)} />
+<TextField
+  icon={Mail}
+  aria-label="E-mail"
+  placeholder="toi@exemple.be"
+  value={email}
+  onChange={e => setEmail(e.target.value)}
+/>
 ```
 
 <!-- prettier-ignore -->
@@ -31,10 +37,15 @@ import { Mail } from 'lucide-react'
 
 Un mot de passe, avec son œil pour l'afficher. Pour un nouveau, `PasswordRing` remplace le cadenas et `PasswordGauge` va dessous.
 
-```tsx title="web/index.tsx" render="passwordfield"
+```tsx title="web/index.tsx" render="passwordfield" play="passwordfield"
 import { PasswordField, PasswordGauge, PasswordRing } from 'hodi:sdk'
 
-<PasswordField aria-label="Mot de passe" value={password} onChange={e => setPassword(e.target.value)} lead={<PasswordRing password={password} />} />
+<PasswordField
+  aria-label="Mot de passe"
+  value={password}
+  onChange={e => setPassword(e.target.value)}
+  lead={<PasswordRing password={password} />}
+/>
 <PasswordGauge password={password} />
 ```
 
@@ -60,10 +71,10 @@ La ligne sous un nouveau mot de passe : sa force et ce qui le rendrait plus fort
 
 Une case par caractère d'un code. Le code complet se vérifie tout seul, sans bouton.
 
-```tsx title="web/index.tsx" render="pinfield"
+```tsx title="web/index.tsx" render="pinfield" play="pinfield"
 import { PinField } from 'hodi:sdk'
 
-<PinField label="Code" length={6} value={code} onChange={setCode} onComplete={check} state={state} align="start" />
+<PinField label="Code" length={6} value={code} onChange={setCode} onComplete={check} align="start" />
 ```
 
 <!-- prettier-ignore -->
@@ -85,11 +96,10 @@ import { PinField } from 'hodi:sdk'
 
 L'interrupteur, pour un réglage qui s'allume ou s'éteint. Dans une ligne, il va dans une `SettingRow`.
 
-```tsx title="web/index.tsx" render="toggle"
+```tsx title="web/index.tsx" render="toggle" play="toggle"
 import { Toggle } from 'hodi:sdk'
 
 <Toggle checked={morning} label="Saluer le matin" onChange={setMorning} />
-<Toggle checked={evening} label="Saluer le soir" onChange={setEvening} />
 ```
 
 <!-- prettier-ignore -->
@@ -104,7 +114,7 @@ import { Toggle } from 'hodi:sdk'
 
 Une phrase que la personne coche, comme un accord.
 
-```tsx title="web/index.tsx" render="checkbox"
+```tsx title="web/index.tsx" render="checkbox" play="checkbox"
 import { Checkbox } from 'hodi:sdk'
 
 <Checkbox checked={keep} onChange={setKeep}>Garder mes salutations</Checkbox>
@@ -122,10 +132,10 @@ import { Checkbox } from 'hodi:sdk'
 
 « J'ai au moins 13 ans », suivi de la ligne de chaque plugin qui en a une (`ageConsent`). C'est la case de tout formulaire qui crée un compte.
 
-```tsx title="web/index.tsx" render="agecheckbox"
+```tsx title="web/index.tsx" render="agecheckbox" play="agecheckbox"
 import { AgeCheckbox } from 'hodi:sdk'
 
-<AgeCheckbox checked={age} onChange={setAge} />
+<AgeCheckbox checked={adult} onChange={setAdult} />
 ```
 
 <!-- prettier-ignore -->
@@ -138,7 +148,7 @@ import { AgeCheckbox } from 'hodi:sdk'
 
 Un choix parmi quelques-uns, dans une pilule, comme « Clair · Sombre · Système ». Dans une ligne, il va dans `choice` de `SettingRow`.
 
-```tsx title="web/index.tsx" render="segmented"
+```tsx title="web/index.tsx" render="segmented" play="segmented"
 import { Segmented } from 'hodi:sdk'
 
 <Segmented

@@ -12,11 +12,17 @@ preview: "segmented"
 
 A one-line field, pill-shaped, with its icon. Its `aria-label` names it.
 
-```tsx title="web/index.tsx" render="textfield"
+```tsx title="web/index.tsx" render="textfield" play="textfield"
 import { TextField } from 'hodi:sdk'
 import { Mail } from 'lucide-react'
 
-<TextField icon={Mail} aria-label="E-mail" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} />
+<TextField
+  icon={Mail}
+  aria-label="E-mail"
+  placeholder="you@example.com"
+  value={email}
+  onChange={e => setEmail(e.target.value)}
+/>
 ```
 
 <!-- prettier-ignore -->
@@ -31,10 +37,15 @@ import { Mail } from 'lucide-react'
 
 A password, with its eye to show it. For a new one, put `PasswordRing` in place of the padlock and `PasswordGauge` under it.
 
-```tsx title="web/index.tsx" render="passwordfield"
+```tsx title="web/index.tsx" render="passwordfield" play="passwordfield"
 import { PasswordField, PasswordGauge, PasswordRing } from 'hodi:sdk'
 
-<PasswordField aria-label="Password" value={password} onChange={e => setPassword(e.target.value)} lead={<PasswordRing password={password} />} />
+<PasswordField
+  aria-label="Password"
+  value={password}
+  onChange={e => setPassword(e.target.value)}
+  lead={<PasswordRing password={password} />}
+/>
 <PasswordGauge password={password} />
 ```
 
@@ -60,10 +71,10 @@ The line under a new password: its strength and what would make it stronger. It 
 
 One box per character of a code. The full code checks itself, without a button.
 
-```tsx title="web/index.tsx" render="pinfield"
+```tsx title="web/index.tsx" render="pinfield" play="pinfield"
 import { PinField } from 'hodi:sdk'
 
-<PinField label="Code" length={6} value={code} onChange={setCode} onComplete={check} state={state} align="start" />
+<PinField label="Code" length={6} value={code} onChange={setCode} onComplete={check} align="start" />
 ```
 
 <!-- prettier-ignore -->
@@ -85,11 +96,10 @@ import { PinField } from 'hodi:sdk'
 
 The switch, for a setting that turns on or off. In a row, it goes in a `SettingRow`.
 
-```tsx title="web/index.tsx" render="toggle"
+```tsx title="web/index.tsx" render="toggle" play="toggle"
 import { Toggle } from 'hodi:sdk'
 
 <Toggle checked={morning} label="Say hello in the morning" onChange={setMorning} />
-<Toggle checked={evening} label="Say hello in the evening" onChange={setEvening} />
 ```
 
 <!-- prettier-ignore -->
@@ -104,7 +114,7 @@ import { Toggle } from 'hodi:sdk'
 
 A sentence the person ticks, like an agreement.
 
-```tsx title="web/index.tsx" render="checkbox"
+```tsx title="web/index.tsx" render="checkbox" play="checkbox"
 import { Checkbox } from 'hodi:sdk'
 
 <Checkbox checked={keep} onChange={setKeep}>Keep my greetings</Checkbox>
@@ -122,10 +132,10 @@ import { Checkbox } from 'hodi:sdk'
 
 "I am at least 13", followed by the line of each plugin that has one (`ageConsent`). It's the box of every form that creates an account.
 
-```tsx title="web/index.tsx" render="agecheckbox"
+```tsx title="web/index.tsx" render="agecheckbox" play="agecheckbox"
 import { AgeCheckbox } from 'hodi:sdk'
 
-<AgeCheckbox checked={age} onChange={setAge} />
+<AgeCheckbox checked={adult} onChange={setAdult} />
 ```
 
 <!-- prettier-ignore -->
@@ -138,7 +148,7 @@ import { AgeCheckbox } from 'hodi:sdk'
 
 One choice among a few, in a pill, like "Light · Dark · System". In a row, pass it to `SettingRow`'s `choice`.
 
-```tsx title="web/index.tsx" render="segmented"
+```tsx title="web/index.tsx" render="segmented" play="segmented"
 import { Segmented } from 'hodi:sdk'
 
 <Segmented

@@ -1,5 +1,5 @@
 // Turns the capture and the playground's build into src/demo/: the renders, their CSS and the playground's files.
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 
 const [work, out] = process.argv.slice(2)
 const capture = JSON.parse(readFileSync(`${work}/capture.json`, 'utf8'))
@@ -14,3 +14,7 @@ const play = readFileSync(
 ).replace(/@font-face\s*{[^}]*}/g, '')
 writeFileSync(`${out}/play.css`, play)
 writeFileSync(`${out}/play.js`, readFileSync(`${work}/play/play.js`))
+// The bundle's other files keep the names it imports them by (their hash is already in them).
+for (const name of readdirSync(out)) if (/^play-.+\.js$/.test(name)) rmSync(`${out}/${name}`)
+for (const name of readdirSync(`${work}/play`))
+  if (/^play-.+\.js$/.test(name)) writeFileSync(`${out}/${name}`, readFileSync(`${work}/play/${name}`))

@@ -14,12 +14,9 @@ Le bouton avec un libellé, et, au besoin, une icône Lucide avant lui. Il fait 
 
 ```tsx title="web/index.tsx" render="button" play="button"
 import { Button } from 'hodi:sdk'
-import { Check, Download, Plus, Trash2 } from 'lucide-react'
+import { Check } from 'lucide-react'
 
-<Button look="primary" icon={Check}>Enregistrer</Button>
-<Button icon={Download}>Exporter</Button>
-<Button look="danger" icon={Trash2} onClick={clear}>Supprimer</Button>
-<Button compact icon={Plus}>Ajouter</Button>
+<Button look="primary" icon={Check} onClick={save}>Enregistrer</Button>
 ```
 
 <!-- prettier-ignore -->
@@ -39,15 +36,11 @@ import { Check, Download, Plus, Trash2 } from 'lucide-react'
 
 Le bouton d'une seule icône. Son `label` est lu par les lecteurs d'écran et s'affiche au survol.
 
-```tsx title="web/index.tsx" render="roundbutton"
+```tsx title="web/index.tsx" render="roundbutton" play="roundbutton"
 import { RoundButton } from 'hodi:sdk'
-import { Pencil, Trash2 } from 'lucide-react'
+import { Pencil } from 'lucide-react'
 
-<RoundButton icon={Pencil} label="Modifier" size={28} />
-<RoundButton icon={Pencil} label="Modifier" size={34} />
-<RoundButton icon={Pencil} label="Modifier" size={38} />
-<RoundButton icon={Pencil} label="Modifier" size={44} />
-<RoundButton icon={Trash2} label="Supprimer" size={38} variant="danger" />
+<RoundButton icon={Pencil} label="Modifier" size={44} onClick={edit} />
 ```
 
 <!-- prettier-ignore -->
@@ -66,12 +59,10 @@ import { Pencil, Trash2 } from 'lucide-react'
 
 Le bouton violet, seule porte vers l'IA du foyer. Un clic lance l'action `aiActions` du même nom sur la partie serveur, une seule fois. Hodi le cache pour un ado, un enfant ou un foyer sans IA, et le grise quand la limite du jour est atteinte. Voir [le contexte serveur](/fr/guide/server-context/).
 
-```tsx title="web/index.tsx" render="aibutton"
+```tsx title="web/index.tsx" render="aibutton" play="aibutton"
 import { AiButton } from 'hodi:sdk'
 
-<AiButton action="summary" input={{ id: article.id }} onAnswer={answer => setSummary(String(answer))}>
-  Résumer
-</AiButton>
+<AiButton action="summary" input={{ id: article.id }} onAnswer={answer => setSummary(String(answer))}>Résumer</AiButton>
 ```
 
 <!-- prettier-ignore -->
@@ -90,12 +81,11 @@ import { AiButton } from 'hodi:sdk'
 
 Un bouton au bout d'un article, à côté de « Lire l'original ». C'est ce que dessine [le lecteur](/fr/guide/slots/reader/).
 
-```tsx title="web/index.tsx" render="readerbutton"
+```tsx title="web/index.tsx" render="readerbutton" play="readerbutton"
 import { ReaderButton } from 'hodi:sdk'
-import { Check, Flag } from 'lucide-react'
+import { Flag } from 'lucide-react'
 
 <ReaderButton icon={<Flag size={12} />} onClick={report}>Signaler</ReaderButton>
-<ReaderButton icon={<Check size={12} />} onClick={report} done>Signalé</ReaderButton>
 ```
 
 <!-- prettier-ignore -->
