@@ -29,5 +29,9 @@ if (panel) {
   })
   panel.addEventListener('pointerenter', load)
   panel.addEventListener('focusin', load)
-  if (typedBefore()) addEventListener('load', load, { once: true })
+  // A step typed in before loads its editor at once, and shows what waited hidden once it is back as it was left.
+  if (typedBefore()) {
+    load()
+    void loading?.finally(() => document.documentElement.classList.remove('tz-restore'))
+  }
 }

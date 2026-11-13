@@ -43,6 +43,15 @@ const panes = [
   noindex={!first || doc.version !== latest}
 >
   <div class="tz" data-pagefind-body={first && doc.version === latest ? '' : undefined}>
+    <!-- A step typed in before must not show its blank state first: what changes waits, hidden, for the editor. -->
+    <script is:inline>
+      try {
+        if (sessionStorage.getItem('hodi-first-steps:' + location.pathname) !== null)
+          document.documentElement.classList.add('tz-restore')
+      } catch {
+        // Without storage, nothing was typed before.
+      }
+    </script>
     <Bar doc={doc} current={current} done={done} home={home} />
     <main class="tz-main show-step" data-pagefind-meta={`title:${data.title}`}>
       <div class="tz-seg" role="radiogroup" aria-label={t(doc.lang, 'firstStepsShow')}>

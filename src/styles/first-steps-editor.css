@@ -27,3 +27,16 @@
     padding-right: 12px;
   }
 }
+
+/* A step typed in before: the parts its code changes wait for the editor, then fade in. */
+.tz-restore .v-list,
+.tz-restore .tz-file,
+.tz-restore .tz-prev .body,
+.tz-restore [data-next] {
+  opacity: 0;
+}
+.v-list,
+.tz-file,
+.tz-prev .body {
+  transition: opacity var(--duration) var(--ease);
+}
