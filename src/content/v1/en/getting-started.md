@@ -7,10 +7,14 @@ icon: "graduation-cap"
 steps:
   - name: "The manifest"
     text: "The manifest tells Hodi who your plugin is and what settings it has. Hodi draws their page by itself."
-    guide: "/en/guide/manifest/"
+    more:
+      - label: "The manifest"
+        href: "/en/guide/manifest/"
+      - label: "Server and web"
+        href: "/en/guide/server-and-web/"
     todo:
       - "Open `plugin.json`, in the tabs above the code."
-      - "On line 10, replace \"Hello\" with \"Hi\". It's the value the setting starts with."
+      - "On the highlighted line, replace \"Hello\" with \"Hi\". It's the value the setting starts with."
       - "Look at the preview: the Greeting row already shows \"Hi\"."
     file: "plugin.json"
     lang: "json"
@@ -41,10 +45,14 @@ steps:
           live: true
   - name: "The route"
     text: "A route is a function: Hodi calls it, it answers. This one reads the \"Greeting\" setting and sends it back."
-    guide: "/en/guide/server-context/"
+    more:
+      - label: "The server context"
+        href: "/en/guide/server-context/"
+      - label: "Server and web"
+        href: "/en/guide/server-and-web/"
     todo:
       - "Open `server/index.ts`: it's the part of your plugin that runs on the server."
-      - "On line 7, add a \"!\" after `greeting`, in the text the route sends back."
+      - "On the highlighted line, add a \"!\" after `greeting`, in the text the route sends back."
       - "Click \"Say hello\" in the preview: your route answers \"Hi!\"."
     file: "server/index.ts"
     lang: "ts"
@@ -77,10 +85,16 @@ steps:
           live: true
   - name: "The card"
     text: "The card is what Hodi shows of your plugin. You draw it with Hodi's components: it looks like the app straight away."
-    guide: "/en/components/"
+    more:
+      - label: "Slots"
+        href: "/en/guide/slots/"
+      - label: "Components"
+        href: "/en/components/"
+      - label: "Buttons"
+        href: "/en/components/buttons/"
     todo:
       - "Open `web/index.tsx`: it's the part of your plugin that shows in Hodi."
-      - "On line 15, add `look=\"primary\"` to the button so it stands out."
+      - "On the highlighted line, add `look=\"primary\"` to the button so it stands out."
       - "Look at the preview: the \"Say hello\" button takes the main style."
     file: "web/index.tsx"
     lang: "tsx"
@@ -124,10 +138,14 @@ steps:
     log: "POST /api/plugins/hello-world/hello  200"
   - name: "Install"
     text: "Developer mode installs your plugin on your test Hodi, then updates it at every save: Hodi restarts by itself to load it."
-    guide: "/en/guide/publish/"
+    more:
+      - label: "Publish"
+        href: "/en/guide/publish/"
+      - label: "The manifest"
+        href: "/en/guide/manifest/"
     todo:
       - "In the preview, your test Hodi's developer mode is on: it shows you a code."
-      - "On line 3, type that code after `--code` to run `npx hodi-plugin dev`."
+      - "On the highlighted line, type that code after `--code` to run `npx hodi-plugin dev`."
       - "Look at Server › Plugins: Hello world is there, with the \"In development\" badge."
     file: "Terminal"
     lang: "text"

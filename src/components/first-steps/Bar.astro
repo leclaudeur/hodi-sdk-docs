@@ -39,11 +39,17 @@ const stateOf = (index: number) => {
     ))}
   </ol>
   <div class="tz-end">
-    <a class="btn compact icon wide-only" href={home}>
+    <a class="btn compact icon wide-only" href={home} data-forget>
       <Icon name="book-open" />
       {t(doc.lang, 'guide')}
     </a>
-    <a class="round" href={home} aria-label={t(doc.lang, 'firstStepsQuit')} title={t(doc.lang, 'firstStepsQuit')}>
+    <a
+      class="round"
+      href={home}
+      data-forget
+      aria-label={t(doc.lang, 'firstStepsQuit')}
+      title={t(doc.lang, 'firstStepsQuit')}
+    >
       <Icon name="x" />
     </a>
   </div>

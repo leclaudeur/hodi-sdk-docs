@@ -46,11 +46,11 @@ const lastStep = firstStepsUrl(doc, String(doc.entry.data.steps?.length ?? 1))
           <span>{finish.realText}</span>
         </p>
         <div class="dlg-a">
-          <a class="btn icon" href={doc.url}>
+          <a class="btn icon" href={doc.url} data-forget>
             <Icon name="rotate-ccw" />
             {t(doc.lang, 'firstStepsAgain')}
           </a>
-          <a class="btn primary icon end" href={home}>
+          <a class="btn primary icon end" href={home} data-forget>
             {t(doc.lang, 'firstStepsGuide')}
             <Icon name="arrow-right" />
           </a>

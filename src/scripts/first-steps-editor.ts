@@ -88,7 +88,6 @@ const showDone = () => {
     if (tick) item.querySelector('.b')?.replaceChildren(tick)
   }
   for (const element of document.querySelectorAll<HTMLElement>('[data-after]')) element.hidden = false
-  document.querySelector<HTMLElement>('[data-solution]')?.setAttribute('hidden', '')
   const next = document.querySelector<HTMLElement>('[data-next]')
   next?.removeAttribute('aria-disabled')
   next?.classList.remove('locked')
@@ -125,9 +124,6 @@ const mount = (host: HTMLElement, config: Setup) => {
   host.querySelector('pre')?.remove()
   host.prepend(view.dom)
   check(view)
-  const solve = () => view.dispatch({ changes: { from: 0, to: view.state.doc.length, insert: config.finished } })
-  document.querySelector('[data-solution]')?.addEventListener('click', solve)
-  if (host.dataset.solve !== undefined) solve()
   // The click that loaded the editor puts the caret where it landed.
   const [x, y] = (host.dataset.at ?? '').split(',').map(Number)
   const at = x !== undefined && y !== undefined ? view.posAtCoords({ x, y }) : null

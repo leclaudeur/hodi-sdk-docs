@@ -4,7 +4,7 @@ import { t } from '../../lib/i18n.ts'
 import { inline } from '../../lib/inline.ts'
 import Icon from '../Icon.astro'
 
-// The step: its name, why it matters, then the three things to do. Opening the file is done; the change is the
+// The step: its name, why it matters, the three things to do, then the guide's pages behind it. Opening the file is done; the change is the
 // person's to make, and the script ticks the rest once the code is right.
 interface Props {
   doc: Doc
@@ -30,9 +30,6 @@ const stateOf = (index: number) => {
     <h1>
       {step.name}
       <span class="dot" aria-hidden="true"></span>
-      <a class="qh" href={step.guide} aria-label={t(doc.lang, 'firstStepsWhy')} title={t(doc.lang, 'firstStepsWhy')}>
-        <Icon name="circle-help" size={18} />
-      </a>
     </h1>
     <p set:html={inline(step.text, doc.lang)} />
     <span class="v-label">{t(doc.lang, 'firstStepsTodo')}</span>
@@ -44,15 +41,26 @@ const stateOf = (index: number) => {
         </li>
       ))}
     </ol>
+    <nav class="tz-more" aria-labelledby="tz-more">
+      <span class="v-label" id="tz-more">
+        {t(doc.lang, 'firstStepsMore')}
+      </span>
+      <ul>
+        {step.more.map(link => (
+          <li>
+            <a href={link.href} target="_blank" rel="noopener">
+              <Icon name="book-open" size={16} />
+              <span>{link.label}</span>
+              <Icon name="arrow-up-right" size={14} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
     {!done && (
-      <>
-        <template data-tick>
-          <Icon name="check" size={12} />
-        </template>
-        <button class="tz-answer" type="button" data-solution hidden>
-          {t(doc.lang, 'firstStepsSolution')}
-        </button>
-      </>
+      <template data-tick>
+        <Icon name="check" size={12} />
+      </template>
     )}
   </section>
 )}

@@ -159,12 +159,47 @@
   color: var(--text);
   font: 500 0.8em var(--font-mono);
 }
-/* The « ? » beside the title: the guide's page that explains why the step works. */
-.qh {
-  display: inline-flex;
-  margin-left: 8px;
-  vertical-align: top;
-  color: var(--info-icon);
+/* « En savoir plus »: the guide's pages behind the step, at the foot of its column, opened in a new tab so the
+   editor stays where it was. */
+.tz-more {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+.tz-more ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tz-more a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 0 10px;
+  margin: 0 -10px;
+  border-radius: 10px;
+  color: var(--text-2);
+  font-size: 14px;
+  text-decoration: none;
+}
+.tz-more a > :first-child {
+  color: var(--text-3);
+}
+.tz-more a > :last-child {
+  margin-left: auto;
+  color: var(--text-3);
+}
+@media (hover: hover) {
+  .tz-more a:hover {
+    background: var(--control-hover);
+    color: var(--text);
+  }
 }
 
 .v-label {
