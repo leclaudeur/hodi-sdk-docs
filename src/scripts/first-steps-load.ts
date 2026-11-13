@@ -35,3 +35,14 @@ if (panel) {
     void loading?.finally(() => document.documentElement.classList.remove('tz-restore'))
   }
 }
+
+// Leaving Premiers pas, or « Revoir », starts it over: what was typed in each step is forgotten.
+const forget = () => {
+  try {
+    for (const key of Object.keys(sessionStorage))
+      if (key.startsWith('hodi-first-steps:')) sessionStorage.removeItem(key)
+  } catch {
+    // Without storage, nothing was kept.
+  }
+}
+for (const link of document.querySelectorAll('[data-forget], .tz-id a')) link.addEventListener('click', forget)
