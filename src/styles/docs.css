@@ -293,36 +293,8 @@
   display: flex;
   flex-direction: column;
 }
-/* It fades in and out with its scrim, as the app's dialogs do: nothing slides. */
-.dev-tree,
-.dev-tree::backdrop {
-  transition:
-    opacity 280ms var(--ease),
-    overlay 280ms var(--ease) allow-discrete,
-    display 280ms var(--ease) allow-discrete;
-}
-.dev-tree:not([open]) {
-  opacity: 0;
-}
 .dev-tree::backdrop {
   background: color-mix(in srgb, var(--bg) 60%, transparent);
-}
-.dev-tree:not([open])::backdrop {
-  opacity: 0;
-}
-@starting-style {
-  .dev-tree[open] {
-    opacity: 0;
-  }
-  .dev-tree[open]::backdrop {
-    opacity: 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .dev-tree,
-  .dev-tree::backdrop {
-    transition: none;
-  }
 }
 .dev-tree .hd {
   display: flex;
