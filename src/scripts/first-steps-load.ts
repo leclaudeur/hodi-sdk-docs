@@ -1,7 +1,6 @@
 // The editor is the page's heaviest part: it loads when the person reaches for the code, so the page shows at once.
 const panel = document.querySelector<HTMLElement>('.tz-file[data-editor]')
 const next = document.querySelector<HTMLElement>('[data-next]')
-const solution = document.querySelector<HTMLElement>('[data-solution]')
 
 let loading: Promise<unknown> | undefined
 const load = () => {
@@ -18,16 +17,11 @@ const typedBefore = () => {
 }
 
 if (panel) {
-  // Until the step is done, the way on waits; the answer is one click away for anyone stuck.
+  // Until the step is done, the way on waits.
   next?.setAttribute('aria-disabled', 'true')
   next?.classList.add('locked')
   next?.addEventListener('click', event => {
     if (next.getAttribute('aria-disabled') === 'true') event.preventDefault()
-  })
-  solution?.removeAttribute('hidden')
-  solution?.addEventListener('click', () => {
-    panel.dataset.solve = ''
-    load()
   })
   panel.addEventListener('pointerdown', event => {
     panel.dataset.at = `${event.clientX},${event.clientY}`

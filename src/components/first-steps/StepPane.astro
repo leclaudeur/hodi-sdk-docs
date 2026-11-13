@@ -45,14 +45,9 @@ const stateOf = (index: number) => {
       ))}
     </ol>
     {!done && (
-      <>
-        <template data-tick>
-          <Icon name="check" size={12} />
-        </template>
-        <button class="tz-answer" type="button" data-solution hidden>
-          {t(doc.lang, 'firstStepsSolution')}
-        </button>
-      </>
+      <template data-tick>
+        <Icon name="check" size={12} />
+      </template>
     )}
   </section>
 )}
