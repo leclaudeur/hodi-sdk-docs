@@ -40,19 +40,22 @@ const PluginAdmin = () => (
       <PluginOptions plugin={plugin as never} layout={phone ? 'phone' : 'desktop'} onSave={no} />
     </section>
     <section data-ex="pluginpermissions">
-      <PluginPermissions
-        permissions={{
-          network: ['api.example.com'],
-          articles: true,
-          publicRoutes: false,
-          accounts: false,
-          mail: false,
-          signIn: false,
-          households: false,
-          notify: true,
-          ai: true
-        }}
-      />
+      {/* One block: the render frame lines its children up in a row, and the title goes above its card. */}
+      <div>
+        <PluginPermissions
+          permissions={{
+            network: ['api.example.com'],
+            articles: true,
+            publicRoutes: false,
+            accounts: false,
+            mail: false,
+            signIn: false,
+            households: false,
+            notify: true,
+            ai: true
+          }}
+        />
+      </div>
     </section>
   </>
 )
