@@ -10,7 +10,7 @@ icon: "layers"
 
 - **The server part** answers the plugin's routes. It runs on Hodi's server, isolated from Hodi itself, and keeps its data in its own SQLite database.
 - **The web part** draws the plugin's screens. It runs in the browser, in Hodi's pages, with Hodi's components.
-- **Between them**, the web part calls the server part's routes. Hodi checks the session on the way.
+- **Between them**, the web part calls the server's routes and Hodi checks the session.
 
 A plugin can have only one of them: a server part that only reads articles, or a web part with no route of its own.
 

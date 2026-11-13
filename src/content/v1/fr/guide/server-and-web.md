@@ -10,7 +10,7 @@ icon: "layers"
 
 - **La partie serveur** répond aux routes du plugin. Elle tourne sur le serveur de Hodi, isolée de Hodi lui-même, et garde ses données dans sa propre base SQLite.
 - **La partie web** dessine les écrans du plugin. Elle tourne dans le navigateur, dans les pages de Hodi, avec les composants de Hodi.
-- **Entre les deux**, la partie web appelle les routes de la partie serveur. Hodi vérifie la session au passage.
+- **Entre les deux**, la partie web appelle les routes du serveur et Hodi vérifie la session.
 
 Un plugin peut n'avoir qu'une des deux : une partie serveur qui ne fait que lire des articles, ou une partie web sans route à elle.
 
