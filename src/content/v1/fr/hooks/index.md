@@ -2,7 +2,7 @@
 title: "Hooks"
 description: "Les textes du plugin, ses routes, ses liens et les réglages du serveur."
 intro: "Ces hooks savent quel plugin les appelle : ils ne marchent que dans ses composants."
-order: 7
+order: 2
 icon: "anchor"
 topic: "science"
 ---
