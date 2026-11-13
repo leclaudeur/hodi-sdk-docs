@@ -14,7 +14,8 @@ const links = [
   { label: t(doc.lang, 'sourceCode'), href: 'https://github.com/leclaudeur/hodi' },
   { label: t(doc.lang, 'template'), href: 'https://github.com/leclaudeur/hodi-plugin-template' },
   { label: t(doc.lang, 'registry'), href: 'https://github.com/leclaudeur/hodi-plugin-registry' },
-  { label: 'npm', href: 'https://www.npmjs.com/package/@hodi-app/plugin-sdk' }
+  { label: 'npm', href: 'https://www.npmjs.com/package/@hodi-app/plugin-sdk' },
+  { label: t(doc.lang, 'support'), href: 'https://www.patreon.com/cw/LeClaudeur' }
 ]
 ---
 
@@ -23,8 +24,11 @@ const links = [
     <Brand href={home} label={t(doc.lang, 'home')} reuse />
     <div class="ft-r">
       <div class="lks">
-        {links.map(link => (
-          <a href={link.href}>{link.label}</a>
+        {links.map((link, index) => (
+          <>
+            {index === 2 && <span class="br" aria-hidden="true" />}
+            <a href={link.href}>{link.label}</a>
+          </>
         ))}
       </div>
       <span class="mono end">SDK {doc.version}.x · AGPL-3.0</span>

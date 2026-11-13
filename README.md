@@ -8,8 +8,9 @@ A guide, the components and the types of `@hodi-app/plugin-sdk`, in French and E
 [![CI](https://github.com/leclaudeur/hodi-sdk-docs/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/leclaudeur/hodi-sdk-docs/actions/workflows/ci.yml)
 [![Plugin SDK](https://img.shields.io/npm/v/@hodi-app/plugin-sdk?label=%40hodi-app%2Fplugin-sdk)](https://www.npmjs.com/package/@hodi-app/plugin-sdk)
 [![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue)](LICENSE)
+[![Patreon](https://img.shields.io/badge/Patreon-Le%20Claudeur-F96854?logo=patreon&logoColor=white)](https://www.patreon.com/cw/LeClaudeur)
 
-[**Quick start**](#quick-start) · [**Writing a page**](#writing-a-page) · [**Deploying**](#deploying) · [**Rules**](#rules)
+[**Quick start**](#quick-start) · [**Writing a page**](#writing-a-page) · [**Deploying**](#deploying) · [**Rules**](#rules) · [**Sponsor**](#sponsor)
 
 </div>
 
@@ -92,6 +93,13 @@ After each merge, open the stack and click **Pull and redeploy**.
 - **One page, one subject**: link to the page that covers a subject instead of repeating it.
 
 Every pull request runs `npm run typecheck`, `npm run lint`, `npm run format:check` and `npm run build`.
+
+## Sponsor
+
+Hodi is free and open source, with no ads and nothing to pay.\
+If it is useful to you, you can support its work on Patreon.
+
+[![Support Hodi on Patreon](https://img.shields.io/badge/Support%20Hodi-Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/cw/LeClaudeur)
 
 ## License
 
