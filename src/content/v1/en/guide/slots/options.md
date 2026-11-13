@@ -1,7 +1,7 @@
 ---
-title: "Its options"
-description: "A card of your own under its settings, in Server › Plugins, for whatever those settings don't say."
-intro: "Under the settings Hodi draws for your plugin, in Server › Plugins: a card of your own, for what settings alone don't say."
+title: "Its admin card"
+description: "A card of the plugin on its page in Server › Plugins, under its settings, for what settings alone can't do."
+intro: "A card the plugin draws itself on its page in _Server › Plugins_, under the settings Hodi draws for it. It is for what plain settings can't do: a button to test, a list, statistics…"
 order: 1
 icon: "sliders-horizontal"
 topic: "tech"
@@ -10,18 +10,33 @@ key: "settingsPage"
 
 ## Where it shows
 
-The server admin opens your plugin in _Server › Plugins_, with its "Manage" round button. Hodi first draws the rows of the settings in `plugin.json`, then your card under them.
+The server admin opens _Server › Plugins_, then a plugin's page. From top to bottom, that page has:
+
+1. The plugin's name, its version and its switch.
+2. "Options": the [settings](/en/guide/manifest/#settings) of `plugin.json`, which Hodi draws.
+3. The plugin's card, `settingsPage`.
+4. The buttons to remove the plugin.
+
+The plugin only draws part 3. The rest comes from Hodi.
 
 ## Example
 
+Hello world puts a "Say hello" button there, which calls its route and shows the answer:
+
 ```tsx title="web/index.tsx"
 import { Button, SettingRow, definePlugin, usePluginApi } from 'hodi:sdk'
+import { useState } from 'react'
 
 const HelloCard = () => {
   const api = usePluginApi()
+  const [text, setText] = useState('Your route’s answer')
+  const sayHello = async () => {
+    const answer = await api('/hello', { method: 'POST' })
+    setText((await answer.json()).text)
+  }
   return (
-    <SettingRow label="Say hello" hint="Your route's answer">
-      <Button compact onClick={() => api('/hello', { method: 'POST' })}>
+    <SettingRow label="Say hello" hint={text}>
+      <Button compact onClick={sayHello}>
         Say hello
       </Button>
     </SettingRow>
@@ -33,6 +48,7 @@ definePlugin({ settingsPage: HelloCard })
 
 ## Good to know
 
-- **What it receives**: nothing: it reads its settings and calls its routes.
-- **Who sees it**: the server admin, who manages plugins.
-- **Its rows**: `SettingRow`s, like the ones Hodi draws above.
+- **What it receives**: nothing. It reads its settings through its routes, and calls them with `usePluginApi()`.
+- **Who sees it**: the server admin only, like the whole _Server › Plugins_ page.
+- **When it shows**: only while the plugin is on.
+- **How it looks**: `SettingRow`s, like the settings' rows above it. The card then looks like part of the page.

@@ -1,30 +1,39 @@
 ---
 title: "Sign-in"
-description: "Another way in, a sign-up, a page in place of Sign in or a step right after it."
-intro: "The screens around signing in: another way in, a sign-up, a page in place of Sign in or a step right after it."
+description: "The screens around signing in: another way in, a sign-up, a page in place of Sign in, a step right after it."
+intro: "The screens around signing in: another way in, a sign-up, a page in place of Sign in, or a step right after it. They are the only slots someone sees before opening their profile."
 order: 6
 icon: "log-in"
 topic: "sport"
 key: "signInExtras"
 ---
 
-Before a profile is open, Hodi only loads the plugins that have the `publicRoutes` permission. Only they can draw these screens, and their public routes answer there.
+## Before signing in
+
+Before someone has opened their profile, Hodi doesn't know their household yet. So it only loads the plugins that have the `publicRoutes` permission, and only their `web/public.tsx` file. That file fills the slots of this page, and calls the plugin's public routes.
 
 ## The slots
 
-- **`signInExtras`**: under the Sign in form, such as "Create my household".
-- **`signedOutPage`**: a page in place of Sign in, on a device without a household.
-- **`afterSignIn`**: a step once signed in, before the app, such as "Which household?".
-- **`whoIsReadingFooter`**: buttons next to "Manage profiles", under "Who's in?".
-- **`ageConsent`**: a line after "I am at least 13", with its links.
+<!-- prettier-ignore -->
+| `definePlugin` key | Where | Example |
+| --- | --- | --- |
+| `signInExtras` | Under the Sign in form | "Create my household" |
+| `signedOutPage` | In place of Sign in, on a device with no household | A home page |
+| `afterSignIn` | A step once signed in, before entering the app | "Which household?" |
+| `whoIsReadingFooter` | Next to "Manage profiles", under "Who's in?" | "Switch household" |
+| `ageConsent` | After "I am at least 13 years old" | "and I accept the terms" |
 
 ## Example
 
-```tsx title="web/index.tsx"
+This button, under Sign in, creates an account with a public route, then signs the person in:
+
+```tsx title="web/public.tsx"
+import { Button, definePlugin, usePluginPublicApi } from 'hodi:sdk'
+
 const SignUp = ({ signedIn }) => {
   const publicApi = usePluginPublicApi()
   const join = async () => {
-    const answer = await publicApi('/signup', { method: 'POST', body: … })
+    const answer = await publicApi('/signup', { method: 'POST', body: JSON.stringify(form) })
     if (answer.ok) signedIn()
   }
   return <Button onClick={join}>Create my household</Button>
@@ -33,8 +42,33 @@ const SignUp = ({ signedIn }) => {
 definePlugin({ signInExtras: SignUp })
 ```
 
+## What they receive
+
+<!-- prettier-ignore -->
+| Slot | Props | |
+| --- | --- | --- |
+| `signInExtras` | `layout`, `signedIn()` | `signedIn()` restarts the app, signed in, after a route that answered `signIn`. |
+| `signedOutPage` | `layout`, `showSignIn()`, `signedIn()` | `showSignIn()` opens Sign in. |
+| `afterSignIn` | `layout`, `done()` | `done()` lets the person into the app. |
+| `whoIsReadingFooter` | `layout` | |
+
+## Signing someone in
+
+The plugin never sets the session itself. With the `signIn` permission, its public route answers `signIn` with an account's id, and Hodi signs the device in:
+
+```tsx title="server/index.ts"
+publicRoutes: {
+  'POST /signup': async (request, ctx) => {
+    const account = await ctx.accounts.create({ email: request.body.email, password: request.body.password })
+    if (!account) return { status: 409 }
+    return { status: 201, signIn: account.id }
+  }
+}
+```
+
+Hodi only accepts the id of an account this call has just created, or whose password it has just checked. Never the server admin's.
+
 ## Good to know
 
-- **Signing someone in**: a public route answers with `signIn` and the id of an account it has just created or checked. Hodi sets up the session itself, with the `signIn` permission.
-- **Refusing a sign-in**: `checkSignIn`, called at every sign-in, can refuse it.
-- **The limits**: no request to another site, 30 per minute at most.
+- **Refusing a sign-in**: `checkSignIn`, on the server, is called at each sign-in. It answers `null` to let the person in, or a key of its `locales` to refuse with that message.
+- **The limits**: 30 requests a minute per address, and no request coming from another site.
