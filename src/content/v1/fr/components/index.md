@@ -11,10 +11,10 @@ cards: "components"
 import { Button, SettingRow, SettingsCard } from 'hodi:sdk'
 ```
 
-Chaque page montre le rendu réel, le code qui le donne, puis toutes les props. Les icônes viennent de `lucide-react`, que le plugin ajoute à ses dépendances.
+Chaque page montre le rendu réel du composant, le code qui le dessine, puis toutes ses props. Les icônes viennent de `lucide-react`, que le plugin ajoute à ses propres dépendances.
 
 ## Les règles
 
-- **Pas de style en ligne** : la page de Hodi les refuse. Le CSS va dans `web.css`.
-- **Les couleurs de Hodi** : ses variables CSS, jamais une couleur en dur.
-- **Un composant de Hodi d'abord** : un composant maison seulement pour ce qu'aucun ne fait.
+- **Pas de style en ligne** : la page de Hodi refuse les styles en ligne. Le CSS du plugin va dans un fichier, avec des classes préfixées par son id.
+- **Les couleurs de Hodi** : les [tokens](/fr/tokens/), jamais une couleur écrite en dur.
+- **Un composant de Hodi d'abord** : le plugin ne dessine son propre composant que pour ce qu'aucun composant de Hodi ne fait.

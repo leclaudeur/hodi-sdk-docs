@@ -1,7 +1,7 @@
 ---
 title: "Petits éléments"
 description: "Les puces, les filtres, l'avatar d'une source et celui d'un foyer."
-intro: "Les légendes et les métadonnées de Hodi sont en police mono : les puces aussi."
+intro: "Les petits éléments qui accompagnent une ligne ou un titre : une puce, un filtre, l'avatar d'une source ou d'un foyer. Comme les légendes et les métadonnées de Hodi, les puces sont écrites en police mono."
 order: 6
 icon: "tag"
 topic: "sport"
@@ -10,7 +10,7 @@ preview: "chip"
 
 ## Chip
 
-Une petite capsule : une langue, un état, une durée.
+Une petite capsule de texte, pour une information courte comme une langue, un état ou une durée.
 
 ```tsx title="web/index.tsx" render="chip" play="chip"
 import { Chip } from 'hodi:sdk'
@@ -21,15 +21,15 @@ import { Chip } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `children` | `ReactNode` | Son texte, court. |
-| `tone?` | `'success' \| 'warning' \| 'danger' \| 'accent'` | Sa couleur. Neutre par défaut. |
-| `size?` | `'capsule' \| 'row'` | `row` au bout d'une ligne de réglage. |
-| `title?` | `string` | Ce qu'elle veut dire, au survol. |
-| `label?` | `string` | Un nom plus complet pour les lecteurs d'écran. |
+| `children` | `ReactNode` | Le texte de la puce, en quelques mots. |
+| `tone?` | `'success' \| 'warning' \| 'danger' \| 'accent'` | La couleur de la puce : neutre par défaut, verte, jaune, rouge ou dans la couleur d'accent. |
+| `size?` | `'capsule' \| 'row'` | La taille de la puce : `capsule` par défaut, `row` au bout d'une ligne de réglage. |
+| `title?` | `string` | Ce que veut dire la puce, affiché au survol. |
+| `label?` | `string` | Un nom plus complet que le texte, pour les lecteurs d'écran. |
 
 ## FilterChip
 
-Un filtre d'une rangée : une pilule, blanche quand elle est choisie.
+Un filtre dans une rangée de filtres. C'est une pilule, qui devient blanche quand elle est choisie.
 
 ```tsx title="web/index.tsx" render="filterchip" play="filterchip"
 import { FilterChip } from 'hodi:sdk'
@@ -46,17 +46,17 @@ import { FilterChip } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `selected` | `boolean` | Choisi ou non. |
-| `children` | `ReactNode` | Son libellé. |
-| `onClick?` | `() => void` | Un filtre de la page. |
-| `href?` | `string` | Ou un lien vers une page. |
-| `count?` | `number` | Combien il en garde, après le libellé. |
-| `icon?` | `LucideIcon` | Une icône avant le libellé. |
-| `disabled?` | `boolean` | Ne se choisit pas. |
+| `selected` | `boolean` | `true` quand le filtre est choisi. |
+| `children` | `ReactNode` | Le texte du filtre. |
+| `onClick?` | `() => void` | Ce que fait un clic, pour un filtre qui change la page sans la quitter. |
+| `href?` | `string` | L'adresse à ouvrir, pour un filtre qui mène à une autre page. |
+| `count?` | `number` | Le nombre d'éléments que le filtre garde, affiché après le texte. |
+| `icon?` | `LucideIcon` | Une icône Lucide, affichée avant le texte. |
+| `disabled?` | `boolean` | Le filtre est grisé et ne se choisit pas. |
 
 ## SourceAvatar
 
-L'icône d'une source, prise sur son site, ou ses initiales quand elle n'en a pas. Jamais ronde.
+L'icône d'une source, prise sur son site, ou ses initiales quand le site n'en a pas. Elle n'est jamais ronde : le rond est réservé aux personnes et aux foyers.
 
 ```tsx title="web/index.tsx" render="sourceavatar" play="sourceavatar"
 import { SourceAvatar } from 'hodi:sdk'
@@ -71,13 +71,13 @@ import { SourceAvatar } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `sourceId` | `string` | L'id de la source, comme le donne un article. |
-| `sourceName` | `string` | Son nom, pour les initiales. |
-| `size?` | `18 \| 20 \| 22 \| 26 \| 44` | Sa taille. Par défaut 18. |
+| `sourceId` | `string` | L'id de la source, tel qu'un article le donne. |
+| `sourceName` | `string` | Le nom de la source, dont l'avatar prend les initiales quand il n'a pas d'icône. |
+| `size?` | `18 \| 20 \| 22 \| 26 \| 44` | La taille de l'avatar, en px. Elle vaut 18 par défaut. |
 
 ## HouseholdAvatar
 
-La photo d'un foyer, ou son initiale, ronde comme un profil de « Qui lit ? ».
+La photo d'un foyer, ou son initiale quand il n'a pas de photo. Elle est ronde, comme un profil sur l'écran « Qui lit ? ».
 
 ```tsx title="web/index.tsx" render="householdavatar" play="householdavatar"
 import { HouseholdAvatar } from 'hodi:sdk'
@@ -92,7 +92,7 @@ import { HouseholdAvatar } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `name` | `string` | Le nom du foyer, pour l'initiale. |
-| `photo` | `string \| null` | L'adresse de sa photo (`household.photo`), ou null. |
-| `size` | `number` | Sa largeur, anneau compris. |
-| `preview?` | `string \| null` | Une photo choisie mais pas encore envoyée. |
+| `name` | `string` | Le nom du foyer, dont l'avatar prend l'initiale quand il n'a pas de photo. |
+| `photo` | `string \| null` | L'adresse de la photo du foyer (`household.photo`), ou `null`. |
+| `size` | `number` | La largeur de l'avatar, en px, anneau compris. |
+| `preview?` | `string \| null` | Une photo que la personne vient de choisir mais n'a pas encore envoyée. Elle s'affiche à la place de `photo`. |
