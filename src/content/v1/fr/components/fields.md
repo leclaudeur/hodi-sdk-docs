@@ -1,7 +1,7 @@
 ---
 title: "Champs"
 description: "Le texte, le mot de passe, les codes, les interrupteurs et les choix."
-intro: "Les champs de Hodi ont la hauteur d'un bouton : côte à côte, ils s'alignent."
+intro: "Les champs où la personne tape ou choisit quelque chose. Ils ont la même hauteur qu'un bouton : un champ et un bouton posés côte à côte s'alignent."
 order: 4
 icon: "text-cursor-input"
 topic: "culture"
@@ -10,7 +10,7 @@ preview: "segmented"
 
 ## TextField
 
-Un champ d'une ligne, en pilule, avec son icône. Son `aria-label` le nomme.
+Un champ de texte sur une ligne, en forme de pilule, avec une icône au début. Il n'a pas de titre visible : son `aria-label` le nomme pour les lecteurs d'écran.
 
 ```tsx title="web/index.tsx" render="textfield" play="textfield"
 import { TextField } from 'hodi:sdk'
@@ -28,14 +28,14 @@ import { Mail } from 'lucide-react'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `icon` | `LucideIcon` | L'icône avant le texte. |
+| `icon` | `LucideIcon` | L'icône au début du champ, une icône Lucide. |
 | `aria-label` | `string` | Le nom du champ, pour les lecteurs d'écran. |
-| `onClear?` | `() => void` | Une recherche : une croix ronde le vide, dès qu'il y a quelque chose à vider. |
+| `onClear?` | `() => void` | Pour une recherche : une croix ronde apparaît dès que le champ contient du texte, et un clic sur elle appelle cette fonction. |
 | `…` | `InputHTMLAttributes` | Tout ce qu'un `<input>` accepte : `value`, `onChange`, `type`, `placeholder`… |
 
 ## PasswordField
 
-Un mot de passe, avec son œil pour l'afficher. Pour un nouveau, `PasswordRing` remplace le cadenas et `PasswordGauge` va dessous.
+Un champ de mot de passe, avec un œil pour afficher ce qui est tapé. Pour un nouveau mot de passe, `PasswordRing` remplace le cadenas et montre sa force, et `PasswordGauge` se place sous le champ.
 
 ```tsx title="web/index.tsx" render="passwordfield" play="passwordfield"
 import { PasswordField, PasswordGauge, PasswordRing } from 'hodi:sdk'
@@ -52,24 +52,24 @@ import { PasswordField, PasswordGauge, PasswordRing } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `aria-label` | `string` | Le nom du champ. |
-| `icon?` | `LucideIcon` | L'icône. Par défaut un cadenas. |
-| `invalid?` | `boolean` | Bord rouge : le mot de passe a été refusé. |
-| `lead?` | `ReactNode` | À la place de l'icône : un `PasswordRing`. |
+| `aria-label` | `string` | Le nom du champ, pour les lecteurs d'écran. |
+| `icon?` | `LucideIcon` | L'icône au début du champ. C'est un cadenas par défaut. |
+| `invalid?` | `boolean` | Met le bord du champ en rouge, quand le mot de passe a été refusé. |
+| `lead?` | `ReactNode` | Un élément à la place de l'icône, comme un `PasswordRing`. |
 | `…` | `InputHTMLAttributes` | Tout ce qu'un `<input>` accepte, sauf `type`. |
 
 ## PasswordGauge
 
-La ligne sous un nouveau mot de passe : sa force et ce qui le rendrait plus fort. Elle disparaît dès qu'il est assez fort. `PasswordRing` prend la même prop.
+La ligne sous un nouveau mot de passe. Elle dit sa force et ce qui le rendrait plus fort, et disparaît dès qu'il est assez fort. `PasswordRing` prend la même prop.
 
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `password` | `string` | Le mot de passe tapé. |
+| `password` | `string` | Le mot de passe tapé, dont la ligne mesure la force. |
 
 ## PinField
 
-Une case par caractère d'un code. Le code complet se vérifie tout seul, sans bouton.
+Un champ de code, avec une case par caractère. Dès que le dernier caractère est tapé, le code se vérifie tout seul, sans bouton.
 
 ```tsx title="web/index.tsx" render="pinfield" play="pinfield"
 import { PinField } from 'hodi:sdk'
@@ -87,21 +87,21 @@ import { PinField } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `label` | `string` | Le nom du champ. |
-| `length` | `number` | Le nombre de caractères : 8 pour les codes de « J'ai un code », 6 pour une appli d'authentification. |
-| `value` | `string` | Ce qui est tapé. |
-| `onChange` | `(value: string) => void` | À chaque caractère. |
-| `onComplete?` | `(value: string) => void` | Le code complet est tapé. |
-| `state?` | `'idle' \| 'wrong' \| 'right'` | `wrong` les rougit, `right` les verdit. |
-| `align?` | `'center' \| 'start'` | `start` dans un formulaire, centré sur son propre écran. |
-| `masked?` | `boolean` | Les chiffres en points. |
-| `characters?` | `RegExp` | Les caractères acceptés. Par défaut, les chiffres. |
-| `disabled?` | `boolean` | Ne se remplit pas. |
-| `autoFocus?` | `boolean` | Prend le focus à l'ouverture. |
+| `label` | `string` | Le nom du champ, pour les lecteurs d'écran. |
+| `length` | `number` | Le nombre de caractères du code : 8 pour les codes de « J'ai un code », 6 pour une appli d'authentification. |
+| `value` | `string` | Ce qui est tapé jusqu'ici. |
+| `onChange` | `(value: string) => void` | Appelé à chaque caractère tapé ou effacé. |
+| `onComplete?` | `(value: string) => void` | Appelé quand le code est tapé en entier, pour le vérifier. |
+| `state?` | `'idle' \| 'wrong' \| 'right'` | `wrong` met les cases en rouge, `right` les met en vert. |
+| `align?` | `'center' \| 'start'` | `start` aligne les cases à gauche, dans un formulaire. `center` les centre, quand le code a son propre écran. |
+| `masked?` | `boolean` | Montre des points à la place des caractères. |
+| `characters?` | `RegExp` | Les caractères acceptés. Par défaut, seulement les chiffres. |
+| `disabled?` | `boolean` | Le champ est grisé et ne se remplit pas. |
+| `autoFocus?` | `boolean` | Place le curseur dans la première case dès l'affichage. |
 
 ## Toggle
 
-L'interrupteur, pour un réglage qui s'allume ou s'éteint. Dans une ligne, il va dans une `SettingRow`.
+L'interrupteur, pour un réglage qui s'allume ou s'éteint. Dans une page de réglages, il se place au bout d'une `SettingRow`.
 
 ```tsx title="web/index.tsx" render="toggle" play="toggle"
 import { Toggle } from 'hodi:sdk'
@@ -116,14 +116,14 @@ import { Toggle } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `checked` | `boolean` | Allumé ou non. |
-| `label` | `string` | Ce qu'il allume, pour les lecteurs d'écran. |
-| `onChange` | `(checked: boolean) => void` | À chaque bascule. |
-| `disabled?` | `boolean` | Ne bascule pas. |
+| `checked` | `boolean` | `true` quand l'interrupteur est allumé. |
+| `label` | `string` | Ce que l'interrupteur allume, pour les lecteurs d'écran. |
+| `onChange` | `(checked: boolean) => void` | Appelé à chaque bascule, avec le nouvel état. |
+| `disabled?` | `boolean` | L'interrupteur est grisé et ne bascule pas. |
 
 ## Checkbox
 
-Une phrase que la personne coche, comme un accord.
+Une case à cocher suivie d'une phrase, pour un accord, comme accepter des conditions.
 
 ```tsx title="web/index.tsx" render="checkbox" play="checkbox"
 import { Checkbox } from 'hodi:sdk'
@@ -134,14 +134,14 @@ import { Checkbox } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `checked` | `boolean` | Cochée ou non. |
-| `onChange` | `(checked: boolean) => void` | À chaque clic. |
-| `children` | `ReactNode` | La phrase. |
-| `disabled?` | `boolean` | Ne se coche pas. |
+| `checked` | `boolean` | `true` quand la case est cochée. |
+| `onChange` | `(checked: boolean) => void` | Appelé à chaque clic, avec le nouvel état. |
+| `children` | `ReactNode` | La phrase à côté de la case. |
+| `disabled?` | `boolean` | La case est grisée et ne se coche pas. |
 
 ## AgeCheckbox
 
-« J'ai au moins 13 ans », suivi de la ligne de chaque plugin qui en a une (`ageConsent`). C'est la case de tout formulaire qui crée un compte.
+La case « J'ai au moins 13 ans », suivie du texte que chaque plugin ajoute avec [`ageConsent`](/fr/guide/slots/age-consent/). Tout formulaire qui crée un compte a cette case.
 
 ```tsx title="web/index.tsx" render="agecheckbox" play="agecheckbox"
 import { AgeCheckbox } from 'hodi:sdk'
@@ -152,12 +152,12 @@ import { AgeCheckbox } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `checked` | `boolean` | Cochée ou non. |
-| `onChange` | `(checked: boolean) => void` | À chaque clic. |
+| `checked` | `boolean` | `true` quand la case est cochée. |
+| `onChange` | `(checked: boolean) => void` | Appelé à chaque clic, avec le nouvel état. |
 
 ## Segmented
 
-Un choix parmi quelques-uns, dans une pilule, comme « Clair · Sombre · Système ». Dans une ligne, il va dans `choice` de `SettingRow`.
+Un choix entre quelques options, dans une pilule, comme « Clair · Sombre · Système ». Dans une page de réglages, il se passe à la prop `choice` d'une `SettingRow`.
 
 ```tsx title="web/index.tsx" render="segmented" play="segmented"
 import { Segmented } from 'hodi:sdk'
@@ -177,8 +177,8 @@ import { Segmented } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `label` | `string` | Le nom du choix. |
-| `value` | `string \| number` | L'option choisie. |
-| `options` | `{ value; label; title? }[]` | Les options. `title` s'affiche au survol. |
-| `onChange` | `(value) => void` | À chaque choix. |
-| `wide?` | `boolean` | Toute la largeur, partagée entre les options. |
+| `label` | `string` | Le nom du choix, pour les lecteurs d'écran. |
+| `value` | `string \| number` | La valeur de l'option choisie. |
+| `options` | `{ value; label; title? }[]` | Les options, dans l'ordre. Chacune a une valeur et un texte ; son `title` s'affiche au survol. |
+| `onChange` | `(value) => void` | Appelé quand la personne choisit une option, avec sa valeur. |
+| `wide?` | `boolean` | Le choix prend toute la largeur, partagée à parts égales entre les options. |
