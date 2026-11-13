@@ -4,6 +4,7 @@ import { defineConfig } from 'astro/config'
 import { codeWindow } from './src/lib/code-window.ts'
 import { rehypeDocs } from './src/lib/rehype-docs.ts'
 import { rehypeFields } from './src/lib/rehype-fields.ts'
+import { demoAssets } from './src/lib/demo.ts'
 import { rehypeRenders } from './src/lib/rehype-renders.ts'
 
 // Pages that only send the browser on, older versions and Premiers pas past its first step (their canonical is
@@ -22,6 +23,13 @@ export default defineConfig({
     smartypants: false,
     shikiConfig: { theme: 'css-variables', transformers: [codeWindow()] },
     // Titles get their ids first, so their links can point at them.
-    rehypePlugins: [rehypeHeadingIds, rehypeFields, rehypeRenders, rehypeDocs]
+    // The renders' file names go in the config: Astro keeps the pages it rendered until its config changes, and a
+    // page kept with an old name would draw its components without their styles.
+    rehypePlugins: [
+      rehypeHeadingIds,
+      rehypeFields,
+      [rehypeRenders, { files: Object.values(demoAssets).map(asset => asset.file) }],
+      rehypeDocs
+    ]
   }
 })
