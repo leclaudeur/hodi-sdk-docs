@@ -106,7 +106,11 @@ The switch, for a setting that turns on or off. In a row, it goes in a `SettingR
 ```tsx title="web/index.tsx" render="toggle" play="toggle"
 import { Toggle } from 'hodi:sdk'
 
-<Toggle checked={morning} label="Say hello in the morning" onChange={setMorning} />
+<Toggle
+  checked={morning}
+  label="Say hello in the morning"
+  onChange={setMorning}
+/>
 ```
 
 <!-- prettier-ignore -->

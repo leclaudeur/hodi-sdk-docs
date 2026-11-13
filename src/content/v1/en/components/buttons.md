@@ -16,7 +16,13 @@ The button with a label, and a Lucide icon before it if you like. It is 44 px ta
 import { Button } from 'hodi:sdk'
 import { Check } from 'lucide-react'
 
-<Button look="primary" icon={Check} onClick={save}>Save</Button>
+<Button
+  look="primary"
+  icon={Check}
+  onClick={save}
+>
+  Save
+</Button>
 ```
 
 <!-- prettier-ignore -->
@@ -67,7 +73,11 @@ The purple button, the only door to the household's AI. A click runs the `aiActi
 ```tsx title="web/index.tsx" render="aibutton" play="aibutton"
 import { AiButton } from 'hodi:sdk'
 
-<AiButton action="summary" input={{ id: article.id }} onAnswer={answer => setSummary(String(answer))}>
+<AiButton
+  action="summary"
+  input={{ id: article.id }}
+  onAnswer={answer => setSummary(String(answer))}
+>
   Summarise
 </AiButton>
 ```

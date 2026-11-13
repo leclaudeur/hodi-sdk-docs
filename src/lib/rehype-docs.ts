@@ -44,9 +44,9 @@ const textOf = (node: Element): string =>
     .map(child => (child.type === 'text' ? child.value : child.type === 'element' ? textOf(child) : ''))
     .join('')
 
-// A title that is a name from the code (a component, a hook, a type) keeps its case: the display font only has capitals.
+// A title that is a name from the code (a component, a hook, a type, h2 or h3) keeps its case: the display font only has capitals.
 const isCodeName = (node: Element, path: string) =>
-  (/\/(components|types)\//.test(path) ||
+  (/\/(components|hooks|functions|types)\//.test(path) ||
     (node.children.length === 1 && node.children[0]?.type === 'element' && node.children[0].tagName === 'code')) &&
   /^[A-Za-z_$][\w$.]*(\(\))?$/.test(textOf(node).trim())
 
@@ -55,7 +55,7 @@ export const rehypeDocs = () => (tree: Root, file: { path?: string }) => {
   walk(tree, node => {
     if (node.type === 'text' && lang === 'fr') node.value = frenchSpaces(node.value)
     if (node.type !== 'element') return
-    if (node.tagName === 'h2' && isCodeName(node, file.path ?? ''))
+    if ((node.tagName === 'h2' || node.tagName === 'h3') && isCodeName(node, file.path ?? ''))
       node.properties.className = [...classes(node), 'code-title']
     if (node.tagName === 'h2' || node.tagName === 'h3') addAnchor(node, t(lang, 'anchor'))
     const icon = node.properties.dataIcon

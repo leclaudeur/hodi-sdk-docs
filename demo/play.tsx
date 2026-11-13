@@ -1,4 +1,5 @@
 import i18next from 'i18next'
+import { flushSync } from 'react-dom'
 import { createRoot, type Root } from 'react-dom/client'
 import { setChosenLanguage } from '../src/lib/i18n.ts'
 import { PluginScope } from '../src/plugins/scope.ts'
@@ -40,13 +41,23 @@ const shown = (lang: Lang) =>
         i18next.on('languageChanged', changed)
       })
 
+// Hodi's words loaded before a render comes alive, so that it never shows a frame without them.
+const ready = (lang: Lang) => {
+  setChosenLanguage(lang)
+  return shown(lang)
+}
+
+// Drawn at once, in the same frame as the render it replaces: no empty frame between the two.
 const draw = (kind: string, el: Element, state: State, lang: Lang, set?: Set) => {
   setChosenLanguage(lang)
   let root = roots.get(el)
   if (!root) roots.set(el, (root = createRoot(el)))
-  root.render(<PluginScope.Provider value="hello-world">{DRAW[kind]?.(state, lang, set)}</PluginScope.Provider>)
+  const live = root
+  flushSync(() =>
+    live.render(<PluginScope.Provider value="hello-world">{DRAW[kind]?.(state, lang, set)}</PluginScope.Provider>)
+  )
   const after = AFTER[kind]
-  if (after) void shown(lang).then(() => after(state, lang))
+  if (after) void shown(lang).then(() => flushSync(() => after(state, lang)))
 }
 
-;(window as unknown as { HodiPlay: unknown }).HodiPlay = { draw }
+;(window as unknown as { HodiPlay: unknown }).HodiPlay = { draw, ready }

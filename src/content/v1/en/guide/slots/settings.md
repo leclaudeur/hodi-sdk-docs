@@ -43,7 +43,11 @@ import { SectionPage, SettingRow, SettingsCard, definePlugin } from 'hodi:sdk'
 import { NotebookPen } from 'lucide-react'
 
 const NotesPage = ({ layout }) => (
-  <SectionPage title="My notes" intro="The notes taken while reading." layout={layout}>
+  <SectionPage
+    title="My notes"
+    intro="The notes taken while reading."
+    layout={layout}
+  >
     <SettingsCard>
       <SettingRow label="Saved notes" value="12" />
     </SettingsCard>

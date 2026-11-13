@@ -16,7 +16,11 @@ Une page de réglages : son titre, la ligne qui l'explique, puis ses cartes. Sur
 import { SectionPage, SettingRow, SettingsCard } from 'hodi:sdk'
 import { Pencil } from 'lucide-react'
 
-<SectionPage title="Hello world" intro="Une salutation, chaque fois que tu ouvres Hodi." layout="desktop">
+<SectionPage
+  title="Hello world"
+  intro="Une salutation, chaque fois que tu ouvres Hodi."
+  layout="desktop"
+>
   <SettingsCard>
     <SettingRow
       label="Salutation"
@@ -127,7 +131,11 @@ Une carte de [Vue d’ensemble](/fr/guide/slots/overview/) : son titre, un nombr
 import { Chip, OverviewCard } from 'hodi:sdk'
 import WeekChart from './WeekChart.tsx'
 
-<OverviewCard title="Bonjours" count={128} aside={<Chip tone="success">+12 cette semaine</Chip>}>
+<OverviewCard
+  title="Bonjours"
+  count={128}
+  aside={<Chip tone="success">+12 cette semaine</Chip>}
+>
   <WeekChart days={week} />
 </OverviewCard>
 ```

@@ -25,7 +25,11 @@ const Welcome = ({ next }) => {
   }
   return (
     <>
-      <TextField aria-label="Site name" value={name} onChange={event => setName(event.target.value)} />
+      <TextField
+        aria-label="Site name"
+        value={name}
+        onChange={event => setName(event.target.value)}
+      />
       <SetupActions onNext={save} />
     </>
   )

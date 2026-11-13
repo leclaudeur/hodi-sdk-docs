@@ -23,7 +23,11 @@ import { Hand } from 'lucide-react'
   title="Nouvelle salutation"
   intro="Elle remplace « Salut »."
 >
-  <TextField icon={Hand} aria-label="Salutation" placeholder="Coucou" />
+  <TextField
+    icon={Hand}
+    aria-label="Salutation"
+    placeholder="Coucou"
+  />
   <DialogActions>
     <Button onClick={close}>Annuler</Button>
     <Button look="primary" onClick={save}>Enregistrer</Button>
@@ -110,7 +114,13 @@ Une liste vide, ou qui n'a pas pu se charger : un titre et une ligne, pas plus.
 import { EmptyState } from 'hodi:sdk'
 import { Inbox } from 'lucide-react'
 
-<EmptyState icon={<Inbox size={28} />} title="Aucun bonjour" compact>Les salutations du foyer arrivent ici.</EmptyState>
+<EmptyState
+  icon={<Inbox size={28} />}
+  title="Aucun bonjour"
+  compact
+>
+  Les salutations du foyer arrivent ici.
+</EmptyState>
 ```
 
 <!-- prettier-ignore -->
