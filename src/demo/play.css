@@ -48,6 +48,10 @@ a {
   font-family: var(--font-display);
   font-weight: 400;
 }
+/* A render drawn differently on a phone: only the one that fits, sitting in the window as the component itself. */
+.rv-d {
+  display: contents;
+}
 .rv-p {
   display: none;
 }
@@ -56,7 +60,7 @@ a {
     display: none;
   }
   .rv-p {
-    display: block;
+    display: contents;
   }
 }
 :host(.page) .in {
@@ -106,23 +110,33 @@ dialog {
 
 /* Watched by useStuck, just above a sticky header: one pixel, taking no room. */
 
-:host(.modal) .in,
-:host(.toast) .in {
-  display: grid;
-  place-items: center;
-}
 :host(.modal) dialog {
   box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.5);
 }
 
-/* A component alone in its window, as in its playground: in the middle, or across it for a card, a row or a field. */
-:host(.plain) .in {
+/* A component alone in its window, listed or customised: in the middle, or across it for a card, a row or a field. */
+:host(:not(.page, .thumb)) .in {
   display: flex;
   justify-content: center;
   width: 100%;
+  /* What narrows on a phone (a PIN's boxes) narrows in the window too, instead of overflowing it. */
+  min-width: 0;
 }
-:host(.plain.wide) .in {
+:host(.wide) .in {
   display: block;
+}
+/* A PIN, a checkbox or a status line spans its row in the app: alone in a window, it keeps its own width, in the
+   middle. */
+:host(:is(.kind-pinfield, .kind-checkbox, .kind-agecheckbox, .kind-statusline)) :is(.in, .rv-d, .rv-p) > :not(.rv-d, .rv-p) {
+  width: fit-content;
+  max-width: 100%;
+}
+/* The space a component keeps from what sits above or under it in the app is not part of it: it stays centred. */
+:is(.in, .rv-d, .rv-p) > :first-child {
+  margin-top: 0;
+}
+:is(.in, .rv-d, .rv-p) > :last-child {
+  margin-bottom: 0;
 }
 /* A group's card on the Composants page: the same render, centred in its frame. */
 :host(.thumb) {

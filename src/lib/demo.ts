@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import type { Lang } from './i18n.ts'
 
 // The components drawn by Hodi's own code (demo/build.sh writes src/demo/): their DOM at a computer's and a
-// phone's width, the CSS they use, and the playground's bundle.
+// phone's width, and the playground's bundle and CSS, which the renders use too.
 
 // From the project's folder: the build moves this module, never the files it reads.
 const read = (name: string) => readFileSync(join(process.cwd(), 'src/demo', name))
@@ -23,7 +23,7 @@ const asset = (name: string) => {
   return { file: `${base}.${hash}.${extension}`, url: `/assets/${base}.${hash}.${extension}`, body }
 }
 
-export const demoAssets = { app: asset('app.css'), playCss: asset('play.css'), playJs: asset('play.js') }
+export const demoAssets = { playCss: asset('play.css'), playJs: asset('play.js') }
 
 // The playground's other files, which play.js imports by their own names: their hash is already in them.
 export const playChunks = readdirSync(join(process.cwd(), 'src/demo'))
