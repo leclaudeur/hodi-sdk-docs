@@ -771,9 +771,9 @@ var de = /* @__PURE__ */ le(((e) => {
 			O.p = n;
 		}
 	}
-	var kt = Math.random().toString(36).slice(2), At = "__reactFiber$" + kt, jt = "__reactProps$" + kt, Mt = "__reactContainer$" + kt, j = "__reactEvents$" + kt, Nt = "__reactListeners$" + kt, Pt = "__reactHandles$" + kt, Ft = "__reactResources$" + kt, It = "__reactMarker$" + kt, Lt = "__reactLoad$" + kt;
+	var kt = Math.random().toString(36).slice(2), At = "__reactFiber$" + kt, jt = "__reactProps$" + kt, Mt = "__reactContainer$" + kt, Nt = "__reactEvents$" + kt, j = "__reactListeners$" + kt, Pt = "__reactHandles$" + kt, Ft = "__reactResources$" + kt, It = "__reactMarker$" + kt, Lt = "__reactLoad$" + kt;
 	function Rt(e) {
-		delete e[At], delete e[jt], delete e[Nt], delete e[Pt];
+		delete e[At], delete e[jt], delete e[j], delete e[Pt];
 	}
 	function zt(e) {
 		var t;
@@ -6305,8 +6305,8 @@ var de = /* @__PURE__ */ le(((e) => {
 		}
 	}
 	function Q(e, t) {
-		var n = t[j];
-		n === void 0 && (n = t[j] = /* @__PURE__ */ new Set());
+		var n = t[Nt];
+		n === void 0 && (n = t[Nt] = /* @__PURE__ */ new Set());
 		var r = e + "__bubble";
 		n.has(r) || (Gf(t, e, 2, !1), n.add(r));
 	}
@@ -9016,7 +9016,7 @@ function Ve({ children: e, count: t, parent: n, i18nKey: i, context: a, tOptions
 	});
 }
 // web/src/plugins/scope.ts
-var He = me(), Ue = (0, k.createContext)(null), We = {
+var He = /* @__PURE__ */ se(ue(), 1), Ue = me(), We = (0, k.createContext)(null), Ge = {
 	name: "arrow-left",
 	size: 24,
 	node: [["path", {
@@ -9027,8 +9027,8 @@ var He = me(), Ue = (0, k.createContext)(null), We = {
 		key: "x3x0zl"
 	}]]
 };
-We.node;
-var Ge = T(We), Ke = {
+Ge.node;
+var Ke = T(Ge), qe = {
 	name: "arrow-right",
 	size: 24,
 	node: [["path", {
@@ -9039,8 +9039,8 @@ var Ge = T(We), Ke = {
 		key: "xquz4c"
 	}]]
 };
-Ke.node;
-var qe = T(Ke), Je = {
+qe.node;
+var Je = T(qe), Ye = {
 	name: "bell",
 	size: 24,
 	node: [["path", {
@@ -9051,8 +9051,8 @@ var qe = T(Ke), Je = {
 		key: "11g9vi"
 	}]]
 };
-Je.node;
-var Ye = T(Je), Xe = {
+Ye.node;
+var Xe = T(Ye), Ze = {
 	name: "bookmark",
 	size: 24,
 	node: [["path", {
@@ -9060,8 +9060,8 @@ var Ye = T(Je), Xe = {
 		key: "oz39mx"
 	}]]
 };
-Xe.node;
-var Ze = T(Xe), Qe = {
+Ze.node;
+var Qe = T(Ze), $e = {
 	name: "chevron-right",
 	size: 24,
 	node: [["path", {
@@ -9069,8 +9069,8 @@ var Ze = T(Xe), Qe = {
 		key: "mthhwq"
 	}]]
 };
-Qe.node;
-var $e = T(Qe), et = {
+$e.node;
+var et = T($e), tt = {
 	name: "download",
 	size: 24,
 	node: [
@@ -9088,8 +9088,8 @@ var $e = T(Qe), et = {
 		}]
 	]
 };
-et.node;
-var tt = T(et), nt = {
+tt.node;
+var nt = T(tt), rt = {
 	name: "external-link",
 	size: 24,
 	node: [
@@ -9107,8 +9107,8 @@ var tt = T(et), nt = {
 		}]
 	]
 };
-nt.node;
-var rt = T(nt), it = {
+rt.node;
+var it = T(rt), at = {
 	name: "eye-off",
 	size: 24,
 	node: [
@@ -9130,8 +9130,8 @@ var rt = T(nt), it = {
 		}]
 	]
 };
-it.node;
-var at = T(it), ot = {
+at.node;
+var ot = T(at), st = {
 	name: "eye",
 	size: 24,
 	node: [["path", {
@@ -9144,8 +9144,8 @@ var at = T(it), ot = {
 		key: "1v7zrd"
 	}]]
 };
-ot.node;
-var st = T(ot), ct = {
+st.node;
+var ct = T(st), lt = {
 	name: "flag",
 	size: 24,
 	node: [["path", {
@@ -9153,8 +9153,8 @@ var st = T(ot), ct = {
 		key: "1jaruq"
 	}]]
 };
-ct.node;
-var lt = T(ct), ut = {
+lt.node;
+var ut = T(lt), dt = {
 	name: "hand",
 	size: 24,
 	node: [
@@ -9176,8 +9176,8 @@ var lt = T(ct), ut = {
 		}]
 	]
 };
-ut.node;
-var dt = T(ut), ft = {
+dt.node;
+var ft = T(dt), pt = {
 	name: "house",
 	size: 24,
 	node: [["path", {
@@ -9189,8 +9189,8 @@ var dt = T(ut), ft = {
 	}]],
 	aliases: ["home"]
 };
-ft.node;
-var pt = T(ft), mt = {
+pt.node;
+var mt = T(pt), ht = {
 	name: "inbox",
 	size: 24,
 	node: [["polyline", {
@@ -9201,8 +9201,8 @@ var pt = T(ft), mt = {
 		key: "oot6mr"
 	}]]
 };
-mt.node;
-var ht = T(mt), gt = {
+ht.node;
+var gt = T(ht), _t = {
 	name: "loader-circle",
 	size: 24,
 	node: [["path", {
@@ -9211,8 +9211,8 @@ var ht = T(mt), gt = {
 	}]],
 	aliases: ["loader-2"]
 };
-gt.node;
-var _t = T(gt), vt = {
+_t.node;
+var vt = T(_t), yt = {
 	name: "lock",
 	size: 24,
 	node: [["rect", {
@@ -9228,8 +9228,8 @@ var _t = T(gt), vt = {
 		key: "fwvmzm"
 	}]]
 };
-vt.node;
-var yt = T(vt), bt = {
+yt.node;
+var bt = T(yt), xt = {
 	name: "mail",
 	size: 24,
 	node: [["path", {
@@ -9244,8 +9244,8 @@ var yt = T(vt), bt = {
 		key: "izxlao"
 	}]]
 };
-bt.node;
-var xt = T(bt), St = {
+xt.node;
+var St = T(xt), Ct = {
 	name: "pencil",
 	size: 24,
 	node: [["path", {
@@ -9256,8 +9256,8 @@ var xt = T(bt), St = {
 		key: "1mk7zo"
 	}]]
 };
-St.node;
-var Ct = T(St), wt = {
+Ct.node;
+var wt = T(Ct), Tt = {
 	name: "plus",
 	size: 24,
 	node: [["path", {
@@ -9268,8 +9268,8 @@ var Ct = T(St), wt = {
 		key: "s699le"
 	}]]
 };
-wt.node;
-var Tt = T(wt), Et = {
+Tt.node;
+var Et = T(Tt), Dt = {
 	name: "search",
 	size: 24,
 	node: [["path", {
@@ -9282,8 +9282,8 @@ var Tt = T(wt), Et = {
 		key: "4ej97u"
 	}]]
 };
-Et.node;
-var Dt = T(Et), Ot = {
+Dt.node;
+var Ot = T(Dt), kt = {
 	name: "trash",
 	size: 24,
 	node: [
@@ -9310,8 +9310,8 @@ var Dt = T(Et), Ot = {
 	],
 	aliases: ["trash-2"]
 };
-Ot.node;
-var kt = T(Ot), At = {
+kt.node;
+var At = T(kt), jt = {
 	name: "x",
 	size: 24,
 	node: [["path", {
@@ -9322,8 +9322,8 @@ var kt = T(Ot), At = {
 		key: "d8bk6v"
 	}]]
 };
-At.node;
-var jt = T(At), Mt = {
+jt.node;
+var Mt = T(jt), Nt = {
 	button: "_button_jc9xd_3",
 	withIcon: "_withIcon_jc9xd_26",
 	wide: "_wide_jc9xd_30",
@@ -9335,17 +9335,17 @@ var jt = T(At), Mt = {
 	glass: "_glass_jc9xd_92",
 	busy: "_busy_jc9xd_137",
 	spin: "_spin_jc9xd_1"
-}, j = /* @__PURE__ */ se(ee(), 1), Nt = ({ children: e, look: t = "neutral", icon: n, busy: r = !1, wide: i = !1, compact: a = !1, href: o, external: s = !1, className: c = "", disabled: l, ...u }) => {
+}, j = /* @__PURE__ */ se(ee(), 1), Pt = ({ children: e, look: t = "neutral", icon: n, busy: r = !1, wide: i = !1, compact: a = !1, href: o, external: s = !1, className: c = "", disabled: l, ...u }) => {
 	let d = [
-		Mt.button,
-		Mt[t],
-		n || r ? Mt.withIcon : "",
-		i ? Mt.wide : "",
-		a ? Mt.compact : "",
+		Nt.button,
+		Nt[t],
+		n || r ? Nt.withIcon : "",
+		i ? Nt.wide : "",
+		a ? Nt.compact : "",
 		c
-	].join(" "), f = /* @__PURE__ */ (0, j.jsxs)(j.Fragment, { children: [r ? /* @__PURE__ */ (0, j.jsx)(_t, {
+	].join(" "), f = /* @__PURE__ */ (0, j.jsxs)(j.Fragment, { children: [r ? /* @__PURE__ */ (0, j.jsx)(vt, {
 		size: a ? 14 : 16,
-		className: Mt.busy,
+		className: Nt.busy,
 		"aria-hidden": "true"
 	}) : n && /* @__PURE__ */ (0, j.jsx)(n, {
 		size: a ? 14 : 16,
@@ -9369,7 +9369,7 @@ var jt = T(At), Mt = {
 		...u,
 		children: f
 	});
-}, Pt = {
+}, Ft = {
 	chip: "_chip_136hn_1",
 	capsule: "_capsule_136hn_19",
 	row: "_row_136hn_26",
@@ -9377,20 +9377,20 @@ var jt = T(At), Mt = {
 	warning: "_warning_136hn_41",
 	danger: "_danger_136hn_48",
 	accent: "_accent_136hn_55"
-}, Ft = ({ children: e, label: t, title: n, tone: r, size: i }) => /* @__PURE__ */ (0, j.jsx)("span", {
-	className: `${Pt.chip} ${r ? Pt[r] : ""} ${i ? Pt[i] : ""}`,
+}, It = ({ children: e, label: t, title: n, tone: r, size: i }) => /* @__PURE__ */ (0, j.jsx)("span", {
+	className: `${Ft.chip} ${r ? Ft[r] : ""} ${i ? Ft[i] : ""}`,
 	"aria-label": t,
 	title: n,
 	children: e
-}), It = { row: "_row_10ahh_2" }, Lt = ({ label: e, onClick: t }) => /* @__PURE__ */ (0, j.jsxs)("button", {
+}), Lt = { row: "_row_10ahh_2" }, Rt = ({ label: e, onClick: t }) => /* @__PURE__ */ (0, j.jsxs)("button", {
 	type: "button",
-	className: It.row,
+	className: Lt.row,
 	onClick: t,
-	children: [/* @__PURE__ */ (0, j.jsx)("span", { children: e }), /* @__PURE__ */ (0, j.jsx)($e, {
+	children: [/* @__PURE__ */ (0, j.jsx)("span", { children: e }), /* @__PURE__ */ (0, j.jsx)(et, {
 		size: 16,
 		"aria-hidden": "true"
 	})]
-}), Rt = {
+}), zt = {
 	button: "_button_rwhyb_1",
 	default: "_default_rwhyb_27",
 	size28: "_size28_rwhyb_32",
@@ -9407,17 +9407,17 @@ var jt = T(At), Mt = {
 	busy: "_busy_rwhyb_131",
 	spin: "_spin_rwhyb_1"
 };
-Rt.card;
-var zt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i = !1, busy: a = !1, href: o, external: s = !1, className: c = "", ...l }) => {
+zt.card;
+var Bt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i = !1, busy: a = !1, href: o, external: s = !1, className: c = "", ...l }) => {
 	let u = [
-		Rt.button,
-		Rt[n],
-		Rt[`size${r}`],
+		zt.button,
+		zt[n],
+		zt[`size${r}`],
 		c
 	].join(" "), d = /* @__PURE__ */ (0, j.jsx)(e, {
 		size: r === 28 ? 14 : r === 44 ? 18 : 16,
 		fill: i ? "currentColor" : "none",
-		className: a ? Rt.busy : void 0,
+		className: a ? zt.busy : void 0,
 		"aria-hidden": "true"
 	});
 	return o ? /* @__PURE__ */ (0, j.jsx)("a", {
@@ -9439,12 +9439,12 @@ var zt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i =
 		...l,
 		children: d
 	});
-}, Bt = {
+}, Vt = {
 	group: "_group_srhka_1",
 	wide: "_wide_srhka_11",
 	option: "_option_srhka_15"
-}, Vt = ({ label: e, value: t, options: n, onChange: r, wide: i = !1 }) => /* @__PURE__ */ (0, j.jsx)("div", {
-	className: `${Bt.group} ${i ? Bt.wide : ""}`,
+}, Ht = ({ label: e, value: t, options: n, onChange: r, wide: i = !1 }) => /* @__PURE__ */ (0, j.jsx)("div", {
+	className: `${Vt.group} ${i ? Vt.wide : ""}`,
 	role: "radiogroup",
 	"aria-label": e,
 	children: n.map((e) => /* @__PURE__ */ (0, j.jsx)("button", {
@@ -9453,11 +9453,11 @@ var zt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i =
 		"aria-checked": e.value === t,
 		"aria-label": e.title,
 		title: e.title,
-		className: Bt.option,
+		className: Vt.option,
 		onClick: () => r(e.value),
 		children: e.label
 	}, e.value))
-}), Ht = ({ size: e = 16 }) => /* @__PURE__ */ (0, j.jsx)("svg", {
+}), Ut = ({ size: e = 16 }) => /* @__PURE__ */ (0, j.jsx)("svg", {
 	width: e,
 	height: e,
 	viewBox: "0 0 24 24",
@@ -9468,12 +9468,12 @@ var zt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i =
 	strokeLinejoin: "round",
 	"aria-hidden": "true",
 	children: /* @__PURE__ */ (0, j.jsx)("path", { d: "M12 3l1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2z" })
-}), Ut = {
+}), Wt = {
 	field: "_field_sw041_1",
 	clearable: "_clearable_sw041_36",
 	clear: "_clear_sw041_36"
-}, Wt = ({ icon: e, type: t = "text", onClear: n, ...r }) => /* @__PURE__ */ (0, j.jsxs)("label", {
-	className: `${Ut.field} ${n ? Ut.clearable : ""}`,
+}, Gt = ({ icon: e, type: t = "text", onClear: n, ...r }) => /* @__PURE__ */ (0, j.jsxs)("label", {
+	className: `${Wt.field} ${n ? Wt.clearable : ""}`,
 	children: [
 		/* @__PURE__ */ (0, j.jsx)(e, {
 			size: 16,
@@ -9485,28 +9485,28 @@ var zt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i =
 		}),
 		n && r.value !== "" && /* @__PURE__ */ (0, j.jsx)("button", {
 			type: "button",
-			className: Ut.clear,
+			className: Wt.clear,
 			"aria-label": "Effacer",
 			onClick: n,
-			children: /* @__PURE__ */ (0, j.jsx)(jt, {
+			children: /* @__PURE__ */ (0, j.jsx)(Mt, {
 				size: 14,
 				"aria-hidden": "true"
 			})
 		})
 	]
-}), Gt = {
+}), Kt = {
 	toggle: "_toggle_i0fxm_1",
 	knob: "_knob_i0fxm_16"
-}, Kt = ({ checked: e, label: t, disabled: n = !1, onChange: r }) => /* @__PURE__ */ (0, j.jsx)("button", {
+}, qt = ({ checked: e, label: t, disabled: n = !1, onChange: r }) => /* @__PURE__ */ (0, j.jsx)("button", {
 	type: "button",
 	role: "switch",
-	className: Gt.toggle,
+	className: Kt.toggle,
 	"aria-checked": e,
 	"aria-label": t,
 	disabled: n,
 	onClick: () => r(!e),
-	children: /* @__PURE__ */ (0, j.jsx)("span", { className: Gt.knob })
-}), qt = {
+	children: /* @__PURE__ */ (0, j.jsx)("span", { className: Kt.knob })
+}), Jt = {
 	reader: "_reader_qb2q2_3",
 	bar: "_bar_qb2q2_11",
 	barInner: "_barInner_qb2q2_24",
@@ -9555,13 +9555,13 @@ var zt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i =
 	fabs: "_fabs_qb2q2_929",
 	aiFab: "_aiFab_qb2q2_944",
 	backButton: "_backButton_qb2q2_960"
-}, Jt = ({ children: e, icon: t, onClick: n, done: r = !1, label: i }) => /* @__PURE__ */ (0, j.jsxs)("button", {
+}, Yt = ({ children: e, icon: t, onClick: n, done: r = !1, label: i }) => /* @__PURE__ */ (0, j.jsxs)("button", {
 	type: "button",
-	className: `${qt.seeOn} ${r ? qt.seeOnDone : ""}`,
+	className: `${Jt.seeOn} ${r ? Jt.seeOnDone : ""}`,
 	onClick: n,
 	"aria-label": i,
 	children: [t, e]
-}), Yt = /* @__PURE__ */ se(ue(), 1), Xt = {
+}), Xt = {
 	logo: "_logo_1ru7u_3",
 	mark: "_mark_1ru7u_10",
 	word: "_word_1ru7u_16",
@@ -9652,7 +9652,7 @@ var zt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i =
 	});
 }, nn = (0, k.createContext)(null), rn = ({ children: e }) => {
 	let t = (0, k.use)(nn);
-	return t ? (0, Yt.createPortal)(e, t) : null;
+	return t ? (0, He.createPortal)(e, t) : null;
 }, an = {
 	page: "_page_fq08m_3",
 	phonePage: "_phonePage_fq08m_12",
@@ -9711,7 +9711,7 @@ var zt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i =
 }), /* @__PURE__ */ (0, j.jsx)("div", {
 	className: an.card,
 	children: t
-})] }), cn = ({ label: e, ariaLabel: t, icon: n, look: r = "neutral", onClick: i, disabled: a, busy: o, href: s, external: c }) => _() ? /* @__PURE__ */ (0, j.jsx)(zt, {
+})] }), cn = ({ label: e, ariaLabel: t, icon: n, look: r = "neutral", onClick: i, disabled: a, busy: o, href: s, external: c }) => _() ? /* @__PURE__ */ (0, j.jsx)(Bt, {
 	icon: n,
 	label: t ?? e,
 	variant: r === "neutral" ? "default" : r,
@@ -9721,7 +9721,7 @@ var zt = ({ icon: e, label: t, variant: n = "default", size: r = 34, filled: i =
 	busy: o,
 	href: s,
 	external: c
-}) : /* @__PURE__ */ (0, j.jsx)(Nt, {
+}) : /* @__PURE__ */ (0, j.jsx)(Pt, {
 	look: r,
 	icon: n,
 	"aria-label": t,
@@ -10628,7 +10628,7 @@ function li(e) {
 				...e,
 				isPositioned: re.current !== !1
 			};
-			T.current && !ai(w.current, t) && (w.current = t, Yt.flushSync(() => {
+			T.current && !ai(w.current, t) && (w.current = t, He.flushSync(() => {
 				d(t);
 			}));
 		});
@@ -10830,8 +10830,8 @@ var ui = (e, t) => {
 				className: `${bi.header} ${i || g ? bi.withBack : ""}`,
 				children: [/* @__PURE__ */ (0, j.jsxs)("span", {
 					className: bi.lead,
-					children: [(i || g) && /* @__PURE__ */ (0, j.jsx)(zt, {
-						icon: Ge,
+					children: [(i || g) && /* @__PURE__ */ (0, j.jsx)(Bt, {
+						icon: Ke,
 						label: u("common.back"),
 						size: v ? 44 : 34,
 						onClick: i ?? (() => d.current?.close())
@@ -10840,8 +10840,8 @@ var ui = (e, t) => {
 						className: bi.title,
 						children: r
 					})]
-				}), /* @__PURE__ */ (0, j.jsx)(zt, {
-					icon: jt,
+				}), /* @__PURE__ */ (0, j.jsx)(Bt, {
+					icon: Mt,
 					label: u("common.close"),
 					size: v ? 44 : 34,
 					onClick: vi
@@ -10926,7 +10926,7 @@ var ui = (e, t) => {
 			children: [/* @__PURE__ */ (0, j.jsx)("div", {
 				className: wi.text,
 				children: r
-			}), /* @__PURE__ */ (0, j.jsx)(hn, { children: /* @__PURE__ */ (0, j.jsx)(Nt, {
+			}), /* @__PURE__ */ (0, j.jsx)(hn, { children: /* @__PURE__ */ (0, j.jsx)(Pt, {
 				look: "primary",
 				onClick: () => o(!1),
 				children: i("common.gotIt")
@@ -10982,7 +10982,7 @@ var ui = (e, t) => {
 			/* @__PURE__ */ (0, j.jsx)(Ai, {}),
 			/* @__PURE__ */ (0, j.jsxs)("div", {
 				className: ji.top,
-				children: [/* @__PURE__ */ (0, j.jsx)(Qt, { size: 34 }), /* @__PURE__ */ (0, j.jsx)(Vt, {
+				children: [/* @__PURE__ */ (0, j.jsx)(Qt, { size: 34 }), /* @__PURE__ */ (0, j.jsx)(Ht, {
 					label: n("language.label"),
 					value: r,
 					onChange: m,
@@ -11039,13 +11039,13 @@ var ui = (e, t) => {
 	return /* @__PURE__ */ (0, j.jsxs)(hn, {
 		className: ji.actions,
 		children: [
-			e && (i ? /* @__PURE__ */ (0, j.jsx)(zt, {
-				icon: Ge,
+			e && (i ? /* @__PURE__ */ (0, j.jsx)(Bt, {
+				icon: Ke,
 				label: r("common.back"),
 				size: 44,
 				onClick: e
-			}) : /* @__PURE__ */ (0, j.jsx)(Nt, {
-				icon: Ge,
+			}) : /* @__PURE__ */ (0, j.jsx)(Pt, {
+				icon: Ke,
 				onClick: e,
 				children: r("common.back")
 			})),
@@ -11173,8 +11173,8 @@ var ui = (e, t) => {
 					}),
 					(a || o) && /* @__PURE__ */ (0, j.jsxs)("div", {
 						className: Ii.actions,
-						children: [a && /* @__PURE__ */ (0, j.jsx)(Nt, {
-							icon: Ge,
+						children: [a && /* @__PURE__ */ (0, j.jsx)(Pt, {
+							icon: Ke,
 							onClick: a,
 							children: s("common.back")
 						}), o]
@@ -11265,39 +11265,39 @@ var Ki = [
 	}, n))
 }), N = () => {}, P = (e) => (t, n) => e === "en" ? n : t, Yi = {
 	Check: f,
-	Download: tt,
-	Trash2: kt,
-	Plus: Tt,
-	Pencil: Ct,
-	Bookmark: Ze,
-	Flag: lt
+	Download: nt,
+	Trash2: At,
+	Plus: Et,
+	Pencil: wt,
+	Bookmark: Qe,
+	Flag: ut
 }, Xi = (e) => Yi[e], F = (e, t) => String(e[t] ?? ""), Zi = (e, t) => /* @__PURE__ */ (0, j.jsx)(ln, {
 	label: t,
 	value: P(e)("Salut", "Hi"),
 	action: {
 		label: P(e)("Changer", "Change"),
-		icon: Ct,
+		icon: wt,
 		onClick: N
 	}
 }), Qi = (e, t) => {
 	let n = P(t);
 	if (e.action === "one") return {
 		label: n("Changer", "Change"),
-		icon: Ct,
+		icon: wt,
 		onClick: N
 	};
 	if (e.action === "two") return [{
 		label: n("Exporter", "Export"),
-		icon: tt,
+		icon: nt,
 		onClick: N
 	}, {
 		label: n("Vider", "Clear"),
-		icon: kt,
+		icon: At,
 		look: "danger",
 		onClick: N
 	}];
 }, $i = {
-	button: (e) => /* @__PURE__ */ (0, j.jsx)(Nt, {
+	button: (e) => /* @__PURE__ */ (0, j.jsx)(Pt, {
 		look: F(e, "look"),
 		icon: Xi(e.icon),
 		compact: e.compact === !0,
@@ -11305,16 +11305,16 @@ var Ki = [
 		wide: e.wide === !0,
 		children: F(e, "label") || " "
 	}),
-	roundbutton: (e) => /* @__PURE__ */ (0, j.jsx)(zt, {
-		icon: Xi(e.icon) ?? Ct,
+	roundbutton: (e) => /* @__PURE__ */ (0, j.jsx)(Bt, {
+		icon: Xi(e.icon) ?? wt,
 		label: F(e, "label"),
 		size: Number(e.size),
 		variant: F(e, "variant"),
 		filled: e.filled === !0
 	}),
-	aibutton: (e) => /* @__PURE__ */ (0, j.jsx)(Nt, {
+	aibutton: (e) => /* @__PURE__ */ (0, j.jsx)(Pt, {
 		look: "ai",
-		icon: Ht,
+		icon: Ut,
 		compact: e.compact === !0,
 		wide: e.wide === !0,
 		disabled: e.disabled === !0,
@@ -11322,7 +11322,7 @@ var Ki = [
 	}),
 	readerbutton: (e, t, n) => {
 		let r = Xi(e.icon);
-		return /* @__PURE__ */ (0, j.jsx)(Jt, {
+		return /* @__PURE__ */ (0, j.jsx)(Yt, {
 			icon: r ? /* @__PURE__ */ (0, j.jsx)(r, { size: 12 }) : void 0,
 			onClick: () => n?.("done", e.done !== !0),
 			done: e.done === !0,
@@ -11333,7 +11333,7 @@ var Ki = [
 		title: F(e, "title"),
 		intro: F(e, "intro") || void 0,
 		layout: F(e, "layout"),
-		aside: e.aside === !0 ? /* @__PURE__ */ (0, j.jsx)(Ft, {
+		aside: e.aside === !0 ? /* @__PURE__ */ (0, j.jsx)(It, {
 			tone: "success",
 			children: P(t)("Actif", "Active")
 		}) : void 0,
@@ -11348,13 +11348,13 @@ var Ki = [
 		value: F(e, "value") || void 0,
 		hint: F(e, "hint") || void 0,
 		action: Qi(e, t),
-		choice: e.choice === !0 ? /* @__PURE__ */ (0, j.jsx)(Vt, {
+		choice: e.choice === !0 ? /* @__PURE__ */ (0, j.jsx)(Ht, {
 			label: "Moment",
 			value: String(e.moment ?? "morning"),
 			options: Gi(t),
 			onChange: (e) => n?.("moment", e)
 		}) : void 0,
-		children: e.toggle === !0 && /* @__PURE__ */ (0, j.jsx)(Kt, {
+		children: e.toggle === !0 && /* @__PURE__ */ (0, j.jsx)(qt, {
 			checked: e.on !== !1,
 			label: F(e, "label"),
 			onChange: (e) => n?.("on", e)
@@ -11363,14 +11363,14 @@ var Ki = [
 	morerow: (e, t) => /* @__PURE__ */ (0, j.jsxs)(sn, { children: [/* @__PURE__ */ (0, j.jsx)(ln, {
 		label: "Anna",
 		value: P(t)("Salut !", "Hi!")
-	}), /* @__PURE__ */ (0, j.jsx)(Lt, {
+	}), /* @__PURE__ */ (0, j.jsx)(Rt, {
 		label: F(e, "label"),
 		onClick: N
 	})] }),
 	overviewcard: (e, t) => /* @__PURE__ */ (0, j.jsx)(dn, {
 		title: F(e, "title"),
 		count: e.count === !0 ? 128 : void 0,
-		aside: e.aside === !0 ? /* @__PURE__ */ (0, j.jsx)(Ft, {
+		aside: e.aside === !0 ? /* @__PURE__ */ (0, j.jsx)(It, {
 			tone: "success",
 			children: P(t)("+12 cette semaine", "+12 this week")
 		}) : void 0,
@@ -11384,19 +11384,19 @@ var Ki = [
 			title: F(e, "title") || " ",
 			intro: F(e, "intro"),
 			onBack: e.back === !0 ? N : void 0,
-			start: e.later === !0 ? /* @__PURE__ */ (0, j.jsx)(Nt, { children: r("Plus tard", "Later") }) : void 0,
-			actions: /* @__PURE__ */ (0, j.jsxs)(Nt, {
+			start: e.later === !0 ? /* @__PURE__ */ (0, j.jsx)(Pt, { children: r("Plus tard", "Later") }) : void 0,
+			actions: /* @__PURE__ */ (0, j.jsxs)(Pt, {
 				look: "primary",
-				children: [r("Continuer", "Continue"), /* @__PURE__ */ (0, j.jsx)(qe, {
+				children: [r("Continuer", "Continue"), /* @__PURE__ */ (0, j.jsx)(Je, {
 					size: 16,
 					"aria-hidden": "true"
 				})]
 			}),
-			children: [e.body === "field" && /* @__PURE__ */ (0, j.jsx)(Wt, {
-				icon: dt,
+			children: [e.body === "field" && /* @__PURE__ */ (0, j.jsx)(Gt, {
+				icon: ft,
 				"aria-label": r("Prénom", "First name"),
 				placeholder: "Anna"
-			}), e.body === "toggle" && /* @__PURE__ */ (0, j.jsx)(Kt, {
+			}), e.body === "toggle" && /* @__PURE__ */ (0, j.jsx)(qt, {
 				checked: e.on !== !1,
 				label: r("Saluer le matin", "Say hello in the morning"),
 				onChange: (e) => n?.("on", e)
@@ -11409,7 +11409,7 @@ var Ki = [
 		tiles: [{
 			key: "a",
 			label: P(t)("Les Dupont", "The Smiths"),
-			icon: pt,
+			icon: mt,
 			onClick: N
 		}, {
 			key: "b",
@@ -11421,8 +11421,8 @@ var Ki = [
 		onBack: e.back === !0 ? N : void 0
 	}),
 	setupactions: (e, t) => /* @__PURE__ */ (0, j.jsx)(Vi, {
-		start: e.later === !0 ? /* @__PURE__ */ (0, j.jsx)(Nt, { children: P(t)("Plus tard", "Later") }) : void 0,
-		children: /* @__PURE__ */ (0, j.jsx)(Nt, {
+		start: e.later === !0 ? /* @__PURE__ */ (0, j.jsx)(Pt, { children: P(t)("Plus tard", "Later") }) : void 0,
+		children: /* @__PURE__ */ (0, j.jsx)(Pt, {
 			look: "primary",
 			children: F(e, "label") || " "
 		})
@@ -11578,13 +11578,13 @@ var Ki = [
 		}),
 		r && /* @__PURE__ */ (0, j.jsxs)("div", {
 			className: I.side,
-			children: [/* @__PURE__ */ (0, j.jsx)(Nt, {
+			children: [/* @__PURE__ */ (0, j.jsx)(Pt, {
 				className: I.wideAction,
 				icon: r.icon,
 				onClick: r.onClick,
 				href: r.href,
 				children: r.label
-			}), /* @__PURE__ */ (0, j.jsx)(zt, {
+			}), /* @__PURE__ */ (0, j.jsx)(Bt, {
 				className: I.roundAction,
 				icon: r.icon,
 				label: r.label,
@@ -11603,7 +11603,7 @@ var Ki = [
 	invalid: "_invalid_1vgq1_18",
 	input: "_input_1vgq1_23",
 	eye: "_eye_1vgq1_48"
-}, la = ({ icon: e = yt, invalid: t = !1, lead: n, className: r = "", ...i }) => {
+}, la = ({ icon: e = bt, invalid: t = !1, lead: n, className: r = "", ...i }) => {
 	let { t: a } = ae(), [o, s] = (0, k.useState)(!1);
 	return /* @__PURE__ */ (0, j.jsxs)("div", {
 		className: `${ca.field} ${t ? ca.invalid : ""} ${r}`,
@@ -11625,10 +11625,10 @@ var Ki = [
 				onClick: () => s(!o),
 				"aria-label": a(o ? "password.hide" : "password.show"),
 				"aria-pressed": o,
-				children: o ? /* @__PURE__ */ (0, j.jsx)(at, {
+				children: o ? /* @__PURE__ */ (0, j.jsx)(ot, {
 					size: 16,
 					"aria-hidden": "true"
-				}) : /* @__PURE__ */ (0, j.jsx)(st, {
+				}) : /* @__PURE__ */ (0, j.jsx)(ct, {
 					size: 16,
 					"aria-hidden": "true"
 				})
@@ -11896,7 +11896,7 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 	render() {
 		return this.state.failed ? this.props.fallback : this.props.children;
 	}
-}, Wa = ({ id: e, component: t, props: n, fallback: r = null }) => /* @__PURE__ */ (0, j.jsx)(Ue.Provider, {
+}, Wa = ({ id: e, component: t, props: n, fallback: r = null }) => /* @__PURE__ */ (0, j.jsx)(We.Provider, {
 	value: e,
 	children: /* @__PURE__ */ (0, j.jsx)(Ua, {
 		id: e,
@@ -11940,12 +11940,12 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 	keysLink: "_keysLink_59yy1_33",
 	form: "_form_59yy1_50"
 }, Za = {
-	Mail: xt,
-	Search: Dt,
-	Hand: dt
+	Mail: St,
+	Search: Ot,
+	Hand: ft
 }, z = (e, t) => String(e[t] ?? ""), Qa = {
-	textfield: (e, t, n) => /* @__PURE__ */ (0, j.jsx)(Wt, {
-		icon: Za[z(e, "icon")] ?? xt,
+	textfield: (e, t, n) => /* @__PURE__ */ (0, j.jsx)(Gt, {
+		icon: Za[z(e, "icon")] ?? St,
 		"aria-label": z(e, "label"),
 		placeholder: z(e, "placeholder"),
 		value: String(e.email ?? (e.clear === !0 ? P(t)("bonjour", "hello") : "")),
@@ -11972,7 +11972,7 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 		masked: e.masked === !0,
 		disabled: e.disabled === !0
 	}),
-	toggle: (e, t, n) => /* @__PURE__ */ (0, j.jsx)(Kt, {
+	toggle: (e, t, n) => /* @__PURE__ */ (0, j.jsx)(qt, {
 		checked: e.checked === !0,
 		label: z(e, "label"),
 		onChange: (e) => n?.("checked", e),
@@ -11988,7 +11988,7 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 		checked: e.checked === !0,
 		onChange: (e) => n?.("checked", e)
 	}),
-	segmented: (e, t, n) => /* @__PURE__ */ (0, j.jsx)(Vt, {
+	segmented: (e, t, n) => /* @__PURE__ */ (0, j.jsx)(Ht, {
 		label: z(e, "label"),
 		value: z(e, "value"),
 		options: Gi(t),
@@ -12005,20 +12005,20 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 		tone: z(e, "tone"),
 		action: e.action === !0 ? {
 			label: P(t)("Voir", "See"),
-			icon: rt,
+			icon: it,
 			onClick: N
 		} : void 0,
 		children: z(e, "body")
 	}),
 	emptystate: (e, t) => /* @__PURE__ */ (0, j.jsx)(ra, {
-		icon: /* @__PURE__ */ (0, j.jsx)(ht, { size: 28 }),
+		icon: /* @__PURE__ */ (0, j.jsx)(gt, { size: 28 }),
 		title: z(e, "title"),
 		tone: z(e, "tone"),
 		compact: e.compact === !0,
-		actions: e.actions === !0 ? /* @__PURE__ */ (0, j.jsx)(Nt, { children: P(t)("Ajouter", "Add") }) : void 0,
+		actions: e.actions === !0 ? /* @__PURE__ */ (0, j.jsx)(Pt, { children: P(t)("Ajouter", "Add") }) : void 0,
 		children: z(e, "body") || void 0
 	}),
-	chip: (e) => /* @__PURE__ */ (0, j.jsx)(Ft, {
+	chip: (e) => /* @__PURE__ */ (0, j.jsx)(It, {
 		tone: e.tone === "none" ? void 0 : z(e, "tone"),
 		size: z(e, "size"),
 		children: z(e, "label") || " "
@@ -12026,7 +12026,7 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 	filterchip: (e, t, n) => /* @__PURE__ */ (0, j.jsx)(aa, {
 		selected: e.selected === !0,
 		count: e.count === !0 ? 12 : void 0,
-		icon: e.icon === !0 ? Ye : void 0,
+		icon: e.icon === !0 ? Xe : void 0,
 		disabled: e.disabled === !0,
 		onClick: () => n?.("selected", e.selected !== !0),
 		children: z(e, "label") || " "
@@ -12041,34 +12041,31 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 		photo: null,
 		size: Number(e.size)
 	})
-}, $a = null, eo = /* @__PURE__ */ new Set(), to = (e) => {
+}, $a = null, eo = /* @__PURE__ */ new Set(), to = (e) => (eo.add(e), () => eo.delete(e)), no = (e) => {
 	$a = e, eo.forEach((e) => e());
-}, no = (e) => (eo.add(e), () => eo.delete(e)), ro = (e) => to(e), io = () => to(null), ao = () => {
-	let e = $a;
-	to(null), e?.onCancel?.();
-}, oo = () => (0, k.useSyncExternalStore)(no, () => $a), so = !1, co = /* @__PURE__ */ new Set(), lo = () => so, uo = (e) => (co.add(e), () => co.delete(e)), fo = () => (0, k.useSyncExternalStore)(uo, lo), po = {
+}, ro = () => {}, io = () => (0, k.useSyncExternalStore)(to, () => $a), ao = !1, oo = /* @__PURE__ */ new Set(), so = () => ao, co = (e) => (oo.add(e), () => oo.delete(e)), lo = () => (0, k.useSyncExternalStore)(co, so), uo = {
 	message: "_message_11tuh_3",
 	form: "_form_11tuh_14",
 	fields: "_fields_11tuh_21",
 	field: "_field_11tuh_21",
 	label: "_label_11tuh_33"
-}, mo = () => {
-	let e = oo();
+}, fo = () => {
+	let e = io();
 	return /* @__PURE__ */ (0, j.jsx)(Ci, {
 		open: e !== null,
-		onClose: ao,
+		onClose: ro,
 		title: e?.title,
 		describedBy: "confirm-message",
-		children: e && /* @__PURE__ */ (0, j.jsx)(_o, { confirmation: e }, e.title)
+		children: e && /* @__PURE__ */ (0, j.jsx)(ho, { confirmation: e }, e.title)
 	});
-}, ho = /* @__PURE__ */ new Map([["invalid_password", "wrongPassword"], ["invalid_code", "wrongCode"]]), go = ({ askPassword: e, askCode: t, error: n, password: r, code: i, onPassword: a, onCode: o }) => {
+}, po = /* @__PURE__ */ new Map([["invalid_password", "wrongPassword"], ["invalid_code", "wrongCode"]]), mo = ({ askPassword: e, askCode: t, error: n, password: r, code: i, onPassword: a, onCode: o }) => {
 	let { t: s } = ae();
 	return /* @__PURE__ */ (0, j.jsxs)("div", {
-		className: po.fields,
+		className: uo.fields,
 		children: [e && /* @__PURE__ */ (0, j.jsxs)("label", {
-			className: po.field,
+			className: uo.field,
 			children: [/* @__PURE__ */ (0, j.jsx)("span", {
-				className: po.label,
+				className: uo.label,
 				children: s("confirm.proof.password")
 			}), /* @__PURE__ */ (0, j.jsx)(la, {
 				"aria-label": s("confirm.proof.password"),
@@ -12090,35 +12087,35 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 			onChange: o
 		})]
 	});
-}, _o = ({ confirmation: e }) => {
-	let { t } = ae(), [n, r] = (0, k.useState)(""), [i, a] = (0, k.useState)(""), [o, s] = (0, k.useState)(!1), [c, l] = (0, k.useState)(null), { proof: u } = e, d = fo(), f = u !== void 0 && u.noPassword !== !0 && u.codeOnly !== !0, p = u !== void 0 && (d || u.codeOnly === !0), m = async (t) => {
+}, ho = ({ confirmation: e }) => {
+	let { t } = ae(), [n, r] = (0, k.useState)(""), [i, a] = (0, k.useState)(""), [o, s] = (0, k.useState)(!1), [c, l] = (0, k.useState)(null), { proof: u } = e, d = lo(), f = u !== void 0 && u.noPassword !== !0 && u.codeOnly !== !0, p = u !== void 0 && (d || u.codeOnly === !0), m = async (t) => {
 		if (t.preventDefault(), !u) e.onConfirm({
 			password: "",
 			code: ""
-		}), io();
+		});
 		else {
 			s(!0), l(null);
 			try {
 				await e.onConfirm({
 					password: n,
 					code: i
-				}), io();
+				});
 			} catch (e) {
 				let t = e instanceof _a ? e.code : null;
-				l(ho.get(t) ?? "failed"), s(!1);
+				l(po.get(t) ?? "failed"), s(!1);
 			}
 		}
 	};
 	return /* @__PURE__ */ (0, j.jsxs)("form", {
-		className: po.form,
+		className: uo.form,
 		onSubmit: (e) => void m(e),
 		children: [
 			/* @__PURE__ */ (0, j.jsx)("p", {
 				id: "confirm-message",
-				className: po.message,
+				className: uo.message,
 				children: e.message
 			}),
-			u && /* @__PURE__ */ (0, j.jsx)(go, {
+			u && /* @__PURE__ */ (0, j.jsx)(mo, {
 				askPassword: f,
 				askCode: p,
 				error: c,
@@ -12133,11 +12130,11 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 				tone: "error",
 				children: t(`confirm.proof.${c}`)
 			}),
-			/* @__PURE__ */ (0, j.jsxs)(hn, { children: [/* @__PURE__ */ (0, j.jsx)(Nt, {
+			/* @__PURE__ */ (0, j.jsxs)(hn, { children: [/* @__PURE__ */ (0, j.jsx)(Pt, {
 				type: "button",
-				onClick: ao,
+				onClick: ro,
 				children: t("common.cancel")
-			}), /* @__PURE__ */ (0, j.jsx)(Nt, {
+			}), /* @__PURE__ */ (0, j.jsx)(Pt, {
 				type: "submit",
 				look: e.look ?? "danger",
 				busy: o,
@@ -12146,34 +12143,34 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 			})] })
 		]
 	});
-}, vo = (0, k.lazy)(C), yo = () => ne() && /* @__PURE__ */ (0, j.jsx)(k.Suspense, { children: /* @__PURE__ */ (0, j.jsx)(vo, {}) }), bo = (e, t) => String(e[t] ?? ""), xo = {
+}, go = (0, k.lazy)(C), _o = () => ne() && /* @__PURE__ */ (0, j.jsx)(k.Suspense, { children: /* @__PURE__ */ (0, j.jsx)(go, {}) }), vo = (e, t) => String(e[t] ?? ""), yo = {
 	dialog: (e, t) => {
 		let n = P(t);
 		return /* @__PURE__ */ (0, j.jsxs)(Ci, {
 			open: !0,
 			onClose: N,
-			size: bo(e, "size"),
-			title: bo(e, "title") || void 0,
-			intro: bo(e, "intro") || void 0,
+			size: vo(e, "size"),
+			title: vo(e, "title") || void 0,
+			intro: vo(e, "intro") || void 0,
 			onBack: e.back === !0 ? N : void 0,
-			children: [/* @__PURE__ */ (0, j.jsx)(Wt, {
-				icon: dt,
+			children: [/* @__PURE__ */ (0, j.jsx)(Gt, {
+				icon: ft,
 				"aria-label": n("Salutation", "Greeting"),
 				placeholder: n("Coucou", "Hey")
-			}), /* @__PURE__ */ (0, j.jsxs)(hn, { children: [/* @__PURE__ */ (0, j.jsx)(Nt, { children: n("Annuler", "Cancel") }), /* @__PURE__ */ (0, j.jsx)(Nt, {
+			}), /* @__PURE__ */ (0, j.jsxs)(hn, { children: [/* @__PURE__ */ (0, j.jsx)(Pt, { children: n("Annuler", "Cancel") }), /* @__PURE__ */ (0, j.jsx)(Pt, {
 				look: "primary",
 				children: n("Enregistrer", "Save")
 			})] })]
 		});
 	},
-	asktoconfirm: () => /* @__PURE__ */ (0, j.jsx)(mo, {}),
-	toasts: () => /* @__PURE__ */ (0, j.jsx)(yo, {})
-}, So = {
-	asktoconfirm: (e) => ro({
-		title: bo(e, "title"),
-		message: bo(e, "message"),
-		label: bo(e, "label") || " ",
-		look: bo(e, "look"),
+	asktoconfirm: () => /* @__PURE__ */ (0, j.jsx)(fo, {}),
+	toasts: () => /* @__PURE__ */ (0, j.jsx)(_o, {})
+}, bo = {
+	asktoconfirm: (e) => no({
+		title: vo(e, "title"),
+		message: vo(e, "message"),
+		label: vo(e, "label") || " ",
+		look: vo(e, "look"),
 		onConfirm: N
 	}),
 	toasts: (e) => {
@@ -12186,37 +12183,43 @@ var Ca = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, wa = (e) => [
 				let n = t[e];
 				"kept" in n || (t[e] = Object.assign((...[e, t]) => n(e, {
 					...t,
+					id: "demo",
 					duration: Infinity
 				}), { kept: !0 }));
 			}
-			t.dismiss(), e.error === !0 ? b(bo(e, "message")) : e.saved === !0 ? p() : te(bo(e, "message"));
+			e.error === !0 ? b(vo(e, "message")) : e.saved === !0 ? p() : te(vo(e, "message"));
 		});
 	}
-}, Co = {
+}, xo = {
 	...$i,
 	...Qa,
-	...xo
-}, wo = (e) => e.getRootNode() instanceof ShadowRoot, { showModal: To } = HTMLDialogElement.prototype;
+	...yo
+}, So = (e) => e.getRootNode() instanceof ShadowRoot, { showModal: Co } = HTMLDialogElement.prototype;
 HTMLDialogElement.prototype.showModal = function() {
-	wo(this) ? this.setAttribute("open", "") : To.call(this);
+	So(this) ? this.setAttribute("open", "") : Co.call(this);
 };
-var { showPopover: Eo } = HTMLElement.prototype;
+var { showPopover: wo } = HTMLElement.prototype;
 HTMLElement.prototype.showPopover = function() {
-	wo(this) ? this.removeAttribute("popover") : Eo.call(this);
+	So(this) ? this.removeAttribute("popover") : wo.call(this);
 };
-var Do = /* @__PURE__ */ new WeakMap(), Oo = (e) => i.language === e ? Promise.resolve() : new Promise((t) => {
+var To = /* @__PURE__ */ new WeakMap(), Eo = (e) => i.language === e ? Promise.resolve() : new Promise((t) => {
 	let n = (r) => {
 		r === e && (i.off("languageChanged", n), t());
 	};
 	i.on("languageChanged", n);
 });
-window.HodiPlay = { draw: (e, t, n, r, i) => {
-	m(r);
-	let a = Do.get(t);
-	a || Do.set(t, a = (0, He.createRoot)(t)), a.render(/* @__PURE__ */ (0, j.jsx)(Ue.Provider, {
-		value: "hello-world",
-		children: Co[e]?.(n, r, i)
-	}));
-	let o = So[e];
-	o && Oo(r).then(() => o(n, r));
-} };
+window.HodiPlay = {
+	draw: (e, t, n, r, i) => {
+		m(r);
+		let a = To.get(t);
+		a || To.set(t, a = (0, Ue.createRoot)(t));
+		let o = a;
+		(0, He.flushSync)(() => o.render(/* @__PURE__ */ (0, j.jsx)(We.Provider, {
+			value: "hello-world",
+			children: xo[e]?.(n, r, i)
+		})));
+		let s = bo[e];
+		s && Eo(r).then(() => (0, He.flushSync)(() => s(n, r)));
+	},
+	ready: (e) => (m(e), Eo(e))
+};

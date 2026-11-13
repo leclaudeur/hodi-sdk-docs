@@ -20,7 +20,7 @@
   letter-spacing: 0.005em;
 }
 /* A name from the code as a title: in the mono font, with its own case. */
-.prose h2.code-title {
+.prose :is(h2, h3).code-title {
   font: 500 clamp(24px, 2.4vw, 30px)/1.2 var(--font-mono);
   letter-spacing: -0.01em;
 }

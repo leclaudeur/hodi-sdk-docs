@@ -10,6 +10,21 @@ interface Live {
   syncs: Map<string, Sync[]>
 }
 
+// A render drawn in a second step (a toast, once Sonner has loaded) keeps its picture until it shows something, so the
+// first hover never flashes an empty render.
+const keepUntilDrawn = (host: Element, still: Node[]) => {
+  const drawn = () =>
+    [...host.children].some(child => !still.includes(child) && child.getBoundingClientRect().height > 0)
+  if (drawn()) return
+  host.append(...still)
+  const watch = new MutationObserver(() => {
+    if (!drawn()) return
+    watch.disconnect()
+    for (const node of still) node.parentNode?.removeChild(node)
+  })
+  watch.observe(host, { childList: true, subtree: true, attributes: true })
+}
+
 // A render comes alive as soon as the pointer or the focus reaches it: Hodi's real component is drawn again inside
 // the render's own root, with the same ground and CSS, so nothing moves, and a click in it works as in the app.
 const start = async (term: HTMLElement): Promise<Live | undefined> => {
@@ -18,6 +33,8 @@ const start = async (term: HTMLElement): Promise<Live | undefined> => {
   const { codeOf, controlsOf } = await import('./play-code.ts')
   const player = await loadBundle(term.dataset.playJs ?? '')
   if (!host || !player) return undefined
+  await player.ready(lang)
+  const still = [...host.childNodes]
   host.replaceChildren()
   const controls = controlsOf(kind)
   const state: State = Object.fromEntries(Object.values(controls).map(control => [control.key, control.value]))
@@ -31,6 +48,7 @@ const start = async (term: HTMLElement): Promise<Live | undefined> => {
     if (code) code.innerHTML = codeOf(kind, state)
   }
   player.draw(kind, host, state, lang, set)
+  keepUntilDrawn(host, still)
   return { controls, state, set, syncs }
 }
 

@@ -17,6 +17,7 @@ interface Player {
     lang: 'fr' | 'en',
     set: (key: string, value: unknown) => void
   ) => void
+  ready: (lang: 'fr' | 'en') => Promise<void>
 }
 
 const lang = langOf(location.pathname)
