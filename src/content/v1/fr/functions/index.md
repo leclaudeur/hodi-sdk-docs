@@ -1,14 +1,16 @@
 ---
 title: "Fonctions"
 description: "Les fonctions de `hodi:sdk` qui s'appellent depuis le code : la question avant d'effacer et les toasts."
-intro: "Ces fonctions s'appellent depuis le code du plugin, par exemple après un clic. Elles affichent une fenêtre ou un toast de Hodi : le plugin ne les dessine pas lui-même."
+intro: "Ces fonctions s'appellent depuis le code du plugin, par exemple après un clic. Elles affichent une fenêtre ou un toast de Hodi : le plugin ne les dessine pas lui-même, et ils ont donc la même allure que partout dans l'app."
 order: 3
 icon: "square-function"
 ---
 
 ## askToConfirm()
 
-La question de Hodi avant ce qui ne se défait pas. Le bouton est rouge par défaut. Avec `proof`, elle demande aussi le mot de passe de la personne : il passe à une route marquée `proof: true` avec `api(path, { proof })`, et Hodi le vérifie.
+Cette fonction ouvre la fenêtre de Hodi qui pose une question avant une action qui ne se défait pas, comme effacer un historique. La personne confirme avec un bouton rouge, ou annule.
+
+Avec `proof`, la fenêtre demande aussi le mot de passe de la personne. `onConfirm` reçoit alors une preuve, que la partie web passe à une route marquée `proof: true` avec `api(path, { proof })`. Hodi vérifie le mot de passe avant de lancer la route.
 
 ```tsx title="web/index.tsx" render="asktoconfirm" kind="modal" play="asktoconfirm"
 import { askToConfirm, usePluginApi } from 'hodi:sdk'
@@ -25,17 +27,21 @@ askToConfirm({
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `title` | `string` | La question. |
-| `message` | `ReactNode` | Ce qui se passe, en entier : quoi, pour qui, ce qui reste. |
-| `label` | `string` | Le bouton qui le fait : « Vider », « Effacer ». |
-| `onConfirm` | `(proof: Proof) => void \| Promise<void>` | Après le clic. Avec `proof`, reçoit le mot de passe et le code tapés ; une erreur garde la fenêtre ouverte. |
-| `look?` | `'danger' \| 'primary'` | Rouge par défaut, `primary` pour ce qui ajoute. |
-| `proof?` | `{}` | Demande le mot de passe de la personne, et le code de son appli avec la validation en deux étapes. |
-| `onCancel?` | `() => void` | Échap, la croix, « Annuler » ou un clic à côté. |
+| `title` | `string` | La question posée, comme « Vider l'historique ? ». |
+| `message` | `ReactNode` | Ce qui va se passer, en entier : ce qui sera effacé, pour qui, et ce qui restera. |
+| `label` | `string` | Le texte du bouton qui confirme, un verbe comme « Vider » ou « Effacer ». |
+| `onConfirm` | `(proof: Proof) => void \| Promise<void>` | Ce que fait le clic sur ce bouton. Avec `proof`, il reçoit le mot de passe et le code tapés. Si la promesse échoue, la fenêtre reste ouverte. |
+| `look?` | `'danger' \| 'primary'` | La couleur du bouton : rouge par défaut, `primary` pour une action qui ajoute au lieu d'effacer. |
+| `proof?` | `{}` | Demande le mot de passe de la personne, et le code de son appli quand elle a la validation en deux étapes. |
+| `onCancel?` | `() => void` | Ce qui se passe quand la personne ferme la fenêtre sans confirmer : avec Échap, la croix, « Annuler » ou un clic à côté. |
 
 ## showDone()
 
-Les toasts de Hodi disent ce qui s'est passé, rien de plus : jamais une question, jamais un formulaire. `showDone` pour une action faite, avec « Annuler » quand elle reçoit `undo`. `showSaved` pour un réglage enregistré. `showError` pour un échec, avec un bouton si besoin.
+Ces fonctions affichent un toast de Hodi : un message court qui dit ce qui vient de se passer. Un toast ne pose jamais de question et ne contient jamais de formulaire. Il en existe trois :
+
+- `showDone` dit qu'une action est faite. Avec `undo`, il ajoute un bouton « Annuler ».
+- `showSaved` dit qu'un réglage est enregistré.
+- `showError` dit qu'une chose a échoué, avec un bouton pour réessayer si besoin.
 
 ```tsx title="web/index.tsx" render="toasts" kind="toast" play="toasts"
 import { showDone } from 'hodi:sdk'
@@ -46,6 +52,6 @@ showDone('Salutation enregistrée')
 <!-- prettier-ignore -->
 | Fonctions | Type | |
 | --- | --- | --- |
-| `showDone` | `(message: string, undo?: () => void) => void` | Une action faite. Avec undo, un bouton « Annuler ». |
-| `showSaved` | `(message?: string) => void` | « Enregistré », un seul à la fois. |
-| `showError` | `(message: string, action?, id?: string) => void` | Un échec : ce qu'il faut faire ensuite va dans le message ou le bouton. `id` n'en garde qu'un du même genre. |
+| `showDone` | `(message: string, undo?: () => void) => void` | Affiche le message d'une action faite. Avec `undo`, un bouton « Annuler » appelle cette fonction. |
+| `showSaved` | `(message?: string) => void` | Affiche « Enregistré », ou le message donné. Un seul de ces toasts reste à l'écran à la fois. |
+| `showError` | `(message: string, action?, id?: string) => void` | Affiche un échec. Le message, ou le bouton `action`, dit quoi faire ensuite. Avec `id`, un nouveau toast remplace celui qui a le même `id`. |

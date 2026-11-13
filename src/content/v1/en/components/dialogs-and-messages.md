@@ -1,7 +1,7 @@
 ---
 title: "Dialogs and messages"
 description: "Windows, messages in the page and empty lists."
-intro: "A window for a form, a message in the page to say what is happening, an empty list when there is nothing. The question before deleting and the toasts are in [Functions](/en/functions/)."
+intro: "These components open a window, show a message in the page or show an empty list. The question before deleting and the toasts are not components: they are functions, described in [Functions](/en/functions/)."
 order: 5
 icon: "message-square"
 topic: "travel"
@@ -10,7 +10,7 @@ preview: "notice"
 
 ## Dialog
 
-Hodi's window, centred, with its tinted header and its cross. Escape, a click beside it or the cross call `onClose`. Its buttons go in `DialogActions`.
+Hodi's window, centred on the screen, with a tinted header and a cross to close it. The Escape key, a click beside the window or the cross call `onClose`. The window's buttons go in `DialogActions`.
 
 ```tsx title="web/index.tsx" render="dialog" kind="modal" play="dialog"
 import { Button, Dialog, DialogActions, TextField } from 'hodi:sdk'
@@ -38,29 +38,29 @@ import { Hand } from 'lucide-react'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `open` | `boolean` | Open or not. |
-| `onClose` | `() => void` | Escape, the cross or a click beside it. |
-| `title?` | `ReactNode` | The title. Without it, use `labelledBy`. |
-| `intro?` | `ReactNode` | What the window does, in one or two sentences. |
-| `size?` | `'compact' \| 'wide'` | `compact` for a question or a short form, `wide` for more to read. |
-| `onBack?` | `() => void` | A back arrow before the title. |
-| `labelledBy?` | `string` | The id of the element that names it. |
-| `describedBy?` | `string` | The id of the element that describes it. |
-| `children` | `ReactNode` | Its content, then its `DialogActions`. |
+| `open` | `boolean` | `true` when the window is open. |
+| `onClose` | `() => void` | Called when the person closes the window: with Escape, the cross or a click beside it. |
+| `title?` | `ReactNode` | The window's title. Without a title, `labelledBy` must name the window. |
+| `intro?` | `ReactNode` | One or two sentences under the title, which say what the window is for. |
+| `size?` | `'compact' \| 'wide'` | The window's width: `compact` for a question or a short form, `wide` when there is more to read. |
+| `onBack?` | `() => void` | Adds a back arrow before the title, which calls this function. |
+| `labelledBy?` | `string` | The id of the element that names the window, for screen readers. |
+| `describedBy?` | `string` | The id of the element that describes the window, for screen readers. |
+| `children` | `ReactNode` | The window's content, then its `DialogActions`. |
 
 ## DialogActions
 
-A window's row of buttons, under a line. "Cancel" on the left, the action on the right.
+The row of buttons at the bottom of a window, under a line. The secondary button, such as "Cancel", goes on the left; the action's button goes on the right.
 
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `children` | `ReactNode` | The buttons, the main one last. |
-| `className?` | `string` | One more class. |
+| `children` | `ReactNode` | The row's buttons. The main button comes last. |
+| `className?` | `string` | One more CSS class, prefixed by the plugin's id. |
 
 ## StatusLine
 
-A line under a field: blue for what is happening, red for a failure.
+A message line under a field: in blue to say what is happening, in red to say something failed.
 
 ```tsx title="web/index.tsx" render="statusline" play="statusline"
 import { StatusLine } from 'hodi:sdk'
@@ -71,12 +71,12 @@ import { StatusLine } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `tone` | `'info' \| 'error'` | Blue or red. |
-| `children` | `string` | The message. |
+| `tone` | `'info' \| 'error'` | The line's colour: `info` in blue, `error` in red. |
+| `children` | `string` | The message, already translated. |
 
 ## Notice
 
-A box with an icon, for information that stays in the page.
+A box with an icon and a title, for information that must stay visible in the page, such as a warning.
 
 ```tsx title="web/index.tsx" render="notice" play="notice"
 import { Notice } from 'hodi:sdk'
@@ -98,17 +98,17 @@ import { ExternalLink, Info } from 'lucide-react'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `title` | `string` | Its title. |
-| `icon` | `LucideIcon` | Its icon. |
-| `children` | `ReactNode` | Its text. |
-| `tone?` | `'info' \| 'warning' \| 'error'` | Its colour. `info` by default. |
-| `action?` | `NoticeAction` | A button at the end: `label`, `icon`, `onClick` or `href`. |
-| `side?` | `ReactNode` | Round buttons at the end, in place of the button. |
-| `href?` | `string` | The whole box opens this page, in a new tab. |
+| `title` | `string` | The box's title. |
+| `icon` | `LucideIcon` | The box's icon, a Lucide icon. |
+| `children` | `ReactNode` | The text under the title. |
+| `tone?` | `'info' \| 'warning' \| 'error'` | The box's colour: `info` in blue by default, `warning` in yellow, `error` in red. |
+| `action?` | `NoticeAction` | A button at the end of the box. It has a `label`, an `icon`, and an `onClick` or an `href`. |
+| `side?` | `ReactNode` | Round buttons at the end of the box, in place of `action`. |
+| `href?` | `string` | Makes the whole box a link to this address, opened in a new tab. |
 
 ## EmptyState
 
-An empty list, or one that couldn't load: a title and a line, no more.
+What an empty list shows, or a list that couldn't load: an icon, a title and one line of text at most.
 
 ```tsx title="web/index.tsx" render="emptystate" play="emptystate"
 import { EmptyState } from 'hodi:sdk'
@@ -126,9 +126,9 @@ import { Inbox } from 'lucide-react'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `icon` | `ReactNode` | Its icon, at 28 px. |
-| `title` | `string` | What is missing. |
-| `children?` | `ReactNode` | One line, at most. |
-| `actions?` | `ReactNode` | Buttons under the text. |
-| `tone?` | `'default' \| 'danger'` | `danger` for a failure. |
-| `compact?` | `boolean` | Above other content. |
+| `icon` | `ReactNode` | The icon, shown at 28 px in a square. |
+| `title` | `string` | The title, which says what is missing, such as "No hellos". |
+| `children?` | `ReactNode` | One line of text under the title, no more. |
+| `actions?` | `ReactNode` | Buttons under the text, such as "Try again". |
+| `tone?` | `'default' \| 'danger'` | `danger` turns the icon red, when the list couldn't load. |
+| `compact?` | `boolean` | A smaller version, for an empty state placed above other content. |
