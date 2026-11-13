@@ -62,8 +62,8 @@ icon: 'file-braces'
 > [!TIP]
 > A code block that names its file with `title="web/index.tsx"` becomes a window with a **Copier** button.
 
-A component's render comes from Hodi itself. When a component changes in Hodi, draw them again with a clone of Hodi
-whose dependencies are installed:
+Components are drawn by Hodi's own code.\
+After a change in Hodi, draw them again from a clone of Hodi with its dependencies installed:
 
 ```bash
 HODI_DIR=../hodi sh demo/build.sh
