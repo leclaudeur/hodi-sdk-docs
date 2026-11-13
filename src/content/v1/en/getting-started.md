@@ -14,8 +14,8 @@ steps:
         href: "/en/guide/server-and-web/"
     todo:
       - "Open `plugin.json`, in the tabs above the code."
-      - "On the highlighted line, replace \"Hello\" with \"Hi\". It's the value the setting starts with."
-      - "Look at the preview: the Greeting row already shows \"Hi\"."
+      - "On the highlighted line, replace *Hello* with *Hi*. It's the value the setting starts with."
+      - "Look at the preview: the Greeting row already shows *Hi*."
     file: "plugin.json"
     lang: "json"
     edit: 10
@@ -44,7 +44,7 @@ steps:
           flash: true
           live: true
   - name: "The route"
-    text: "A route is a function: Hodi calls it, it answers. This one reads the \"Greeting\" setting and sends it back."
+    text: "A route is a function: Hodi calls it, it answers. This one reads the *Greeting* setting and sends it back."
     more:
       - label: "The server context"
         href: "/en/guide/server-context/"
@@ -52,8 +52,8 @@ steps:
         href: "/en/guide/server-and-web/"
     todo:
       - "Open `server/index.ts`: it's the part of your plugin that runs on the server."
-      - "On the highlighted line, add a \"!\" after `greeting`, in the text the route sends back."
-      - "Click \"Say hello\" in the preview: your route answers \"Hi!\"."
+      - "On the highlighted line, add a `!` after `greeting`, in the text the route sends back."
+      - "Click *Say hello* in the preview: your route answers *Hi!*."
     file: "server/index.ts"
     lang: "ts"
     edit: 7
@@ -95,7 +95,7 @@ steps:
     todo:
       - "Open `web/index.tsx`: it's the part of your plugin that shows in Hodi."
       - "On the highlighted line, add `look=\"primary\"` to the button so it stands out."
-      - "Look at the preview: the \"Say hello\" button takes the main style."
+      - "Look at the preview: the *Say hello* button takes the main style."
     file: "web/index.tsx"
     lang: "tsx"
     edit: 15
@@ -146,7 +146,7 @@ steps:
     todo:
       - "In the preview, your test Hodi's developer mode is on: it shows you a code."
       - "On the highlighted line, type that code after `--code` to run `npx hodi-plugin dev`."
-      - "Look at Server › Plugins: Hello world is there, with the \"In development\" badge."
+      - "Look at Server › Plugins: Hello world is there, with the *In development* badge."
     file: "Terminal"
     lang: "text"
     edit: 3
@@ -192,7 +192,7 @@ finish:
     - name: "The manifest"
       text: "`plugin.json` gives the plugin its name, its version and its setting."
     - name: "The route"
-      text: "`server/index.ts` answers the \"Say hello\" button with that setting."
+      text: "`server/index.ts` answers the *Say hello* button with that setting."
     - name: "The card"
       text: "`web/index.tsx` shows the setting and the button in Settings."
     - name: "Installing"
