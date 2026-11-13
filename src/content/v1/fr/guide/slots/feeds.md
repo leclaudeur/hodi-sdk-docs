@@ -1,7 +1,7 @@
 ---
 title: "Flux"
-description: "Des flux qu'un foyer suit comme n'importe quelle source : ton plugin fournit les articles, Hodi les range."
-intro: "Des flux qu'un foyer suit comme n'importe quelle autre source : ton plugin fournit les articles, et Hodi les range dans le thème que tu choisis."
+description: "Des flux qu'un foyer suit comme n'importe quelle source : le plugin fournit les articles, Hodi les range."
+intro: "Des flux qu'un foyer suit comme n'importe quelle autre source : le plugin fournit les articles, et Hodi les range dans le thème choisi."
 order: 7
 icon: "rss"
 topic: "climate"

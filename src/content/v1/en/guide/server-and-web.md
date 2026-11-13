@@ -1,33 +1,41 @@
 ---
 title: "Server and web"
-description: "A plugin adds a feature to Hodi without touching its code."
-intro: "A plugin adds a feature to Hodi without touching its code. It has two parts: one runs on the server, the other shows in the app. This page explains how they work and talk to each other."
+description: "The two parts of a Hodi plugin: where each one runs, what it can do and how they talk."
+intro: "A plugin adds a feature to Hodi without touching its code. It has two parts: one runs on the server, the other in the browser."
 order: 1
 icon: "layers"
 ---
 
+## In short
+
+- **The server part** answers the plugin's routes. It runs on Hodi's server, isolated from Hodi itself, and keeps its data in its own SQLite database.
+- **The web part** draws the plugin's screens. It runs in the browser, in Hodi's pages, with Hodi's components.
+- **Between them**, the web part calls the server part's routes. Hodi checks the session on the way.
+
+A plugin can have only one of them: a server part that only reads articles, or a web part with no route of its own.
+
 ## A plugin's folder
 
-A plugin fits in a folder. The easiest way is to start from the [plugin template](https://github.com/leclaudeur/hodi-plugin-template): it works as is, with its build, its tests and its CI.
+A plugin fits in a folder. The [plugin template](https://github.com/leclaudeur/hodi-plugin-template) gives one that works as is, with its build, its tests and its CI.
 
 ```text title="my-plugin/"
-plugin.json        what it is: its name, who for, its settings, its permissions
-server/index.ts    its server part
-web/index.tsx      its web part, once signed in
-web/public.tsx     its screens before sign-in, if it has any
+plugin.json        its name, who it's for, its settings, its permissions
+server/index.ts    the server part
+web/index.tsx      the web part, once signed in
+web/public.tsx     its screens before signing in, if it has any
 locales/fr.json    its texts, one file per language
 locales/en.json
 assets/            its images, copied as they are
 test/              its tests
 ```
 
-Only `plugin.json` is required, and [the manifest](/en/guide/manifest/) goes through it. A plugin can have only a server part, or only a web part with no route of its own.
+Only `plugin.json` is required. [The manifest](/en/guide/manifest/) covers it in detail.
 
 ## The build
 
-`npx hodi-plugin build` turns that folder into a single `.hodi-plugin` file, the one Hodi installs:
+`npx hodi-plugin build` turns this folder into a single `.hodi-plugin` file, the one Hodi installs:
 
-- `server/index.ts` becomes `server.js`, with its npm packages inside;
+- `server/index.ts` becomes `server.js`, one file with all the code it imports;
 - `web/index.tsx` becomes `web.js` and `web.css`;
 - `web/public.tsx` becomes `web-public.js` and `web-public.css`;
 - `plugin.json`, `locales/` and `assets/` are copied as they are.
@@ -36,41 +44,43 @@ Only `plugin.json` is required, and [the manifest](/en/guide/manifest/) goes thr
 
 ## The server part
 
-It runs in Hodi's sandbox, a separate thread with its own JavaScript engine, never inside Hodi itself. It exports a `ServerPlugin` object.
+Hodi doesn't load this code into its own process. It runs it in a separate JavaScript engine, QuickJS, in a thread of its own. That engine only knows standard JavaScript: no `require`, no `fs`, no `fetch`, no `process`.
 
-It imports no module from Node or from Hodi. npm packages are fine as long as they don't need any: the build puts them in `server.js`. Everything else comes in its context, `ctx`, which [the server context](/en/guide/server-context/) goes through:
+The file exports a `ServerPlugin` object, with its routes and hooks. Anything beyond standard JavaScript goes through the context Hodi gives it, `ctx`, which [the server context](/en/guide/server-context/) covers:
 
-- **its own database**, an SQLite file of its own, with its tables named as it likes;
-- **its settings**, as the admin chose them;
-- **what its permissions open for it**, and nothing else: a site, AI, e-mails…
+- **its database**: a SQLite file of its own, with tables named as it likes;
+- **its settings**: as the admin chose them;
+- **what its permissions open**, and nothing else: a website, AI, emails…
 
-## The sandbox's limits
+npm packages work if they're written in plain JavaScript, like `date-fns` or `zod`: the build copies them into `server.js`. A package that needs Node, for example to read a file or open a connection, doesn't work.
 
-- **Memory**: 16 MB, 32 at most if `memoryMb` asks for it.
-- **Time**: 10 seconds per call; beyond that, Hodi stops it.
+### Its limits
+
+- **Memory**: 16 MB, up to 32 if `memoryMb` asks for it.
+- **Time**: 10 seconds per call. Beyond that, Hodi stops the call.
 - **Answer**: 1 MB at most per call.
 - **Database**: 256 MB at most.
-- **Queue**: 8 calls at most behind the one running; beyond that, `busy`.
-- **Crashes**: 3 in 10 minutes, and the plugin waits for Hodi's next start.
+- **Queue**: at most 8 calls waiting behind the running one. Beyond that, Hodi answers `busy`.
+- **Crashes**: after 3 in 10 minutes, the plugin waits for Hodi's next start.
 
-The thread goes to sleep after a minute without a call, and wakes up at the next one: keep nothing in memory between two calls, put it in your database.
+The thread stops after a minute without a call, and starts again at the next one. A global variable doesn't survive between two calls: what must last goes in the database.
 
 ## The web part
 
-It loads once the person is signed in, in the background: the app never waits for a plugin to show. It gets React and Hodi's components from the page, which it imports from `hodi:sdk`. So the plugin looks like the rest of the app, in every theme and on every screen size.
+It loads once the person is signed in, in the background: the app never waits for a plugin to show. It uses the React and the components of Hodi's page, imported from `hodi:sdk`. So the plugin looks like the rest of the app, in every theme and at every screen size.
 
 - **Its slots**: `definePlugin()` says where it shows, see [slots](/en/guide/slots/).
 - **Its components**: the app's own, listed in [components](/en/components/).
 - **Its texts**: `usePluginTranslation()` reads the ones in its `locales/` folder.
-- **Its styles**: a CSS file, its classes prefixed with its id, Hodi's colours.
+- **Its styles**: a CSS file, classes prefixed with the plugin's id, Hodi's colours.
 
-Inline styles (`style=`) are refused by Hodi's page: always go through a class. Hodi's colour variables change with the theme, a hard-coded colour doesn't.
+Hodi's page refuses inline styles (`style=`): styles always go through a class. Hodi's colour variables follow the theme, a hard-coded colour doesn't.
 
-Hodi only shows the web part of a signed plugin, or of the one you are writing in developer mode: it runs in Hodi's page, with the person's session.
+The web part runs in Hodi's page, with the person's session. So Hodi only shows it for a signed plugin, or for the plugin being written in developer mode.
 
 ## How they talk
 
-The web part calls its routes by their path, and Hodi does the rest: it checks who is asking, then passes the request to the server part.
+The web part calls a route by its path. Hodi checks who's asking, then hands the request to the server part.
 
 ```tsx title="web/index.tsx"
 const api = usePluginApi()
@@ -80,18 +90,18 @@ const { text } = await answer.json()
 
 1. `api('/hello')` requests `/api/plugins/hello-world/hello`.
 2. Hodi checks the session, the profile and that the plugin is meant for it.
-3. It calls the route `'POST /hello'` with `request.who`, without any cookie.
-4. Whatever it answers comes back to the web part as is, in JSON.
+3. It calls the server part's `'POST /hello'` route, with `request.who` but no cookie at all.
+4. What it answers goes back to the web part as is, in JSON.
 
 ## Texts
 
-Every text goes in `locales/fr.json`, the reference, and in `locales/en.json`. The French says « tu ». Each file also translates the plugin's name, description and settings:
+Every text goes in `locales/fr.json`, the reference, and in `locales/en.json`. A plugin's French texts say « tu » to the person, like the rest of Hodi. Each file also translates the plugin's name, description and settings:
 
 ```json title="locales/en.json"
 {
   "manifest": {
     "name": "Hello world",
-    "description": "One setting, one route and its own card."
+    "description": "A setting, a route and its own card."
   },
   "settings": {
     "greeting": "Message",
@@ -101,10 +111,10 @@ Every text goes in `locales/fr.json`, the reference, and in `locales/en.json`. T
 }
 ```
 
-## Getting started
+## To begin
 
-1. **Node.js 24** or newer.
-2. **A test Hodi**, your own, with _Server › Plugins › Developer mode_ turned on.
-3. **The SDK**: `npm install --save-dev @hodi-app/plugin-sdk` in its folder.
+1. **Node.js 24** or later.
+2. **A test Hodi**, with _Server › Plugins › Developer mode_ turned on.
+3. **The SDK**: `npm install --save-dev @hodi-app/plugin-sdk` in the plugin's folder.
 
-To see the four steps for real, follow [Getting started](/en/getting-started/): a complete plugin in 15 minutes.
+[Getting started](/en/getting-started/) goes through the four steps of a complete plugin, in an editor.

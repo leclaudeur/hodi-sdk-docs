@@ -33,6 +33,8 @@
   color: var(--text-3);
   font-size: 11px;
   line-height: 1;
+  /* Capitals only: the mono font's line leaves them a pixel low, so the box gives them that pixel back. */
+  padding-bottom: 2px;
 }
 @media (hover: hover) {
   .sdk-search:hover {

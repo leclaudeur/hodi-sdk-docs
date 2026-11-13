@@ -8,8 +8,10 @@ the front matter, the versions and the deployment.
 - The look is Hodi's: its tokens in `src/styles/tokens.css` (copied from hodi-next's `web/src/styles/tokens.css`,
   never edited here), its fonts, its menus (the app's Menu under the profile switcher) and its sidebar. Never
   hard-code a colour; accent text uses `--rust`.
-- The pages are in `src/content/v<major>/<lang>/`. French is the reference and says « tu ». Only the text is French:
-  addresses, file names, code, comments, identifiers and commits are in English.
+- The pages are in `src/content/v<major>/<lang>/`. French is the reference. It never speaks to the reader, neither « tu »
+  nor « vous »: « les styles passent par une classe », not « passe par une classe ». Only a plugin's own texts in the
+  examples say « tu », as Hodi does. Only the text is French: addresses, file names, code, comments, identifiers and
+  commits are in English.
 - The interface's own words (Copier, the menus, the sidebar's groups) are in `src/i18n/fr.json` and `en.json`, every
   key in both.
 - Never edit an older major's folder except to fix an error: a new major copies the folder.

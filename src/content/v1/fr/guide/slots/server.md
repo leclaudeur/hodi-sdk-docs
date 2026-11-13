@@ -1,7 +1,7 @@
 ---
 title: "Serveur"
 description: "Un groupe de sections dans l'espace Serveur, pour tout ce que seul l'admin du serveur doit voir et gérer."
-intro: "Un groupe de sections dans l'espace Serveur, au nom de ton plugin : pour tout ce que seul l'admin du serveur doit voir, régler et gérer."
+intro: "Un groupe de sections dans l'espace Serveur, au nom du plugin : pour tout ce que seul l'admin du serveur doit voir, régler et gérer."
 order: 3
 icon: "server"
 topic: "science"

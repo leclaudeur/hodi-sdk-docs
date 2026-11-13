@@ -30,7 +30,7 @@ import { Hand } from 'lucide-react'
 | --- | --- | --- |
 | `open` | `boolean` | Ouverte ou non. |
 | `onClose` | `() => void` | Échap, la croix ou un clic à côté. |
-| `title?` | `ReactNode` | Le titre. Sans lui, utilise `labelledBy`. |
+| `title?` | `ReactNode` | Le titre. Sans lui, `labelledBy` le remplace. |
 | `intro?` | `ReactNode` | Ce que fait la fenêtre, en une ou deux phrases. |
 | `size?` | `'compact' \| 'wide'` | `compact` pour une question ou un court formulaire, `wide` pour plus à lire. |
 | `onBack?` | `() => void` | Une flèche de retour avant le titre. |
@@ -50,7 +50,7 @@ La rangée des boutons d'une fenêtre, sous un trait. « Annuler » à gauche, l
 
 ## askToConfirm()
 
-La question de Hodi avant ce qui ne se défait pas. Le bouton est rouge par défaut. Avec `proof`, elle demande aussi le mot de passe de la personne : passe-le à une route marquée `proof: true` avec `api(path, { proof })`, et Hodi le vérifie.
+La question de Hodi avant ce qui ne se défait pas. Le bouton est rouge par défaut. Avec `proof`, elle demande aussi le mot de passe de la personne : il passe à une route marquée `proof: true` avec `api(path, { proof })`, et Hodi le vérifie.
 
 ```tsx title="web/index.tsx" render="asktoconfirm" kind="modal"
 import { askToConfirm, usePluginApi } from 'hodi:sdk'
@@ -77,7 +77,7 @@ askToConfirm({
 
 ## showDone()
 
-Les toasts de Hodi disent ce qui s'est passé, rien de plus : jamais une question, jamais un formulaire. `showDone` pour une action faite, avec « Annuler » si tu lui donnes `undo`. `showSaved` pour un réglage enregistré. `showError` pour un échec, avec un bouton si besoin.
+Les toasts de Hodi disent ce qui s'est passé, rien de plus : jamais une question, jamais un formulaire. `showDone` pour une action faite, avec « Annuler » quand elle reçoit `undo`. `showSaved` pour un réglage enregistré. `showError` pour un échec, avec un bouton si besoin.
 
 ```tsx title="web/index.tsx" render="toasts" kind="toast"
 import { showDone, showError, showSaved } from 'hodi:sdk'

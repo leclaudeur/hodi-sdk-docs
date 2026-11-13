@@ -29,7 +29,7 @@ const Page = ({ layout }: { layout: 'desktop' | 'phone' }) => (
 | Props | Type | |
 | --- | --- | --- |
 | `title` | `string` | Le titre de la page. |
-| `layout` | `'desktop' \| 'phone'` | Celui que l'emplacement donne à ta page. |
+| `layout` | `'desktop' \| 'phone'` | Celui que l'emplacement donne à la page. |
 | `intro?` | `ReactNode` | Ce que fait la page, sous son titre. |
 | `aside?` | `ReactNode` | À côté du titre, ou dessous sur téléphone. |
 | `children` | `ReactNode` | Ses cartes, des `SettingsCard`. |
@@ -110,12 +110,12 @@ import { MoreRow, SettingRow, SettingsCard } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `label` | `string` | « Voir les 4 autres », dans les mots de ton plugin. |
+| `label` | `string` | « Voir les 4 autres », dans les mots du plugin. |
 | `onClick` | `() => void` | Montre le reste. |
 
 ## OverviewCard
 
-Une carte de [Vue d’ensemble](/fr/guide/slots/overview/) : son titre, un nombre, une puce au bout, puis ton contenu.
+Une carte de [Vue d’ensemble](/fr/guide/slots/overview/) : son titre, un nombre, une puce au bout, puis le contenu du plugin.
 
 ```tsx title="web/index.tsx" render="overviewcard"
 import { Chip, OverviewCard, usePluginTranslation } from 'hodi:sdk'

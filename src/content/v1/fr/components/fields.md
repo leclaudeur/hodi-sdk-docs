@@ -29,7 +29,7 @@ import { Mail } from 'lucide-react'
 
 ## PasswordField
 
-Un mot de passe, avec son œil pour l'afficher. Pour un nouveau, mets `PasswordRing` à la place du cadenas et `PasswordGauge` dessous.
+Un mot de passe, avec son œil pour l'afficher. Pour un nouveau, `PasswordRing` remplace le cadenas et `PasswordGauge` va dessous.
 
 ```tsx title="web/index.tsx" render="passwordfield"
 import { PasswordField, PasswordGauge, PasswordRing } from 'hodi:sdk'
@@ -136,7 +136,7 @@ import { AgeCheckbox } from 'hodi:sdk'
 
 ## Segmented
 
-Un choix parmi quelques-uns, dans une pilule, comme « Clair · Sombre · Système ». Dans une ligne, passe-le à `choice` de `SettingRow`.
+Un choix parmi quelques-uns, dans une pilule, comme « Clair · Sombre · Système ». Dans une ligne, il va dans `choice` de `SettingRow`.
 
 ```tsx title="web/index.tsx" render="segmented"
 import { Segmented } from 'hodi:sdk'

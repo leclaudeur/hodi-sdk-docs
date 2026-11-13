@@ -1,7 +1,7 @@
 ---
 title: "Ses options"
-description: "Une carte à toi sous ses réglages, dans Serveur › Plugins, pour tout ce que ces réglages ne disent pas."
-intro: "Sous les réglages que Hodi dessine pour ton plugin, dans Serveur › Plugins : une carte à toi, pour ce que des réglages seuls ne disent pas."
+description: "Une carte du plugin sous ses réglages, dans Serveur › Plugins, pour tout ce que ces réglages ne disent pas."
+intro: "Sous les réglages que Hodi dessine pour le plugin, dans Serveur › Plugins : une carte à lui, pour ce que des réglages seuls ne disent pas."
 order: 1
 icon: "sliders-horizontal"
 topic: "tech"
@@ -10,7 +10,7 @@ key: "settingsPage"
 
 ## Où elle s'affiche
 
-L'admin du serveur ouvre ton plugin dans _Serveur › Plugins_, avec son rond « Gérer ». Hodi y dessine d'abord les lignes des réglages de `plugin.json`, puis ta carte en dessous.
+L'admin du serveur ouvre le plugin dans _Serveur › Plugins_, avec son rond « Gérer ». Hodi y dessine d'abord les lignes des réglages de `plugin.json`, puis la carte du plugin en dessous.
 
 ## Exemple
 

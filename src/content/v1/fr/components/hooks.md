@@ -1,6 +1,6 @@
 ---
 title: "Hooks"
-description: "Les textes de ton plugin, ses routes, ses liens et les réglages du serveur."
+description: "Les textes du plugin, ses routes, ses liens et les réglages du serveur."
 intro: "Ces hooks savent quel plugin les appelle : ils ne marchent que dans ses composants."
 order: 7
 icon: "anchor"
@@ -9,7 +9,7 @@ topic: "science"
 
 ## usePluginTranslation()
 
-Les textes de ton plugin, dans la langue de la personne, depuis `locales/`. Jamais ceux de Hodi.
+Les textes du plugin, dans la langue de la personne, depuis `locales/`. Jamais ceux de Hodi.
 
 ```tsx title="web/index.tsx"
 import { usePluginTranslation } from 'hodi:sdk'
@@ -26,7 +26,7 @@ t('greeting', { name: 'Anna' })
 
 ## usePluginApi()
 
-Une requête vers tes `routes` : `api('/hello')` demande `/api/plugins/<id>/hello`. Ses deux sœurs font de même pour tes autres tables de routes, voir [le contexte serveur](/fr/guide/server-context/).
+Une requête vers les `routes` du plugin : `api('/hello')` demande `/api/plugins/<id>/hello`. Ses deux sœurs font de même pour ses autres tables de routes, voir [le contexte serveur](/fr/guide/server-context/).
 
 ```tsx title="web/index.tsx"
 import { usePluginApi, usePluginPublicApi, usePluginServerApi } from 'hodi:sdk'
@@ -39,15 +39,15 @@ const { greeting } = await answer.json()
 <!-- prettier-ignore -->
 | Hooks | Type | |
 | --- | --- | --- |
-| `usePluginApi()` | `(path, init?) => Promise<Response>` | Tes `routes`. |
-| `usePluginServerApi()` | `(path, init?) => Promise<Response>` | Tes `serverRoutes`, pour l'admin du serveur seulement. |
-| `usePluginPublicApi()` | `(path, init?) => Promise<Response>` | Tes `publicRoutes`, avant toute connexion. |
+| `usePluginApi()` | `(path, init?) => Promise<Response>` | Les `routes` du plugin. |
+| `usePluginServerApi()` | `(path, init?) => Promise<Response>` | Les `serverRoutes` du plugin, pour l'admin du serveur seulement. |
+| `usePluginPublicApi()` | `(path, init?) => Promise<Response>` | Les `publicRoutes` du plugin, avant toute connexion. |
 
 `init` est celui de `fetch`, plus `proof` : le mot de passe que `askToConfirm` a reçu.
 
 ## usePluginLinks()
 
-Les adresses de Hodi et de tes écrans. Un plugin ne les écrit jamais : elles suivent Hodi.
+Les adresses de Hodi et des écrans du plugin. Un plugin ne les écrit jamais : elles suivent Hodi.
 
 ```tsx title="web/index.tsx"
 import { Button, navigate, usePluginLinks } from 'hodi:sdk'
@@ -63,15 +63,15 @@ const links = usePluginLinks()
 | `frontPage` | `string` | La une. |
 | `article` | `(id: string) => string` | Un article, dans le lecteur. |
 | `settings` | `string` | Réglages. |
-| `plugins` | `string` | Ta page dans Serveur › Plugins, pour l'admin du serveur. |
-| `page` | `(path?: string) => string` | Ta page, ou un de ses écrans. |
-| `serverPage` | `(section: string, path?: string) => string` | Une de tes sections de Serveur, ou un de ses écrans. |
+| `plugins` | `string` | La page du plugin dans Serveur › Plugins, pour l'admin du serveur. |
+| `page` | `(path?: string) => string` | La page du plugin, ou un de ses écrans. |
+| `serverPage` | `(section: string, path?: string) => string` | Une des sections de Serveur du plugin, ou un de ses écrans. |
 
 `navigate(href)` y va, comme un lien, depuis un bouton ou après une action.
 
 ## usePluginPath()
 
-L'écran que montre ta page : ce qui suit son adresse, `''` à sa racine.
+L'écran que montre la page du plugin : ce qui suit son adresse, `''` à sa racine.
 
 ```tsx title="web/index.tsx"
 import { usePluginPath } from 'hodi:sdk'
@@ -83,11 +83,11 @@ return path.startsWith('week/') ? <Week n={Number(path.slice(5))} /> : <Home />
 <!-- prettier-ignore -->
 | Renvoie | Type | |
 | --- | --- | --- |
-| `path` | `string` | Ce qui suit l'adresse de ta page. |
+| `path` | `string` | Ce qui suit l'adresse de la page du plugin. |
 
 ## useServerSettings()
 
-Ce que promettent Serveur › Contenu et Sauvegardes, en lecture seule : les chiffres que disent tes pages légales. null tant que le serveur n'a pas répondu.
+Ce que promettent Serveur › Contenu et Sauvegardes, en lecture seule : les chiffres que disent les pages légales du plugin. null tant que le serveur n'a pas répondu.
 
 ```tsx title="web/index.tsx"
 import { useServerSettings } from 'hodi:sdk'
