@@ -15,6 +15,10 @@ export const renders = JSON.parse(read('renders.json').toString()) as Record<
   { d: Record<string, string>; p: Record<string, string> }
 >
 
+// The renders' own hash: Astro keeps a page's Markdown output until its plugins' options change, so a new render
+// must change them even when the playground's bundle stays the same.
+export const rendersHash = createHash('sha256').update(read('renders.json')).digest('hex').slice(0, 10)
+
 // Each file is served under a name that carries its hash, so the browser keeps it for a year.
 const asset = (name: string) => {
   const body = read(name)
