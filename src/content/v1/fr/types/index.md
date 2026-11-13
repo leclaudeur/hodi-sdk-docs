@@ -395,7 +395,7 @@ Une clé de ses locales, ou `{ text, links }` : ses balises `<nom>` deviennent d
 
 ### Confirmation
 
-Ce que reçoit [askToConfirm()](/fr/components/). Avec `proof`, `onConfirm` reçoit une `Proof` : `password` et `code`.
+Ce que reçoit [askToConfirm()](/fr/components/dialogs-and-messages/#asktoconfirm). Avec `proof`, `onConfirm` reçoit une `Proof` : `password` et `code`.
 
 <!-- prettier-ignore -->
 | Champs | Type | |
@@ -410,7 +410,7 @@ Ce que reçoit [askToConfirm()](/fr/components/). Avec `proof`, `onConfirm` reç
 
 ### PluginLinks
 
-Ce que donne [usePluginLinks()](/fr/components/).
+Ce que donne [usePluginLinks()](/fr/components/hooks/).
 
 <!-- prettier-ignore -->
 | Champs | Type | |

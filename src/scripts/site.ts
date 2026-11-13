@@ -1,3 +1,4 @@
+import { wirePlay } from './play-window.ts'
 import { wireSearch } from './search.ts'
 import { fitSidebar, spyHeadings } from './sidebar.ts'
 
@@ -111,6 +112,7 @@ wireTheme()
 wireSheet()
 wireCopy()
 wireTree()
+wirePlay()
 wireSearch()
 fitSidebar()
 spyHeadings()

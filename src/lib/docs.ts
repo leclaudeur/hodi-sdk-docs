@@ -35,7 +35,11 @@ const toDoc = (entry: Entry): Doc => {
   const [version = latest, lang = 'fr', ...rest] = entry.id.replace(/\/index$/, '').split('/')
   if (!isLang(lang)) throw new Error(`${entry.id}: the folder after the version must be a language`)
   const path = rest.join('/')
-  const parent = rest.length > 2 ? rest.slice(0, -1).join('/') : undefined
+  // The page one folder up, when there is one: guide/slots/options under guide/slots, components/buttons under
+  // components. The guide's folder itself is no page.
+  const up = rest.slice(0, -1).join('/')
+  const parent =
+    up && all.some(other => other.id.replace(/\/index$/, '') === `${version}/${lang}/${up}`) ? up : undefined
   return { entry, version, lang, path, url: urlOf(version, lang, path), parent }
 }
 

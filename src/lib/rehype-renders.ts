@@ -1,0 +1,29 @@
+import type { Element, ElementContent, Root, RootContent } from 'hast'
+import { demoAssets, renders } from './demo.ts'
+
+// A component's frame gets the component itself, drawn by Hodi's code at build time, in a declarative shadow root:
+// the app's CSS stays inside it and the docs' styles stay out, with no script.
+
+export const shadowOf = (key: string, extra = '') => {
+  const desktop = renders.d[key] ?? ''
+  const phone = renders.p[key] ?? desktop
+  const inner = desktop === phone ? desktop : `<div class="rv-d">${desktop}</div><div class="rv-p">${phone}</div>`
+  return `<template shadowrootmode="open"><link rel="stylesheet" href="${demoAssets.app.url}">${extra}<div class="in">${inner}</div></template>`
+}
+
+const visit = (node: Root | Element) => {
+  for (const child of node.children as RootContent[]) {
+    if (child.type !== 'element') continue
+    const key = child.properties.dataRender
+    if (child.properties.dataPlay) {
+      child.properties.dataPlayCss = demoAssets.playCss.url
+      child.properties.dataPlayJs = demoAssets.playJs.url
+    }
+    if (typeof key === 'string') {
+      // A raw node: the serializer writes it as is, and Astro allows raw HTML in Markdown.
+      child.children = [{ type: 'raw', value: shadowOf(key) } as unknown as ElementContent]
+    } else visit(child)
+  }
+}
+
+export const rehypeRenders = () => (tree: Root) => visit(tree)
