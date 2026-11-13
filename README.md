@@ -36,8 +36,8 @@ Every save reloads the page. The search only works on a build: run `npm run buil
 
 ## Writing a page
 
-Each page is one Markdown file, and its path is its address. French is the reference, and English holds the same
-files under `en/`.
+Each page is one Markdown file, and its path is its address.\
+French is the reference, and English holds the same files under `en/`.
 
 ```text
 src/content/v1/fr/
@@ -71,8 +71,8 @@ HODI_DIR=../hodi sh demo/build.sh
 
 ## Deploying
 
-There is no release: what is on `main` is online. Each merge builds the image `ghcr.io/leclaudeur/hodi-sdk-docs`,
-which Portainer runs on the server.
+There is no release: what is on `main` is online.\
+Each merge builds the image `ghcr.io/leclaudeur/hodi-sdk-docs`, which Portainer runs on the server.
 
 1. **Set the address**: add the variable `SITE_URL` in _Settings › Secrets and variables › Actions_.
 2. **Make the image public**: after the first build, in the package's _Package settings_.
