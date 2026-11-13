@@ -39,6 +39,8 @@ type StepProps = {
   body: 'none' | 'field' | 'toggle'
 }
 const noop = () => {}
+// The docs page's language: the sample words match the page around the playground.
+const w = (french: string, other: string) => (document.documentElement.lang === 'en' ? other : french)
 const stepPage = (el: Element, p: StepProps) => {
   let root = roots.get(el)
   if (!root) roots.set(el, (root = createRoot(el)))
@@ -49,16 +51,18 @@ const stepPage = (el: Element, p: StepProps) => {
       title={p.title || ' '}
       intro={p.intro}
       onBack={p.back ? noop : undefined}
-      start={p.later ? <Button>Plus tard</Button> : undefined}
+      start={p.later ? <Button>{w('Plus tard', 'Later')}</Button> : undefined}
       actions={
         <Button look="primary">
-          Continuer
+          {w('Continuer', 'Continue')}
           <ArrowRight size={16} aria-hidden="true" />
         </Button>
       }
     >
-      {p.body === 'field' && <TextField icon={Hand} aria-label="Salutation" defaultValue="Salut" />}
-      {p.body === 'toggle' && <Toggle checked label="Saluer le matin" onChange={noop} />}
+      {p.body === 'field' && <TextField icon={Hand} aria-label={w('Prénom', 'First name')} placeholder="Anna" />}
+      {p.body === 'toggle' && (
+        <Toggle checked label={w('Saluer le matin', 'Say hello in the morning')} onChange={noop} />
+      )}
     </StepPage>
   )
 }

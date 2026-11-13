@@ -1,6 +1,10 @@
 // The code a playground shows: only what differs from the defaults, coloured like the site's code windows.
 
+import { langOf, t } from '../lib/i18n.ts'
+
 export type State = Record<string, string | boolean>
+
+const lang = langOf(location.pathname)
 
 const escape = (text: string) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;')
 const token = (kind: string, text: string) =>
@@ -33,7 +37,7 @@ const element = (name: string, inner = '') => `${punct('<')}${tag(name)}${inner}
 
 const stepBody = (body: unknown) => {
   if (body === 'field')
-    return `\n  ${element('TextField', ` ${prop('icon')}${punct('=')}${braces(plain('Hand'))} ${prop('aria-label')}${punct('=')}${quoted('Prénom')}`)}${punct(' />')}`
+    return `\n  ${element('TextField', ` ${prop('icon')}${punct('=')}${braces(plain('Hand'))} ${prop('aria-label')}${punct('=')}${quoted(t(lang, 'playSampleField'))}`)}${punct(' />')}`
   if (body === 'toggle')
     return `\n  ${element('Toggle', ` ${prop('checked')}${punct('=')}${braces(plain('on'))} ${prop('onChange')}${punct('=')}${braces(plain('setOn'))}`)}${punct(' />')}`
   return ''
@@ -48,9 +52,11 @@ const stepPage = (state: State) => {
   if (state.later)
     code += attribute(
       'start',
-      braces(`${element('Button')}${punct('>')}${plain('Plus tard')}${punct('</')}${tag('Button')}${punct('>')}`)
+      braces(
+        `${element('Button')}${punct('>')}${plain(t(lang, 'playSampleLater'))}${punct('</')}${tag('Button')}${punct('>')}`
+      )
     )
-  const primary = `${element('Button', ` ${prop('look')}${punct('=')}${quoted('primary')}`)}${punct('>')}${plain('Continuer')}${punct('</')}${tag('Button')}${punct('>')}`
+  const primary = `${element('Button', ` ${prop('look')}${punct('=')}${quoted('primary')}`)}${punct('>')}${plain(t(lang, 'playSampleNext'))}${punct('</')}${tag('Button')}${punct('>')}`
   code += attribute('actions', braces(primary))
   return `${code}\n${punct('>')}${stepBody(state.body)}\n${punct('</')}${tag('StepPage')}${punct('>')}`
 }

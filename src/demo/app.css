@@ -1,24 +1,94 @@
 /* Inside each render's shadow root: a reset like the app's, then how each kind of render sits in its window. */
 
-:host { display: block; }
-.in { font-family: var(--font-body); color: var(--text); font-size: 14px; line-height: 1.4; text-wrap: pretty; }
-*, *::before, *::after { box-sizing: border-box; }
-:where(h1,h2,h3,h4,p,ul,ol,figure) { margin: 0; }
-:where(h1,h2,h3,h4) { text-wrap: balance; }
-:where(ul,ol) { padding: 0; list-style: none; }
-:where(img,svg) { display: block; max-width: 100%; }
-:where(button,input,select,textarea) { font: inherit; color: inherit; }
-button { cursor: pointer; }
-a { color: var(--text); }
-.mono { font-family: var(--font-mono); letter-spacing: .06em; text-transform: uppercase; }
-.screen-title { font-family: var(--font-display); font-weight: 400; }
-.rv-p { display: none; }
-@media (max-width: 600px) { .rv-d { display: none; } .rv-p { display: block; } }
-:host(.page) .in { zoom: .62; height: 710px; }
-:host(.page) [class*="_page_"], :host(.page) [class*="_host_"] { min-height: 100% !important; height: 100%; }
-dialog { position: static !important; inset: auto !important; display: block; margin: 0 auto !important; transform: none !important; animation: none !important; max-width: 100%; translate: none !important; }
-:host(.toast) [data-sonner-toaster] { position: static !important; transform: none !important; width: 356px !important; max-width: 100%; }
-:host(.toast) [data-sonner-toast] { position: relative !important; transform: none !important; inset: auto !important; }
+:host {
+  display: block;
+}
+.in {
+  font-family: var(--font-body);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+:where(h1, h2, h3, h4, p, ul, ol, figure) {
+  margin: 0;
+}
+:where(h1, h2, h3, h4) {
+  text-wrap: balance;
+}
+:where(ul, ol) {
+  padding: 0;
+  list-style: none;
+}
+:where(img, svg) {
+  display: block;
+  max-width: 100%;
+}
+:where(button, input, select, textarea) {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: var(--text);
+}
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.screen-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+.rv-p {
+  display: none;
+}
+@media (max-width: 600px) {
+  .rv-d {
+    display: none;
+  }
+  .rv-p {
+    display: block;
+  }
+}
+:host(.page) .in {
+  zoom: 0.62;
+  height: 710px;
+}
+:host(.page) [class*='_page_'],
+:host(.page) [class*='_host_'] {
+  min-height: 100% !important;
+  height: 100%;
+}
+dialog {
+  position: static !important;
+  inset: auto !important;
+  display: block;
+  margin: 0 auto !important;
+  transform: none !important;
+  animation: none !important;
+  max-width: 100%;
+  translate: none !important;
+}
+:host(.toast) [data-sonner-toaster] {
+  position: static !important;
+  transform: none !important;
+  width: 356px !important;
+  max-width: 100%;
+}
+:host(.toast) [data-sonner-toast] {
+  position: relative !important;
+  transform: none !important;
+  inset: auto !important;
+}
 .screen-title {
   /* The dot stays with the last word. */
   white-space: nowrap;
@@ -36,19 +106,52 @@ dialog { position: static !important; inset: auto !important; display: block; ma
 
 /* Watched by useStuck, just above a sticky header: one pixel, taking no room. */
 
-:host(.modal) .in, :host(.toast) .in { display: grid; place-items: center; }
-:host(.modal) dialog { box-shadow: 0 30px 80px -30px rgba(0,0,0,.5); }
+:host(.modal) .in,
+:host(.toast) .in {
+  display: grid;
+  place-items: center;
+}
+:host(.modal) dialog {
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.5);
+}
 
 /* A group's card on the Composants page: the same render, smaller, centred in its frame. */
-:host(.thumb) { display: grid !important; place-items: center; }
-:host(.thumb) .in { pointer-events: none; display: flex; justify-content: center; }
-:host(.thumb.buttons) .in { zoom: 0.66; }
-:host(.thumb.buttons) .in div { flex-wrap: nowrap !important; }
-:host(.thumb.settings-and-pages) .in { zoom: 0.55; width: 540px; display: block; }
-:host(.thumb.step-pages) .in { zoom: 0.8; width: 400px; display: block; }
-:host(.thumb.fields) .in { zoom: 0.9; }
-:host(.thumb.dialogs-and-messages) .in { zoom: 0.8; width: 400px; display: block; }
-:host(.thumb.small-elements) .in { zoom: 0.9; }
+:host(.thumb) {
+  display: grid !important;
+  place-items: center;
+}
+:host(.thumb) .in {
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+}
+:host(.thumb.buttons) .in {
+  zoom: 0.66;
+}
+:host(.thumb.buttons) .in div {
+  flex-wrap: nowrap !important;
+}
+:host(.thumb.settings-and-pages) .in {
+  zoom: 0.55;
+  width: 540px;
+  display: block;
+}
+:host(.thumb.step-pages) .in {
+  zoom: 0.8;
+  width: 400px;
+  display: block;
+}
+:host(.thumb.fields) .in {
+  zoom: 0.9;
+}
+:host(.thumb.dialogs-and-messages) .in {
+  zoom: 0.8;
+  width: 400px;
+  display: block;
+}
+:host(.thumb.small-elements) .in {
+  zoom: 0.9;
+}
 
 ._button_jc9xd_3 { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; gap: 8px; height: var(--button-height); padding: 0px 18px; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--control); color: var(--text); font-size: 14px; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; transition: background-color 120ms, scale 120ms; }
 ._withIcon_jc9xd_26 { padding: 0px 18px 0px 14px; }
