@@ -316,11 +316,12 @@ html:has(dialog.sx[open]) {
   .sx-f {
     display: none;
   }
+  /* The header's round buttons' size, so the close sits like them. */
   .sx-close {
     display: grid;
     flex: none;
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
   }
   .sx-list:has(.sx-empty:not([hidden])) {
     display: flex;
