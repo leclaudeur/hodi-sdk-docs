@@ -1,0 +1,28 @@
+---
+import type { Doc } from '../lib/docs.ts'
+import Icon from './Icon.astro'
+
+// The pages under this one as cards: an icon in the page's colour, its title and its summary.
+interface Props {
+  pages: Doc[]
+}
+
+const { pages } = Astro.props
+---
+
+<div class="slots">
+  {pages.map(page => (
+    <a class="slot" data-topic={page.entry.data.topic} href={page.url}>
+      <span class="ic">
+        <Icon name={page.entry.data.icon} size={20} />
+      </span>
+      <span class="tx">
+        <b>
+          {page.entry.data.title}
+          <Icon name="arrow-right" />
+        </b>
+        <span>{page.entry.data.description}</span>
+      </span>
+    </a>
+  ))}
+</div>

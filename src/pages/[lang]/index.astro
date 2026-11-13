@@ -1,0 +1,13 @@
+---
+import { docs, latest, orderOf } from '../../lib/docs.ts'
+import type { Lang } from '../../lib/i18n.ts'
+import Redirect from '../../layouts/Redirect.astro'
+
+// /fr/ and /en/: that language's first page.
+export const getStaticPaths = () =>
+  [...new Set(docs.filter(doc => doc.version === latest).map(doc => doc.lang))].map(lang => ({ params: { lang } }))
+
+const lang = Astro.params.lang as Lang
+---
+
+<Redirect to={orderOf(latest, lang)[0]?.url ?? '/'} />

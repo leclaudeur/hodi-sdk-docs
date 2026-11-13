@@ -1,0 +1,146 @@
+---
+import { counterpart, groupsOf, languagesOf, latest, versions, type Doc } from '../lib/docs.ts'
+import { t } from '../lib/i18n.ts'
+import Brand from './Brand.astro'
+import Icon from './Icon.astro'
+
+// The bar: the logo, the sections, then the version, GitHub, the language and the theme; a sheet on a phone.
+interface Props {
+  doc: Doc
+}
+
+const { doc } = Astro.props
+const { lang, version } = doc
+const groups = groupsOf(version, lang)
+const sections = groups.flatMap(group =>
+  group.key === 'guide'
+    ? group.docs.slice(0, 1).map(({ doc: first }) => ({ label: t(lang, 'guide'), doc: first, key: 'guide' }))
+    : group.docs.map(({ doc: page }) => ({ label: page.entry.data.title, doc: page, key: page.path.split('/')[0] }))
+)
+const section = doc.path.split('/')[0]
+const others = languagesOf(doc).filter(other => other.lang !== lang)
+const themes = [
+  { key: 'dark', icon: 'moon' },
+  { key: 'light', icon: 'sun' },
+  { key: 'powder', icon: 'flower-2' }
+] as const
+const github = 'https://github.com/leclaudeur/hodi'
+const label = (v: string) => `${v}.x`
+---
+
+<header class="nav">
+  <div class="nav-in">
+    <Brand href={groups[0]?.docs[0]?.doc.url ?? '/'} label={t(lang, 'home')} />
+    <nav class="nav-links" aria-label={t(lang, 'documentation')}>
+      {sections.map(s => (
+        <a href={s.doc.url} aria-current={s.key === section ? 'true' : undefined}>
+          {s.label}
+        </a>
+      ))}
+    </nav>
+    <div class="nav-end">
+      <div class="menu-w">
+        <button
+          type="button"
+          class="ver"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          aria-label={`${t(lang, 'version')} : ${label(version)}`}
+        >
+          <span class="lb">
+            <span class="pre">SDK </span>
+            {label(version)}
+          </span>
+          <Icon name="chevrons-up-down" />
+        </button>
+        <div class="vm" role="menu" aria-label={t(lang, 'version')}>
+          {versions.map(v => (
+            <a
+              role="menuitemradio"
+              aria-checked={v === version ? 'true' : 'false'}
+              href={counterpart(doc, v, lang)?.url}
+            >
+              <span class="lb">{label(v)}</span>
+              {v === latest && <span class="chip success">{t(lang, 'latest')}</span>}
+              <Icon name="check" class="end" />
+            </a>
+          ))}
+        </div>
+      </div>
+      <span class="nav-sep hide-md"></span>
+      <a class="round hide-sm" href={github} aria-label={t(lang, 'github')}>
+        <Icon name="github" />
+      </a>
+      {others.map(other => (
+        <a class="round lang hide-md" href={other.url} hreflang={other.lang} lang={other.lang}>
+          {other.lang.toUpperCase()}
+        </a>
+      ))}
+      <div class="menu-w hide-md">
+        <button
+          type="button"
+          class="round"
+          aria-haspopup="menu"
+          aria-expanded="false"
+          aria-label={t(lang, 'appearance')}
+        >
+          <Icon name="sun-moon" />
+        </button>
+        <div class="vm end" role="menu" aria-label={t(lang, 'appearance')}>
+          {themes.map(theme => (
+            <button type="button" role="menuitemradio" aria-checked="false" data-theme-pick={theme.key}>
+              <Icon name={theme.icon} />
+              <span class="lb">{t(lang, theme.key)}</span>
+              <Icon name="check" class="end" />
+            </button>
+          ))}
+        </div>
+      </div>
+      <button
+        type="button"
+        class="round burger"
+        aria-expanded="false"
+        aria-controls="sheet"
+        aria-label={t(lang, 'menu')}
+      >
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="sheet-scrim" aria-hidden="true"></div>
+<div class="sheet" id="sheet">
+  {sections.map(s => (
+    <a class="row" href={s.doc.url}>
+      {s.label}
+      <Icon name="arrow-right" />
+    </a>
+  ))}
+  <a class="row" href={github}>
+    {t(lang, 'github')}
+    <Icon name="github" />
+  </a>
+  <div class="set-row">
+    <span>{t(lang, 'appearance')}</span>
+    <div class="seg" role="group" aria-label={t(lang, 'appearance')}>
+      {themes.map(theme => (
+        <button type="button" aria-pressed="false" data-theme-pick={theme.key}>
+          {t(lang, theme.key)}
+        </button>
+      ))}
+    </div>
+  </div>
+  {others.length > 0 && (
+    <div class="set-row">
+      <span>{t(lang, 'language')}</span>
+      <div class="seg" role="group" aria-label={t(lang, 'language')}>
+        {[doc, ...others].map(page => (
+          <a href={page.url} hreflang={page.lang} aria-pressed={page.lang === lang ? 'true' : 'false'}>
+            {page.lang === 'fr' ? 'Français' : 'English'}
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+</div>

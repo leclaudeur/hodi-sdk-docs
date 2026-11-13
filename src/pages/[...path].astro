@@ -1,0 +1,19 @@
+---
+import { render } from 'astro:content'
+import { docs, type Doc } from '../lib/docs.ts'
+import DocPage from '../layouts/DocPage.astro'
+
+// One static page per Markdown file, at its address: /fr/guide/manifest/, or /v1/fr/… once v1 is not the latest.
+export const getStaticPaths = () => docs.map(doc => ({ params: { path: doc.url.slice(1, -1) }, props: { doc } }))
+
+interface Props {
+  doc: Doc
+}
+
+const { doc } = Astro.props
+const { Content, headings } = await render(doc.entry)
+---
+
+<DocPage doc={doc} headings={headings}>
+  <Content />
+</DocPage>

@@ -1,0 +1,550 @@
+/* The page: one column held by two lines (the frame), the sidebar and its line, the text centred beside it. */
+
+.frame {
+  position: relative;
+  max-width: var(--frame);
+  margin: 0 auto;
+  border-inline: 1px solid var(--grid-line);
+}
+@media (max-width: 1240px) {
+  .frame {
+    border-inline: 0;
+  }
+}
+.pad {
+  padding-inline: max(clamp(16px, 4vw, 48px), env(safe-area-inset-left, 0px))
+    max(clamp(16px, 4vw, 48px), env(safe-area-inset-right, 0px));
+}
+.dev-view {
+  --sec: clamp(64px, 9vw, 112px);
+  padding-block: var(--sec);
+}
+
+.sec-head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.sec-head .title {
+  font-size: clamp(48px, 6vw, 76px);
+}
+
+.dev-wrap {
+  --side: calc(220px + var(--side-gain, 0px));
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--side) minmax(0, 1fr);
+  gap: 56px;
+  max-width: calc(1240px + var(--side-gain, 0px));
+  margin: 0 auto 0 0;
+}
+.dev-main {
+  min-width: 0;
+}
+
+/* Computer: the sidebar's squares start under the logo. It grows by what the gutter gives back (minus its rows'
+   9 px inset, 10 once the frame's side line shows), so its line and the text stay where they were. */
+@media (min-width: 1024px) {
+  .dev-view {
+    --side-gain: calc(clamp(16px, 4vw, 48px) - clamp(16px, 3vw, 28px) + 9px);
+    padding-left: calc(clamp(16px, 3vw, 28px) - 9px);
+    padding-right: 28px;
+    padding-bottom: 0;
+  }
+  .dev-main {
+    justify-self: center;
+    width: 100%;
+    max-width: 760px;
+    padding-bottom: var(--sec);
+  }
+  /* A line right of the sidebar, from the bar's line down to the footer's. */
+  .dev-wrap::before {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--sec));
+    bottom: 0;
+    left: calc(var(--side) + 28px);
+    width: 1px;
+    background: var(--grid-line);
+    pointer-events: none;
+  }
+}
+@media (min-width: 1241px) {
+  .dev-view {
+    --side-gain: calc(clamp(16px, 4vw, 48px) - clamp(16px, 3vw, 28px) + 10px);
+    padding-left: calc(clamp(16px, 3vw, 28px) - 10px);
+  }
+}
+
+/* The app's first column: 36 px rows with a 24 px square, the current one raised on a card. */
+.dev-side {
+  position: sticky;
+  top: 97px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  max-height: var(--side-max, calc(100vh - 120px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.dev-side .grp {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.dev-side .grp + .grp {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--divider);
+}
+.dev-side .grp > .mono {
+  display: block;
+  padding: 0 8px 8px;
+}
+.dev-side a {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--text-nav);
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.dev-side a:hover {
+  color: var(--text);
+}
+.dev-side a[aria-current='page'] {
+  border-color: var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-weight: 500;
+}
+.dev-side .sq {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--control);
+  color: var(--text-nav);
+}
+.dev-side a[aria-current='page'] .sq {
+  border-color: transparent;
+  background: var(--raised);
+  color: var(--text);
+}
+.dev-side .subs {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 2px 0 4px 19px;
+  padding-left: 14px;
+  border-left: 1px solid var(--divider);
+}
+.dev-side .subs a {
+  height: 32px;
+  padding: 0 10px;
+  font-size: 13.5px;
+}
+.dev-side .subs.heads {
+  margin: 0 0 6px 10px;
+}
+.dev-side .subs.heads a {
+  height: auto;
+  min-height: 30px;
+  padding-block: 6px;
+  color: var(--text-3);
+  font-size: 13px;
+  line-height: 1.25;
+  white-space: normal;
+}
+.dev-side .subs.heads a.h3 {
+  padding-left: 22px;
+  font-size: 12.5px;
+}
+.dev-side .subs.heads a.on {
+  color: var(--text);
+}
+/* Where rows go on past the edge, they fade out instead of being cut. */
+.dev-side.more-up {
+  mask-image: linear-gradient(to bottom, transparent, #000 40px);
+}
+.dev-side.more-down {
+  mask-image: linear-gradient(to top, transparent, #000 40px);
+}
+.dev-side.more-up.more-down {
+  mask-image: linear-gradient(to bottom, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+}
+
+/* « Premiers pas » on top: the header's primary button, with the rows' 10 px corners instead of a pill. */
+.dev-side .first-steps {
+  justify-content: center;
+  gap: 8px;
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  transition: background-color 120ms ease;
+}
+
+.dev-side .first-steps:hover {
+  color: var(--bg);
+}
+
+@media (hover: hover) {
+  .dev-side .first-steps:hover {
+    background: color-mix(in srgb, var(--text) 86%, var(--bg));
+  }
+}
+
+/* Tablet and phone: a bar under the header, the way up, where you are, and the pages in a panel. */
+.dev-crumb {
+  display: none;
+}
+@media (max-width: 1023px) {
+  .dev-wrap {
+    display: block;
+  }
+  .dev-wrap > .dev-side {
+    display: none;
+  }
+  .dev-crumb {
+    position: sticky;
+    top: calc(var(--bar) + 1px + env(safe-area-inset-top, 0px));
+    z-index: 5;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 56px;
+    margin: calc(-1 * var(--sec)) 0 32px;
+  }
+  /* The bar's own background and line run across the whole width. */
+  .dev-crumb::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0 -100vw;
+    border-bottom: 1px solid var(--grid-line);
+    background: var(--bg);
+  }
+  .dev-crumb .up {
+    width: 34px;
+    height: 34px;
+  }
+  .dev-crumb .path {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    overflow: hidden;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .dev-crumb .path .sep {
+    color: var(--text-3);
+  }
+  .dev-crumb .path a {
+    overflow: hidden;
+    color: var(--text);
+    text-decoration: none;
+    text-overflow: ellipsis;
+  }
+  .dev-view {
+    --sec: 40px;
+  }
+}
+
+/* The pages panel: a native dialog from the left edge, the sidebar inside. */
+.dev-tree {
+  width: min(380px, 100%);
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 0 40px var(--shadow);
+}
+.dev-tree[open] {
+  display: flex;
+  flex-direction: column;
+  animation: tree-in 200ms var(--ease);
+}
+@keyframes tree-in {
+  from {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+}
+.dev-tree::backdrop {
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+  backdrop-filter: blur(4px);
+}
+.dev-tree .hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 14px 20px;
+  border-bottom: 1px solid var(--divider);
+  font-size: 15px;
+  font-weight: 600;
+}
+.dev-tree .bd {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+}
+.dev-tree .dev-side {
+  position: static;
+  max-height: none;
+  overflow: visible;
+}
+@media (max-width: 600px) {
+  .dev-tree {
+    width: 100%;
+    border-right: 0;
+  }
+}
+
+/* An older version: one line above the title, with the way to the newest. */
+.old {
+  margin: 0 0 32px;
+  padding: 14px 16px;
+  border: 1px solid var(--info-border);
+  border-radius: 16px;
+  background: var(--info-surface);
+  color: var(--info-text);
+  font-size: 15px;
+}
+.old a {
+  color: var(--text);
+}
+
+/* Cards of the pages under this one: two columns, an icon in the page's colour, three lines of text. */
+.slots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 14px;
+  margin: 8px 0 32px;
+}
+.slot {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 14px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--column);
+  color: inherit;
+  text-decoration: none;
+  transition: background-color var(--duration) var(--ease);
+}
+.slot .ic {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--topic-border, var(--border));
+  border-radius: 8px;
+  background: var(--topic-surface, var(--control));
+  color: var(--topic, var(--text));
+}
+.slot .tx {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding-top: 2px;
+}
+.slot b {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.slot b svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-3);
+  transition:
+    transform var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+}
+.slot .tx > span {
+  color: var(--text-2);
+  font-size: 14px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+@media (hover: hover) {
+  .slot:hover {
+    background: var(--card-hover);
+  }
+  .slot:hover b svg {
+    transform: translateX(3px);
+    color: var(--text);
+  }
+}
+@media (max-width: 600px) {
+  .slots {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: auto;
+  }
+}
+
+/* The page before and after, at the foot of each page. */
+.dev-pn {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--divider);
+}
+@media (max-width: 600px) {
+  .dev-pn .btn {
+    flex: 1;
+    min-width: 0;
+    justify-content: flex-start;
+  }
+  .dev-pn .btn.next {
+    justify-content: flex-end;
+  }
+}
+
+/* The foot: on the frame's line, the brand left, the links and the version right. */
+.foot {
+  position: relative;
+  padding-block: 32px calc(32px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--grid-line);
+}
+.foot .in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 28px;
+}
+.foot .brand .logo {
+  height: 20px;
+}
+.foot .ft-r {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 28px;
+  min-width: 0;
+}
+.foot .lks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  color: var(--text-2);
+  font-size: 14px;
+}
+.foot .lks a {
+  text-decoration: none;
+}
+.foot .lks a:hover {
+  color: var(--text);
+}
+.foot .end {
+  margin-left: auto;
+}
+@media (max-width: 600px) {
+  .foot .in {
+    flex-direction: column;
+  }
+  .foot .ft-r {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .foot .lks {
+    justify-content: center;
+  }
+  .foot .end {
+    margin-left: 0;
+  }
+}
+
+/* The topics' colours, by name, for the slots' cards. */
+[data-topic='tech'] {
+  --topic: var(--topic-tech);
+  --topic-border: var(--topic-tech-border);
+  --topic-surface: var(--topic-tech-surface);
+}
+[data-topic='world'] {
+  --topic: var(--topic-world);
+  --topic-border: var(--topic-world-border);
+  --topic-surface: var(--topic-world-surface);
+}
+[data-topic='science'] {
+  --topic: var(--topic-science);
+  --topic-border: var(--topic-science-border);
+  --topic-surface: var(--topic-science-surface);
+}
+[data-topic='ai'] {
+  --topic: var(--topic-ai);
+  --topic-border: var(--topic-ai-border);
+  --topic-surface: var(--topic-ai-surface);
+}
+[data-topic='culture'] {
+  --topic: var(--topic-culture);
+  --topic-border: var(--topic-culture-border);
+  --topic-surface: var(--topic-culture-surface);
+}
+[data-topic='sport'] {
+  --topic: var(--topic-sport);
+  --topic-border: var(--topic-sport-border);
+  --topic-surface: var(--topic-sport-surface);
+}
+[data-topic='climate'] {
+  --topic: var(--topic-climate);
+  --topic-border: var(--topic-climate-border);
+  --topic-surface: var(--topic-climate-surface);
+}
+[data-topic='travel'] {
+  --topic: var(--topic-travel);
+  --topic-border: var(--topic-travel-border);
+  --topic-surface: var(--topic-travel-surface);
+}
+
+/* The 404 page: the brand, a title, one line and the way back. */
+.lost {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 560px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 96px max(16px, env(safe-area-inset-right, 0px)) 64px max(16px, env(safe-area-inset-left, 0px));
+}
+.lost .title {
+  margin-top: 24px;
+  font-size: clamp(48px, 8vw, 72px);
+}
+.lost p {
+  margin: 0;
+  color: var(--text-2);
+}

@@ -1,0 +1,19 @@
+---
+import { iconNode, svgAttributes } from '../lib/icons.ts'
+
+// A lucide icon drawn into the page at build time: no script, no request.
+interface Props {
+  name: string
+  size?: number
+  class?: string
+}
+
+const { name, size = 16, class: className } = Astro.props
+const shapes = iconNode(name)
+---
+
+<svg {...svgAttributes(size)} class:list={['lucide', `lucide-${name}`, className]}>
+  {shapes.map(([Tag, attributes]) => (
+    <Tag {...attributes} />
+  ))}
+</svg>

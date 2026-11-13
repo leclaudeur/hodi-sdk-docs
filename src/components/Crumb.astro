@@ -1,0 +1,51 @@
+---
+import { docs, type Doc } from '../lib/docs.ts'
+import { t } from '../lib/i18n.ts'
+import Icon from './Icon.astro'
+import Sidebar from './Sidebar.astro'
+import type { MarkdownHeading } from 'astro'
+
+// Tablet and phone: the sidebar folds into a bar under the header, its pages in a panel.
+interface Props {
+  doc: Doc
+  group: 'guide' | 'reference'
+  headings: MarkdownHeading[]
+}
+
+const { doc, group, headings } = Astro.props
+const parent = docs.find(other => other.version === doc.version && other.lang === doc.lang && other.path === doc.parent)
+---
+
+<nav class="dev-crumb" aria-label={t(doc.lang, 'whereYouAre')}>
+  {parent && (
+    <a class="round up" href={parent.url} aria-label={t(doc.lang, 'back')}>
+      <Icon name="arrow-left" />
+    </a>
+  )}
+  <span class="path">
+    <span class="mono">{t(doc.lang, group)}</span>
+    {parent && (
+      <>
+        <span class="sep" aria-hidden="true">
+          ›
+        </span>
+        <a href={parent.url}>{parent.entry.data.title}</a>
+      </>
+    )}
+  </span>
+  <button type="button" class="btn compact icon tree-open" aria-haspopup="dialog">
+    <Icon name="list-tree" />
+    {t(doc.lang, 'pages')}
+  </button>
+</nav>
+<dialog class="dev-tree" aria-label={t(doc.lang, 'pages')}>
+  <div class="hd">
+    {t(doc.lang, 'pages')}
+    <button type="button" class="round close" aria-label={t(doc.lang, 'close')}>
+      <Icon name="x" />
+    </button>
+  </div>
+  <div class="bd">
+    <Sidebar doc={doc} headings={headings} />
+  </div>
+</dialog>

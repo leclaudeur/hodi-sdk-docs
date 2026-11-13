@@ -1,0 +1,33 @@
+---
+import type { Doc } from '../lib/docs.ts'
+import { t } from '../lib/i18n.ts'
+import Brand from './Brand.astro'
+
+// The foot of every page: the brand, the places a plugin author needs, the version and the licence.
+interface Props {
+  doc: Doc
+  home: string
+}
+
+const { doc, home } = Astro.props
+const links = [
+  { label: t(doc.lang, 'sourceCode'), href: 'https://github.com/leclaudeur/hodi' },
+  { label: t(doc.lang, 'template'), href: 'https://github.com/leclaudeur/hodi-plugin-template' },
+  { label: t(doc.lang, 'registry'), href: 'https://github.com/leclaudeur/hodi-plugin-registry' },
+  { label: 'npm', href: 'https://www.npmjs.com/package/@hodi-app/plugin-sdk' }
+]
+---
+
+<footer class="foot pad">
+  <div class="in">
+    <Brand href={home} label={t(doc.lang, 'home')} reuse />
+    <div class="ft-r">
+      <div class="lks">
+        {links.map(link => (
+          <a href={link.href}>{link.label}</a>
+        ))}
+      </div>
+      <span class="mono end">SDK {doc.version}.x · AGPL-3.0</span>
+    </div>
+  </div>
+</footer>

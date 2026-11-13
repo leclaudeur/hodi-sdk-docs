@@ -1,0 +1,87 @@
+---
+import type { MarkdownHeading } from 'astro'
+import Crumb from '../components/Crumb.astro'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+import PrevNext from '../components/PrevNext.astro'
+import Sidebar from '../components/Sidebar.astro'
+import SlotCards from '../components/SlotCards.astro'
+import { counterpart, docs, groupsOf, languagesOf, latest, type Doc } from '../lib/docs.ts'
+import { t } from '../lib/i18n.ts'
+import { inline, plain } from '../lib/inline.ts'
+import Base from './Base.astro'
+
+// A page of the documentation: the bar, the sidebar, the page's title, intro and text, then the way on.
+interface Props {
+  doc: Doc
+  headings: MarkdownHeading[]
+}
+
+const { doc, headings } = Astro.props
+const { data } = doc.entry
+const group = doc.path.startsWith('guide/') ? 'guide' : 'reference'
+const home = groupsOf(doc.version, doc.lang)[0]?.docs[0]?.doc.url ?? '/'
+const newest = doc.version === latest ? doc : counterpart(doc, latest, doc.lang)
+const children = docs.filter(
+  other => other.version === doc.version && other.lang === doc.lang && other.parent === doc.path
+)
+const description = plain(data.description)
+const kicker = doc.parent
+  ? docs.find(other => other.version === doc.version && other.lang === doc.lang && other.path === doc.parent)?.entry
+      .data.title
+  : t(doc.lang, group)
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: data.title,
+  description,
+  inLanguage: doc.lang,
+  isPartOf: { '@type': 'WebSite', name: 'Hodi SDK' },
+  proficiencyLevel: 'Beginner'
+}
+---
+
+<Base
+  lang={doc.lang}
+  title={`${data.title} · Hodi SDK`}
+  description={description}
+  canonical={newest?.url ?? doc.url}
+  alternates={languagesOf(doc).map(page => ({ lang: page.lang, url: page.url }))}
+  noindex={doc.version !== latest}
+  jsonLd={jsonLd}
+>
+  <Header doc={doc} />
+  <main>
+    <div class="frame">
+      <section class="dev-view pad">
+        <div class="dev-wrap">
+          <Sidebar doc={doc} headings={headings} />
+          <article class="dev-main">
+            <Crumb doc={doc} group={group} headings={headings} />
+            {newest && newest !== doc && (
+              <p class="old">
+                {t(doc.lang, 'oldVersion')} <a href={newest.url}>{t(doc.lang, 'oldVersionLink')}</a>
+              </p>
+            )}
+            <header class="sec-head">
+              <span class="mono kicker">{kicker}</span>
+              <h1 class="title">
+                {data.title}
+                <span class="dot" aria-hidden="true"></span>
+              </h1>
+            </header>
+            <div class="prose">
+              <p set:html={inline(data.intro, doc.lang)} />
+              {data.cards === 'children' && (
+                <SlotCards pages={children.sort((a, b) => a.entry.data.order - b.entry.data.order)} />
+              )}
+              <slot />
+            </div>
+            <PrevNext doc={doc} />
+          </article>
+        </div>
+      </section>
+      <Footer doc={doc} home={home} />
+    </div>
+  </main>
+</Base>
