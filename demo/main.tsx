@@ -52,6 +52,7 @@ import Chip from '../src/ui/Chip.tsx'
 import FilterChip from '../src/ui/FilterChip.tsx'
 import SourceAvatar from '../src/ui/SourceAvatar.tsx'
 import HouseholdAvatar from '../src/ui/HouseholdAvatar.tsx'
+import PluginAdmin from './plugin-admin.tsx'
 import '../src/styles/index.ts'
 
 const no = () => {}
@@ -275,6 +276,7 @@ const Demo = () => (
       </SetupActions>
     </section>
     <Fields />
+    <PluginAdmin />
     <section data-ex="dialog">
       <Dialog
         open={!confirmOnly}
