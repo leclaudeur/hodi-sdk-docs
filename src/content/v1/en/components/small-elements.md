@@ -12,14 +12,10 @@ preview: "chip"
 
 A small capsule: a language, a state, a duration.
 
-```tsx title="web/index.tsx" render="chip"
+```tsx title="web/index.tsx" render="chip" play="chip"
 import { Chip } from 'hodi:sdk'
 
-<Chip>EN</Chip>
 <Chip tone="success">Active</Chip>
-<Chip tone="warning">Rarely opened</Chip>
-<Chip tone="danger">Error</Chip>
-<Chip tone="accent">This device</Chip>
 ```
 
 <!-- prettier-ignore -->
@@ -35,13 +31,10 @@ import { Chip } from 'hodi:sdk'
 
 A filter in a row: a pill, white when chosen.
 
-```tsx title="web/index.tsx" render="filterchip"
+```tsx title="web/index.tsx" render="filterchip" play="filterchip"
 import { FilterChip } from 'hodi:sdk'
-import { Bell } from 'lucide-react'
 
 <FilterChip selected={filter === 'all'} count={12} onClick={() => setFilter('all')}>All</FilterChip>
-<FilterChip selected={filter === 'morning'} icon={Bell} onClick={() => setFilter('morning')}>Morning</FilterChip>
-<FilterChip selected={filter === 'evening'} onClick={() => setFilter('evening')}>Evening</FilterChip>
 ```
 
 <!-- prettier-ignore -->
@@ -59,10 +52,10 @@ import { Bell } from 'lucide-react'
 
 A source's icon, taken from its site, or its initials when it has none. Never round.
 
-```tsx title="web/index.tsx" render="sourceavatar"
+```tsx title="web/index.tsx" render="sourceavatar" play="sourceavatar"
 import { SourceAvatar } from 'hodi:sdk'
 
-<SourceAvatar sourceId={article.sourceId} sourceName={article.sourceName} size={26} />
+<SourceAvatar sourceId={article.sourceId} sourceName="Le Monde" size={44} />
 ```
 
 <!-- prettier-ignore -->
@@ -76,10 +69,10 @@ import { SourceAvatar } from 'hodi:sdk'
 
 A household's photo, or its initial, round like a profile in "Who's in?".
 
-```tsx title="web/index.tsx" render="householdavatar"
+```tsx title="web/index.tsx" render="householdavatar" play="householdavatar"
 import { HouseholdAvatar } from 'hodi:sdk'
 
-<HouseholdAvatar name={household.name} photo={household.photo} size={44} />
+<HouseholdAvatar name="Smith" photo={household.photo} size={64} />
 ```
 
 <!-- prettier-ignore -->

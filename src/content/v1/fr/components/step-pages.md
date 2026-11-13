@@ -12,7 +12,7 @@ preview: "setupactions"
 
 Une étape en pleine page, hors de l'installation : une inscription avant la connexion, par exemple. Sa barre de progression, son titre, sa ligne, ses champs, puis ses boutons.
 
-```tsx title="web/index.tsx" render="steppage" kind="page" play="stepPage"
+```tsx title="web/index.tsx" render="steppage" kind="page" play="steppage"
 import { Button, StepPage, TextField } from 'hodi:sdk'
 import { Hand } from 'lucide-react'
 
@@ -25,7 +25,7 @@ import { Hand } from 'lucide-react'
   onBack={back}
   actions={<Button look="primary" type="submit">Continuer</Button>}
 >
-  <TextField icon={Hand} aria-label="Prénom" placeholder="Anna" value={name} onChange={e => setName(e.target.value)} />
+  <TextField icon={Hand} aria-label="Prénom" value={name} onChange={e => setName(e.target.value)} />
 </StepPage>
 ```
 
@@ -46,14 +46,13 @@ import { Hand } from 'lucide-react'
 
 Un choix en tuiles rondes, dessiné comme « Qui lit ? » dessine les profils.
 
-```tsx title="web/index.tsx" render="tilespage" kind="page"
+```tsx title="web/index.tsx" render="tilespage" kind="page" play="tilespage"
 import { TilesPage } from 'hodi:sdk'
-import { House } from 'lucide-react'
 
 <TilesPage
   title="Quel foyer ?"
   intro="Choisis le foyer à ouvrir."
-  tiles={households.map(h => ({ key: String(h.id), label: h.name, onClick: () => open(h.id) }))}
+  tiles={households.map(h => ({ key: h.id, label: h.name, onClick: () => open(h.id) }))}
   opening={opening}
   onBack={back}
 />
@@ -74,17 +73,12 @@ import { House } from 'lucide-react'
 
 Les boutons au bas d'une étape qu'un plugin ajoute à [l’installation](/fr/guide/slots/setup/). Hodi y met « Retour » à gauche, ceux du plugin vont à droite.
 
-```tsx title="web/index.tsx" render="setupactions"
+```tsx title="web/index.tsx" render="setupactions" play="setupactions"
 import { Button, SetupActions } from 'hodi:sdk'
 
-const Step = ({ next }: SetupStepProps) => (
-  <form onSubmit={e => { e.preventDefault(); void save().then(next) }}>
-    …
-    <SetupActions start={<Button onClick={next}>Plus tard</Button>}>
-      <Button look="primary" type="submit">Continuer</Button>
-    </SetupActions>
-  </form>
-)
+<SetupActions start={<Button onClick={next}>Plus tard</Button>}>
+  <Button look="primary" type="submit">Continuer</Button>
+</SetupActions>
 ```
 
 <!-- prettier-ignore -->

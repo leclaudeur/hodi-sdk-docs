@@ -1,55 +1,19 @@
-import { langOf, t } from '../lib/i18n.ts'
-import type { State } from './play-code.ts'
+import { langOf } from '../lib/i18n.ts'
+import type { State } from '../../demo/code.ts'
 
 // « Personnaliser »: the props list turns into controls, and the window above draws Hodi's real component again
 // with each change. Its bundle loads on that first click only, so the page stays light.
 
-type Control =
+export type Control =
   | { kind: 'text'; key: string; value: string }
   | { kind: 'seg'; key: string; value: string; options: [string, string][] }
   | { kind: 'switch'; key: string; value: boolean }
 
 interface Player {
-  draw: (host: Element, state: State) => void
+  draw: (kind: string, host: Element, state: State, lang: 'fr' | 'en') => void
 }
 
 const lang = langOf(location.pathname)
-const text = (key: string, value: string): Control => ({ kind: 'text', key, value })
-const toggle = (key: string, value = false): Control => ({ kind: 'switch', key, value })
-const seg = (key: string, options: (string | [string, string])[], value: string): Control => ({
-  kind: 'seg',
-  key,
-  value,
-  options: options.map(option => (typeof option === 'string' ? [option, option] : option))
-})
-
-// Each prop of the list that a control drives, by its name in the list.
-const CONTROLS: Record<string, Record<string, Control>> = {
-  button: {
-    children: text('label', t(lang, 'playSampleLabel')),
-    'look?': seg('look', ['neutral', 'primary', 'danger', 'ai'], 'primary'),
-    'icon?': seg('icon', [['none', t(lang, 'playNone')], 'Check', 'Download', 'Trash2'], 'Check'),
-    'busy?': toggle('busy'),
-    'compact?': toggle('compact'),
-    'wide?': toggle('wide')
-  },
-  stepPage: {
-    title: text('title', t(lang, 'playSampleTitle')),
-    intro: text('intro', t(lang, 'playSampleIntro')),
-    'step?': toggle('progress', true),
-    'onBack?': toggle('back', true),
-    'start?': toggle('later'),
-    'children?': seg(
-      'body',
-      [
-        ['none', t(lang, 'playNothing')],
-        ['field', 'TextField'],
-        ['toggle', 'Toggle']
-      ],
-      'field'
-    )
-  }
-}
 
 const segment = (label: string, options: [string, string][], value: string, onPick: (value: string) => void) => {
   const group = document.createElement('div')
@@ -98,6 +62,7 @@ let bundle: Promise<Player | undefined> | undefined
 const loadBundle = (url: string) =>
   (bundle ??= new Promise(resolve => {
     const script = document.createElement('script')
+    script.type = 'module'
     script.src = url
     script.onload = () => resolve((window as unknown as { HodiPlay?: Player }).HodiPlay)
     script.onerror = () => resolve(undefined)
@@ -118,5 +83,5 @@ const fontFaces = () =>
     .map(rule => rule.cssText)
     .join('\n')
 
-export { CONTROLS, controlOf, fontFaces, lang, loadBundle, segment }
+export { controlOf, fontFaces, lang, loadBundle, segment }
 export type { Player }

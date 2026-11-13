@@ -12,7 +12,7 @@ preview: "notice"
 
 La fenêtre de Hodi, centrée, avec son en-tête teinté et sa croix. Échap, un clic à côté ou la croix appellent `onClose`. Ses boutons vont dans `DialogActions`.
 
-```tsx title="web/index.tsx" render="dialog" kind="modal"
+```tsx title="web/index.tsx" render="dialog" kind="modal" play="dialog"
 import { Button, Dialog, DialogActions, TextField } from 'hodi:sdk'
 import { Hand } from 'lucide-react'
 
@@ -52,7 +52,7 @@ La rangée des boutons d'une fenêtre, sous un trait. « Annuler » à gauche, l
 
 La question de Hodi avant ce qui ne se défait pas. Le bouton est rouge par défaut. Avec `proof`, elle demande aussi le mot de passe de la personne : il passe à une route marquée `proof: true` avec `api(path, { proof })`, et Hodi le vérifie.
 
-```tsx title="web/index.tsx" render="asktoconfirm" kind="modal"
+```tsx title="web/index.tsx" render="asktoconfirm" kind="modal" play="asktoconfirm"
 import { askToConfirm, usePluginApi } from 'hodi:sdk'
 
 const api = usePluginApi()
@@ -79,13 +79,10 @@ askToConfirm({
 
 Les toasts de Hodi disent ce qui s'est passé, rien de plus : jamais une question, jamais un formulaire. `showDone` pour une action faite, avec « Annuler » quand elle reçoit `undo`. `showSaved` pour un réglage enregistré. `showError` pour un échec, avec un bouton si besoin.
 
-```tsx title="web/index.tsx" render="toasts" kind="toast"
-import { showDone, showError, showSaved } from 'hodi:sdk'
+```tsx title="web/index.tsx" render="toasts" kind="toast" play="toasts"
+import { showDone } from 'hodi:sdk'
 
 showDone('Salutation enregistrée')
-showDone('Salutation effacée', () => restore(id))
-showSaved()
-showError('Le serveur n’a pas répondu.')
 ```
 
 <!-- prettier-ignore -->
@@ -99,11 +96,10 @@ showError('Le serveur n’a pas répondu.')
 
 Une ligne sous un champ : bleue pour ce qui se passe, rouge pour un échec.
 
-```tsx title="web/index.tsx" render="statusline"
+```tsx title="web/index.tsx" render="statusline" play="statusline"
 import { StatusLine } from 'hodi:sdk'
 
 <StatusLine tone="info">Enregistré il y a 2 min.</StatusLine>
-<StatusLine tone="error">Le serveur n’a pas répondu.</StatusLine>
 ```
 
 <!-- prettier-ignore -->
@@ -116,11 +112,19 @@ import { StatusLine } from 'hodi:sdk'
 
 Un encadré avec une icône, pour une information qui reste dans la page.
 
-```tsx title="web/index.tsx" render="notice"
+```tsx title="web/index.tsx" render="notice" play="notice"
 import { Notice } from 'hodi:sdk'
 import { ExternalLink, Info } from 'lucide-react'
 
-<Notice title="Nouvelle version" icon={Info} action={{ label: 'Voir', icon: ExternalLink, href: links.plugins }}>
+<Notice
+  title="Nouvelle version"
+  icon={Info}
+  action={{
+    label: 'Voir',
+    icon: ExternalLink,
+    href: links.plugins
+  }}
+>
   Hello world 0.2 dit bonjour en néerlandais.
 </Notice>
 ```
@@ -140,13 +144,11 @@ import { ExternalLink, Info } from 'lucide-react'
 
 Une liste vide, ou qui n'a pas pu se charger : un titre et une ligne, pas plus.
 
-```tsx title="web/index.tsx" render="emptystate"
+```tsx title="web/index.tsx" render="emptystate" play="emptystate"
 import { EmptyState } from 'hodi:sdk'
 import { Inbox } from 'lucide-react'
 
-<EmptyState icon={<Inbox size={28} />} title="Aucun bonjour" compact>
-  Les salutations du foyer arrivent ici.
-</EmptyState>
+<EmptyState icon={<Inbox size={28} />} title="Aucun bonjour" compact>Les salutations du foyer arrivent ici.</EmptyState>
 ```
 
 <!-- prettier-ignore -->

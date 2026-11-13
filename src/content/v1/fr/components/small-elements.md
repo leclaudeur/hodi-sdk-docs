@@ -12,14 +12,10 @@ preview: "chip"
 
 Une petite capsule : une langue, un état, une durée.
 
-```tsx title="web/index.tsx" render="chip"
+```tsx title="web/index.tsx" render="chip" play="chip"
 import { Chip } from 'hodi:sdk'
 
-<Chip>EN</Chip>
 <Chip tone="success">Actif</Chip>
-<Chip tone="warning">Peu ouvert</Chip>
-<Chip tone="danger">Erreur</Chip>
-<Chip tone="accent">Cet appareil</Chip>
 ```
 
 <!-- prettier-ignore -->
@@ -35,13 +31,10 @@ import { Chip } from 'hodi:sdk'
 
 Un filtre d'une rangée : une pilule, blanche quand elle est choisie.
 
-```tsx title="web/index.tsx" render="filterchip"
+```tsx title="web/index.tsx" render="filterchip" play="filterchip"
 import { FilterChip } from 'hodi:sdk'
-import { Bell } from 'lucide-react'
 
 <FilterChip selected={filter === 'all'} count={12} onClick={() => setFilter('all')}>Tout</FilterChip>
-<FilterChip selected={filter === 'morning'} icon={Bell} onClick={() => setFilter('morning')}>Matin</FilterChip>
-<FilterChip selected={filter === 'evening'} onClick={() => setFilter('evening')}>Soir</FilterChip>
 ```
 
 <!-- prettier-ignore -->
@@ -59,10 +52,10 @@ import { Bell } from 'lucide-react'
 
 L'icône d'une source, prise sur son site, ou ses initiales quand elle n'en a pas. Jamais ronde.
 
-```tsx title="web/index.tsx" render="sourceavatar"
+```tsx title="web/index.tsx" render="sourceavatar" play="sourceavatar"
 import { SourceAvatar } from 'hodi:sdk'
 
-<SourceAvatar sourceId={article.sourceId} sourceName={article.sourceName} size={26} />
+<SourceAvatar sourceId={article.sourceId} sourceName="Le Monde" size={44} />
 ```
 
 <!-- prettier-ignore -->
@@ -76,10 +69,10 @@ import { SourceAvatar } from 'hodi:sdk'
 
 La photo d'un foyer, ou son initiale, ronde comme un profil de « Qui lit ? ».
 
-```tsx title="web/index.tsx" render="householdavatar"
+```tsx title="web/index.tsx" render="householdavatar" play="householdavatar"
 import { HouseholdAvatar } from 'hodi:sdk'
 
-<HouseholdAvatar name={household.name} photo={household.photo} size={44} />
+<HouseholdAvatar name="Dupont" photo={household.photo} size={64} />
 ```
 
 <!-- prettier-ignore -->
