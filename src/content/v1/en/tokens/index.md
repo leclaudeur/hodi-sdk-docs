@@ -112,7 +112,7 @@ Blue marks a note that explains how a screen works.
 | `--info-icon` | An information note's icon. |
 | `--info-text` | An information note's text. |
 
-## News topic colours
+## News topics
 
 Each news topic has its colour: Belgium, World, Tech… An element with the `data-topic` attribute gets that topic's three tokens. The samples below show the `tech` topic.
 

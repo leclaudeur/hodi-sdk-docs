@@ -112,7 +112,7 @@ Le bleu marque une note qui explique comment marche un écran.
 | `--info-icon` | L'icône d'une note d'information. |
 | `--info-text` | Le texte d'une note d'information. |
 
-## Les couleurs des thèmes de l'actu
+## Les thèmes de l'actu
 
 Chaque thème de l'actu a sa couleur : Belgique, Monde, Tech… Un élément avec l'attribut `data-topic` reçoit les trois tokens de ce thème. Les pastilles ci-dessous montrent le thème `tech`.
 
