@@ -1,6 +1,6 @@
 ---
 title: "Connexion"
-description: "Les écrans autour de la connexion : une autre façon d'entrer, une inscription, une page à la place de Connexion, une étape juste après."
+description: "Les écrans autour de la connexion : une autre façon d'entrer, une inscription, une étape juste après."
 intro: "Les écrans autour de la connexion : une autre façon d'entrer, une inscription, une page à la place de Connexion, ou une étape juste après. Ce sont les seuls emplacements qu'une personne voit avant d'avoir ouvert son profil."
 order: 6
 icon: "log-in"

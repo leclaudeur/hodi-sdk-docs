@@ -96,7 +96,9 @@ La CI du modèle les relance à chaque push. Un plugin qui passe ses tests se co
 | `runTask(name)` | Lance une tâche, comme Hodi le ferait à son heure. |
 | `readFeed(key)` | Lit un flux du plugin, comme un foyer qui le suit. |
 | `exportData(person)` | Demande la copie des données d'une personne. |
-| `mails`, `notifications`, `questions` | Ce qui est sorti du serveur, dans l'ordre : e-mails, notifications, questions à l'IA. |
+| `mails` | Les e-mails que le plugin a envoyés, dans l'ordre. |
+| `notifications` | Les notifications que le plugin a envoyées, dans l'ordre. |
+| `questions` | Les questions que le plugin a posées à l'IA, dans l'ordre. |
 | `log` | Les lignes du journal du plugin, et celles de Hodi à son sujet (une permission refusée, par exemple). |
 | `stop()` | Arrête le petit Hodi à la fin des tests. |
 

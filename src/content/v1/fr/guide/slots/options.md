@@ -1,6 +1,6 @@
 ---
 title: "Sa carte d'admin"
-description: "Une carte du plugin sur sa page de Serveur › Plugins, sous ses réglages, pour ce que des réglages seuls ne permettent pas."
+description: "Une carte du plugin dans Serveur › Plugins, sous ses réglages, pour ce qu'un réglage seul ne permet pas."
 intro: "Une carte que le plugin dessine lui-même sur sa page de _Serveur › Plugins_, sous les réglages que Hodi dessine pour lui. Elle sert à ce que de simples réglages ne permettent pas : un bouton pour tester, une liste, des statistiques…"
 order: 1
 icon: "sliders-horizontal"

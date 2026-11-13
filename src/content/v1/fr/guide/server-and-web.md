@@ -55,10 +55,12 @@ Voici ce que devient chaque fichier :
 <!-- prettier-ignore -->
 | Dans le dossier | Dans le fichier `.hodi-plugin` |
 | --- | --- |
-| `server/index.ts` | `server.js`, avec le code des paquets npm qu'il importe |
-| `web/index.tsx` | `web.js` et `web.css` |
-| `web/public.tsx` | `web-public.js` et `web-public.css` |
-| `plugin.json`, `locales/` et `assets/` | Copiés tels quels |
+| `server/index.ts` | Le fichier devient `server.js`, avec le code des paquets npm qu'il importe. |
+| `web/index.tsx` | Le fichier devient `web.js`, et ses styles deviennent `web.css`. |
+| `web/public.tsx` | Le fichier devient `web-public.js`, et ses styles deviennent `web-public.css`. |
+| `plugin.json` | Le fichier est copié tel quel. |
+| `locales/` | Le dossier est copié tel quel, avec les textes de chaque langue. |
+| `assets/` | Le dossier est copié tel quel, avec les images et les autres fichiers. |
 
 Le fichier arrive dans `dist/`, par exemple `dist/hello-world-0.1.0.hodi-plugin`. [Publier](/fr/guide/publish/) explique comment le tester, l'installer et le faire signer.
 

@@ -1,6 +1,6 @@
 ---
 title: "Réglages"
-description: "Une entrée de Réglages rien qu'au plugin, avec sa propre page, pour ce que chaque profil du foyer règle ou consulte lui-même."
+description: "Une page du plugin dans Réglages, pour ce que chaque profil du foyer règle ou consulte lui-même."
 intro: "Une entrée de Réglages rien qu'au plugin, avec sa propre page. Elle sert à ce que chaque profil du foyer règle ou consulte lui-même : ses notes, ses statistiques, ses préférences pour le plugin…"
 order: 2
 icon: "settings"

@@ -24,7 +24,7 @@ const label = (cell: Element | undefined) => (cell?.children ?? []).map(textOf).
 const cellsOf = (row: Element) =>
   row.children.filter((c): c is Element => c.type === 'element' && /^t[hd]$/.test(c.tagName))
 
-// Only code spans, commas and spaces: a name, a type or a command, which reads best beside the title.
+// Only code spans, commas and spaces: a name, a type or a command, written as the field list writes a name.
 const isCode = (cell: Element) =>
   cell.children.some(child => child.type === 'element' && child.tagName === 'code') &&
   cell.children.every(
@@ -41,16 +41,14 @@ const bar = (name: string) => el('div', ['ph', 'mono'], [el('span', [], [{ type:
 
 const rowOf = (cells: Element[], names: string[]) => {
   const [first, ...rest] = cells
-  const beside = rest.filter(isCode)
-  const under = rest.filter(cell => !isCode(cell) && label(cell))
-  // Code from the table becomes the field list's own name and type, so both read the same.
+  const under = rest.filter(cell => label(cell))
+  // Code from the table becomes the field list's own name, so both read the same.
   const title = first && isCode(first) ? el('span', ['k'], first.children) : el('strong', [], first?.children ?? [])
-  const types = beside.map(cell => el('span', ['ty'], cell.children))
   return el(
     'div',
     ['pr'],
     [
-      el('div', ['pn'], [title, ...types]),
+      el('div', ['pn'], [title]),
       ...under.map(cell => line(cell, names.length > 2 ? (names[cells.indexOf(cell)] ?? '') : ''))
     ]
   )

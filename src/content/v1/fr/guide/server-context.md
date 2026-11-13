@@ -49,7 +49,9 @@ Le reste de cette page explique chaque morceau : `migrations`, `routes`, `reques
 | `feeds` | Les articles de ses flux. |
 | `onArticle` | Appelé pour chaque nouvel article que Hodi lit. |
 | `checkSignIn` | Appelé à chaque connexion, pour l'accepter ou la refuser. |
-| `onProfileDeleted`, `onAccountDeleted`, `onHouseholdRemoved` | Appelés quand des données de quelqu'un disparaissent de Hodi. |
+| `onProfileDeleted` | Appelé quand un profil est supprimé, pour effacer ce que le plugin garde de lui. |
+| `onAccountDeleted` | Appelé quand un compte est supprimé, pour effacer ce que le plugin garde de lui. |
+| `onHouseholdRemoved` | Appelé quand un foyer est supprimé, pour effacer ce que le plugin garde de lui. |
 | `exportData` | Ce que le plugin garde d'une personne, pour sa copie de données. |
 
 ## Sa base de données

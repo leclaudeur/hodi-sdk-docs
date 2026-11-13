@@ -1,6 +1,6 @@
 ---
 title: "Its admin card"
-description: "A card of the plugin on its page in Server › Plugins, under its settings, for what settings alone can't do."
+description: "A card of the plugin in Server › Plugins, under its settings, for what a setting alone can't do."
 intro: "A card the plugin draws itself on its page in _Server › Plugins_, under the settings Hodi draws for it. It is for what plain settings can't do: a button to test, a list, statistics…"
 order: 1
 icon: "sliders-horizontal"

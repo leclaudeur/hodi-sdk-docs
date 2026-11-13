@@ -55,10 +55,12 @@ Here is what each file becomes:
 <!-- prettier-ignore -->
 | In the folder | In the `.hodi-plugin` file |
 | --- | --- |
-| `server/index.ts` | `server.js`, with the code of the npm packages it imports |
-| `web/index.tsx` | `web.js` and `web.css` |
-| `web/public.tsx` | `web-public.js` and `web-public.css` |
-| `plugin.json`, `locales/` and `assets/` | Copied as they are |
+| `server/index.ts` | The file becomes `server.js`, with the code of the npm packages it imports. |
+| `web/index.tsx` | The file becomes `web.js`, and its styles become `web.css`. |
+| `web/public.tsx` | The file becomes `web-public.js`, and its styles become `web-public.css`. |
+| `plugin.json` | The file is copied as it is. |
+| `locales/` | The folder is copied as it is, with the texts of each language. |
+| `assets/` | The folder is copied as it is, with the images and the other files. |
 
 The file lands in `dist/`, for example `dist/hello-world-0.1.0.hodi-plugin`. [Publish](/en/guide/publish/) explains how to test it, install it and have it signed.
 

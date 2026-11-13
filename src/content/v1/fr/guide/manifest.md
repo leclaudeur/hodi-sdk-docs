@@ -165,7 +165,8 @@ Voici ce que Hodi dessine pour quatre réglages, un de chaque type :
 | `type` | `'text' \| 'boolean' \| 'number' \| 'choice'` | Ce qu'il contient, et donc ce que Hodi dessine. |
 | `default` | Selon le type | Sa valeur tant que l'admin ne l'a pas changée. |
 | `maxLength?` | `number` | Pour `text` : la longueur maximale. 2000 par défaut, et au plus. |
-| `min?` et `max?` | `number` | Pour `number` : les bornes. La valeur par défaut doit être entre les deux. |
+| `min?` | `number` | Pour `number` : la plus petite valeur permise. La valeur par défaut ne peut pas être plus petite. |
+| `max?` | `number` | Pour `number` : la plus grande valeur permise. La valeur par défaut ne peut pas être plus grande. |
 | `options` | `string[]` | Pour `choice` : les valeurs possibles. Chacune suit les mêmes règles que `key`. |
 
 ### Les types de réglage

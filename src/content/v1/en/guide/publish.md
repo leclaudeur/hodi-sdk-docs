@@ -96,7 +96,9 @@ The template's CI runs them again at every push. A plugin that passes its tests 
 | `runTask(name)` | Runs a task, as Hodi would at its time. |
 | `readFeed(key)` | Reads a feed of the plugin, like a household that follows it. |
 | `exportData(person)` | Asks for a person's copy of their data. |
-| `mails`, `notifications`, `questions` | What left the server, in order: e-mails, notifications, questions to the AI. |
+| `mails` | The e-mails the plugin sent, in order. |
+| `notifications` | The notifications the plugin sent, in order. |
+| `questions` | The questions the plugin asked the AI, in order. |
 | `log` | The plugin's log lines, and Hodi's lines about it (a refused permission, for example). |
 | `stop()` | Stops the small Hodi at the end of the tests. |
 

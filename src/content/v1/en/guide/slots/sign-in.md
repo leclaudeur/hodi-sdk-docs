@@ -1,6 +1,6 @@
 ---
 title: "Sign-in"
-description: "The screens around signing in: another way in, a sign-up, a page in place of Sign in, a step right after it."
+description: "The screens around signing in: another way in, a sign-up, a step right after it."
 intro: "The screens around signing in: another way in, a sign-up, a page in place of Sign in, or a step right after it. They are the only slots someone sees before opening their profile."
 order: 6
 icon: "log-in"

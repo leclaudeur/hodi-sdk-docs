@@ -1,6 +1,6 @@
 ---
 title: "Settings"
-description: "An entry in Settings for the plugin alone, with its own page, for what each profile of the household sets or looks up itself."
+description: "A page of the plugin in Settings, for what each profile of the household sets or looks up itself."
 intro: "An entry in Settings for the plugin alone, with its own page. It is for what each profile of the household sets or looks up itself: its notes, its statistics, its preferences for the plugin…"
 order: 2
 icon: "settings"
