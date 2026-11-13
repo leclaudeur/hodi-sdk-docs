@@ -150,14 +150,12 @@
   font-size: 16px;
   line-height: 1.6;
 }
+/* Code in a short sentence: the mono font alone sets it apart, a box would chop the line. */
 .tz-step code,
 .v-list code {
-  padding: 1px 6px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--control);
   color: var(--text);
-  font: 500 0.8em var(--font-mono);
+  font: 500 0.9em var(--font-mono);
+  white-space: nowrap;
 }
 /* « En savoir plus »: the guide's pages behind the step, at the foot of its column, opened in a new tab so the
    editor stays where it was. */

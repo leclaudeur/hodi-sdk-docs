@@ -1,11 +1,11 @@
 ---
 import type { Doc } from '../../lib/docs.ts'
-import { firstStepsUrl } from '../../lib/first-steps.ts'
 import { t } from '../../lib/i18n.ts'
 import { inline } from '../../lib/inline.ts'
 import Icon from '../Icon.astro'
 
 // The end, as the app's tour ends: confetti over the dimmed editor and a dialog that sums the four steps up.
+// Closing it, by the cross, the scrim or Escape, starts again like « Revoir ».
 interface Props {
   doc: Doc
   home: string
@@ -13,16 +13,15 @@ interface Props {
 
 const { doc, home } = Astro.props
 const finish = doc.entry.data.finish
-const lastStep = firstStepsUrl(doc, String(doc.entry.data.steps?.length ?? 1))
 ---
 
 {finish && (
-  <div class="tz-done" data-close={lastStep}>
-    <a class="scrim" href={lastStep} tabindex="-1" aria-hidden="true"></a>
+  <div class="tz-done">
+    <a class="scrim" href={doc.url} tabindex="-1" aria-hidden="true" data-forget></a>
     <div class="dlg" role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="tz-done-title">
       <div class="dlg-h">
         <h2 id="tz-done-title">{finish.title}</h2>
-        <a class="round" href={lastStep} aria-label={t(doc.lang, 'close')}>
+        <a class="round" href={doc.url} data-forget aria-label={t(doc.lang, 'close')}>
           <Icon name="x" />
         </a>
       </div>
@@ -46,7 +45,7 @@ const lastStep = firstStepsUrl(doc, String(doc.entry.data.steps?.length ?? 1))
           <span>{finish.realText}</span>
         </p>
         <div class="dlg-a">
-          <a class="btn icon" href={doc.url} data-forget>
+          <a class="btn icon" href={doc.url} data-forget data-again>
             <Icon name="rotate-ccw" />
             {t(doc.lang, 'firstStepsAgain')}
           </a>
