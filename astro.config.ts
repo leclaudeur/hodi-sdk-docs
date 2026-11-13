@@ -7,6 +7,7 @@ import { rehypeFields } from './src/lib/rehype-fields.ts'
 import { rehypeNotice } from './src/lib/rehype-notice.ts'
 import { demoAssets } from './src/lib/demo.ts'
 import { rehypeRenders } from './src/lib/rehype-renders.ts'
+import { rehypeTokens } from './src/lib/rehype-tokens.ts'
 
 // Pages that only send the browser on, older versions and Premiers pas past its first step (their canonical is
 // another page): not listed.
@@ -31,7 +32,8 @@ export default defineConfig({
       rehypeFields,
       rehypeNotice,
       [rehypeRenders, { files: Object.values(demoAssets).map(asset => asset.file) }],
-      rehypeDocs
+      rehypeDocs,
+      rehypeTokens
     ]
   }
 })

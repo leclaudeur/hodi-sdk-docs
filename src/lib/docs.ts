@@ -47,14 +47,14 @@ export const docs = all.map(toDoc)
 
 const byOrder = (a: Doc, b: Doc) => a.entry.data.order - b.entry.data.order
 
-// The sidebar: the guide's pages, each with the pages under it, then the reference: Composants, Hooks, Fonctions and
-// Types, each a section of its own in the bar too.
+// The sidebar: the guide's pages, each with the pages under it, then the reference: Composants, Hooks, Fonctions,
+// Types and Tokens, each a section of its own in the bar too.
 export const groupsOf = (version: string, lang: Lang): Group[] => {
   const mine = docs.filter(doc => doc.version === version && doc.lang === lang)
   const top = (section: string) => mine.filter(doc => doc.path.split('/')[0] === section && !doc.parent).sort(byOrder)
   const withChildren = (doc: Doc) => ({ doc, children: mine.filter(child => child.parent === doc.path).sort(byOrder) })
   const guide = mine.filter(doc => doc.path.startsWith('guide/') && !doc.parent).sort(byOrder)
-  const reference = [...top('components'), ...top('hooks'), ...top('functions'), ...top('types')]
+  const reference = [...top('components'), ...top('hooks'), ...top('functions'), ...top('types'), ...top('tokens')]
   return [
     { key: 'guide' as const, docs: guide.map(withChildren) },
     { key: 'reference' as const, docs: reference.map(withChildren) }

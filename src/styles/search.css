@@ -42,7 +42,8 @@
     color: var(--text-2);
   }
 }
-@media (max-width: 1023px) {
+/* Up to 1100 px the bar holds six sections: the search shrinks to its round button. */
+@media (max-width: 1100px) {
   .sdk-search {
     width: 34px;
     padding: 0;
