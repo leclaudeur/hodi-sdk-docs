@@ -39,11 +39,24 @@ const addAnchor = (node: Element, label: string) => {
 
 // What Markdown cannot say on its own: the window's Copier in the page's language, lucide icons asked by
 // data-icon, titles' links and French spaces.
+const textOf = (node: Element): string =>
+  node.children
+    .map(child => (child.type === 'text' ? child.value : child.type === 'element' ? textOf(child) : ''))
+    .join('')
+
+// A title that is a name from the code (a component, a hook, a type) keeps its case: the display font only has capitals.
+const isCodeName = (node: Element, path: string) =>
+  (/\/(components|types)\//.test(path) ||
+    (node.children.length === 1 && node.children[0]?.type === 'element' && node.children[0].tagName === 'code')) &&
+  /^[A-Za-z_$][\w$.]*(\(\))?$/.test(textOf(node).trim())
+
 export const rehypeDocs = () => (tree: Root, file: { path?: string }) => {
   const lang = langOf(file.path ?? '')
   walk(tree, node => {
     if (node.type === 'text' && lang === 'fr') node.value = frenchSpaces(node.value)
     if (node.type !== 'element') return
+    if (node.tagName === 'h2' && isCodeName(node, file.path ?? ''))
+      node.properties.className = [...classes(node), 'code-title']
     if (node.tagName === 'h2' || node.tagName === 'h3') addAnchor(node, t(lang, 'anchor'))
     const icon = node.properties.dataIcon
     if (typeof icon === 'string') node.children = [iconElement(icon, 16)]
