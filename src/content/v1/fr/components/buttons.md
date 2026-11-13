@@ -16,7 +16,13 @@ Le bouton avec un libellé, et, au besoin, une icône Lucide avant lui. Il fait 
 import { Button } from 'hodi:sdk'
 import { Check } from 'lucide-react'
 
-<Button look="primary" icon={Check} onClick={save}>Enregistrer</Button>
+<Button
+  look="primary"
+  icon={Check}
+  onClick={save}
+>
+  Enregistrer
+</Button>
 ```
 
 <!-- prettier-ignore -->
@@ -67,7 +73,13 @@ Le bouton violet, seule porte vers l'IA du foyer. Un clic lance l'action `aiActi
 ```tsx title="web/index.tsx" render="aibutton" play="aibutton"
 import { AiButton } from 'hodi:sdk'
 
-<AiButton action="summary" input={{ id: article.id }} onAnswer={answer => setSummary(String(answer))}>Résumer</AiButton>
+<AiButton
+  action="summary"
+  input={{ id: article.id }}
+  onAnswer={answer => setSummary(String(answer))}
+>
+  Résumer
+</AiButton>
 ```
 
 <!-- prettier-ignore -->
