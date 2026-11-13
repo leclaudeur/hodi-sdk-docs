@@ -44,11 +44,11 @@
 }
 
 /* Computer: the sidebar's squares start under the logo. It grows by what the gutter gives back (minus its rows'
-   9 px inset, 10 once the frame's side line shows), so its line and the text stay where they were. */
+   6 px inset, 7 once the frame's side line shows), so its line and the text stay where they were. */
 @media (min-width: 1024px) {
   .dev-view {
-    --side-gain: calc(clamp(16px, 4vw, 48px) - clamp(16px, 3vw, 28px) + 9px);
-    padding-left: calc(clamp(16px, 3vw, 28px) - 9px);
+    --side-gain: calc(clamp(16px, 4vw, 48px) - clamp(16px, 3vw, 28px) + 6px);
+    padding-left: calc(clamp(16px, 3vw, 28px) - 6px);
     padding-right: 28px;
     padding-bottom: 0;
   }
@@ -72,8 +72,8 @@
 }
 @media (min-width: 1241px) {
   .dev-view {
-    --side-gain: calc(clamp(16px, 4vw, 48px) - clamp(16px, 3vw, 28px) + 10px);
-    padding-left: calc(clamp(16px, 3vw, 28px) - 10px);
+    --side-gain: calc(clamp(16px, 4vw, 48px) - clamp(16px, 3vw, 28px) + 7px);
+    padding-left: calc(clamp(16px, 3vw, 28px) - 7px);
   }
 }
 
@@ -101,7 +101,7 @@
 }
 .dev-side .grp > .mono {
   display: block;
-  padding: 0 8px 8px;
+  padding: 0 6px 8px;
 }
 .dev-side a {
   display: flex;
@@ -109,7 +109,7 @@
   align-items: center;
   gap: 10px;
   height: 36px;
-  padding: 0 8px;
+  padding: 0 5px;
   border: 1px solid transparent;
   border-radius: 10px;
   color: var(--text-nav);
@@ -146,7 +146,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin: 2px 0 4px 19px;
+  margin: 2px 0 4px 16px;
   padding-left: 14px;
   border-left: 1px solid var(--divider);
 }
@@ -160,7 +160,7 @@
 }
 /* A top page's own titles sit under its pages, as in the page, and carry on the same rail without a break. */
 .dev-side .grp > .subs.heads {
-  margin: 2px 0 4px 19px;
+  margin: 2px 0 4px 16px;
 }
 .dev-side .grp > .subs + .subs.heads {
   /* Back over the pages' bottom margin and the group's gap, so the two rails meet. */
