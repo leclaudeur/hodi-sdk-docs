@@ -59,7 +59,7 @@ const wireEnd = () => {
   // The dialog takes the focus, so Tab starts inside it, without a ring on a button nobody chose.
   end.querySelector<HTMLElement>('.dlg')?.focus()
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && end.dataset.close) location.href = end.dataset.close
+    if (event.key === 'Escape') end.querySelector<HTMLElement>('[data-again]')?.click()
   })
 }
 

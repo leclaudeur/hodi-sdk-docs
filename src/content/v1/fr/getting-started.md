@@ -52,7 +52,7 @@ steps:
         href: "/fr/guide/server-and-web/"
     todo:
       - "Ouvrir `server/index.ts` : c'est la partie du plugin qui tourne sur le serveur."
-      - "Sur la ligne surlignée, ajouter un `!` après `greeting`, dans le texte que la route renvoie."
+      - "Sur la ligne surlignée, ajouter un point d'exclamation après `greeting`, dans le texte que la route renvoie."
       - "Cliquer sur *Dire bonjour* dans l'aperçu : la route répond *Salut !*."
     file: "server/index.ts"
     lang: "ts"
@@ -145,7 +145,7 @@ steps:
         href: "/fr/guide/manifest/"
     todo:
       - "Dans l'aperçu, le mode développeur du Hodi de test est actif : il montre un code."
-      - "Sur la ligne surlignée, taper ce code après `--code`, pour lancer `npx hodi-plugin dev`."
+      - "Sur la ligne surlignée, taper ce code à la fin de la commande."
       - "Dans Serveur › Plugins, Hello world apparaît alors avec le badge *En développement*."
     file: "Terminal"
     lang: "text"
