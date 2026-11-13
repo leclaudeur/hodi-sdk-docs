@@ -2,7 +2,7 @@
 title: "Types"
 description: "Every type in the SDK, part by part, with each of their fields."
 intro: "The SDK gives the types of each part. Your editor shows them as you write, with their comments. This page gathers them all: the sidebar leads straight to each one."
-order: 2
+order: 4
 icon: "type"
 ---
 
@@ -395,7 +395,7 @@ A key from its locales, or `{ text, links }`: its `<name>` tags become links to 
 
 ### Confirmation
 
-What [askToConfirm()](/en/components/dialogs-and-messages/#asktoconfirm) gets. With `proof`, `onConfirm` gets a `Proof`: `password` and `code`.
+What [askToConfirm()](/en/functions/#asktoconfirm) gets. With `proof`, `onConfirm` gets a `Proof`: `password` and `code`.
 
 <!-- prettier-ignore -->
 | Fields | Type | |
@@ -410,7 +410,7 @@ What [askToConfirm()](/en/components/dialogs-and-messages/#asktoconfirm) gets. W
 
 ### PluginLinks
 
-What [usePluginLinks()](/en/components/hooks/) gives.
+What [usePluginLinks()](/en/hooks/) gives.
 
 <!-- prettier-ignore -->
 | Fields | Type | |

@@ -28,7 +28,7 @@ import { Check } from 'lucide-react'
 | `busy?` | `boolean` | Waiting for the server: the icon becomes a spinning circle, and the button can't be pressed. |
 | `compact?` | `boolean` | 34 px tall, for a row or a header. |
 | `wide?` | `boolean` | Its parent's whole width. |
-| `href?` | `string` | A link drawn as a button. For an address in Hodi, take it from [usePluginLinks()](/en/components/hooks/). |
+| `href?` | `string` | A link drawn as a button. For an address in Hodi, take it from [usePluginLinks()](/en/hooks/). |
 | `external?` | `boolean` | The link opens in a new tab. |
 | `…` | `ButtonHTMLAttributes` | What a `<button>` accepts: `onClick`… |
 

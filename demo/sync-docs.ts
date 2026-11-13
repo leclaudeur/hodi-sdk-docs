@@ -8,9 +8,8 @@ import { KINDS } from './kinds.ts'
 //   node demo/sync-docs.ts
 
 for (const lang of ['fr', 'en'] as const) {
-  const dir = `src/content/v1/${lang}/components`
-  for (const file of readdirSync(dir)) {
-    const path = `${dir}/${file}`
+  const dirs = ['components', 'functions'].map(section => `src/content/v1/${lang}/${section}`)
+  for (const path of dirs.flatMap(dir => readdirSync(dir).map(file => `${dir}/${file}`))) {
     const md = readFileSync(path, 'utf8')
     const out = md.replace(/```tsx([^\n]*)render="([a-z]+)"([^\n]*)\n[\s\S]*?\n```/g, (all, a, name, b) => {
       const kind = KINDS[name]

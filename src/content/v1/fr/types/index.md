@@ -2,7 +2,7 @@
 title: "Types"
 description: "Tous les types du SDK, partie par partie, avec chacun de leurs champs."
 intro: "Le SDK donne les types de chaque partie. L'éditeur les montre pendant l'écriture, avec leurs commentaires. Cette page les rassemble tous : la sidebar mène droit à chacun."
-order: 2
+order: 4
 icon: "type"
 ---
 
@@ -395,7 +395,7 @@ Une clé de ses locales, ou `{ text, links }` : ses balises `<nom>` deviennent d
 
 ### Confirmation
 
-Ce que reçoit [askToConfirm()](/fr/components/dialogs-and-messages/#asktoconfirm). Avec `proof`, `onConfirm` reçoit une `Proof` : `password` et `code`.
+Ce que reçoit [askToConfirm()](/fr/functions/#asktoconfirm). Avec `proof`, `onConfirm` reçoit une `Proof` : `password` et `code`.
 
 <!-- prettier-ignore -->
 | Champs | Type | |
@@ -410,7 +410,7 @@ Ce que reçoit [askToConfirm()](/fr/components/dialogs-and-messages/#asktoconfir
 
 ### PluginLinks
 
-Ce que donne [usePluginLinks()](/fr/components/hooks/).
+Ce que donne [usePluginLinks()](/fr/hooks/).
 
 <!-- prettier-ignore -->
 | Champs | Type | |
