@@ -16,6 +16,14 @@
 .cmp-render.rows {
   padding: 28px 24px;
 }
+/* A component's render and its playground are the same stage: the dotted ground, the component in its middle. */
+.cmp-render.plain,
+.pl-stage:not(.pl-big) {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: 32px;
+}
 .cmp-render.page {
   position: relative;
   height: 440px;
@@ -43,8 +51,12 @@
   padding-right: 112px;
 }
 @media (max-width: 600px) {
-  .cmp-render {
+  .cmp-render:not(.plain) {
     padding: 28px 20px;
+  }
+  .cmp-render.plain,
+  .pl-stage:not(.pl-big) {
+    padding: 32px 20px;
   }
   .cmp-code pre {
     padding-top: 60px;
@@ -106,6 +118,7 @@
   transition: border-color var(--duration) var(--ease);
 }
 .cc-prev,
+.cmp-render.plain,
 .pl-stage {
   background-color: var(--bg);
   background-image: radial-gradient(color-mix(in srgb, var(--text) 16%, transparent) 1px, transparent 1.2px);

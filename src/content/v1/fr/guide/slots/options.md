@@ -51,4 +51,4 @@ definePlugin({ settingsPage: HelloCard })
 - **Ce qu'elle reçoit** : rien. Elle lit ses réglages avec ses routes, et les appelle avec `usePluginApi()`.
 - **Qui la voit** : l'admin du serveur seulement, comme toute la page _Serveur › Plugins_.
 - **Quand elle s'affiche** : seulement quand le plugin est activé.
-- **Son dessin** : des `SettingRow`, comme les lignes des réglages au-dessus. La carte a ainsi l'air de faire partie de la page.
+- **Son dessin** : des `SettingRow`, comme les réglages au-dessus.

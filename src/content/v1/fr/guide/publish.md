@@ -207,7 +207,9 @@ Le [README du registre](https://github.com/leclaudeur/hodi-plugin-registry#add-o
 ### Ensuite
 
 - Le plugin apparaît dans _Serveur › Plugins › Disponibles_ de chaque Hodi, prêt à installer en un clic.
-- Chaque nouvelle version est une nouvelle pull request sur le registre. Elle est relue, puis signée à son tour.
+- Chaque nouvelle version passe par une nouvelle pull request.
+
+Cette nouvelle version est relue, puis signée à son tour.
 
 ## Les règles de Hodi
 

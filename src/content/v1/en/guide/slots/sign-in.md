@@ -70,5 +70,7 @@ Hodi only accepts the id of an account this call has just created, or whose pass
 
 ## Good to know
 
-- **Refusing a sign-in**: `checkSignIn`, on the server, is called at each sign-in. It answers `null` to let the person in, or a key of its `locales` to refuse with that message.
-- **The limits**: 30 requests a minute per address, and no request coming from another site.
+- **Refusing a sign-in**: `checkSignIn`, on the server, at each sign-in.
+- **The limits**: 30 requests a minute per address, none from another site.
+
+`checkSignIn` answers `null` to let the person in, or a key of its `locales` to refuse with that message.

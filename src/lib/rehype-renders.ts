@@ -1,4 +1,5 @@
 import type { Element, ElementContent, Root, RootContent } from 'hast'
+import { KINDS } from '../../demo/kinds.ts'
 import { demoAssets, renders } from './demo.ts'
 import { langOf, type Lang } from './i18n.ts'
 
@@ -21,6 +22,8 @@ const visit = (node: Root | Element, lang: Lang) => {
       child.properties.dataPlayJs = demoAssets.playJs.url
     }
     if (typeof key === 'string') {
+      // A card, a row or a field spans its window, as it spans the playground's stage.
+      if (KINDS[key]?.wide) child.properties.className = [...((child.properties.className as string[]) ?? []), 'wide']
       // A raw node: the serializer writes it as is, and Astro allows raw HTML in Markdown.
       child.children = [{ type: 'raw', value: shadowOf(key, lang) } as unknown as ElementContent]
     } else visit(child, lang)

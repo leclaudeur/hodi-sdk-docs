@@ -1,8 +1,9 @@
 import type { Element, ElementContent, Root } from 'hast'
 import { langOf, t } from './i18n.ts'
+import { rowsOf } from './rehype-rows.ts'
 
 // A Markdown table whose columns are a name, « Type » and a text becomes a field list: each name with its type on
-// one line, the text under it, as in the app's settings rows. Any other table stays a table.
+// one line, the text under it, as in the app's settings rows. Any other table becomes rows (rehype-rows.ts).
 
 const el = (tagName: string, className: string[], children: ElementContent[]): Element => ({
   type: 'element',
@@ -61,6 +62,6 @@ const fieldsOf = (table: Element, lang: ReturnType<typeof langOf>): Element | un
 export const rehypeFields = () => (tree: Root, file: { path?: string }) => {
   const lang = langOf(file.path ?? '')
   tree.children = tree.children.map(node =>
-    node.type === 'element' && node.tagName === 'table' ? (fieldsOf(node, lang) ?? node) : node
+    node.type === 'element' && node.tagName === 'table' ? (fieldsOf(node, lang) ?? rowsOf(node)) : node
   )
 }

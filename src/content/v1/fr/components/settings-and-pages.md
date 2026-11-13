@@ -71,7 +71,7 @@ import { Pencil } from 'lucide-react'
 
 Une ligne de réglage. Sous son nom, une ligne de 14 px : sa valeur, ou à défaut une aide courte, jamais les deux. Son action est un bouton avec un libellé, qui devient un rond de 38 px sur téléphone. Un choix (`Segmented`) passe sous le texte sur téléphone.
 
-```tsx title="web/index.tsx" render="settingrow" kind="rows" play="settingrow"
+```tsx title="web/index.tsx" render="settingrow" play="settingrow"
 import { SettingRow, SettingsCard } from 'hodi:sdk'
 import { Pencil } from 'lucide-react'
 
@@ -125,9 +125,10 @@ Une carte de [Vue d’ensemble](/fr/guide/slots/overview/) : son titre, un nombr
 
 ```tsx title="web/index.tsx" render="overviewcard" play="overviewcard"
 import { Chip, OverviewCard } from 'hodi:sdk'
+import WeekChart from './WeekChart.tsx'
 
-<OverviewCard title="Bonjours" count={128} aside={<Chip tone="success">Actif</Chip>}>
-  <p className="mono">34 aujourd'hui</p>
+<OverviewCard title="Bonjours" count={128} aside={<Chip tone="success">+12 cette semaine</Chip>}>
+  <WeekChart days={week} />
 </OverviewCard>
 ```
 

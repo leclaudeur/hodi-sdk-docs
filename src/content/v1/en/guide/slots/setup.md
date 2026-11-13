@@ -69,4 +69,4 @@ definePlugin({
 ## Good to know
 
 - **Who sees them**: only if the plugin was turned on at the "Plugins found" step.
-- **A step of Hodi**: `{ id: 'mail', core: 'mail' }` puts the form of _Server › E-mail_ among the plugin's steps.
+- **A step of Hodi**: `{ id: 'mail', core: 'mail' }` adds the form of _Server › E-mail_.

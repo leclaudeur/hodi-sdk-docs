@@ -56,3 +56,110 @@
   line-height: 1.55;
   text-wrap: pretty;
 }
+
+/* Any other table, as rows: the title and its code on one line, each other cell under it after its column's name. */
+.props.rows .pr {
+  display: block;
+}
+.prose .props.rows strong {
+  font-size: 15px;
+}
+.prose .props .pn .k,
+.prose .props .pn .ty {
+  font-family: var(--font-mono);
+}
+.prose .props .pn .k code,
+.prose .props .pn .ty code,
+.prose .props .pn strong code {
+  padding: 0;
+  border: 0;
+  background: none;
+  white-space: normal;
+}
+.prose .props .pn .k code {
+  color: var(--text);
+  font: 500 13.5px/1.5 var(--font-mono);
+}
+.prose .props .pn .ty code {
+  color: var(--topic-travel);
+  font: 400 12.5px/1.5 var(--font-mono);
+}
+.prose .props .pr > p:first-child {
+  margin-top: 0;
+}
+.props .row-label {
+  margin-right: 8px;
+  color: var(--text-3);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* A comparison: one card per thing compared, side by side when there is room for both. */
+.prose .compare {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 4px 0 40px;
+}
+.prose .compare .props {
+  margin: 0;
+}
+.prose .compare .row-label {
+  display: block;
+  margin: 0 0 2px;
+}
+
+/* The app's info notice: a blue card, its square and icon at the top left, the title and the text beside them. */
+.prose .notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--info-border);
+  border-radius: 16px;
+  background: var(--info-surface);
+}
+.notice .notice-mark {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--info-border);
+  border-radius: 12px;
+  background: var(--info-mark);
+  color: var(--info-icon);
+}
+.notice .notice-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+  min-height: 44px;
+}
+.prose .notice p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.prose .notice .notice-title {
+  color: var(--text);
+  font-weight: 500;
+}
+.prose .notice .notice-text {
+  color: var(--text-3);
+}
+.prose .notice .notice-text p + p {
+  margin-top: 8px;
+}
+@media (max-width: 600px) {
+  .prose .notice {
+    padding: 12px;
+  }
+}
+.props.rows .ph span {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

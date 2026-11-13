@@ -69,4 +69,4 @@ definePlugin({
 ## À savoir
 
 - **Qui les voit** : seulement si le plugin a été activé à l'étape « Plugins trouvés ».
-- **Une étape de Hodi** : `{ id: 'mail', core: 'mail' }` place le formulaire de _Serveur › E-mail_ parmi les étapes du plugin.
+- **Une étape de Hodi** : `{ id: 'mail', core: 'mail' }` ajoute le formulaire de _Serveur › E-mail_.

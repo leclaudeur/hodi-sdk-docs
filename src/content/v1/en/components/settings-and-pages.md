@@ -71,7 +71,7 @@ import { Pencil } from 'lucide-react'
 
 A settings row. Under its name, a 14 px line: its value, or failing that a short hint, never both. Its action is a button with a label, which becomes a 38 px round button on a phone. A choice (`Segmented`) moves under the text on a phone.
 
-```tsx title="web/index.tsx" render="settingrow" kind="rows" play="settingrow"
+```tsx title="web/index.tsx" render="settingrow" play="settingrow"
 import { SettingRow, SettingsCard } from 'hodi:sdk'
 import { Pencil } from 'lucide-react'
 
@@ -125,9 +125,10 @@ An [Overview](/en/guide/slots/overview/) card: its title, a number, a chip at th
 
 ```tsx title="web/index.tsx" render="overviewcard" play="overviewcard"
 import { Chip, OverviewCard } from 'hodi:sdk'
+import WeekChart from './WeekChart.tsx'
 
-<OverviewCard title="Hellos" count={128} aside={<Chip tone="success">Active</Chip>}>
-  <p className="mono">34 today</p>
+<OverviewCard title="Hellos" count={128} aside={<Chip tone="success">+12 this week</Chip>}>
+  <WeekChart days={week} />
 </OverviewCard>
 ```
 

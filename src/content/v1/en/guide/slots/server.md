@@ -52,5 +52,7 @@ definePlugin({
 ## Good to know
 
 - **Who sees them**: the server admin only.
-- **Its routes**: a section calls the plugin's `serverRoutes`, with `usePluginServerApi()`. These routes refuse anyone but the server admin.
-- **An invalid section**: a section without a valid `id`, or with an `id` already taken, isn't shown.
+- **Its routes**: the `serverRoutes`, called with `usePluginServerApi()`.
+- **An invalid section**: without a valid `id`, or with an `id` already taken, it isn't shown.
+
+The `serverRoutes` refuse anyone but the server admin.

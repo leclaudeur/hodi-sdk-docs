@@ -70,5 +70,7 @@ Hodi n'accepte que l'id d'un compte que cet appel vient de créer, ou dont il vi
 
 ## À savoir
 
-- **Refuser une connexion** : `checkSignIn`, côté serveur, est appelé à chaque connexion. Il répond `null` pour laisser entrer, ou une clé de ses `locales` pour refuser avec ce message.
-- **Les limites** : 30 requêtes par minute par adresse, et aucune requête venue d'un autre site.
+- **Refuser une connexion** : `checkSignIn`, côté serveur, à chaque connexion.
+- **Les limites** : 30 requêtes par minute par adresse, aucune venue d'un autre site.
+
+`checkSignIn` répond `null` pour laisser entrer, ou une clé de ses `locales` pour refuser avec ce message.
