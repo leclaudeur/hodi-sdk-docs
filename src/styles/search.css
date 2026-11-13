@@ -293,6 +293,11 @@ html:has(dialog.sx[open]) {
 }
 
 @media (max-width: 600px) {
+  /* A phone's full screen opens and closes at once: only the computer's card fades, like the app's dialogs. */
+  .sx,
+  .sx::backdrop {
+    transition: none;
+  }
   .sx {
     width: 100%;
     height: 100dvh;

@@ -13,7 +13,7 @@ interface Props {
 
 const { doc, headings } = Astro.props
 const groups = groupsOf(doc.version, doc.lang)
-const heads = headings.filter(heading => heading.depth === 2 || heading.depth === 3)
+const heads = headings.filter(heading => heading.depth === 2)
 const firstSteps = firstStepsOf(doc.version, doc.lang)
 const isOpen = (page: Doc) => page.path === doc.path || page.path === doc.parent
 ---
