@@ -1,5 +1,6 @@
 ---
 import type { MarkdownHeading } from 'astro'
+import { render } from 'astro:content'
 import { firstStepsOf, groupsOf, type Doc } from '../lib/docs.ts'
 import { t } from '../lib/i18n.ts'
 import Heads from './Heads.astro'
@@ -16,6 +17,9 @@ const groups = groupsOf(doc.version, doc.lang)
 const heads = headings.filter(heading => heading.depth === 2)
 const firstSteps = firstStepsOf(doc.version, doc.lang)
 const isOpen = (page: Doc) => page.path === doc.path || page.path === doc.parent
+// On a child page, the parent's own titles stay under its children, as on the parent page.
+const parent = groups.flatMap(group => group.docs).find(({ doc: page }) => page.path === doc.parent)?.doc
+const parentHeads = parent ? (await render(parent.entry)).headings.filter(heading => heading.depth === 2) : []
 ---
 
 <nav class="dev-side" aria-label={t(doc.lang, 'documentation')}>
@@ -51,6 +55,7 @@ const isOpen = (page: Doc) => page.path === doc.path || page.path === doc.parent
             </div>
           )}
           {page.path === doc.path && <Heads headings={heads} />}
+          {page.path === doc.parent && <Heads headings={parentHeads} page={page.url} />}
         </>
       ))}
     </div>

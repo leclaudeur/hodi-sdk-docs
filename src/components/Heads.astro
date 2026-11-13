@@ -1,18 +1,24 @@
 ---
 import type { MarkdownHeading } from 'astro'
 
-// The current page's titles, under its row in the sidebar; the script lights the one on screen.
+// A page's titles, under its row in the sidebar. The current page's titles carry data-head so the script lights the one
+// on screen; a parent's titles, shown from a child page, link to the parent page instead.
 interface Props {
   headings: MarkdownHeading[]
+  page?: string
 }
 
-const { headings } = Astro.props
+const { headings, page } = Astro.props
 ---
 
 {headings.length > 0 && (
   <div class="subs heads">
     {headings.map(heading => (
-      <a class:list={[`h${heading.depth}`]} href={`#${heading.slug}`} data-head={heading.slug}>
+      <a
+        class:list={[`h${heading.depth}`]}
+        href={`${page ?? ''}#${heading.slug}`}
+        data-head={page ? undefined : heading.slug}
+      >
         {heading.text}
       </a>
     ))}
