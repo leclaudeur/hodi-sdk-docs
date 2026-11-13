@@ -290,9 +290,13 @@
   color: var(--text);
   box-shadow: 0 0 40px var(--shadow);
 }
-.dev-tree[open] {
+/* Its column holds while it closes too: a closed dialog only turns to none at the end of the transition. */
+.dev-tree {
   display: flex;
   flex-direction: column;
+}
+.dev-tree:not([open]) {
+  display: none;
 }
 .dev-tree::backdrop {
   background: color-mix(in srgb, var(--bg) 60%, transparent);
