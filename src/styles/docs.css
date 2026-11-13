@@ -158,6 +158,11 @@
 .dev-side .subs.heads {
   margin: 0 0 6px 10px;
 }
+/* A top page's own titles share the rail of its pages, just above them. */
+.dev-side .grp > .subs.heads {
+  margin: 2px 0 0 19px;
+  padding-bottom: 4px;
+}
 .dev-side .subs.heads a {
   height: auto;
   min-height: 30px;
@@ -211,6 +216,11 @@
   display: none;
 }
 @media (max-width: 1023px) {
+  /* The bar's gutter, so the page lines up under the logo. */
+  .pad {
+    padding-inline: max(clamp(16px, 3vw, 28px), env(safe-area-inset-left, 0px))
+      max(clamp(16px, 3vw, 28px), env(safe-area-inset-right, 0px));
+  }
   .dev-wrap {
     display: block;
   }
@@ -282,17 +292,39 @@
 .dev-tree[open] {
   display: flex;
   flex-direction: column;
-  animation: tree-in 200ms var(--ease);
 }
-@keyframes tree-in {
-  from {
-    transform: translateX(-24px);
-    opacity: 0;
-  }
+/* It slides in from the left edge over a fading scrim, and slides back out on closing. */
+.dev-tree,
+.dev-tree::backdrop {
+  transition:
+    transform 280ms var(--ease),
+    opacity 280ms var(--ease),
+    overlay 280ms var(--ease) allow-discrete,
+    display 280ms var(--ease) allow-discrete;
+}
+.dev-tree:not([open]) {
+  transform: translateX(-100%);
 }
 .dev-tree::backdrop {
   background: color-mix(in srgb, var(--bg) 60%, transparent);
   backdrop-filter: blur(4px);
+}
+.dev-tree:not([open])::backdrop {
+  opacity: 0;
+}
+@starting-style {
+  .dev-tree[open] {
+    transform: translateX(-100%);
+  }
+  .dev-tree[open]::backdrop {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dev-tree,
+  .dev-tree::backdrop {
+    transition: none;
+  }
 }
 .dev-tree .hd {
   display: flex;
