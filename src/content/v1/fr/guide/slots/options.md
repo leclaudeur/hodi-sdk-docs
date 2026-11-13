@@ -13,7 +13,7 @@ key: "settingsPage"
 L'admin du serveur ouvre _Serveur › Plugins_, puis la page d'un plugin. Cette page montre, de haut en bas :
 
 1. Le nom du plugin, sa version et son interrupteur.
-2. « Options » : les [réglages](/fr/guide/manifest/#les-réglages--settings) que Hodi dessine.
+2. « Options » : les [réglages](/fr/guide/manifest/#les-réglages) que Hodi dessine.
 3. La carte `settingsPage`, que le plugin dessine.
 4. Les boutons pour supprimer le plugin.
 

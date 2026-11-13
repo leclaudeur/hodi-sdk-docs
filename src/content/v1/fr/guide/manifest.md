@@ -71,11 +71,15 @@ Hodi refuse un id qui ne respecte pas ces quatre règles :
 
 Une fois le plugin publié, l'id du plugin ne change plus. Pour Hodi, un autre id veut dire un autre plugin : Hodi installerait le nouveau plugin à côté de l'ancien, avec une base vide, et les données de l'ancien plugin ne suivraient pas.
 
-### `name` et `description`
+### `name`
 
-Le nom du plugin (60 caractères au plus) et sa description (280 caractères au plus) sont les deux textes que l'admin du serveur lit dans _Serveur › Plugins_. Le registre des plugins montre aussi ces deux textes, avant l'installation.
+Le nom du plugin, 60 caractères au plus. L'admin du serveur le lit dans _Serveur › Plugins_, et le registre des plugins le montre avant l'installation.
 
-Ces deux textes existent aussi dans chaque langue, dans les fichiers `locales/` du plugin, sous la clé `manifest` :
+### `description`
+
+La description du plugin, 280 caractères au plus. Elle s'affiche aux mêmes endroits que le nom.
+
+Le nom et la description existent aussi dans chaque langue, dans les fichiers `locales/` du plugin, sous la clé `manifest` :
 
 ```json title="locales/en.json"
 {
@@ -100,7 +104,9 @@ Ce champ dit pour quelle version de l'API des plugins le plugin est écrit. Aujo
 
 Hodi ne charge pas un plugin écrit pour une autre version de l'API : le code de ce plugin attendrait des fonctions que Hodi n'a plus, ou pas encore. Un plugin écrit pour l'API 1 reste listé dans _Serveur › Plugins_, avec un message qui demande de le mettre à jour.
 
-## Qui voit le plugin : `audience`
+## Qui voit le plugin
+
+### `audience`
 
 Le champ `audience` dit quels profils d'un foyer voient le plugin : la page du plugin dans Réglages, ses cartes et ses boutons. Hodi applique la même règle aux [routes](/fr/guide/server-context/#les-routes) du plugin : une personne qui ne voit pas le plugin ne peut pas non plus appeler ses routes.
 
@@ -114,9 +120,9 @@ Le champ `audience` a deux valeurs possibles :
 
 Avec `"all"`, une route peut quand même adapter sa réponse à la personne qui demande : `request.who.kind` vaut `"adult"`, `"teen"` ou `"child"`.
 
-## Les réglages : `settings`
+## Les réglages
 
-### À quoi sert un réglage
+### `settings`
 
 Un réglage est une valeur que l'admin du serveur peut changer sans toucher au code du plugin. Dans Hello world, le réglage `greeting` est le message que le plugin répond.
 
@@ -228,9 +234,9 @@ La partie serveur lit les réglages avec `ctx.settings()`. Cette fonction renvoi
 
 `ctx.settings()` donne toujours la valeur du moment : quand l'admin change un réglage, l'appel suivant voit déjà la nouvelle valeur.
 
-## Les permissions : `permissions`
+## Les permissions
 
-### Ce qu'est une permission
+### `permissions`
 
 Par défaut, un plugin ne peut faire que trois choses : garder ses données dans sa base, lire ses réglages et écrire dans le journal de Hodi.
 

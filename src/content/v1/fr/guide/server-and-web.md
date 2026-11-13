@@ -116,7 +116,7 @@ Pour tout le reste, la partie serveur passe par `ctx`, le contexte que Hodi donn
 | Poser une question à l'IA du foyer | Avec `ctx.ai.ask()`. Il faut la permission `ai`. |
 | Écrire une ligne dans le journal | Avec `ctx.log()`, pour suivre ce que fait le plugin. |
 
-Hodi vérifie chaque appel : le plugin n'obtient que ce que ses [permissions](/fr/guide/manifest/#les-permissions--permissions) lui ouvrent. [Le contexte serveur](/fr/guide/server-context/) décrit tout ce que `ctx` contient.
+Hodi vérifie chaque appel : le plugin n'obtient que ce que ses [permissions](/fr/guide/manifest/#les-permissions) lui ouvrent. [Le contexte serveur](/fr/guide/server-context/) décrit tout ce que `ctx` contient.
 
 ### Les paquets npm dans la partie serveur
 
@@ -181,7 +181,7 @@ const HelloCard = () => {
 definePlugin({ settingsPage: HelloCard })
 ```
 
-### Ce que la partie web importe de `hodi:sdk`
+### Ce que la partie web importe
 
 La partie web importe tout de `hodi:sdk` : les composants de Hodi (`Button`, `SettingRow`…), les hooks de Hodi (`usePluginApi`…) et `definePlugin`. Ces composants ne sont pas des copies : ce sont les composants de la page de Hodi elle-même. Le plugin a donc l'air du reste de l'app, dans chaque thème et sur chaque taille d'écran.
 
