@@ -18,6 +18,7 @@ import TilesPage from '../src/plugins/TilesPage.tsx'
 import SetupActions from '../src/plugins/SetupActions.tsx'
 import type { Lang, State } from './code.ts'
 import { momentsOf } from './kinds-fields.ts'
+import WeekChart from './week-chart.tsx'
 
 // Buttons, settings and step pages drawn by Hodi's own components from a state: the docs' render, then the
 // playground at each change.
@@ -155,9 +156,11 @@ export const DRAW_BUTTONS: Record<string, Draw> = {
     <OverviewCard
       title={s(state, 'title')}
       count={state.count === true ? 128 : undefined}
-      aside={state.aside === true ? <Chip tone="success">{tr(lang)('Actif', 'Active')}</Chip> : undefined}
+      aside={
+        state.aside === true ? <Chip tone="success">{tr(lang)('+12 cette semaine', '+12 this week')}</Chip> : undefined
+      }
     >
-      {state.body !== '' && <p className="mono">{s(state, 'body')}</p>}
+      {state.chart === true && <WeekChart lang={lang} />}
     </OverviewCard>
   ),
   steppage: stepPage,

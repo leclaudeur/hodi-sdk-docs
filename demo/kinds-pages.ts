@@ -99,18 +99,24 @@ export const overviewcard: Kind = {
     title: text('title', words('Bonjours', 'Hellos')),
     'count?': toggle('count', true),
     'aside?': toggle('aside', true),
-    'children?': text('body', words("34 aujourd'hui", '34 today'))
+    'children?': toggle('chart', true)
   },
   code: (state, lang) => ({
+    own: state.chart === true ? [['WeekChart', './WeekChart.tsx']] : [],
     body: [
       h(
         'OverviewCard',
         [
           ['title', s(str(state, 'title'))],
           ['count', state.count === true && e('128')],
-          ['aside', state.aside === true && { el: h('Chip', [['tone', s('success')]], tr(lang)('Actif', 'Active')) }]
+          [
+            'aside',
+            state.aside === true && {
+              el: h('Chip', [['tone', s('success')]], tr(lang)('+12 cette semaine', '+12 this week'))
+            }
+          ]
         ],
-        ...(state.body === '' ? [] : [h('p', [['className', s('mono')]], str(state, 'body'))])
+        ...(state.chart === true ? [h('WeekChart', [['days', e('week')]])] : [])
       )
     ]
   })

@@ -96,7 +96,7 @@ Hodi compare ce numéro avec celui du registre : quand le registre a un numéro 
 
 ### `api`
 
-`api` dit pour quelle version de l'API des plugins le plugin est écrit. Aujourd'hui, c'est `2`.
+Ce champ dit pour quelle version de l'API des plugins le plugin est écrit. Aujourd'hui, c'est `2`.
 
 Hodi ne charge pas un plugin écrit pour une autre version : son code attendrait des fonctions que Hodi n'a plus, ou pas encore. Un plugin écrit pour l'API 1 reste listé dans _Serveur › Plugins_, avec un message qui demande de le mettre à jour.
 
@@ -154,7 +154,7 @@ Voici ce que Hodi dessine pour quatre réglages, un de chaque type :
 ]
 ```
 
-Un plugin a 32 réglages au plus.
+> **Un plugin a 32 réglages au plus.**
 
 ### Les champs d'un réglage
 
@@ -288,7 +288,7 @@ En développement, avec `hodi-plugin dev`, le plugin garde toutes ses permission
 
 ### `menu`
 
-`menu` dit où placer la page du plugin dans Réglages. Il ne sert qu'au plugin qui a une page à lui, déclarée par `page` dans la partie web.
+Ce champ dit où placer la page du plugin dans Réglages. Il ne sert qu'au plugin qui a une page à lui, déclarée par `page` dans la partie web.
 
 ```json title="plugin.json"
 "menu": {
@@ -304,15 +304,15 @@ Sans `menu`, ou avec un groupe inconnu, la page va à la fin du groupe Foyer. [R
 
 ### `feeds`
 
-`feeds` déclare les flux d'articles que le plugin propose, 5 au plus. Un foyer les suit comme n'importe quelle autre source. [Flux](/fr/guide/slots/feeds/) montre un exemple complet.
+Ce champ déclare les flux d'articles que le plugin propose, 5 au plus. Un foyer les suit comme n'importe quelle autre source. [Flux](/fr/guide/slots/feeds/) montre un exemple complet.
 
 ### `memoryMb`
 
-`memoryMb` donne la mémoire de la partie serveur, en Mo. Elle vaut 16 par défaut, et 32 au plus. Un plugin ne l'augmente que s'il en a vraiment besoin : tous les plugins se partagent la mémoire du serveur.
+Ce champ donne la mémoire de la partie serveur, en Mo. Elle vaut 16 par défaut, et 32 au plus. Un plugin ne l'augmente que s'il en a vraiment besoin : tous les plugins se partagent la mémoire du serveur.
 
 ### `publicPages`
 
-`publicPages` liste les adresses des pages publiques du plugin que les moteurs de recherche peuvent lire, 20 au plus. Il demande la permission `publicRoutes`. Chaque adresse a sa langue, et peut avoir son titre, sa description et son image de partage.
+Ce champ liste les adresses des pages publiques du plugin que les moteurs de recherche peuvent lire, 20 au plus. Il demande la permission `publicRoutes`. Chaque adresse a sa langue, et peut avoir son titre, sa description et son image de partage.
 
 ```json title="plugin.json"
 "publicPages": {
@@ -333,5 +333,7 @@ Sans `menu`, ou avec un groupe inconnu, la page va à la fin du groupe Foyer. [R
 }
 ```
 
-- `defaults` : le titre (70 caractères au plus), la description (200 au plus) et l'image de chaque page qui n'a pas les siens.
-- `routes` : chaque adresse, avec sa langue en deux lettres. L'image est un fichier `.png`, `.jpg` ou `.webp` du dossier `assets/`, en 1200 × 630.
+- `defaults` : le titre, la description et l'image par défaut.
+- `routes` : chaque adresse, avec sa langue en deux lettres.
+
+Une page sans titre, description ou image à elle prend ceux de `defaults`. Le titre a 70 caractères au plus, la description 200. L'image est un fichier `.png`, `.jpg` ou `.webp` du dossier `assets/`, en 1200 × 630.

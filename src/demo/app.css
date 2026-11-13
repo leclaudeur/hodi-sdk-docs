@@ -115,6 +115,15 @@ dialog {
   box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.5);
 }
 
+/* A component alone in its window, as in its playground: in the middle, or across it for a card, a row or a field. */
+:host(.plain) .in {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+:host(.plain.wide) .in {
+  display: block;
+}
 /* A group's card on the Composants page: the same render, centred in its frame. */
 :host(.thumb) {
   display: grid !important;
@@ -132,9 +141,63 @@ dialog {
   display: block;
   width: min(420px, 100% - 48px);
 }
+/* The plugin's own content in OverviewCard's demo (week-chart.tsx): a week of bars, today's in the accent. */
+.week-chart {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  height: 96px;
+  margin-top: 16px;
+}
+.week-day {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+}
+.week-bar {
+  width: 100%;
+  border-radius: 6px;
+  background: var(--control-hover);
+}
+.week-day.today .week-bar {
+  background: var(--rust);
+}
+.week-label {
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.week-day:nth-child(1) .week-bar {
+  height: 44%;
+}
+.week-day:nth-child(2) .week-bar {
+  height: 67%;
+}
+.week-day:nth-child(3) .week-bar {
+  height: 33%;
+}
+.week-day:nth-child(4) .week-bar {
+  height: 81%;
+}
+.week-day:nth-child(5) .week-bar {
+  height: 59%;
+}
+.week-day:nth-child(6) .week-bar {
+  height: 100%;
+}
+.week-day:nth-child(7) .week-bar {
+  height: 89%;
+}
 /* A render is a picture of the app: the wheel always scrolls the docs' page, never a box inside the picture. */
 .in * {
   overscroll-behavior: auto !important;
+}
+
+/* A section's name, or a page's head, over its card: 20px apart, as the app's pages space them. */
+:is([class*='_label_'], [class*='_head_']) + [class*='_card_'] {
+  margin-top: 20px;
 }
 
 ._button_jc9xd_3 { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; gap: 8px; height: var(--button-height); padding: 0px 18px; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--control); color: var(--text); font-size: 14px; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; transition: background-color 120ms, scale 120ms; }

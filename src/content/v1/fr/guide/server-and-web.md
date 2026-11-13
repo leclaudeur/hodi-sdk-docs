@@ -23,7 +23,7 @@ Le plus simple est de partir d'un exemple : le plugin « Hello world » des [pre
 | Ce qu'elle utilise | `ctx`, le contexte que Hodi lui donne | `hodi:sdk`, les composants et les hooks de Hodi |
 | Obligatoire | Non | Non |
 
-Un plugin peut n'avoir qu'une des deux parties. Un plugin qui ajoute seulement un flux d'articles n'a pas besoin d'écran. Un plugin qui ajoute seulement une entrée au menu de l'avatar n'a pas besoin de serveur.
+> **Un plugin peut n'avoir qu'une des deux parties.** Un plugin qui ajoute seulement un flux d'articles n'a pas besoin d'écran. Un plugin qui ajoute seulement une entrée au menu de l'avatar n'a pas besoin de serveur.
 
 ## Les fichiers d'un plugin
 
@@ -270,4 +270,4 @@ const { t } = usePluginTranslation()
 
 Le modèle contient déjà le SDK, `@hodi-app/plugin-sdk` : `npm install` l'installe avec le reste. Sans le modèle, il s'ajoute avec `npm install --save-dev @hodi-app/plugin-sdk`.
 
-Les [premiers pas](/fr/getting-started/) montrent ces étapes en vrai, dans un éditeur : un plugin complet en quinze minutes.
+Les [premiers pas](/fr/getting-started/) montrent ces étapes en vrai, dans un éditeur : un plugin très simple, en une dizaine de minutes. C'est un exemple guidé pour découvrir les étapes : il ne produit rien d'utile au quotidien.

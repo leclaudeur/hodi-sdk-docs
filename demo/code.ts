@@ -24,6 +24,8 @@ export interface Snippet {
   body: (El | Call)[]
   lucide?: string[]
   uses?: string[]
+  // The plugin's own components, by name and file: imported from there, never from hodi:sdk.
+  own?: [string, string][]
   pre?: string[]
 }
 
@@ -133,7 +135,7 @@ const importLine = (names: string[], from: string): Line => [
 // The names a snippet takes from hodi:sdk: its components (not its icons), its calls and what it uses besides.
 const sdkNames = (snippet: Snippet) => {
   const names = new Set(snippet.uses ?? [])
-  const icons = new Set(snippet.lucide ?? [])
+  const icons = new Set([...(snippet.lucide ?? []), ...(snippet.own ?? []).map(([name]) => name)])
   const walk = (node: El | string) => {
     if (typeof node === 'string') return
     if (/^[A-Z]/.test(node.tag) && !icons.has(node.tag)) names.add(node.tag)
@@ -150,6 +152,13 @@ const sdkNames = (snippet: Snippet) => {
 export const snippetLines = (snippet: Snippet): Line[] => [
   importLine(sdkNames(snippet), 'hodi:sdk'),
   ...(snippet.lucide?.length ? [importLine([...new Set(snippet.lucide)], 'lucide-react')] : []),
+  ...(snippet.own ?? []).map(([name, file]): Line => [
+    ['keyword', 'import'],
+    plain(` ${name} `),
+    ['keyword', 'from'],
+    plain(' '),
+    ['string-expression', `'${file}'`]
+  ]),
   [],
   ...(snippet.pre ?? []).map(line => [plain(line)]),
   ...snippet.body.flatMap(node => ('call' in node ? callLines(node) : elLines(node, 0)))

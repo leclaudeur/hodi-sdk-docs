@@ -52,5 +52,7 @@ definePlugin({
 ## À savoir
 
 - **Qui les voit** : l'admin du serveur seulement.
-- **Ses routes** : une section appelle les `serverRoutes` du plugin, avec `usePluginServerApi()`. Ces routes refusent tout autre que l'admin du serveur.
-- **Une section invalide** : une section sans `id` valide, ou avec un `id` déjà pris, n'est pas affichée.
+- **Ses routes** : les `serverRoutes`, appelées avec `usePluginServerApi()`.
+- **Une section invalide** : sans `id` valide, ou avec un `id` déjà pris, elle n'est pas affichée.
+
+Les `serverRoutes` refusent toute personne autre que l'admin du serveur.

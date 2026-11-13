@@ -4,6 +4,7 @@ import { defineConfig } from 'astro/config'
 import { codeWindow } from './src/lib/code-window.ts'
 import { rehypeDocs } from './src/lib/rehype-docs.ts'
 import { rehypeFields } from './src/lib/rehype-fields.ts'
+import { rehypeNotice } from './src/lib/rehype-notice.ts'
 import { demoAssets } from './src/lib/demo.ts'
 import { rehypeRenders } from './src/lib/rehype-renders.ts'
 
@@ -28,6 +29,7 @@ export default defineConfig({
     rehypePlugins: [
       rehypeHeadingIds,
       rehypeFields,
+      rehypeNotice,
       [rehypeRenders, { files: Object.values(demoAssets).map(asset => asset.file) }],
       rehypeDocs
     ]

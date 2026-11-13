@@ -12,7 +12,8 @@ const play = readFileSync(
   `${work}/play/${readdirSync(`${work}/play`).find(name => name.endsWith('.css'))}`,
   'utf8'
 ).replace(/@font-face\s*{[^}]*}/g, '')
-writeFileSync(`${out}/play.css`, play)
+// The same reset and demo pieces as the renders (shadow.css), so a playground draws exactly like its render.
+writeFileSync(`${out}/play.css`, `${shadow}\n${play}`)
 writeFileSync(`${out}/play.js`, readFileSync(`${work}/play/play.js`))
 // The bundle's other files keep the names it imports them by (their hash is already in them).
 for (const name of readdirSync(out)) if (/^play-.+\.js$/.test(name)) rmSync(`${out}/${name}`)

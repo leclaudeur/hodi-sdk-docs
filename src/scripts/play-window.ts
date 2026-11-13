@@ -100,6 +100,8 @@ const goLive = async (term: HTMLElement, list: HTMLElement) => {
 }
 
 export const wirePlay = () => {
+  // A phone shows the render and its code only: there is no room to change a prop and see it change.
+  if (matchMedia('(max-width: 600px)').matches) return
   for (const term of document.querySelectorAll<HTMLElement>('.term.cmp[data-play]')) {
     const list = term.nextElementSibling
     if (!(list instanceof HTMLElement) || !list.classList.contains('props')) continue
@@ -110,7 +112,11 @@ export const wirePlay = () => {
     ]
     const pick = segment(t(lang, 'playView'), modes, 'list', async mode => {
       if (mode === 'play' && !live) live = await goLive(term, list)
-      list.classList.toggle('playing', mode === 'play' && live)
+      const playing = mode === 'play' && live
+      list.classList.toggle('playing', playing)
+      // While playing, the controls sit right under the render and the code under them: all three on one screen.
+      if (playing) term.querySelector('.cmp-code')?.before(list)
+      else term.after(list)
     })
     list.querySelector('.ph span:last-child')?.replaceWith(pick)
   }

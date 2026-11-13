@@ -23,7 +23,7 @@ The simplest way is to start from an example: the "Hello world" plugin of [Getti
 | What it uses | `ctx`, the context Hodi gives it | `hodi:sdk`, Hodi's components and hooks |
 | Required | No | No |
 
-A plugin may have only one of the two parts. A plugin that only adds a feed of articles needs no screen. A plugin that only adds an entry to the avatar's menu needs no server.
+> **A plugin may have only one of the two parts.** A plugin that only adds a feed of articles needs no screen. A plugin that only adds an entry to the avatar's menu needs no server.
 
 ## A plugin's files
 
@@ -270,4 +270,4 @@ const { t } = usePluginTranslation()
 
 The template already has the SDK, `@hodi-app/plugin-sdk`: `npm install` installs it with the rest. Without the template, it is added with `npm install --save-dev @hodi-app/plugin-sdk`.
 
-[Getting started](/en/getting-started/) shows these steps for real, in an editor: a whole plugin in fifteen minutes.
+[Getting started](/en/getting-started/) shows these steps for real, in an editor: a very simple plugin, in about ten minutes. It is a guided example to discover the steps: it makes nothing useful day to day.

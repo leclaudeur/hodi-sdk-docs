@@ -96,7 +96,7 @@ Hodi compares this number with the registry's: when the registry has a higher nu
 
 ### `api`
 
-`api` says which version of the plugin API the plugin is written for. Today, it is `2`.
+This field says which version of the plugin API the plugin is written for. Today, it is `2`.
 
 Hodi doesn't load a plugin written for another version: its code would expect functions Hodi no longer has, or doesn't have yet. A plugin written for API 1 stays listed in _Server › Plugins_, with a message asking to update it.
 
@@ -154,7 +154,7 @@ Here is what Hodi draws for four settings, one of each type:
 ]
 ```
 
-A plugin has 32 settings at most.
+> **A plugin has 32 settings at most.**
 
 ### A setting's fields
 
@@ -288,7 +288,7 @@ In development, with `hodi-plugin dev`, the plugin keeps all its permissions, ev
 
 ### `menu`
 
-`menu` says where to put the plugin's page in Settings. It is only for a plugin that has a page of its own, declared by `page` in the web part.
+This field says where to put the plugin's page in Settings. It is only for a plugin that has a page of its own, declared by `page` in the web part.
 
 ```json title="plugin.json"
 "menu": {
@@ -304,15 +304,15 @@ Without `menu`, or with an unknown group, the page goes at the end of the Househ
 
 ### `feeds`
 
-`feeds` declares the feeds of articles the plugin offers, 5 at most. A household follows them like any other source. [Feeds](/en/guide/slots/feeds/) shows a whole example.
+This field declares the feeds of articles the plugin offers, 5 at most. A household follows them like any other source. [Feeds](/en/guide/slots/feeds/) shows a whole example.
 
 ### `memoryMb`
 
-`memoryMb` gives the server part's memory, in MB. It is 16 by default, and 32 at most. A plugin only raises it if it really needs to: all plugins share the server's memory.
+This field gives the server part's memory, in MB. It is 16 by default, and 32 at most. A plugin only raises it if it really needs to: all plugins share the server's memory.
 
 ### `publicPages`
 
-`publicPages` lists the addresses of the plugin's public pages that search engines may read, 20 at most. It needs the `publicRoutes` permission. Each address has its language, and may have its title, its description and its sharing image.
+This field lists the addresses of the plugin's public pages that search engines may read, 20 at most. It needs the `publicRoutes` permission. Each address has its language, and may have its title, its description and its sharing image.
 
 ```json title="plugin.json"
 "publicPages": {
@@ -333,5 +333,7 @@ Without `menu`, or with an unknown group, the page goes at the end of the Househ
 }
 ```
 
-- `defaults`: the title (70 characters at most), the description (200 at most) and the image of every page that doesn't have its own.
-- `routes`: each address, with its two-letter language. The image is a `.png`, `.jpg` or `.webp` file of the `assets/` folder, at 1200 × 630.
+- `defaults`: the default title, description and image.
+- `routes`: each address, with its two-letter language.
+
+A page without a title, description or image of its own takes those of `defaults`. The title has 70 characters at most, the description 200. The image is a `.png`, `.jpg` or `.webp` file of the `assets/` folder, at 1200 × 630.

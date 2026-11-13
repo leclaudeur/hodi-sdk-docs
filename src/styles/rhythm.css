@@ -1,0 +1,12 @@
+/* One rhythm for every block (a code window, a render, a field list, cards, a notice): the same air above and under
+   it. Under a title, the title's own space only, whatever follows it. */
+.prose :is(.term, .props, .compare, .notice, .comp-grid, .slots) {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+.prose :is(h2, h3) + * {
+  margin-top: 0;
+}
+.prose > :last-child {
+  margin-bottom: 0;
+}
