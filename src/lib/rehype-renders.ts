@@ -32,6 +32,7 @@ const visit = (node: Root | Element, lang: Lang) => {
   }
 }
 
-// Its options only name the files, so that a new render invalidates the pages Astro keeps (see astro.config.ts).
+// Its options only name the files and the renders' hash, so that a new render invalidates the pages Astro keeps
+// (see astro.config.ts).
 export const rehypeRenders = (_options?: { files: string[] }) => (tree: Root, file: { path?: string }) =>
   visit(tree, langOf(file.path ?? ''))
