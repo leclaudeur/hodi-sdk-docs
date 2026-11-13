@@ -158,6 +158,15 @@
 .dev-side .subs.heads {
   margin: 0 0 6px 10px;
 }
+/* A top page's own titles sit under its pages, as in the page, and carry on the same rail without a break. */
+.dev-side .grp > .subs.heads {
+  margin: 2px 0 4px 19px;
+}
+.dev-side .grp > .subs + .subs.heads {
+  /* Back over the pages' bottom margin and the group's gap, so the two rails meet. */
+  margin-top: -7px;
+  padding-top: 2px;
+}
 .dev-side .subs.heads a {
   height: auto;
   min-height: 30px;
@@ -211,6 +220,11 @@
   display: none;
 }
 @media (max-width: 1023px) {
+  /* The bar's gutter, so the page lines up under the logo. */
+  .pad {
+    padding-inline: max(clamp(16px, 3vw, 28px), env(safe-area-inset-left, 0px))
+      max(clamp(16px, 3vw, 28px), env(safe-area-inset-right, 0px));
+  }
   .dev-wrap {
     display: block;
   }
@@ -282,17 +296,37 @@
 .dev-tree[open] {
   display: flex;
   flex-direction: column;
-  animation: tree-in 200ms var(--ease);
 }
-@keyframes tree-in {
-  from {
-    transform: translateX(-24px);
-    opacity: 0;
-  }
+/* It fades in and out with its scrim, as the app's dialogs do: nothing slides. */
+.dev-tree,
+.dev-tree::backdrop {
+  transition:
+    opacity 280ms var(--ease),
+    overlay 280ms var(--ease) allow-discrete,
+    display 280ms var(--ease) allow-discrete;
+}
+.dev-tree:not([open]) {
+  opacity: 0;
 }
 .dev-tree::backdrop {
   background: color-mix(in srgb, var(--bg) 60%, transparent);
-  backdrop-filter: blur(4px);
+}
+.dev-tree:not([open])::backdrop {
+  opacity: 0;
+}
+@starting-style {
+  .dev-tree[open] {
+    opacity: 0;
+  }
+  .dev-tree[open]::backdrop {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dev-tree,
+  .dev-tree::backdrop {
+    transition: none;
+  }
 }
 .dev-tree .hd {
   display: flex;

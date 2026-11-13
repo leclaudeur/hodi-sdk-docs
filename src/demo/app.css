@@ -152,6 +152,10 @@ dialog {
 :host(.thumb.small-elements) .in {
   zoom: 0.9;
 }
+/* A render is a picture of the app: the wheel always scrolls the docs' page, never a box inside the picture. */
+.in * {
+  overscroll-behavior: auto !important;
+}
 
 ._button_jc9xd_3 { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; gap: 8px; height: var(--button-height); padding: 0px 18px; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--control); color: var(--text); font-size: 14px; font-weight: 600; line-height: 1; text-decoration: none; white-space: nowrap; transition: background-color 120ms, scale 120ms; }
 ._withIcon_jc9xd_26 { padding: 0px 18px 0px 14px; }

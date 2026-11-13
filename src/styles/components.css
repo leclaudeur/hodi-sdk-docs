@@ -75,7 +75,6 @@
   --radius-thumb: 10px;
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --duration: 160ms;
-  overscroll-behavior-y: contain;
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
