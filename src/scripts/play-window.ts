@@ -99,25 +99,51 @@ const goLive = async (term: HTMLElement, list: HTMLElement) => {
   return true
 }
 
+// The component's name: the title its section opens with.
+const titleOf = (term: HTMLElement) => {
+  let node = term.previousElementSibling
+  while (node && !/^H[23]$/.test(node.tagName)) node = node.previousElementSibling
+  return node?.textContent?.trim() ?? ''
+}
+
+// Under the render, always in its place: three tabs, Code, Props and Personnaliser, which show one panel at a time. A
+// phone has no Personnaliser: there is no room to change a prop and see it change.
+const tabsOf = (term: HTMLElement, list: HTMLElement) => {
+  const phone = matchMedia('(max-width: 600px)').matches
+  const code = term.querySelector<HTMLElement>('.cmp-code')
+  let live = false
+  const tabs: [string, string][] = [
+    ['code', t(lang, 'playCode')],
+    ['props', t(lang, 'playProps')],
+    ...(phone ? [] : ([['play', t(lang, 'playEdit')]] as [string, string][]))
+  ]
+  const show = async (tab: string) => {
+    if (tab === 'play' && !live) live = await goLive(term, list)
+    if (code) code.hidden = tab !== 'code'
+    list.hidden = tab === 'code'
+    list.classList.toggle('playing', tab === 'play' && live)
+  }
+  // The bar is a field list's: the component's name at the left, the tabs at the right.
+  const bar = document.createElement('div')
+  bar.className = 'cmp-tabs mono'
+  const name = document.createElement('span')
+  name.textContent = titleOf(term)
+  bar.append(
+    name,
+    segment(t(lang, 'playView'), tabs, 'code', tab => void show(tab))
+  )
+  return { bar, show }
+}
+
 export const wirePlay = () => {
-  // A phone shows the render and its code only: there is no room to change a prop and see it change.
-  if (matchMedia('(max-width: 600px)').matches) return
   for (const term of document.querySelectorAll<HTMLElement>('.term.cmp[data-play]')) {
     const list = term.nextElementSibling
     if (!(list instanceof HTMLElement) || !list.classList.contains('props')) continue
-    let live = false
-    const modes: [string, string][] = [
-      ['list', t(lang, 'playList')],
-      ['play', t(lang, 'playEdit')]
-    ]
-    const pick = segment(t(lang, 'playView'), modes, 'list', async mode => {
-      if (mode === 'play' && !live) live = await goLive(term, list)
-      const playing = mode === 'play' && live
-      list.classList.toggle('playing', playing)
-      // While playing, the controls sit right under the render and the code under them: all three on one screen.
-      if (playing) term.querySelector('.cmp-code')?.before(list)
-      else term.after(list)
-    })
-    list.querySelector('.ph span:last-child')?.replaceWith(pick)
+    const { bar, show } = tabsOf(term, list)
+    // The tabs and the props move into the window, under the render and the code's place.
+    term.querySelector('.cmp-code')?.before(bar)
+    term.append(list)
+    list.classList.add('in-tabs')
+    void show('code')
   }
 }

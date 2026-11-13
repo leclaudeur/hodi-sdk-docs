@@ -183,3 +183,35 @@ html.pl-locked {
     justify-content: flex-end;
   }
 }
+
+/* Under the render: the component's name, then Code, Props and Personnaliser at the right, as a field list's bar. */
+.cmp-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 8px 8px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--column);
+  color: var(--text-3);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.cmp-tabs .seg {
+  padding: 2px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.cmp-tabs .seg button {
+  height: 32px;
+  padding: 0 14px;
+  font: 500 13px/1 var(--font-body);
+}
+.cmp-code[hidden],
+.props[hidden] {
+  display: none;
+}
+.prose .term .props.in-tabs > .ph {
+  display: none;
+}
