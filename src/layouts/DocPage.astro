@@ -7,7 +7,7 @@ import PrevNext from '../components/PrevNext.astro'
 import Sidebar from '../components/Sidebar.astro'
 import ComponentCards from '../components/ComponentCards.astro'
 import SlotCards from '../components/SlotCards.astro'
-import { counterpart, docs, groupsOf, languagesOf, latest, type Doc } from '../lib/docs.ts'
+import { counterpart, isCodeTitle, docs, groupsOf, languagesOf, latest, type Doc } from '../lib/docs.ts'
 import { t } from '../lib/i18n.ts'
 import { inline, plain } from '../lib/inline.ts'
 import Base from './Base.astro'
@@ -70,7 +70,7 @@ const jsonLd = {
             )}
             <header class="sec-head" data-pagefind-meta={`group:${kicker}`}>
               <span class="mono kicker">{kicker}</span>
-              <h1 class="title">
+              <h1 class:list={['title', { code: isCodeTitle(data.title) }]}>
                 {data.title}
                 <span class="dot" aria-hidden="true"></span>
               </h1>

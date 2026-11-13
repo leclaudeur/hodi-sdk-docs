@@ -1,5 +1,5 @@
 ---
-import type { Doc } from '../lib/docs.ts'
+import { isCodeTitle, type Doc } from '../lib/docs.ts'
 import Icon from './Icon.astro'
 
 // The pages under this one as cards, written like the Composants cards: an icon in the page's colour where those have
@@ -18,7 +18,7 @@ const { pages } = Astro.props
         <Icon name={page.entry.data.icon} size={20} />
       </span>
       <span class="tx">
-        <b>
+        <b class:list={{ code: isCodeTitle(page.entry.data.title) }}>
           {page.entry.data.title}
           <Icon name="arrow-right" />
         </b>

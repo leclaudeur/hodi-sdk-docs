@@ -96,7 +96,7 @@ import { AiButton } from 'hodi:sdk'
 
 ## ReaderButton
 
-A button at the end of an article, next to "Read the original". It's what [the reader](/en/guide/slots/reader/) draws.
+A button at the end of an article, next to "Read the original". It's the button of the [`readerAction`](/en/guide/slots/reader/) slot.
 
 ```tsx title="web/index.tsx" render="readerbutton" play="readerbutton"
 import { ReaderButton } from 'hodi:sdk'

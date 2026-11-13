@@ -1,31 +1,22 @@
 ---
-title: "Connexion"
-description: "Les écrans autour de la connexion : une autre façon d'entrer, une inscription, une étape juste après."
-intro: "Les écrans autour de la connexion : une autre façon d'entrer, une inscription, une page à la place de Connexion, ou une étape juste après. Ce sont les seuls emplacements qu'une personne voit avant d'avoir ouvert son profil."
+title: "signInExtras"
+description: "Un bouton ou un lien du plugin sous le formulaire de Connexion, comme « Créer mon foyer »."
+intro: "Un composant du plugin sous le formulaire de Connexion de Hodi. Il sert à proposer une autre façon d'entrer : un lien « Créer mon foyer », un bouton « Continuer avec Google »…"
 order: 6
 icon: "log-in"
 topic: "sport"
 key: "signInExtras"
 ---
 
-## Avant la connexion
+## Où s'affiche `signInExtras`
 
-Avant qu'une personne ait ouvert son profil, Hodi ne connaît pas encore son foyer. Il ne charge donc que les plugins qui ont la permission `publicRoutes`, et seulement leur fichier `web/public.tsx`. Ce fichier remplit les emplacements de cette page, et appelle les routes publiques du plugin.
+Sur l'écran de Connexion de Hodi, sous le formulaire, avant que la personne ait ouvert son profil.
 
-## Les emplacements
+À ce moment, Hodi ne connaît pas encore le foyer de la personne. Hodi ne charge donc que les plugins qui ont la permission `publicRoutes`, et seulement le fichier `web/public.tsx` de ces plugins. Les cinq emplacements de connexion se déclarent dans ce fichier : `signInExtras`, `signedOutPage`, `afterSignIn`, `whoIsReadingFooter` et `ageConsent`.
 
-<!-- prettier-ignore -->
-| Clé de `definePlugin` | Où l'écran apparaît |
-| --- | --- |
-| `signInExtras` | Sous le formulaire de Connexion. Par exemple, un lien « Créer mon foyer ». |
-| `signedOutPage` | À la place de Connexion, sur un appareil qui n'a pas encore de foyer. Par exemple, une page d'accueil. |
-| `afterSignIn` | Une étape juste après la connexion, avant d'entrer dans l'app. Par exemple, « Quel foyer ? ». |
-| `whoIsReadingFooter` | À côté de « Gérer les profils », sous « Qui lit ? ». Par exemple, « Changer de foyer ». |
-| `ageConsent` | Après la case « J'ai au moins 13 ans ». Par exemple, « et j'accepte les conditions ». |
+## Un bouton « Créer mon foyer »
 
-## Exemple
-
-Ce bouton, sous Connexion, crée un compte avec une route publique, puis connecte la personne :
+Ce bouton appelle une route publique du plugin, qui crée un compte. Quand la route a répondu, le bouton appelle `signedIn()` : Hodi redémarre l'app, avec la personne connectée.
 
 ```tsx title="web/public.tsx"
 import { Button, definePlugin, usePluginPublicApi } from 'hodi:sdk'
@@ -42,19 +33,17 @@ const SignUp = ({ signedIn }) => {
 definePlugin({ signInExtras: SignUp })
 ```
 
-## Ce qu'ils reçoivent
+## Ce que Hodi donne au composant de `signInExtras`
 
 <!-- prettier-ignore -->
-| Emplacement | Props | |
+| Props | Type | |
 | --- | --- | --- |
-| `signInExtras` | `layout`, `signedIn()` | `signedIn()` relance l'app, connectée, après une route qui a répondu `signIn`. |
-| `signedOutPage` | `layout`, `showSignIn()`, `signedIn()` | `showSignIn()` ouvre Connexion. |
-| `afterSignIn` | `layout`, `done()` | `done()` laisse la personne entrer dans l'app. |
-| `whoIsReadingFooter` | `layout` | |
+| `layout` | `'desktop' \| 'phone'` | La taille de l'écran. |
+| `signedIn` | `() => void` | Redémarre l'app, connectée, après une route qui a répondu `signIn`. |
 
-## Connecter quelqu'un
+## Connecter quelqu'un depuis une route publique
 
-Le plugin ne pose jamais la session lui-même. Avec la permission `signIn`, sa route publique répond `signIn` avec l'id d'un compte, et Hodi connecte l'appareil :
+Le plugin ne pose jamais la session lui-même. Avec la permission `signIn`, la route publique du plugin répond `signIn` avec l'id d'un compte, et Hodi connecte l'appareil à ce compte :
 
 ```tsx title="server/index.ts"
 publicRoutes: {
@@ -66,11 +55,11 @@ publicRoutes: {
 }
 ```
 
-Hodi n'accepte que l'id d'un compte que cet appel vient de créer, ou dont il vient de vérifier le mot de passe. Jamais celui de l'admin du serveur.
+Hodi n'accepte que l'id d'un compte que cet appel vient de créer, ou dont cet appel vient de vérifier le mot de passe. Jamais l'id de l'admin du serveur.
 
-## À savoir
+## À savoir sur `signInExtras`
 
-- **Refuser une connexion** : `checkSignIn`, côté serveur, à chaque connexion.
+- **Refuser une connexion** : `checkSignIn`, dans la partie serveur, à chaque connexion.
 - **Les limites** : 30 requêtes par minute par adresse, aucune venue d'un autre site.
 
-`checkSignIn` répond `null` pour laisser entrer, ou une clé de ses `locales` pour refuser avec ce message.
+`checkSignIn` répond `null` pour laisser entrer la personne, ou une clé des `locales` du plugin pour refuser la connexion avec ce message.

@@ -1,7 +1,7 @@
 ---
 title: "Step pages"
 description: "The pages of setup and of \"I have a code\": a step, tiles, the buttons."
-intro: "For the [Sign-in](/en/guide/slots/sign-in/) and [Setup](/en/guide/slots/setup/) slots: these pages have the logo at the top, the licence at the bottom and the card in the middle, like Hodi's own."
+intro: "For the [`signInExtras`](/en/guide/slots/sign-in/), [`afterSignIn`](/en/guide/slots/after-sign-in/) and [`setupSteps`](/en/guide/slots/setup/) slots: these pages have the logo at the top, the licence at the bottom and the card in the middle, like Hodi's own."
 order: 3
 icon: "list-checks"
 topic: "climate"
@@ -76,7 +76,7 @@ import { TilesPage } from 'hodi:sdk'
 
 ## SetupActions
 
-The buttons at the bottom of a step your plugin adds to [setup](/en/guide/slots/setup/). Hodi puts "Back" on the left, your buttons go on the right.
+The buttons at the bottom of a step your plugin adds to the setup, with [`setupSteps`](/en/guide/slots/setup/). Hodi puts "Back" on the left, your buttons go on the right.
 
 ```tsx title="web/index.tsx" render="setupactions" play="setupactions"
 import { Button, SetupActions } from 'hodi:sdk'

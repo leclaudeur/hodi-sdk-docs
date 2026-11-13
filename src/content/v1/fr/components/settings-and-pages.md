@@ -1,7 +1,7 @@
 ---
 title: "Réglages et pages"
 description: "Une page de réglages, ses cartes, ses lignes, la fin d'une longue liste et les cartes de Vue d'ensemble."
-intro: "Les pages des emplacements [Réglages](/fr/guide/slots/settings/) et [Serveur](/fr/guide/slots/server/) se construisent avec ces composants."
+intro: "Les pages des emplacements [`page`](/fr/guide/slots/settings/) et [`serverSections`](/fr/guide/slots/server/) se construisent avec ces composants."
 order: 2
 icon: "settings"
 topic: "world"
@@ -125,7 +125,7 @@ import { MoreRow, SettingRow, SettingsCard } from 'hodi:sdk'
 
 ## OverviewCard
 
-Une carte de [Vue d’ensemble](/fr/guide/slots/overview/) : son titre, un nombre, une puce au bout, puis le contenu du plugin.
+Une carte de [`overviewCards`](/fr/guide/slots/overview/) : son titre, un nombre, une puce au bout, puis le contenu du plugin.
 
 ```tsx title="web/index.tsx" render="overviewcard" play="overviewcard"
 import { Chip, OverviewCard } from 'hodi:sdk'

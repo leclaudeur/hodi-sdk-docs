@@ -1,5 +1,5 @@
 ---
-title: "Sa carte d'admin"
+title: "settingsPage"
 description: "Une carte du plugin dans Serveur › Plugins, sous ses réglages, pour ce qu'un réglage seul ne permet pas."
 intro: "Une carte que le plugin dessine lui-même sur sa page de _Serveur › Plugins_, sous les réglages que Hodi dessine pour lui. Elle sert à ce que de simples réglages ne permettent pas : un bouton pour tester, une liste, des statistiques…"
 order: 1
@@ -8,20 +8,20 @@ topic: "tech"
 key: "settingsPage"
 ---
 
-## Où elle s'affiche
+## Où s'affiche `settingsPage`
 
-L'admin du serveur ouvre _Serveur › Plugins_, puis la page d'un plugin. Cette page a, de haut en bas :
+L'admin du serveur ouvre _Serveur › Plugins_, puis la page d'un plugin. Cette page montre, de haut en bas :
 
 1. Le nom du plugin, sa version et son interrupteur.
-2. « Options » : les [réglages](/fr/guide/manifest/#les-réglages) de `plugin.json`, que Hodi dessine.
-3. La carte du plugin, `settingsPage`.
+2. « Options » : les [réglages](/fr/guide/manifest/#les-réglages-du-plugin--settings) que Hodi dessine.
+3. La carte `settingsPage`, que le plugin dessine.
 4. Les boutons pour supprimer le plugin.
 
-Le plugin ne dessine que la partie 3. Le reste vient de Hodi.
+Le plugin ne dessine que la carte `settingsPage`. Le reste de la page vient de Hodi.
 
-## Exemple
+## Une carte « Dire bonjour »
 
-Hello world y met un bouton « Dire bonjour » qui appelle sa route et affiche la réponse :
+Hello world met dans cette carte un bouton « Dire bonjour ». Un clic sur ce bouton appelle la route `/hello`, puis la carte affiche la réponse :
 
 ```tsx title="web/index.tsx"
 import { Button, SettingRow, definePlugin, usePluginApi } from 'hodi:sdk'
@@ -46,10 +46,10 @@ const HelloCard = () => {
 definePlugin({ settingsPage: HelloCard })
 ```
 
-## À savoir
+## À savoir sur `settingsPage`
 
-- **Ce qu'elle reçoit** : rien.
-- **Ses données** : elle les lit par ses routes, avec `usePluginApi()`.
-- **Qui la voit** : l'admin du serveur seulement, comme toute la page _Serveur › Plugins_.
-- **Quand elle s'affiche** : seulement quand le plugin est activé.
-- **Son dessin** : des `SettingRow`, comme les réglages au-dessus.
+- **Ce que Hodi donne au composant** : aucune prop.
+- **Les données de la carte** : les routes du plugin, avec `usePluginApi()`.
+- **Qui voit la carte** : l'admin du serveur seulement, comme toute la page.
+- **Quand la carte s'affiche** : seulement quand le plugin est activé.
+- **Le dessin de la carte** : des `SettingRow`, comme les réglages au-dessus.

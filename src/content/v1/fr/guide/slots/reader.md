@@ -1,5 +1,5 @@
 ---
-title: "Lecteur"
+title: "readerAction"
 description: "Un bouton sous un article ouvert, à côté de « Lire l'original », pour que le plugin agisse sur cet article."
 intro: "Un bouton sous un article ouvert, à côté de « Lire l'original ». Il sert à faire quelque chose de cet article-là : le signaler, l'envoyer quelque part, le noter…"
 order: 5
@@ -8,13 +8,13 @@ topic: "culture"
 key: "readerAction"
 ---
 
-## Où il s'affiche
+## Où s'affiche `readerAction`
 
-Quand une personne ouvre un article dans le lecteur de Hodi, une rangée de boutons suit le texte, avec « Lire l'original ». Le bouton du plugin s'y ajoute.
+Quand une personne ouvre un article dans le lecteur de Hodi, une rangée de boutons suit le texte de l'article, avec « Lire l'original ». Le bouton du plugin s'ajoute à cette rangée.
 
-## Exemple
+## Un bouton « Signaler »
 
-Ce bouton signale l'article à la partie serveur du plugin :
+Ce bouton envoie l'id de l'article à une route du plugin :
 
 ```tsx title="web/index.tsx"
 import { ReaderButton, definePlugin, usePluginApi } from 'hodi:sdk'
@@ -33,20 +33,22 @@ const Report = ({ article }) => {
 definePlugin({ readerAction: Report })
 ```
 
-## Ce qu'il reçoit
+## Ce que Hodi donne au composant de `readerAction`
+
+Hodi donne au composant une seule prop, `article` : l'article ouvert. Voici les champs de `article` :
 
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
 | `article.id` | `string` | L'id de l'article dans Hodi. |
-| `article.title` | `string` | Son titre. |
-| `article.url` | `string` | Son adresse sur le site d'origine. |
-| `article.sourceId` | `string` | L'id de sa source. |
-| `article.sourceName` | `string` | Le nom de sa source, comme « Le Monde ». |
+| `article.title` | `string` | Le titre de l'article. |
+| `article.url` | `string` | L'adresse de l'article sur le site d'origine. |
+| `article.sourceId` | `string` | L'id de la source de l'article. |
+| `article.sourceName` | `string` | Le nom de la source, comme « Le Monde ». |
 
-## Côté serveur
+## Retrouver l'article dans la partie serveur
 
-La route reçoit l'id de l'article, jamais une adresse à ouvrir. Avec la permission `articles`, elle retrouve l'article chez Hodi :
+La route du plugin reçoit l'id de l'article, jamais une adresse à ouvrir. Avec la permission `articles`, la route retrouve l'article chez Hodi :
 
 ```tsx title="server/index.ts"
 'POST /report': async (request, ctx) => {
@@ -61,7 +63,7 @@ La route reçoit l'id de l'article, jamais une adresse à ouvrir. Avec la permis
 
 Ainsi, un plugin ne peut pas se servir du lecteur pour ouvrir n'importe quelle adresse.
 
-## À savoir
+## À savoir sur `readerAction`
 
-- **Son dessin** : un `ReaderButton`, comme les boutons de Hodi au même endroit.
-- **Qui le voit** : les profils prévus par `audience`.
+- **Le dessin du bouton** : un `ReaderButton`, comme les boutons de Hodi au même endroit.
+- **Qui voit le bouton** : les profils prévus par `audience`.

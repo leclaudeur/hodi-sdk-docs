@@ -1,5 +1,5 @@
 ---
-title: "Its admin card"
+title: "settingsPage"
 description: "A card of the plugin in Server › Plugins, under its settings, for what a setting alone can't do."
 intro: "A card the plugin draws itself on its page in _Server › Plugins_, under the settings Hodi draws for it. It is for what plain settings can't do: a button to test, a list, statistics…"
 order: 1
@@ -8,20 +8,20 @@ topic: "tech"
 key: "settingsPage"
 ---
 
-## Where it shows
+## Where `settingsPage` shows
 
-The server admin opens _Server › Plugins_, then a plugin's page. From top to bottom, that page has:
+The server admin opens _Server › Plugins_, then a plugin's page. This page shows, from top to bottom:
 
 1. The plugin's name, its version and its switch.
-2. "Options": the [settings](/en/guide/manifest/#settings) of `plugin.json`, which Hodi draws.
-3. The plugin's card, `settingsPage`.
-4. The buttons to remove the plugin.
+2. "Options": the [settings](/en/guide/manifest/#the-plugins-settings-settings) Hodi draws.
+3. The `settingsPage` card, which the plugin draws.
+4. The buttons to delete the plugin.
 
-The plugin only draws part 3. The rest comes from Hodi.
+The plugin only draws the `settingsPage` card. The rest of the page comes from Hodi.
 
-## Example
+## A "Say hello" card
 
-Hello world puts a "Say hello" button there, which calls its route and shows the answer:
+Hello world puts a "Say hello" button in this card. A click on this button calls the `/hello` route, then the card shows the answer:
 
 ```tsx title="web/index.tsx"
 import { Button, SettingRow, definePlugin, usePluginApi } from 'hodi:sdk'
@@ -29,7 +29,7 @@ import { useState } from 'react'
 
 const HelloCard = () => {
   const api = usePluginApi()
-  const [text, setText] = useState('Your route’s answer')
+  const [text, setText] = useState('Your route\'s answer')
   const sayHello = async () => {
     const answer = await api('/hello', { method: 'POST' })
     setText((await answer.json()).text)
@@ -46,10 +46,10 @@ const HelloCard = () => {
 definePlugin({ settingsPage: HelloCard })
 ```
 
-## Good to know
+## Good to know about `settingsPage`
 
-- **What it receives**: nothing.
-- **Its data**: it reads it through its routes, with `usePluginApi()`.
-- **Who sees it**: the server admin only, like the whole _Server › Plugins_ page.
-- **When it shows**: only while the plugin is on.
-- **How it looks**: `SettingRow`s, like the settings above it.
+- **What Hodi gives the component**: no prop.
+- **The card's data**: the plugin's routes, with `usePluginApi()`.
+- **Who sees the card**: the server admin only, like the whole page.
+- **When the card shows**: only when the plugin is on.
+- **How the card is drawn**: with `SettingRow`s, like the settings above it.
