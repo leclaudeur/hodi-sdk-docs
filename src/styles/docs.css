@@ -176,10 +176,6 @@
   line-height: 1.25;
   white-space: normal;
 }
-.dev-side .subs.heads a.h3 {
-  padding-left: 22px;
-  font-size: 12.5px;
-}
 .dev-side .subs.heads a.on {
   color: var(--text);
 }
