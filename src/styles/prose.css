@@ -60,13 +60,10 @@
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
 }
+/* A name from the code in a sentence: the mono font in the text's colour, without a box, so the line reads on. */
 .prose :not(pre) > code {
-  padding: 1px 6px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--control);
   color: var(--text);
-  font: 500 0.8em var(--font-mono);
+  font: 500 0.86em var(--font-mono);
   white-space: nowrap;
 }
 @media (max-width: 600px) {

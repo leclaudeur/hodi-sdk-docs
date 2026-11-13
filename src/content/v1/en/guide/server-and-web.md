@@ -15,12 +15,13 @@ The simplest way is to start from an example: the "Hello world" plugin of [Getti
 - **Hodi links them**: it passes the click on to the server, then the answer back to the button.
 
 <!-- prettier-ignore -->
-| | The server part | The web part |
+| | Server part | Web part |
 | --- | --- | --- |
-| icon | server | monitor |
-| topic | tech | science |
-| | `server/index.ts`, on Hodi's server. | `web/index.tsx`, in the browser. |
-| | Answers routes, keeps data, runs tasks. | Draws screens, cards and buttons. |
+| Its file | `server/index.ts` | `web/index.tsx` |
+| Where it runs | On Hodi's server, in a sandbox | In the browser, in Hodi's pages |
+| Its role | Answer routes, keep data, run tasks | Draw screens, cards and buttons |
+| What it uses | `ctx`, the context Hodi gives it | `hodi:sdk`, Hodi's components and hooks |
+| Required | No | No |
 
 > **A plugin may have only one of the two parts.** A plugin that only adds a feed of articles needs no screen. A plugin that only adds an entry to the avatar's menu needs no server.
 

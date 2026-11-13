@@ -1,5 +1,4 @@
 import type { Element, ElementContent } from 'hast'
-import { iconNode, svgAttributes } from './icons.ts'
 
 // Any other Markdown table becomes rows or cards, never a grid: a grid's columns crush or overflow on a phone.
 // A table whose first heading is empty and whose others are named compares those: one card per column, side by side
@@ -58,46 +57,29 @@ const rowOf = (cells: Element[], names: string[]) => {
   )
 }
 
-// A card per thing compared, as the cards of a page's pages: an icon in a topic's colour, its name, a short text.
-// The table's rows say what goes in it: « icon » and « topic » by name, every other row a line of the text.
-const svg = (name: string) =>
-  ({
-    type: 'element',
-    tagName: 'svg',
-    properties: svgAttributes(20),
-    children: iconNode(name).map(([tag, attributes]) => ({
-      type: 'element',
-      tagName: tag,
-      properties: attributes,
-      children: []
-    }))
-  }) as Element
-
+// A comparison, as a field list that shows one thing at a time: a switch in its bar picks the thing, each row gives
+// the point's name and that thing's value (scripts/compare.ts). Every value is in the page, for search engines too.
 const compareOf = (names: string[], rows: Element[][]) => {
-  const valueOf = (key: string, index: number) => label(rows.find(cells => label(cells[0]) === key)?.[index + 1])
-  const lines = rows.filter(cells => !['icon', 'topic'].includes(label(cells[0])))
-  const card = (name: string, index: number) => {
-    const topic = valueOf('topic', index)
-    return {
-      ...el(
-        'div',
-        ['slot'],
-        [
-          el('span', ['ic'], [svg(valueOf('icon', index) || 'circle')]),
-          el(
-            'span',
-            ['tx'],
-            [
-              el('b', [], [{ type: 'text', value: name }]),
-              ...lines.map(cells => el('span', [], cells[index + 1]?.children ?? []))
-            ]
-          )
-        ]
-      ),
-      properties: { className: ['slot'], ...(topic ? { dataTopic: topic } : {}) }
-    }
+  const things = names.slice(1)
+  const button = (name: string, index: number) => ({
+    ...el('button', [], [{ type: 'text', value: name }]),
+    properties: { type: 'button', dataI: String(index), ariaPressed: index === 0 ? 'true' : 'false' }
+  })
+  const bar = el('div', ['ph', 'mono'], [el('div', ['seg'], things.map(button))])
+  const value = (cells: Element[], index: number) => ({
+    ...el('p', ['cmp-v'], cells[index + 1]?.children ?? []),
+    properties: { className: ['cmp-v'], dataI: String(index) }
+  })
+  const row = (cells: Element[]) =>
+    el(
+      'div',
+      ['pr'],
+      [el('div', ['pn'], [el('strong', [], cells[0]?.children ?? [])]), ...things.map((_, i) => value(cells, i))]
+    )
+  return {
+    ...el('div', ['props', 'rows', 'compare'], [bar, ...rows.map(row)]),
+    properties: { className: ['props', 'rows', 'compare'], dataShow: '0' }
   }
-  return el('div', ['slots', 'parts'], names.slice(1).map(card))
 }
 
 export const rowsOf = (table: Element): Element => {
