@@ -75,38 +75,31 @@ html:has(dialog.sx[open]) {
   display: flex;
   flex-direction: column;
 }
-/* It fades in a little lower than it rests, and fades back out on closing. */
-.sx,
-.sx::backdrop {
-  --sx-from: translateY(-8px);
-  transition:
-    transform 220ms var(--ease),
-    opacity 220ms var(--ease),
-    overlay 220ms var(--ease) allow-discrete,
-    display 220ms var(--ease) allow-discrete;
+/* As the app's dialogs: it rises a little out of a page that dims when it opens, and goes at once when it closes. */
+.sx[open] {
+  animation: sx-in 240ms var(--ease);
 }
-.sx:not([open]),
-.sx:not([open])::backdrop {
-  transform: var(--sx-from);
-  opacity: 0;
+.sx[open]::backdrop {
+  animation: sx-scrim-in 240ms var(--ease);
 }
 .sx::backdrop {
-  background: color-mix(in srgb, var(--bg) 70%, transparent);
-  transform: none;
+  background: var(--scrim);
 }
-@starting-style {
-  .sx[open] {
-    transform: var(--sx-from);
+@keyframes sx-in {
+  from {
     opacity: 0;
+    transform: translateY(8px) scale(0.98);
   }
-  .sx[open]::backdrop {
+}
+@keyframes sx-scrim-in {
+  from {
     opacity: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .sx,
-  .sx::backdrop {
-    transition: none;
+  .sx[open],
+  .sx[open]::backdrop {
+    animation: none;
   }
 }
 .sx-h {
@@ -293,10 +286,10 @@ html:has(dialog.sx[open]) {
 }
 
 @media (max-width: 600px) {
-  /* A phone's full screen opens and closes at once: only the computer's card fades, like the app's dialogs. */
-  .sx,
-  .sx::backdrop {
-    transition: none;
+  /* A phone's full screen opens and closes at once: only the card of a tablet or a computer moves. */
+  .sx[open],
+  .sx[open]::backdrop {
+    animation: none;
   }
   .sx {
     width: 100%;

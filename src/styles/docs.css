@@ -264,6 +264,7 @@
   .dev-crumb .path .sep {
     color: var(--text-3);
   }
+  /* The whole path in the mono captions, its last step a shade brighter. */
   .dev-crumb .path a {
     overflow: hidden;
     color: var(--text);
@@ -295,6 +296,40 @@
 }
 .dev-tree::backdrop {
   background: color-mix(in srgb, var(--bg) 60%, transparent);
+}
+/* On a tablet it comes 8 px from the left and fades, both ways, as the phone menu comes from the bar; a phone's
+   panel covers the whole screen and opens at once. */
+@media (min-width: 601px) {
+  .dev-tree,
+  .dev-tree::backdrop {
+    transition:
+      opacity 200ms var(--ease),
+      transform 200ms var(--ease),
+      overlay 200ms var(--ease) allow-discrete,
+      display 200ms var(--ease) allow-discrete;
+  }
+  .dev-tree:not([open]) {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  .dev-tree:not([open])::backdrop {
+    opacity: 0;
+  }
+  @starting-style {
+    .dev-tree[open] {
+      opacity: 0;
+      transform: translateX(-8px);
+    }
+    .dev-tree[open]::backdrop {
+      opacity: 0;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dev-tree,
+  .dev-tree::backdrop {
+    transition: none;
+  }
 }
 .dev-tree .hd {
   display: flex;
