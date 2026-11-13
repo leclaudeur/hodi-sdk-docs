@@ -190,7 +190,7 @@ Here is where to find each topic of the web part:
 - **Where the plugin shows**: `definePlugin()` says so, see [Slots](/en/guide/slots/).
 - **The components**: the app's, listed in [Components](/en/components/).
 - **The texts**: `usePluginTranslation()` reads them in the `locales/` folder.
-- **The styles**: a CSS file, with classes prefixed by the plugin's id.
+- **The styles**: a CSS file, with classes prefixed by the plugin's id and Hodi's [tokens](/en/tokens/).
 
 ### The web part's styles
 
@@ -202,7 +202,7 @@ Hodi's page refuses inline styles, such as `style={{ color: 'red' }}`. So every 
 }
 ```
 
-Colours come from Hodi's variables, such as `var(--text-2)`. These variables change with the theme (Light, Dark, Poudré). A hard-coded colour, such as `#333`, doesn't change and becomes unreadable in another theme.
+Colours come from Hodi's variables, such as `var(--text-2)`. These variables change with the theme (Light, Dark, Poudré). A hard-coded colour, such as `#333`, doesn't change and becomes unreadable in another theme. [Tokens](/en/tokens/) lists all these variables: colours, fonts, corners and motion.
 
 ### When Hodi shows the web part
 

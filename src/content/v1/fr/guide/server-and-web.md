@@ -190,7 +190,7 @@ Voici où trouver chaque sujet de la partie web :
 - **Où le plugin s'affiche** : `definePlugin()` le dit, voir [les emplacements](/fr/guide/slots/).
 - **Les composants** : ceux de l'app, listés dans [Composants](/fr/components/).
 - **Les textes** : `usePluginTranslation()` les lit dans le dossier `locales/`.
-- **Les styles** : un fichier CSS, avec des classes préfixées par l'id du plugin.
+- **Les styles** : un fichier CSS, avec des classes préfixées par l'id du plugin et les [tokens](/fr/tokens/) de Hodi.
 
 ### Les styles de la partie web
 
@@ -202,7 +202,7 @@ La page de Hodi refuse les styles en ligne, comme `style={{ color: 'red' }}`. Ch
 }
 ```
 
-Les couleurs viennent des variables de Hodi, comme `var(--text-2)`. Ces variables changent avec le thème (Clair, Sombre, Poudré). Une couleur écrite en dur, comme `#333`, ne change pas et devient illisible dans un autre thème.
+Les couleurs viennent des variables de Hodi, comme `var(--text-2)`. Ces variables changent avec le thème (Clair, Sombre, Poudré). Une couleur écrite en dur, comme `#333`, ne change pas et devient illisible dans un autre thème. [Tokens](/fr/tokens/) liste toutes ces variables : couleurs, polices, arrondis et mouvement.
 
 ### Quand Hodi affiche la partie web
 
