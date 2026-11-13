@@ -1,17 +1,23 @@
 ---
 import type { Doc } from '../../lib/docs.ts'
 import { t } from '../../lib/i18n.ts'
+import { liveRow, readCode, startOf } from '../../lib/live.ts'
 import Icon from '../Icon.astro'
 
-// What Hodi shows at this step, drawn with the app's settings card, and the server's log under it.
+// What Hodi shows at this step, drawn with the app's settings card, and the server's log under it. Until the step is
+// done, the live row shows what the code as it starts says, and what the step brings stays hidden.
 interface Props {
   doc: Doc
   current: number
+  done: boolean
 }
 
-const { doc, current } = Astro.props
+const { doc, current, done } = Astro.props
 const step = doc.entry.data.steps?.[current]
 const preview = step?.preview
+const greeting = preview?.rows?.[0]?.value ?? ''
+const live = step && !done ? liveRow(step.file, readCode(step.file, startOf(step)), greeting) : {}
+const rows = preview?.rows?.map(row => (row.live ? { ...row, ...live } : row))
 // The log's last word is its status: green when it went well.
 const [logText, logStatus] = step?.log ? [step.log.replace(/\S+$/, ''), step.log.match(/\S+$/)?.[0]] : []
 ---
@@ -19,8 +25,8 @@ const [logText, logStatus] = step?.log ? [step.log.replace(/\S+$/, ''), step.log
 {preview && (
   <section class="tz-prev" data-pane="prev" aria-label={t(doc.lang, 'firstStepsPreview')} data-pagefind-ignore>
     <div class="tb">
-      <span class="mono">{`${t(doc.lang, 'firstStepsPreview')} · ${preview.crumb}`}</span>
-      <span class="mono live">{t(doc.lang, 'firstStepsLive')}</span>
+      <span class="mono">{t(doc.lang, 'firstStepsPreview')}</span>
+      <span class="chip success live">{t(doc.lang, 'firstStepsLive')}</span>
     </div>
     <div class="body">
       <div>
@@ -31,8 +37,8 @@ const [logText, logStatus] = step?.log ? [step.log.replace(/\S+$/, ''), step.log
         <p class="intro">{preview.intro}</p>
       </div>
       <div class="s-card">
-        {preview.rows?.map(row => (
-          <div class="s-row">
+        {rows?.map(row => (
+          <div class="s-row" data-live={row.live ? '' : undefined} data-greeting={row.live ? greeting : undefined}>
             <span class="t">
               <b>{row.label}</b>
               <span class:list={[!row.value ? 'h' : row.flash && 'flash']} data-answer={row.answer}>
@@ -49,7 +55,7 @@ const [logText, logStatus] = step?.log ? [step.log.replace(/\S+$/, ''), step.log
           </div>
         ))}
         {preview.plugins?.map(plugin => (
-          <div class="s-row">
+          <div class="s-row" data-after={plugin.after ? '' : undefined} hidden={plugin.after && !done}>
             <span class="mark">
               <Icon name={plugin.icon} size={20} />
             </span>
@@ -63,7 +69,7 @@ const [logText, logStatus] = step?.log ? [step.log.replace(/\S+$/, ''), step.log
       </div>
     </div>
     {step?.log && (
-      <p class="tz-log">
+      <p class="tz-log" data-after hidden={!done}>
         {logText}
         <span class="ok">{logStatus}</span>
       </p>

@@ -13,7 +13,9 @@ const row = z.object({
   flash: z.boolean().optional(),
   primary: z.boolean().optional(),
   // What the row says once its button is clicked: the route's answer.
-  answer: z.string().optional()
+  answer: z.string().optional(),
+  // The row that follows the code as the person types: its value, its answer or its button's look.
+  live: z.boolean().optional()
 })
 
 // A plugin in Serveur › Plugins, with its chip.
@@ -22,7 +24,9 @@ const plugin = z.object({
   icon: z.string(),
   hint: z.string(),
   chip: z.string(),
-  tone: z.enum(['success', 'warning'])
+  tone: z.enum(['success', 'warning']),
+  // A plugin that only shows once the step is done.
+  after: z.boolean().optional()
 })
 
 // One step of Premiers pas: its text and to-do list, the file it edits, and what Hodi shows.
@@ -33,13 +37,15 @@ const step = z.object({
   todo: z.array(z.string()),
   file: z.string(),
   lang: z.string(),
-  // The line the step changes, marked in the code.
+  // The line the person changes, as it starts; the code is the file once the step is done.
   edit: z.number(),
+  start: z.string(),
   code: z.string(),
+  // The first line that only shows once the step is done, such as a command's output.
+  reveal: z.number().optional(),
   preview: z.object({
     title: z.string(),
     intro: z.string(),
-    crumb: z.string(),
     rows: z.array(row).optional(),
     plugins: z.array(plugin).optional()
   }),

@@ -2,21 +2,41 @@
 import type { Doc } from '../../lib/docs.ts'
 import { highlight } from '../../lib/first-steps.ts'
 import { t } from '../../lib/i18n.ts'
+import { finishedOf, outputOf, startOf } from '../../lib/live.ts'
 
-// The editor: one tab per file, the steps already done can be read again, the ones to come wait.
+// The editor: one tab per file, the steps already done can be read again, the ones to come wait. The current file
+// starts as the step found it, and the script turns it into an editor the person types in.
 interface Props {
   doc: Doc
   current: number
+  done: boolean
 }
 
-const { doc, current } = Astro.props
+const { doc, current, done } = Astro.props
 const steps = doc.entry.data.steps ?? []
 const files = await Promise.all(
-  steps.map(async (step, index) => ({
-    file: step.file,
-    open: index <= current,
-    html: index <= current ? await highlight(step.code, step.lang, step.edit) : ''
-  }))
+  steps.map(async (step, index) => {
+    const typing = index === current && !done
+    const code = typing ? startOf(step) : step.code
+    return {
+      file: step.file,
+      open: index <= current,
+      typing,
+      html: index <= current ? await highlight(code, step.lang, step.edit) : '',
+      // A command's output, which the terminal prints once the step is done.
+      reveal: typing && step.reveal ? await highlight(outputOf(step), step.lang, 0, step.reveal) : '',
+      editor: typing
+        ? JSON.stringify({
+            file: step.file,
+            lang: step.lang,
+            edit: step.edit,
+            start: startOf(step),
+            finished: finishedOf(step),
+            label: t(doc.lang, 'firstStepsEditor')
+          })
+        : ''
+    }
+  })
 )
 ---
 
@@ -44,8 +64,11 @@ const files = await Promise.all(
           id={`tz-file-${index}`}
           aria-labelledby={`tz-tab-${index}`}
           hidden={index !== current}
-          set:html={file.html}
-        />
+          data-editor={file.editor || undefined}
+        >
+          <Fragment set:html={file.html} />
+          {file.reveal && <div class="tz-reveal" data-after hidden set:html={file.reveal} />}
+        </div>
       )
   )}
 </section>

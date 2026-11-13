@@ -11,6 +11,7 @@ import { plain } from '../lib/inline.ts'
 import Base from './Base.astro'
 import '../styles/first-steps.css'
 import '../styles/first-steps-end.css'
+import '../styles/first-steps-editor.css'
 
 // Premiers pas: a full-screen editor, the step on the left, the code in the middle, Hodi on the right.
 interface Props {
@@ -53,12 +54,13 @@ const panes = [
       </div>
       <StepPane doc={doc} current={current} done={done} />
       <Foot doc={doc} current={current} home={home} />
-      <CodePane doc={doc} current={current} />
-      <PreviewPane doc={doc} current={current} />
+      <CodePane doc={doc} current={current} done={done} />
+      <PreviewPane doc={doc} current={current} done={done} />
     </main>
     {done && <Finish doc={doc} home={home} />}
   </div>
   <script>
     import '../scripts/first-steps.ts'
+    import '../scripts/first-steps-load.ts'
   </script>
 </Base>

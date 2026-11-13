@@ -269,7 +269,9 @@
 .tz-file {
   display: flex;
   flex: 1;
+  flex-direction: column;
   min-height: 0;
+  overflow: auto;
 }
 .tz-file[hidden] {
   display: none;
@@ -363,19 +365,14 @@
   white-space: nowrap;
 }
 .tz-prev .live {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
   gap: 6px;
-  color: var(--approve-text);
 }
 .tz-prev .live::before {
   content: '';
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: var(--approve-border);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--approve-border) 25%, transparent);
+  background: currentColor;
 }
 .tz-prev .body {
   display: flex;
