@@ -11,7 +11,7 @@ const textOf = (node: ElementContent): string => {
 }
 
 // Every line gets its number; the step's line is marked, with the caret at its end; a terminal's ✓ is green.
-const editor = (edit: number): ShikiTransformer => ({
+const editor = (edit: number, first: number): ShikiTransformer => ({
   name: 'hodi-first-steps-editor',
   line(node, line) {
     const text = textOf(node)
@@ -21,7 +21,7 @@ const editor = (edit: number): ShikiTransformer => ({
       type: 'element',
       tagName: 'i',
       properties: {},
-      children: [{ type: 'text', value: String(line) }]
+      children: [{ type: 'text', value: String(line + first - 1) }]
     })
     if (line === edit)
       node.children.push({ type: 'element', tagName: 'span', properties: { className: ['caret'] }, children: [] })
@@ -29,11 +29,11 @@ const editor = (edit: number): ShikiTransformer => ({
 })
 
 // The step's code as the editor draws it: highlighted, numbered, without the newlines between lines.
-export const highlight = async (code: string, lang: string, edit: number) => {
+export const highlight = async (code: string, lang: string, edit: number, first = 1) => {
   const html = await codeToHtml(code.trimEnd(), {
     lang: lang === 'text' ? 'text' : lang,
     theme,
-    transformers: [editor(edit)]
+    transformers: [editor(edit - first + 1, first)]
   })
   return html.replace(/<\/span>\n<span class="ln/g, '</span><span class="ln')
 }

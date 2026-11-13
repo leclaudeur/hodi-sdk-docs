@@ -24,7 +24,7 @@ const next = firstStepsUrl(doc, isLast ? 'done' : slugOf(current + 1))
     <Icon name="arrow-left" />
     {t(doc.lang, 'firstStepsBack')}
   </a>
-  <a class="btn primary icon end" href={next}>
+  <a class="btn primary icon end" href={next} data-next>
     {t(doc.lang, isLast ? 'firstStepsFinish' : 'firstStepsNext')}
     <Icon name={isLast ? 'check' : 'arrow-right'} />
   </a>

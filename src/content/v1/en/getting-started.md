@@ -15,6 +15,7 @@ steps:
     file: "plugin.json"
     lang: "json"
     edit: 10
+    start: '"default": "Hello"'
     code: |
       {
         "id": "hello-world",
@@ -32,12 +33,12 @@ steps:
     preview:
       title: "Hello world"
       intro: "Your first plugin."
-      crumb: "Server › Plugins › Hello world"
       rows:
         - label: "Greeting"
           value: "Hi"
           button: "Change"
           flash: true
+          live: true
   - name: "The route"
     text: "A route is a function: Hodi calls it, it answers. This one reads the \"Greeting\" setting and sends it back."
     guide: "/en/guide/server-context/"
@@ -48,6 +49,7 @@ steps:
     file: "server/index.ts"
     lang: "ts"
     edit: 7
+    start: "return { body: { text: `${greeting}` } }"
     code: |
       import type { ServerPlugin } from '@hodi-app/plugin-sdk/server'
 
@@ -64,7 +66,6 @@ steps:
     preview:
       title: "Hello world"
       intro: "Your first plugin."
-      crumb: "Server › Plugins › Hello world"
       rows:
         - label: "Greeting"
           value: "Hi"
@@ -73,6 +74,7 @@ steps:
           hint: "Your route's answer"
           button: "Say hello"
           answer: "Hi!"
+          live: true
   - name: "The card"
     text: "The card is what Hodi shows of your plugin. You draw it with Hodi's components: it looks like the app straight away."
     guide: "/en/components/"
@@ -83,6 +85,7 @@ steps:
     file: "web/index.tsx"
     lang: "tsx"
     edit: 15
+    start: "<Button onClick={sayHello}>"
     code: |
       import { useState } from 'react'
       import {
@@ -109,7 +112,6 @@ steps:
     preview:
       title: "Hello world"
       intro: "Your first plugin."
-      crumb: "Server › Plugins › Hello world"
       rows:
         - label: "Greeting"
           value: "Hi"
@@ -118,17 +120,20 @@ steps:
           hint: "Your route's answer"
           button: "Say hello"
           primary: true
+          live: true
     log: "POST /api/plugins/hello-world/hello  200"
   - name: "Install"
     text: "Developer mode installs your plugin on your test Hodi, then updates it at every save: Hodi restarts by itself to load it."
     guide: "/en/guide/publish/"
     todo:
-      - "In Server › Plugins on your test Hodi, turn on developer mode and copy the code it shows you."
-      - "Run `npx hodi-plugin dev` with that code, from your plugin's folder."
+      - "In the preview, your test Hodi's developer mode is on: it shows you a code."
+      - "On line 3, type that code after `--code` to run `npx hodi-plugin dev`."
       - "Look at Server › Plugins: Hello world is there, with the \"In development\" badge."
     file: "Terminal"
     lang: "text"
-    edit: 10
+    edit: 3
+    start: "--code"
+    reveal: 4
     code: |
       $ npx hodi-plugin dev \
           --server http://localhost:3000 \
@@ -144,7 +149,6 @@ steps:
     preview:
       title: "Plugins"
       intro: "What the server admin sees."
-      crumb: "Server › Plugins"
       plugins:
         - name: "Diagnostic"
           icon: "stethoscope"
@@ -156,6 +160,12 @@ steps:
           hint: "Your first plugin"
           chip: "In development"
           tone: "warning"
+          after: true
+        - name: "Developer mode"
+          icon: "code"
+          hint: "Code: 482913"
+          chip: "On"
+          tone: "success"
     log: "Developer mode: Hello world 0.1.0  ok"
 finish:
   title: "All done!"

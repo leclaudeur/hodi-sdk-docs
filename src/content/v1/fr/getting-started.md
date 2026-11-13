@@ -15,6 +15,7 @@ steps:
     file: "plugin.json"
     lang: "json"
     edit: 10
+    start: '"default": "Bonjour"'
     code: |
       {
         "id": "hello-world",
@@ -32,12 +33,12 @@ steps:
     preview:
       title: "Hello world"
       intro: "Ton premier plugin."
-      crumb: "Serveur › Plugins › Hello world"
       rows:
         - label: "Salutation"
           value: "Salut"
           button: "Changer"
           flash: true
+          live: true
   - name: "La route"
     text: "Une route, c'est une fonction : Hodi l'appelle, elle répond. Celle-ci lit le réglage « Salutation » et le renvoie."
     guide: "/fr/guide/server-context/"
@@ -48,6 +49,7 @@ steps:
     file: "server/index.ts"
     lang: "ts"
     edit: 7
+    start: "return { body: { text: `${greeting}` } }"
     code: |
       import type { ServerPlugin } from '@hodi-app/plugin-sdk/server'
 
@@ -64,7 +66,6 @@ steps:
     preview:
       title: "Hello world"
       intro: "Ton premier plugin."
-      crumb: "Serveur › Plugins › Hello world"
       rows:
         - label: "Salutation"
           value: "Salut"
@@ -73,6 +74,7 @@ steps:
           hint: "Réponse de ta route"
           button: "Dire bonjour"
           answer: "Salut !"
+          live: true
   - name: "La carte"
     text: "La carte, c'est ce que Hodi affiche de ton plugin. Tu la dessines avec les composants de Hodi : elle a tout de suite l'air de l'app."
     guide: "/fr/components/"
@@ -83,6 +85,7 @@ steps:
     file: "web/index.tsx"
     lang: "tsx"
     edit: 15
+    start: "<Button onClick={sayHello}>"
     code: |
       import { useState } from 'react'
       import {
@@ -109,7 +112,6 @@ steps:
     preview:
       title: "Hello world"
       intro: "Ton premier plugin."
-      crumb: "Serveur › Plugins › Hello world"
       rows:
         - label: "Salutation"
           value: "Salut"
@@ -118,17 +120,20 @@ steps:
           hint: "Réponse de ta route"
           button: "Dire bonjour"
           primary: true
+          live: true
     log: "POST /api/plugins/hello-world/hello  200"
   - name: "Installer"
     text: "Le mode développeur installe ton plugin sur ton Hodi de test, puis le remet à jour à chaque sauvegarde : Hodi redémarre tout seul pour le charger."
     guide: "/fr/guide/publish/"
     todo:
-      - "Dans Serveur › Plugins de ton Hodi de test, active le mode développeur et copie le code qu'il te montre."
-      - "Lance `npx hodi-plugin dev` avec ce code, depuis le dossier de ton plugin."
+      - "Dans l'aperçu, le mode développeur de ton Hodi de test est actif : il te montre un code."
+      - "À la ligne 3, tape ce code après `--code`, pour lancer `npx hodi-plugin dev`."
       - "Regarde Serveur › Plugins : Hello world y est, avec le badge « En développement »."
     file: "Terminal"
     lang: "text"
-    edit: 10
+    edit: 3
+    start: "--code"
+    reveal: 4
     code: |
       $ npx hodi-plugin dev \
           --server http://localhost:3000 \
@@ -144,7 +149,6 @@ steps:
     preview:
       title: "Plugins"
       intro: "Ce que l'admin du serveur voit."
-      crumb: "Serveur › Plugins"
       plugins:
         - name: "Diagnostic"
           icon: "stethoscope"
@@ -156,6 +160,12 @@ steps:
           hint: "Ton premier plugin"
           chip: "En développement"
           tone: "warning"
+          after: true
+        - name: "Mode développeur"
+          icon: "code"
+          hint: "Code : 482913"
+          chip: "Actif"
+          tone: "success"
     log: "Mode développeur : Hello world 0.1.0  ok"
 finish:
   title: "Tuto terminé !"

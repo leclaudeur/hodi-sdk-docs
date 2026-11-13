@@ -4,7 +4,8 @@ import { t } from '../../lib/i18n.ts'
 import { inline } from '../../lib/inline.ts'
 import Icon from '../Icon.astro'
 
-// The step: its name, why it matters, then the three things to do, the last one still open.
+// The step: its name, why it matters, then the three things to do. Opening the file is done; the change is the
+// person's to make, and the script ticks the rest once the code is right.
 interface Props {
   doc: Doc
   current: number
@@ -14,10 +15,9 @@ interface Props {
 const { doc, current, done } = Astro.props
 const steps = doc.entry.data.steps ?? []
 const step = steps[current]
-const last = (step?.todo.length ?? 0) - 1
 const stateOf = (index: number) => {
-  if (done || index < last) return 'done'
-  return 'cur'
+  if (done || index === 0) return 'done'
+  return index === 1 ? 'cur' : ''
 }
 ---
 
@@ -44,5 +44,15 @@ const stateOf = (index: number) => {
         </li>
       ))}
     </ol>
+    {!done && (
+      <>
+        <template data-tick>
+          <Icon name="check" size={12} />
+        </template>
+        <button class="tz-answer" type="button" data-solution hidden>
+          {t(doc.lang, 'firstStepsSolution')}
+        </button>
+      </>
+    )}
   </section>
 )}
