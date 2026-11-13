@@ -1,7 +1,7 @@
 ---
 title: "Boutons"
 description: "Avec un libellé ou une icône, celui de l'IA et celui du lecteur."
-intro: "Chaque bouton de Hodi vient de ces quatre composants : mêmes hauteurs, mêmes couleurs, mêmes survols, dans les trois thèmes."
+intro: "Chaque bouton de Hodi vient de l'un de ces quatre composants. Un plugin qui les utilise a donc des boutons de la même hauteur, de la même couleur et avec le même survol que le reste de l'app, dans les trois thèmes."
 order: 1
 icon: "mouse-pointer-click"
 topic: "tech"
@@ -10,7 +10,7 @@ preview: "button"
 
 ## Button
 
-Le bouton avec un libellé, et, au besoin, une icône Lucide avant lui. Il fait 44 px de haut, 34 px en `compact`. Le bouton principal d'un écran est `primary`, ce qui efface est `danger`.
+Le bouton avec un texte, et au besoin une icône Lucide avant ce texte. Il fait 44 px de haut, ou 34 px avec `compact`. Sur un écran, le bouton de l'action principale prend le look `primary`, et un bouton qui efface prend le look `danger`.
 
 ```tsx title="web/index.tsx" render="button" play="button"
 import { Button } from 'hodi:sdk'
@@ -28,19 +28,19 @@ import { Check } from 'lucide-react'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `children` | `ReactNode` | Le libellé. |
-| `look?` | `'neutral' \| 'primary' \| 'danger' \| 'ai'` | Sa couleur, `neutral` par défaut. |
-| `icon?` | `ComponentType` | Une icône Lucide, à 16 px avant le libellé. |
-| `busy?` | `boolean` | Attend le serveur : l'icône devient un rond qui tourne, et le bouton ne se presse plus. |
-| `compact?` | `boolean` | 34 px de haut, pour une ligne ou un en-tête. |
-| `wide?` | `boolean` | Toute la largeur de son parent. |
-| `href?` | `string` | Un lien dessiné en bouton. Une adresse de Hodi vient de [usePluginLinks()](/fr/hooks/). |
-| `external?` | `boolean` | Le lien s'ouvre dans un nouvel onglet. |
-| `…` | `ButtonHTMLAttributes` | Ce qu'un `<button>` accepte : `onClick`… |
+| `children` | `ReactNode` | Le texte du bouton. |
+| `look?` | `'neutral' \| 'primary' \| 'danger' \| 'ai'` | La couleur du bouton : `neutral` par défaut, `primary` pour l'action principale, `danger` pour effacer, `ai` pour l'IA. |
+| `icon?` | `ComponentType` | Une icône Lucide, affichée à 16 px avant le texte. |
+| `busy?` | `boolean` | Le bouton attend le serveur : son icône devient un rond qui tourne, et il ne se presse plus. |
+| `compact?` | `boolean` | Le bouton fait 34 px de haut, pour tenir dans une ligne ou un en-tête. |
+| `wide?` | `boolean` | Le bouton prend toute la largeur de son parent. |
+| `href?` | `string` | Fait du bouton un lien vers cette adresse. Une adresse de Hodi vient de [usePluginLinks()](/fr/hooks/#usepluginlinks). |
+| `external?` | `boolean` | Avec `href` : le lien s'ouvre dans un nouvel onglet. |
+| `…` | `ButtonHTMLAttributes` | Tout ce qu'un `<button>` accepte, comme `onClick` ou `disabled`. |
 
 ## RoundButton
 
-Le bouton d'une seule icône. Son `label` est lu par les lecteurs d'écran et s'affiche au survol.
+Le bouton rond, avec une seule icône et sans texte. Son `label` dit ce que fait le bouton : les lecteurs d'écran le lisent, et il s'affiche au survol.
 
 ```tsx title="web/index.tsx" render="roundbutton" play="roundbutton"
 import { RoundButton } from 'hodi:sdk'
@@ -57,18 +57,20 @@ import { Pencil } from 'lucide-react'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `icon` | `LucideIcon` | L'icône, une icône Lucide. |
+| `icon` | `LucideIcon` | L'icône du bouton, une icône Lucide. |
 | `label` | `string` | Ce que fait le bouton, pour les lecteurs d'écran et au survol. |
-| `size?` | `28 \| 34 \| 38 \| 44` | 28 dans une carte, 34 dans un en-tête, 38 dans une ligne de réglage sur téléphone, 44 sous le doigt. |
-| `variant?` | `'default' \| 'on' \| 'danger' \| 'primary' \| 'ai' \| 'glass' \| 'image'` | Sa couleur. `on` : allumé, comme un filtre choisi. `glass` et `image` : posé sur une photo. |
-| `filled?` | `boolean` | L'icône pleine, comme un article enregistré. |
-| `busy?` | `boolean` | L'icône tourne : elle doit donc être une icône de chargement. |
-| `href?` | `string` | Un lien dessiné en rond. |
-| `external?` | `boolean` | Le lien s'ouvre dans un nouvel onglet. |
+| `size?` | `28 \| 34 \| 38 \| 44` | Le diamètre du bouton, en px : 28 dans une carte, 34 dans un en-tête, 38 dans une ligne de réglage sur un téléphone, 44 pour un bouton qu'on touche du doigt. |
+| `variant?` | `'default' \| 'on' \| 'danger' \| 'primary' \| 'ai' \| 'glass' \| 'image'` | La couleur du bouton. `on` le montre allumé, comme un filtre choisi. `glass` et `image` servent pour un bouton posé sur une photo. |
+| `filled?` | `boolean` | Remplit l'icône, par exemple pour montrer qu'un article est enregistré. |
+| `busy?` | `boolean` | Fait tourner l'icône, qui doit donc être une icône de chargement. |
+| `href?` | `string` | Fait du bouton un lien vers cette adresse. |
+| `external?` | `boolean` | Avec `href` : le lien s'ouvre dans un nouvel onglet. |
 
 ## AiButton
 
-Le bouton violet, seule porte vers l'IA du foyer. Un clic lance l'action `aiActions` du même nom sur la partie serveur, une seule fois. Hodi le cache pour un ado, un enfant ou un foyer sans IA, et le grise quand la limite du jour est atteinte. Voir [le contexte serveur](/fr/guide/server-context/).
+Le bouton violet. C'est le seul moyen pour un plugin de poser une question à l'IA du foyer. Chaque clic lance une fois l'action du même nom dans `aiActions`, côté serveur, et renvoie sa réponse à `onAnswer`.
+
+Hodi cache ce bouton pour un ado, un enfant ou un foyer sans IA. Il le grise quand le foyer a atteint sa limite du jour. [Le contexte serveur](/fr/guide/server-context/#lia-seulement-sur-un-clic) explique le côté serveur.
 
 ```tsx title="web/index.tsx" render="aibutton" play="aibutton"
 import { AiButton } from 'hodi:sdk'
@@ -85,18 +87,18 @@ import { AiButton } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `action` | `string` | Le nom de l'action dans `aiActions` de la partie serveur. |
-| `input?` | `unknown` | Son `request.input`, 16 Ko de JSON au plus. |
-| `onAnswer` | `(answer: unknown) => void` | Ce que l'action a répondu. |
-| `onError?` | `(error: AiButtonError) => void` | Appelé à la place du toast de Hodi. `AiButtonError` : `unavailable`, `off`, `limited`, `refused` ou `failed`. |
-| `children` | `ReactNode` | Le libellé, un verbe : « Résumer », « Traduire ». |
-| `compact?` | `boolean` | 34 px de haut. |
-| `wide?` | `boolean` | Toute la largeur. |
-| `disabled?` | `boolean` | Ne se presse pas. |
+| `action` | `string` | Le nom de l'action à lancer, tel qu'il est écrit dans `aiActions` de la partie serveur. |
+| `input?` | `unknown` | La valeur que l'action reçoit dans `request.input`, 16 Ko de JSON au plus. |
+| `onAnswer` | `(answer: unknown) => void` | Reçoit ce que l'action a répondu. |
+| `onError?` | `(error: AiButtonError) => void` | Appelé quand la question échoue, à la place du toast d'erreur de Hodi. L'erreur vaut `unavailable`, `off`, `limited`, `refused` ou `failed`. |
+| `children` | `ReactNode` | Le texte du bouton, un verbe comme « Résumer » ou « Traduire ». |
+| `compact?` | `boolean` | Le bouton fait 34 px de haut au lieu de 44. |
+| `wide?` | `boolean` | Le bouton prend toute la largeur de son parent. |
+| `disabled?` | `boolean` | Le bouton est grisé et ne se presse pas. |
 
 ## ReaderButton
 
-Un bouton au bout d'un article, à côté de « Lire l'original ». C'est le bouton de l'emplacement [`readerAction`](/fr/guide/slots/reader/).
+Le petit bouton qui se place au bout d'un article, à côté de « Lire l'original ». C'est le bouton à utiliser dans l'emplacement [`readerAction`](/fr/guide/slots/reader/).
 
 ```tsx title="web/index.tsx" render="readerbutton" play="readerbutton"
 import { ReaderButton } from 'hodi:sdk'
@@ -108,8 +110,8 @@ import { Flag } from 'lucide-react'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `children` | `ReactNode` | Le libellé. |
-| `onClick` | `() => void` | Ce que fait le bouton. |
-| `icon?` | `ReactNode` | Une icône Lucide à 12 px, avant le libellé. |
-| `done?` | `boolean` | L'action est faite pour cet article : le bouton le montre. |
-| `label?` | `string` | Un nom plus complet pour les lecteurs d'écran. |
+| `children` | `ReactNode` | Le texte du bouton. |
+| `onClick` | `() => void` | Ce que fait un clic sur le bouton. |
+| `icon?` | `ReactNode` | Une icône Lucide à 12 px, affichée avant le texte. |
+| `done?` | `boolean` | Montre que l'action est déjà faite pour cet article. |
+| `label?` | `string` | Un nom plus complet que le texte, pour les lecteurs d'écran. |
