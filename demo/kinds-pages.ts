@@ -33,6 +33,7 @@ const rowAction = (state: Record<string, string | boolean>, lang: 'fr' | 'en') =
 }
 
 export const settingrow: Kind = {
+  wide: true,
   controls: {
     label: text('label', words('Texte', 'Text')),
     'value?': text('value', words('Salut', 'Hi')),
@@ -70,6 +71,7 @@ export const settingrow: Kind = {
 }
 
 export const morerow: Kind = {
+  wide: true,
   controls: {
     label: text('label', words('Voir les 4 autres', 'See the 4 others'))
   },
@@ -92,6 +94,7 @@ export const morerow: Kind = {
 }
 
 export const overviewcard: Kind = {
+  wide: true,
   controls: {
     title: text('title', words('Bonjours', 'Hellos')),
     'count?': toggle('count', true),
@@ -210,6 +213,7 @@ export const tilespage: Kind = {
 }
 
 export const setupactions: Kind = {
+  wide: true,
   controls: {
     children: text('label', words('Continuer', 'Continue')),
     'start?': toggle('later', true)

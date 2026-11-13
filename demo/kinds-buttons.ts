@@ -112,6 +112,7 @@ const changeAction = (lang: 'fr' | 'en') => ({
 })
 
 export const sectionpage: Kind = {
+  wide: true,
   controls: {
     title: text('title', 'Hello world'),
     layout: seg('layout', ['desktop', 'phone']),
@@ -147,6 +148,7 @@ export const sectionpage: Kind = {
 }
 
 export const settingscard: Kind = {
+  wide: true,
   controls: { 'label?': text('label', words('Salutation', 'Greeting')) },
   code: (state, lang) => ({
     lucide: ['Pencil'],

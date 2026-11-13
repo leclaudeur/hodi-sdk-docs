@@ -27,9 +27,9 @@ const frameStage = (stage: HTMLElement, css: string, js: string) => {
   }
 }
 
-const shadowStage = (stage: HTMLElement, css: string, player: Player) => {
+const shadowStage = (stage: HTMLElement, css: string, player: Player, wide: boolean) => {
   const root = stage.attachShadow({ mode: 'open' })
-  root.innerHTML = `<link rel="stylesheet" href="${css}"><style>:host{display:grid!important;place-items:center}.host{display:flex;justify-content:center;width:100%}</style><div class="host"></div>`
+  root.innerHTML = `<link rel="stylesheet" href="${css}"><style>:host{display:grid!important;place-items:center}.host{display:flex;justify-content:center;width:100%}.host.wide{display:block}</style><div class="host${wide ? ' wide' : ''}"></div>`
   const host = root.querySelector('.host')
   return async (kind: string, state: State) => {
     if (host) player.draw(kind, host, state, lang)
@@ -71,13 +71,13 @@ const goLive = async (term: HTMLElement, list: HTMLElement) => {
   // A page, a dialog or a toast reads the viewport: it gets a frame of its own.
   const frame = term.querySelector('.cmp-render')?.classList
   const big = ['page', 'modal', 'toast'].some(name => frame?.contains(name))
-  const { codeOf, controlsOf } = await import('./play-code.ts')
+  const { codeOf, controlsOf, isWide } = await import('./play-code.ts')
   const player = big ? undefined : await loadBundle(js)
   if (!big && !player) return false
   const stage = document.createElement('div')
   stage.className = `pl-stage${big ? ' pl-big' : ''}`
   term.querySelector('.cmp-render')?.replaceWith(stage)
-  const draw = big ? frameStage(stage, css, js) : shadowStage(stage, css, player as Player)
+  const draw = big ? frameStage(stage, css, js) : shadowStage(stage, css, player as Player, isWide(kind))
   if (big) pageBar(term)
   const controls = controlsOf(kind)
   const state: State = Object.fromEntries(Object.values(controls).map(control => [control.key, control.value]))

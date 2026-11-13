@@ -89,6 +89,7 @@ export const toasts: Kind = {
 }
 
 export const statusline: Kind = {
+  wide: true,
   controls: {
     tone: seg('tone', ['info', 'error']),
     children: text('message', words('Enregistré il y a 2 min.', 'Saved 2 min ago.'))
@@ -97,6 +98,7 @@ export const statusline: Kind = {
 }
 
 export const notice: Kind = {
+  wide: true,
   controls: {
     title: text('title', words('Nouvelle version', 'New version')),
     children: text(
@@ -133,6 +135,7 @@ export const notice: Kind = {
 }
 
 export const emptystate: Kind = {
+  wide: true,
   controls: {
     title: text('title', words('Aucun bonjour', 'No hellos')),
     'children?': text(

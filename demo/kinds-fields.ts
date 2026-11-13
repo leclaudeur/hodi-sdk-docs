@@ -4,11 +4,12 @@ import { seg, str, text, toggle, words, type Kind } from './controls.ts'
 // The fields: their controls and their code.
 
 export const textfield: Kind = {
+  wide: true,
   controls: {
     icon: seg('icon', ['Mail', 'Search', 'Hand']),
     'aria-label': text('label', 'E-mail'),
     'onClear?': toggle('clear'),
-    '…': text('placeholder', words('toi@exemple.be', 'you@example.com'))
+    placeholder: text('placeholder', words('toi@exemple.be', 'you@example.com'))
   },
   code: state => ({
     lucide: [str(state, 'icon')],
@@ -26,11 +27,12 @@ export const textfield: Kind = {
 }
 
 export const passwordfield: Kind = {
+  wide: true,
   controls: {
     'aria-label': text('label', words('Mot de passe', 'Password')),
     'invalid?': toggle('invalid'),
     'lead?': toggle('ring', true),
-    '…': text('password', words('soleil', 'sunshine'))
+    value: text('password', words('soleil', 'sunshine'))
   },
   code: state => ({
     body: [
@@ -47,6 +49,7 @@ export const passwordfield: Kind = {
 }
 
 export const pinfield: Kind = {
+  wide: true,
   controls: {
     label: text('label', 'Code'),
     length: seg('length', ['6', '8']),
@@ -91,6 +94,7 @@ export const toggleKind: Kind = {
 }
 
 export const checkbox: Kind = {
+  wide: true,
   controls: {
     checked: toggle('checked', true),
     children: text('label', words('Garder mes salutations', 'Keep my greetings')),
@@ -112,6 +116,7 @@ export const checkbox: Kind = {
 }
 
 export const agecheckbox: Kind = {
+  wide: true,
   controls: { checked: toggle('checked') },
   code: () => ({
     body: [

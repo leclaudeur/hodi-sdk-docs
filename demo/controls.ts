@@ -10,7 +10,9 @@ export type Control =
   | { kind: 'seg'; key: string; value: string; options: [string, Words][] }
 
 export interface Kind {
-  // By the prop's name in the list, such as `look?`.
+  // A card, a row or a field fills the stage, as it fills its render; a button or a chip sits in its middle.
+  wide?: true
+  // By the prop's name in the list, such as `look?`. A name the list does not show only gives its first value.
   controls: Record<string, Control>
   code: (state: State, lang: Lang) => Snippet
 }

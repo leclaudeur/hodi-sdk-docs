@@ -33,4 +33,6 @@ export const codeOf = (kind: string, state: State) => {
     : ''
 }
 
+export const isWide = (kind: string) => KINDS[kind]?.wide === true
+
 export type { State }
