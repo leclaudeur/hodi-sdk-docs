@@ -49,7 +49,6 @@ export const passwordfield: Kind = {
 }
 
 export const pinfield: Kind = {
-  wide: true,
   controls: {
     label: text('label', 'Code'),
     length: seg('length', ['6', '8']),
@@ -94,7 +93,6 @@ export const toggleKind: Kind = {
 }
 
 export const checkbox: Kind = {
-  wide: true,
   controls: {
     checked: toggle('checked', true),
     children: text('label', words('Garder mes salutations', 'Keep my greetings')),
@@ -116,7 +114,6 @@ export const checkbox: Kind = {
 }
 
 export const agecheckbox: Kind = {
-  wide: true,
   controls: { checked: toggle('checked') },
   code: () => ({
     body: [

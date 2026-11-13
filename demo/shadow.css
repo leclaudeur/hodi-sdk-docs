@@ -125,6 +125,14 @@ dialog {
 :host(.wide) .in {
   display: block;
 }
+/* A PIN, a checkbox or a status line spans its row in the app: alone in a window, it keeps its own width, in the
+   middle. */
+:host(:is(.kind-pinfield, .kind-checkbox, .kind-agecheckbox, .kind-statusline))
+  :is(.in, .rv-d, .rv-p)
+  > :not(.rv-d, .rv-p) {
+  width: fit-content;
+  max-width: 100%;
+}
 /* The space a component keeps from what sits above or under it in the app is not part of it: it stays centred. */
 :is(.in, .rv-d, .rv-p) > :first-child {
   margin-top: 0;

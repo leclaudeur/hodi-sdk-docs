@@ -22,8 +22,9 @@ const visit = (node: Root | Element, lang: Lang) => {
       child.properties.dataPlayJs = demoAssets.playJs.url
     }
     if (typeof key === 'string') {
-      // A card, a row or a field spans its window, as it spans the playground's stage.
-      if (KINDS[key]?.wide) child.properties.className = [...((child.properties.className as string[]) ?? []), 'wide']
+      // Its name, for what one kind needs (shadow.css); a card, a row or a field spans its window.
+      const classes = [...((child.properties.className as string[]) ?? []), `kind-${key}`]
+      child.properties.className = KINDS[key]?.wide ? [...classes, 'wide'] : classes
       // A raw node: the serializer writes it as is, and Astro allows raw HTML in Markdown.
       child.children = [{ type: 'raw', value: shadowOf(key, lang) } as unknown as ElementContent]
     } else visit(child, lang)
