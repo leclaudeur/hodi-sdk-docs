@@ -30,21 +30,21 @@ L'entrée du plugin se range dans l'un des six groupes de la page Réglages. Le 
 }
 ```
 
-Avec cet exemple, l'entrée du plugin va dans le groupe « Toi », juste après l'entrée « Statistiques ».
+Avec cet exemple, l'entrée du plugin va dans le groupe _Toi_, juste après l'entrée _Statistiques_.
 
-Sans `after`, l'entrée du plugin va à la fin de son groupe. Sans `menu`, ou avec un groupe que Hodi ne connaît pas, l'entrée du plugin va à la fin du groupe « Foyer ».
+Sans `after`, l'entrée du plugin va à la fin de son groupe. Sans `menu`, ou avec un groupe que Hodi ne connaît pas, l'entrée du plugin va à la fin du groupe _Foyer_.
 
 Voici les six valeurs possibles de `group`. Pour chaque valeur, le nom du groupe dans la page Réglages, et les entrées de Hodi que ce groupe contient déjà, avec la valeur à donner à `after` pour placer l'entrée du plugin après l'une d'elles :
 
 <!-- prettier-ignore -->
 | Valeur de `group` | Le groupe et ses entrées |
 | --- | --- |
-| `reading` | Le groupe « Lecture ». Ce groupe contient Lecture et affichage (`reading`), Thèmes (`themes`), Sources (`sources`) et Historique (`history`). |
-| `subjects` | Le groupe « Sujets ». Ce groupe contient Sujets suivis (`followed`) et Sujets masqués (`muted`). |
-| `you` | Le groupe « Toi ». Ce groupe contient Mon profil (`me`), Statistiques (`stats`), Compte et données (`account`) et Partage (`sharing`). |
-| `household` | Le groupe « Foyer ». Ce groupe contient Foyer (`household`), Profils (`profiles`) et IA et crédits (`ai`). C'est le groupe par défaut. |
-| `device` | Le groupe « Cet appareil ». Ce groupe contient Notifications (`notifications`) et Raccourcis clavier (`shortcuts`). |
-| `about` | Le groupe « Hodi ». Ce groupe contient Serveur (`server`) et À propos (`about`). |
+| `reading` | Le groupe _Lecture_. Ce groupe contient Lecture et affichage (`reading`), Thèmes (`themes`), Sources (`sources`) et Historique (`history`). |
+| `subjects` | Le groupe _Sujets_. Ce groupe contient Sujets suivis (`followed`) et Sujets masqués (`muted`). |
+| `you` | Le groupe _Toi_. Ce groupe contient Mon profil (`me`), Statistiques (`stats`), Compte et données (`account`) et Partage (`sharing`). |
+| `household` | Le groupe _Foyer_. Ce groupe contient Foyer (`household`), Profils (`profiles`) et IA et crédits (`ai`). C'est le groupe par défaut. |
+| `device` | Le groupe _Cet appareil_. Ce groupe contient Notifications (`notifications`) et Raccourcis clavier (`shortcuts`). |
+| `about` | Le groupe _Hodi_. Ce groupe contient Serveur (`server`) et À propos (`about`). |
 
 ## Dessiner la page
 
@@ -78,7 +78,7 @@ definePlugin({
 })
 ```
 
-Avec cet exemple, la page Réglages affiche une entrée pour le plugin, avec une icône de carnet. Un clic sur cette entrée ouvre la page « Mes notes ». La page « Mes notes » contient une carte, et cette carte contient une ligne « Notes enregistrées : 12 ».
+Avec cet exemple, la page Réglages affiche une entrée pour le plugin, avec une icône de carnet. Un clic sur cette entrée ouvre la page _Mes notes_. La page _Mes notes_ contient une carte, et cette carte contient une ligne _Notes enregistrées : 12_.
 
 ## Les props
 
@@ -104,7 +104,7 @@ Voici les trois clés de `definePlugin` qui servent à la page Réglages :
 | --- | --- | --- |
 | `page` | `ComponentType<{ layout }>` | Le composant de la page du plugin, décrit plus haut. Sans cette clé, la page Réglages n'a pas d'entrée pour le plugin. |
 | `menuIcon?` | `ComponentType` | L'icône à gauche du nom de l'entrée, une icône Lucide. Sans cette clé, Hodi affiche une pièce de puzzle. |
-| `menuHint?` | `ComponentType` | La ligne grise sous le nom de l'entrée, par exemple « 12 notes ». Sans cette clé, Hodi affiche la description du plugin. |
+| `menuHint?` | `ComponentType` | La ligne grise sous le nom de l'entrée, par exemple _12 notes_. Sans cette clé, Hodi affiche la description du plugin. |
 
 `menuHint` est un composant, et pas un simple texte : le composant `menuHint` peut donc lire des données, par exemple le nombre de notes, et afficher ce nombre.
 

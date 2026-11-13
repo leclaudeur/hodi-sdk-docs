@@ -77,7 +77,7 @@ import { SourceAvatar } from 'hodi:sdk'
 
 ## HouseholdAvatar
 
-A household's photo, or its initial when it has no photo. It is round, like a profile on the "Who's in?" screen.
+A household's photo, or its initial when it has no photo. It is round, like a profile on the _Who's in?_ screen.
 
 ```tsx title="web/index.tsx" render="householdavatar" play="householdavatar"
 import { HouseholdAvatar } from 'hodi:sdk'

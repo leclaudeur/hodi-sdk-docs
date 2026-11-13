@@ -126,7 +126,7 @@ Avec `"all"`, une route peut quand même adapter sa réponse à la personne qui 
 
 Un réglage est une valeur que l'admin du serveur peut changer sans toucher au code du plugin. Dans Hello world, le réglage `greeting` est le message que le plugin répond.
 
-Le plugin déclare ses réglages dans le champ `settings` de `plugin.json`. Hodi dessine lui-même une ligne pour chaque réglage, avec ses propres composants, sur la page du plugin dans _Serveur › Plugins_, sous le titre « Options ». Le plugin n'a aucun écran à écrire pour ses réglages.
+Le plugin déclare ses réglages dans le champ `settings` de `plugin.json`. Hodi dessine lui-même une ligne pour chaque réglage, avec ses propres composants, sur la page du plugin dans _Serveur › Plugins_, sous le titre _Options_. Le plugin n'a aucun écran à écrire pour ses réglages.
 
 Voici quatre réglages, un de chaque type, et les lignes que Hodi dessine pour ces quatre réglages :
 
@@ -213,8 +213,8 @@ Dans `plugin.json`, un réglage n'a qu'un nom technique, comme `greeting`. Le te
 
 Pour un réglage dont la clé est `greeting` :
 
-- `settings.greeting` est son libellé, en gras sur sa ligne : « Message » ;
-- `settings.greetingHint` est sa ligne d'aide, en gris dessous : « Ce que le plugin répond » ;
+- `settings.greeting` est son libellé, en gras sur sa ligne : _Message_ ;
+- `settings.greetingHint` est sa ligne d'aide, en gris dessous : _Ce que le plugin répond_ ;
 - pour un `choice`, `settings.momentOptions.morning` est le texte du bouton de l'option `morning`.
 
 La ligne d'aide est facultative. Sans libellé, Hodi affiche la clé du réglage elle-même : `greeting`.
@@ -310,10 +310,10 @@ Le champ `menu` dit où placer l'entrée du plugin dans Réglages. Ce champ ne s
 }
 ```
 
-- `group` : le groupe de Réglages, comme `you` pour « Toi ».
+- `group` : le groupe de Réglages, comme `you` pour _Toi_.
 - `after` : l'entrée de Hodi juste avant, comme `stats`.
 
-Sans `menu`, ou avec un groupe inconnu, l'entrée du plugin va à la fin du groupe « Foyer ». [`page`](/fr/guide/slots/settings/) liste les six groupes et leurs entrées.
+Sans `menu`, ou avec un groupe inconnu, l'entrée du plugin va à la fin du groupe _Foyer_. [`page`](/fr/guide/slots/settings/) liste les six groupes et leurs entrées.
 
 ### `feeds`
 

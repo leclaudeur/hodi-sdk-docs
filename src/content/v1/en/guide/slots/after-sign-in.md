@@ -1,7 +1,7 @@
 ---
 title: "afterSignIn"
-description: "A step of the plugin right after signing in, before entering the app, such as \"Which household?\"."
-intro: "A step the plugin draws right after signing in, before \"Who's in?\" and before the app. It is for asking one thing before entering: choosing a household, accepting new terms…"
+description: "A step of the plugin right after signing in, before entering the app, such as _Which household?_."
+intro: "A step the plugin draws right after signing in, before _Who's in?_ and before the app. It is for asking one thing before entering: choosing a household, accepting new terms…"
 order: 8
 icon: "house"
 topic: "sport"
@@ -10,7 +10,7 @@ key: "afterSignIn"
 
 ## Where in Hodi
 
-Right after someone signs in, before the "Who's in?" screen and before the app. The person only sees this step once per sign-in.
+Right after someone signs in, before the _Who's in?_ screen and before the app. The person only sees this step once per sign-in.
 
 If several plugins give an `afterSignIn`, Hodi shows the first one's. The server admin who has no household never sees this step: they go straight to the Server space.
 

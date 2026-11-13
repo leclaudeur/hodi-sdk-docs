@@ -1,7 +1,7 @@
 ---
 title: "afterSignIn"
-description: "Une étape du plugin juste après la connexion, avant d'entrer dans l'app, comme « Quel foyer ? »."
-intro: "Une étape que le plugin dessine juste après la connexion, avant « Qui lit ? » et avant l'app. Elle sert à demander une chose avant d'entrer : choisir un foyer, accepter de nouvelles conditions…"
+description: "Une étape du plugin juste après la connexion, avant d'entrer dans l'app, comme _Quel foyer ?_."
+intro: "Une étape que le plugin dessine juste après la connexion, avant _Qui lit ?_ et avant l'app. Elle sert à demander une chose avant d'entrer : choisir un foyer, accepter de nouvelles conditions…"
 order: 8
 icon: "house"
 topic: "sport"
@@ -10,7 +10,7 @@ key: "afterSignIn"
 
 ## Où dans Hodi
 
-Juste après la connexion d'une personne, avant l'écran « Qui lit ? » et avant l'app. La personne ne voit cette étape qu'une fois par connexion.
+Juste après la connexion d'une personne, avant l'écran _Qui lit ?_ et avant l'app. La personne ne voit cette étape qu'une fois par connexion.
 
 Si plusieurs plugins donnent un `afterSignIn`, Hodi affiche celui du premier. L'admin du serveur qui n'a pas de foyer ne voit jamais cette étape : il arrive directement dans l'espace Serveur.
 

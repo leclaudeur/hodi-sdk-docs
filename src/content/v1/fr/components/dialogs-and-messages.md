@@ -50,7 +50,7 @@ import { Hand } from 'lucide-react'
 
 ## DialogActions
 
-La rangée de boutons au bas d'une fenêtre, sous un trait. Le bouton secondaire, comme « Annuler », va à gauche ; le bouton de l'action va à droite.
+La rangée de boutons au bas d'une fenêtre, sous un trait. Le bouton secondaire, comme _Annuler_, va à gauche ; le bouton de l'action va à droite.
 
 <!-- prettier-ignore -->
 | Props | Type | |
@@ -127,8 +127,8 @@ import { Inbox } from 'lucide-react'
 | Props | Type | |
 | --- | --- | --- |
 | `icon` | `ReactNode` | L'icône, affichée à 28 px dans un carré. |
-| `title` | `string` | Le titre, qui dit ce qui manque, comme « Aucun bonjour ». |
+| `title` | `string` | Le titre, qui dit ce qui manque, comme _Aucun bonjour_. |
 | `children?` | `ReactNode` | Une ligne de texte sous le titre, pas plus. |
-| `actions?` | `ReactNode` | Des boutons sous le texte, comme « Réessayer ». |
+| `actions?` | `ReactNode` | Des boutons sous le texte, comme _Réessayer_. |
 | `tone?` | `'default' \| 'danger'` | `danger` met l'icône en rouge, quand la liste n'a pas pu se charger. |
 | `compact?` | `boolean` | Une version plus petite, pour un état vide posé au-dessus d'un autre contenu. |

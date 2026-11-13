@@ -1,6 +1,6 @@
 ---
 title: "avatarMenu"
-description: "Entries of the plugin in the avatar's menu, such as \"Switch household\"."
+description: "Entries of the plugin in the avatar's menu, such as _Switch household_."
 intro: "Entries the plugin adds to the avatar's menu, the menu of the open profile. They are for a quick action, reachable from any page."
 order: 14
 icon: "circle-user-round"

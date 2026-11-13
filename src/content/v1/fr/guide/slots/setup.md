@@ -10,7 +10,7 @@ key: "setupSteps"
 
 ## Où dans Hodi
 
-La mise en route de Hodi est l'assistant qui s'ouvre au premier démarrage. L'assistant enchaîne des étapes. L'une de ces étapes, « Plugins trouvés », liste les plugins présents et propose de les activer. Les étapes des plugins activés viennent juste après, avant « Le serveur est prêt ».
+La mise en route de Hodi est l'assistant qui s'ouvre au premier démarrage. L'assistant enchaîne des étapes. L'une de ces étapes, _Plugins trouvés_, liste les plugins présents et propose de les activer. Les étapes des plugins activés viennent juste après, avant _Le serveur est prêt_.
 
 ## Exemple
 
@@ -71,10 +71,10 @@ definePlugin({
 
 ## Qui dessine quoi
 
-- **Hodi** dessine la carte, le titre, la ligne sous le titre, la numérotation et « Retour ».
-- **Le plugin** dessine le milieu, et termine par `SetupActions`, qui affiche « Continuer ».
+- **Hodi** dessine la carte, le titre, la ligne sous le titre, la numérotation et _Retour_.
+- **Le plugin** dessine le milieu, et termine par `SetupActions`, qui affiche _Continuer_.
 
 ## À savoir
 
-- **Qui voit les étapes** : l'admin, si le plugin est activé à l'étape « Plugins trouvés ».
+- **Qui voit les étapes** : l'admin, si le plugin est activé à l'étape _Plugins trouvés_.
 - **Une étape de Hodi** : `{ id: 'mail', core: 'mail' }` ajoute le formulaire de _Serveur › E-mail_.

@@ -27,19 +27,19 @@ askToConfirm({
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `title` | `string` | The question asked, such as "Clear the history?". |
+| `title` | `string` | The question asked, such as _Clear the history?_. |
 | `message` | `ReactNode` | What will happen, in full: what will be erased, for whom, and what will remain. |
-| `label` | `string` | The text of the button that confirms, a verb such as "Clear" or "Delete". |
+| `label` | `string` | The text of the button that confirms, a verb such as _Clear_ or _Delete_. |
 | `onConfirm` | `(proof: Proof) => void \| Promise<void>` | What the click on that button does. With `proof`, it receives the password and code typed. If the promise fails, the window stays open. |
 | `look?` | `'danger' \| 'primary'` | The button's colour: red by default, `primary` for an action that adds instead of erasing. |
 | `proof?` | `{}` | Asks for the person's password, and their app's code when they use two-step verification. |
-| `onCancel?` | `() => void` | What happens when the person closes the window without confirming: with Escape, the cross, "Cancel" or a click beside it. |
+| `onCancel?` | `() => void` | What happens when the person closes the window without confirming: with Escape, the cross, _Cancel_ or a click beside it. |
 
 ## showDone()
 
 These functions show one of Hodi's toasts: a short message that says what just happened. A toast never asks a question and never holds a form. There are three:
 
-- `showDone` says an action is done. With `undo`, it adds an "Undo" button.
+- `showDone` says an action is done. With `undo`, it adds an _Undo_ button.
 - `showSaved` says a setting is saved.
 - `showError` says something failed, with a button to try again if needed.
 
@@ -52,6 +52,6 @@ showDone('Greeting saved')
 <!-- prettier-ignore -->
 | Functions | Type | |
 | --- | --- | --- |
-| `showDone` | `(message: string, undo?: () => void) => void` | Shows the message of an action done. With `undo`, an "Undo" button calls that function. |
-| `showSaved` | `(message?: string) => void` | Shows "Saved", or the message given. Only one of these toasts stays on screen at a time. |
+| `showDone` | `(message: string, undo?: () => void) => void` | Shows the message of an action done. With `undo`, an _Undo_ button calls that function. |
+| `showSaved` | `(message?: string) => void` | Shows _Saved_, or the message given. Only one of these toasts stays on screen at a time. |
 | `showError` | `(message: string, action?, id?: string) => void` | Shows a failure. The message, or the `action` button, says what to do next. With `id`, a new toast replaces the one with the same `id`. |

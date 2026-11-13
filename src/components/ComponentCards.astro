@@ -2,6 +2,7 @@
 import { Code } from 'astro:components'
 import type { Doc } from '../lib/docs.ts'
 import { shadowOf } from '../lib/rehype-renders.ts'
+import { inline } from '../lib/inline.ts'
 import Icon from './Icon.astro'
 
 // The Composants page's groups: each one drawn for real in miniature, then its name and what it holds.
@@ -31,7 +32,7 @@ const hooks = `const { t } = usePluginTranslation()\nconst api = usePluginApi()`
           {page.entry.data.title}
           <Icon name="arrow-right" />
         </b>
-        <span>{page.entry.data.description}</span>
+        <span set:html={inline(page.entry.data.description, page.lang)} />
       </span>
     </a>
   ))}

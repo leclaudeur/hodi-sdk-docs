@@ -91,14 +91,14 @@ import { AiButton } from 'hodi:sdk'
 | `input?` | `unknown` | La valeur que l'action reçoit dans `request.input`, 16 Ko de JSON au plus. |
 | `onAnswer` | `(answer: unknown) => void` | Reçoit ce que l'action a répondu. |
 | `onError?` | `(error: AiButtonError) => void` | Appelé quand la question échoue, à la place du toast d'erreur de Hodi. L'erreur vaut `unavailable`, `off`, `limited`, `refused` ou `failed`. |
-| `children` | `ReactNode` | Le texte du bouton, un verbe comme « Résumer » ou « Traduire ». |
+| `children` | `ReactNode` | Le texte du bouton, un verbe comme _Résumer_ ou _Traduire_. |
 | `compact?` | `boolean` | Le bouton fait 34 px de haut au lieu de 44. |
 | `wide?` | `boolean` | Le bouton prend toute la largeur de son parent. |
 | `disabled?` | `boolean` | Le bouton est grisé et ne se presse pas. |
 
 ## ReaderButton
 
-Le petit bouton qui se place au bout d'un article, à côté de « Lire l'original ». C'est le bouton à utiliser dans l'emplacement [`readerAction`](/fr/guide/slots/reader/).
+Le petit bouton qui se place au bout d'un article, à côté de _Lire l'original_. C'est le bouton à utiliser dans l'emplacement [`readerAction`](/fr/guide/slots/reader/).
 
 ```tsx title="web/index.tsx" render="readerbutton" play="readerbutton"
 import { ReaderButton } from 'hodi:sdk'

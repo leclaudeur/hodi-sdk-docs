@@ -98,7 +98,7 @@ const tabsOf = (term: HTMLElement, list: HTMLElement) => {
     ['props', t(lang, 'playProps')],
     ...(noPlay ? [] : ([['play', t(lang, 'playEdit')]] as [string, string][]))
   ]
-  // The list's own note, « ? » : facultatif, follows the name while the props show.
+  // The list's own note, « ? : facultatif », follows the name while the props show.
   const note = document.createElement('span')
   note.className = 'cmp-note'
   note.textContent = list.querySelector('.ph span:last-child')?.textContent ?? ''

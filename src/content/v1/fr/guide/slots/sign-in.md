@@ -1,7 +1,7 @@
 ---
 title: "signInExtras"
-description: "Un bouton ou un lien du plugin sous le formulaire de Connexion, comme « Créer mon foyer »."
-intro: "Un composant du plugin sous le formulaire de Connexion de Hodi. Il sert à proposer une autre façon d'entrer : un lien « Créer mon foyer », un bouton « Continuer avec Google »…"
+description: "Un bouton ou un lien du plugin sous le formulaire de Connexion, comme _Créer mon foyer_."
+intro: "Un composant du plugin sous le formulaire de Connexion de Hodi. Il sert à proposer une autre façon d'entrer : un lien _Créer mon foyer_, un bouton _Continuer avec Google_…"
 order: 6
 icon: "log-in"
 topic: "sport"

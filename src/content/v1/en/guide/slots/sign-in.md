@@ -1,7 +1,7 @@
 ---
 title: "signInExtras"
-description: "A button or a link of the plugin under the Sign in form, such as \"Create my household\"."
-intro: "A component of the plugin under Hodi's Sign in form. It is for offering another way in: a \"Create my household\" link, a \"Continue with Google\" button…"
+description: "A button or a link of the plugin under the Sign in form, such as _Create my household_."
+intro: "A component of the plugin under Hodi's Sign in form. It is for offering another way in: a _Create my household_ link, a _Continue with Google_ button…"
 order: 6
 icon: "log-in"
 topic: "sport"

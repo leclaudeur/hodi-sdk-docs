@@ -8,7 +8,7 @@ icon: "layers"
 
 ## Les deux parties d'un plugin
 
-Le plus simple est de partir d'un exemple : le plugin « Hello world » des [premiers pas](/fr/getting-started/). Ce plugin ajoute un bouton « Dire bonjour » dans _Serveur › Plugins_. Un clic sur ce bouton demande un message au serveur, puis le bouton affiche la réponse du serveur.
+Le plus simple est de partir d'un exemple : le plugin _Hello world_ des [premiers pas](/fr/getting-started/). Ce plugin ajoute un bouton _Dire bonjour_ dans _Serveur › Plugins_. Un clic sur ce bouton demande un message au serveur, puis le bouton affiche la réponse du serveur.
 
 Voici qui fait quoi dans ce plugin :
 
@@ -158,7 +158,7 @@ La partie web est le code du plugin qui tourne dans le navigateur, dans les page
 
 La partie web se charge en arrière-plan, une fois la personne connectée. L'app n'attend jamais un plugin pour s'afficher : le plugin apparaît dès qu'il est prêt.
 
-Voici la partie web de Hello world. Cette partie web dessine une carte avec un bouton « Dire bonjour », sur la page du plugin dans _Serveur › Plugins_. Un clic sur le bouton appelle la route `/hello`, puis la carte affiche la réponse de la route :
+Voici la partie web de Hello world. Cette partie web dessine une carte avec un bouton _Dire bonjour_, sur la page du plugin dans _Serveur › Plugins_. Un clic sur le bouton appelle la route `/hello`, puis la carte affiche la réponse de la route :
 
 ```tsx title="web/index.tsx"
 import { Button, SettingRow, definePlugin, usePluginApi } from 'hodi:sdk'

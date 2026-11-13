@@ -181,7 +181,7 @@ An article Hodi read, as `ctx.articles.get()` returns it or `onArticle` receives
 | `title` | `string` | The article's title. |
 | `url` | `string` | The article's address on its site. |
 | `sourceId` | `string` | The id of the source that published the article. |
-| `sourceName` | `string` | That source's name, such as "RTL info". |
+| `sourceName` | `string` | That source's name, such as _RTL info_. |
 | `publishedAt` | `string \| null` | The publication date, or `null` when the site doesn't give it. |
 | `status` | `'ok' \| 'unreadable' \| 'failed'` | `ok`: the reader has the article's text. `unreadable`: the page has no text to read. `failed`: the site didn't answer. |
 | `text` | `{ title; byline; contentHtml; textLength } \| null` | The text the reader shows, when `status` is `ok`. Otherwise, `null`. |
@@ -299,10 +299,10 @@ The object `definePlugin()` receives: one field per slot, all optional. [The slo
 | `signInExtras?` | `ComponentType<{ layout; signedIn }>` | A component under the [Sign in](/en/guide/slots/sign-in/) form. |
 | `signedOutPage?` | `ComponentType<SignedOutPageProps>` | A [page instead of Sign in](/en/guide/slots/signed-out-page/), when the device has no household. |
 | `afterSignIn?` | `ComponentType<AfterSignInProps>` | A [step right after signing in](/en/guide/slots/after-sign-in/), before entering the app. |
-| `whoIsReadingFooter?` | `ComponentType<{ layout }>` | A component [under "Who's in?"](/en/guide/slots/who-is-reading-footer/), next to "Manage profiles". |
-| `ageConsent?` | `AgeConsent` | A [text after "I am at least 13 years old"](/en/guide/slots/age-consent/). |
+| `whoIsReadingFooter?` | `ComponentType<{ layout }>` | A component [under _Who's in?_](/en/guide/slots/who-is-reading-footer/), next to _Manage profiles_. |
+| `ageConsent?` | `AgeConsent` | A [text after _I am at least 13 years old_](/en/guide/slots/age-consent/). |
 | `setupSteps?` | `SetupStep[]` | The [plugin's steps in Hodi's setup](/en/guide/slots/setup/). |
-| `accountRows?` | `ComponentType<{ layout }>` | [Rows at the end of "Your account"](/en/guide/slots/account-rows/). |
+| `accountRows?` | `ComponentType<{ layout }>` | [Rows at the end of _Your account_](/en/guide/slots/account-rows/). |
 | `avatarMenu?` | `AvatarMenuItem[]` | [Entries in the avatar's menu](/en/guide/slots/avatar-menu/). |
 
 ### ServerSection
@@ -385,7 +385,7 @@ The article open in the reader, which the component of `readerAction` receives. 
 | `title` | `string` | The article's title. |
 | `url` | `string` | The article's address on its site. |
 | `sourceId` | `string` | The id of the source that published the article. |
-| `sourceName` | `string` | That source's name, such as "RTL info". |
+| `sourceName` | `string` | That source's name, such as _RTL info_. |
 
 ### AgeConsent
 
@@ -404,7 +404,7 @@ What [askToConfirm()](/en/functions/#asktoconfirm) receives. With `proof`, the w
 <!-- prettier-ignore -->
 | Fields | Type | |
 | --- | --- | --- |
-| `title` | `string` | The question asked, such as "Clear the history?". |
+| `title` | `string` | The question asked, such as _Clear the history?_. |
 | `message` | `ReactNode` | What will happen after the click, in one sentence. |
 | `label` | `string` | The text of the button that confirms. |
 | `onConfirm` | `(proof: Proof) => void \| Promise<void>` | What the click on that button does. If the promise fails, the window stays open. |

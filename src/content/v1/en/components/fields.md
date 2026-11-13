@@ -88,7 +88,7 @@ import { PinField } from 'hodi:sdk'
 | Props | Type | |
 | --- | --- | --- |
 | `label` | `string` | The field's name, for screen readers. |
-| `length` | `number` | The number of characters in the code: 8 for the codes of "I have a code", 6 for an authenticator app. |
+| `length` | `number` | The number of characters in the code: 8 for the codes of _I have a code_, 6 for an authenticator app. |
 | `value` | `string` | What is typed so far. |
 | `onChange` | `(value: string) => void` | Called at each character typed or erased. |
 | `onComplete?` | `(value: string) => void` | Called when the whole code is typed, to check it. |
@@ -141,7 +141,7 @@ import { Checkbox } from 'hodi:sdk'
 
 ## AgeCheckbox
 
-The "I am at least 13 years old" box, followed by the text each plugin adds with [`ageConsent`](/en/guide/slots/age-consent/). Every form that creates an account has this box.
+The _I am at least 13 years old_ box, followed by the text each plugin adds with [`ageConsent`](/en/guide/slots/age-consent/). Every form that creates an account has this box.
 
 ```tsx title="web/index.tsx" render="agecheckbox" play="agecheckbox"
 import { AgeCheckbox } from 'hodi:sdk'
@@ -157,7 +157,7 @@ import { AgeCheckbox } from 'hodi:sdk'
 
 ## Segmented
 
-A choice between a few options, in a pill, such as "Light · Dark · System". In a settings page, it is passed to a `SettingRow`'s `choice` prop.
+A choice between a few options, in a pill, such as _Light · Dark · System_. In a settings page, it is passed to a `SettingRow`'s `choice` prop.
 
 ```tsx title="web/index.tsx" render="segmented" play="segmented"
 import { Segmented } from 'hodi:sdk'

@@ -1,7 +1,7 @@
 ---
 title: "Publish"
-description: "From a plugin's folder to the \"Install\" button of every Hodi: test, try on a test Hodi, build the file, then have it checked and signed through the plugin registry."
-intro: "From a plugin's folder to the \"Install\" button of every Hodi: test, try on a test Hodi, build the file, then have it checked and signed through the plugin registry."
+description: "From a plugin's folder to the _Install_ button of every Hodi: test, try on a test Hodi, build the file, then have it checked and signed through the plugin registry."
+intro: "From a plugin's folder to the _Install_ button of every Hodi: test, try on a test Hodi, build the file, then have it checked and signed through the plugin registry."
 order: 5
 icon: "package"
 ---
@@ -222,7 +222,7 @@ The maintainer checks each of these rules before signing a plugin.
 | Rule | Why |
 | --- | --- |
 | **No AI without a click.** Only `AiButton` asks the AI, once per click. | The AI costs the household money: nothing may start it behind its back. |
-| **Every text in the locales**, in French and in English. The plugin's French texts say « tu ». | Hodi is bilingual, and speaks to everyone the same way. |
+| **Every text in the locales**, in French and in English. The plugin's French texts say _tu_. | Hodi is bilingual, and speaks to everyone the same way. |
 | **Hodi's components and colours**, not home-made buttons or colours. | The plugin looks like the rest of Hodi, in all three themes. |
 | **People's data**: the plugin says what it keeps, and deletes it when they leave. | Everyone can get or delete what Hodi knows about them. |
 | **Migrations are added at the end**, and never change once published. | A Hodi that already installed a version must be able to move to the next one. |

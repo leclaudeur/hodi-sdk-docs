@@ -18,7 +18,7 @@ Hodi's Sign in screen always stays reachable: a code's link, a new password's li
 
 ## Example
 
-This page presents the service and offers two buttons: "Sign in", which opens Hodi's Sign in, and "Create my household", which calls a public route of the plugin.
+This page presents the service and offers two buttons: _Sign in_, which opens Hodi's Sign in, and _Create my household_, which calls a public route of the plugin.
 
 ```tsx title="web/public.tsx"
 import { Button, definePlugin } from 'hodi:sdk'

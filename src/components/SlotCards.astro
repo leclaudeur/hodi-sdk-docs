@@ -1,5 +1,6 @@
 ---
 import { isCodeTitle, type Doc } from '../lib/docs.ts'
+import { inline } from '../lib/inline.ts'
 import Icon from './Icon.astro'
 
 // The pages under this one as cards, written like the Composants cards: an icon in the page's colour where those have
@@ -22,7 +23,7 @@ const { pages } = Astro.props
           {page.entry.data.title}
           <Icon name="arrow-right" />
         </b>
-        <span>{page.entry.data.description}</span>
+        <span set:html={inline(page.entry.data.description, page.lang)} />
       </span>
     </a>
   ))}

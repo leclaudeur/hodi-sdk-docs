@@ -1,7 +1,7 @@
 ---
 title: "readerAction"
-description: "Un bouton sous un article ouvert, à côté de « Lire l'original », pour que le plugin agisse sur cet article."
-intro: "Un bouton sous un article ouvert, à côté de « Lire l'original ». Il sert à faire quelque chose de cet article-là : le signaler, l'envoyer quelque part, le noter…"
+description: "Un bouton sous un article ouvert, à côté de _Lire l'original_, pour que le plugin agisse sur cet article."
+intro: "Un bouton sous un article ouvert, à côté de _Lire l'original_. Il sert à faire quelque chose de cet article-là : le signaler, l'envoyer quelque part, le noter…"
 order: 5
 icon: "book-open"
 topic: "culture"
@@ -10,7 +10,7 @@ key: "readerAction"
 
 ## Où dans Hodi
 
-Quand une personne ouvre un article dans le lecteur de Hodi, une rangée de boutons suit le texte de l'article, avec « Lire l'original ». Le bouton du plugin s'ajoute à cette rangée.
+Quand une personne ouvre un article dans le lecteur de Hodi, une rangée de boutons suit le texte de l'article, avec _Lire l'original_. Le bouton du plugin s'ajoute à cette rangée.
 
 ## Exemple
 
@@ -44,7 +44,7 @@ Hodi donne au composant une seule prop, `article` : l'article ouvert. Voici les 
 | `article.title` | `string` | Le titre de l'article. |
 | `article.url` | `string` | L'adresse de l'article sur le site d'origine. |
 | `article.sourceId` | `string` | L'id de la source de l'article. |
-| `article.sourceName` | `string` | Le nom de la source, comme « Le Monde ». |
+| `article.sourceName` | `string` | Le nom de la source, comme _Le Monde_. |
 
 ## Côté serveur
 

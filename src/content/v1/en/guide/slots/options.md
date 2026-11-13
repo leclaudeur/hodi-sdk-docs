@@ -13,7 +13,7 @@ key: "settingsPage"
 The server admin opens _Server › Plugins_, then a plugin's page. This page shows, from top to bottom:
 
 1. The plugin's name, its version and its switch.
-2. "Options": the [settings](/en/guide/manifest/#settings) Hodi draws.
+2. _Options_: the [settings](/en/guide/manifest/#settings) Hodi draws.
 3. The `settingsPage` card, which the plugin draws.
 4. The buttons to delete the plugin.
 
@@ -21,7 +21,7 @@ The plugin only draws the `settingsPage` card. The rest of the page comes from H
 
 ## Example
 
-Hello world puts a "Say hello" button in this card. A click on this button calls the `/hello` route, then the card shows the answer:
+Hello world puts a _Say hello_ button in this card. A click on this button calls the `/hello` route, then the card shows the answer:
 
 ```tsx title="web/index.tsx"
 import { Button, SettingRow, definePlugin, usePluginApi } from 'hodi:sdk'

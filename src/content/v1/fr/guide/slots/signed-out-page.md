@@ -18,7 +18,7 @@ L'écran de Connexion de Hodi reste toujours joignable : le lien d'un code, le l
 
 ## Exemple
 
-Cette page présente le service et propose deux boutons : « Se connecter », qui ouvre la Connexion de Hodi, et « Créer mon foyer », qui appelle une route publique du plugin.
+Cette page présente le service et propose deux boutons : _Se connecter_, qui ouvre la Connexion de Hodi, et _Créer mon foyer_, qui appelle une route publique du plugin.
 
 ```tsx title="web/public.tsx"
 import { Button, definePlugin } from 'hodi:sdk'

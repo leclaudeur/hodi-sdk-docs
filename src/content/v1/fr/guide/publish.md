@@ -1,7 +1,7 @@
 ---
 title: "Publier"
-description: "Du dossier d'un plugin au bouton « Installer » de chaque Hodi : tester, essayer sur un Hodi de test, construire le fichier, puis le faire vérifier et signer par le registre des plugins."
-intro: "Du dossier d'un plugin au bouton « Installer » de chaque Hodi : tester, essayer sur un Hodi de test, construire le fichier, puis le faire vérifier et signer par le registre des plugins."
+description: "Du dossier d'un plugin au bouton _Installer_ de chaque Hodi : tester, essayer sur un Hodi de test, construire le fichier, puis le faire vérifier et signer par le registre des plugins."
+intro: "Du dossier d'un plugin au bouton _Installer_ de chaque Hodi : tester, essayer sur un Hodi de test, construire le fichier, puis le faire vérifier et signer par le registre des plugins."
 order: 5
 icon: "package"
 ---
@@ -222,7 +222,7 @@ Le mainteneur vérifie chacune de ces règles avant de signer un plugin.
 | Règle | Pourquoi |
 | --- | --- |
 | **Pas d'IA sans un clic.** Seul `AiButton` interroge l'IA, une fois par clic. | L'IA coûte de l'argent au foyer : rien ne doit la lancer dans son dos. |
-| **Chaque texte dans les locales**, en français et en anglais. Les textes du plugin disent « tu ». | Hodi est bilingue, et parle à chacun de la même façon. |
+| **Chaque texte dans les locales**, en français et en anglais. Les textes du plugin disent _tu_. | Hodi est bilingue, et parle à chacun de la même façon. |
 | **Les composants et les couleurs de Hodi**, pas des boutons ni des couleurs maison. | Le plugin ressemble au reste de Hodi, dans les trois thèmes. |
 | **Les données des gens** : le plugin dit ce qu'il garde, et l'efface quand ils partent. | Chacun peut récupérer ou effacer ce que Hodi sait de lui. |
 | **Les migrations s'ajoutent au bout**, et ne changent jamais une fois publiées. | Un Hodi qui a déjà installé une version doit pouvoir passer à la suivante. |
