@@ -3,3 +3,5 @@ dist/
 package-lock.json
 src/styles/tokens.css
 src/styles/fonts.css
+# Written by demo/build.sh from Hodi's own build.
+src/demo/

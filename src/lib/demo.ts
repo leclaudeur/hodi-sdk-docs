@@ -1,0 +1,24 @@
+import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
+// The components drawn by Hodi's own code (demo/build.sh writes src/demo/): their DOM at a computer's and a
+// phone's width, the CSS they use, and the playground's bundle.
+
+// From the project's folder: the build moves this module, never the files it reads.
+const read = (name: string) => readFileSync(join(process.cwd(), 'src/demo', name))
+
+export const renders = JSON.parse(read('renders.json').toString()) as {
+  d: Record<string, string>
+  p: Record<string, string>
+}
+
+// Each file is served under a name that carries its hash, so the browser keeps it for a year.
+const asset = (name: string) => {
+  const body = read(name)
+  const [base, extension] = name.split('.')
+  const hash = createHash('sha256').update(body).digest('hex').slice(0, 10)
+  return { file: `${base}.${hash}.${extension}`, url: `/assets/${base}.${hash}.${extension}`, body }
+}
+
+export const demoAssets = { app: asset('app.css'), playCss: asset('play.css'), playJs: asset('play.js') }

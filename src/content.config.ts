@@ -60,8 +60,10 @@ const docs = defineCollection({
     // A slot's colour (a Hodi topic) and the key of definePlugin() it fills.
     topic: z.string().optional(),
     key: z.string().optional(),
-    // Cards of the pages under this one, drawn between the intro and the text.
-    cards: z.literal('children').optional(),
+    // Cards of the pages under this one, drawn between the intro and the text; components ones show a render.
+    cards: z.enum(['children', 'components']).optional(),
+    // The component drawn on this page's card, by its key in src/demo/renders.json.
+    preview: z.string().optional(),
     // Premiers pas only: its steps, then the dialog that ends it.
     steps: z.array(step).optional(),
     finish: z

@@ -8,7 +8,7 @@ import tseslint from 'typescript-eslint'
 
 // Hodi's rules, with Astro's for the .astro files.
 export default defineConfig(
-  { ignores: ['dist/', 'node_modules/', '.astro/'] },
+  { ignores: ['dist/', 'node_modules/', '.astro/', 'demo/', 'src/demo/'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   ...astro.configs.recommended,

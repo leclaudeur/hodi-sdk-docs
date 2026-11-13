@@ -1,0 +1,35 @@
+---
+import { Code } from 'astro:components'
+import type { Doc } from '../lib/docs.ts'
+import { shadowOf } from '../lib/rehype-renders.ts'
+import Icon from './Icon.astro'
+
+// The Composants page's groups: each one drawn for real in miniature, then its name and what it holds.
+interface Props {
+  pages: Doc[]
+}
+
+const { pages } = Astro.props
+const hooks = `const { t } = usePluginTranslation()\nconst api = usePluginApi()`
+---
+
+<div class="comp-grid">
+  {pages.map(page => (
+    <a class="cc" data-topic={page.entry.data.topic} href={page.url}>
+      <span class="cc-prev" aria-hidden="true">
+        {page.entry.data.preview ? (
+          <span class={`cmp-render thumb ${page.path.split('/').pop()}`} set:html={shadowOf(page.entry.data.preview)} />
+        ) : (
+          <Code class="cc-code" code={hooks} lang="tsx" theme="css-variables" />
+        )}
+      </span>
+      <span class="cc-tx">
+        <b>
+          {page.entry.data.title}
+          <Icon name="arrow-right" />
+        </b>
+        <span>{page.entry.data.description}</span>
+      </span>
+    </a>
+  ))}
+</div>
