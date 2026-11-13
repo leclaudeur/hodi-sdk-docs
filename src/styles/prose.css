@@ -19,9 +19,9 @@
   font: 400 clamp(32px, 3.4vw, 44px)/1 var(--font-display);
   letter-spacing: 0.005em;
 }
-/* A name from the code as a title: in the mono font, with its own case, at 16 px like every mono title. */
+/* A name from the code as a title: in the mono font, with its own case, at 18 px like every mono title. */
 .prose :is(h2, h3).code-title {
-  font: 500 16px/1.4 var(--font-mono);
+  font: 500 18px/1.4 var(--font-mono);
   letter-spacing: 0;
 }
 .prose h3 {
