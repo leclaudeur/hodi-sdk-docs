@@ -1,6 +1,6 @@
 ---
 title: "Connexion"
-description: "Les écrans autour de la connexion : une autre façon d'entrer, une inscription, une page à la place de Connexion, une étape juste après."
+description: "Les écrans autour de la connexion : une autre façon d'entrer, une inscription, une étape juste après."
 intro: "Les écrans autour de la connexion : une autre façon d'entrer, une inscription, une page à la place de Connexion, ou une étape juste après. Ce sont les seuls emplacements qu'une personne voit avant d'avoir ouvert son profil."
 order: 6
 icon: "log-in"
@@ -15,13 +15,13 @@ Avant qu'une personne ait ouvert son profil, Hodi ne connaît pas encore son foy
 ## Les emplacements
 
 <!-- prettier-ignore -->
-| Clé de `definePlugin` | Où | Exemple |
-| --- | --- | --- |
-| `signInExtras` | Sous le formulaire de Connexion | « Créer mon foyer » |
-| `signedOutPage` | À la place de Connexion, sur un appareil qui n'a pas de foyer | Une page d'accueil |
-| `afterSignIn` | Une étape une fois connecté, avant d'entrer dans l'app | « Quel foyer ? » |
-| `whoIsReadingFooter` | À côté de « Gérer les profils », sous « Qui lit ? » | « Changer de foyer » |
-| `ageConsent` | Après « J'ai au moins 13 ans » | « et j'accepte les conditions » |
+| Clé de `definePlugin` | Où l'écran apparaît |
+| --- | --- |
+| `signInExtras` | Sous le formulaire de Connexion. Par exemple, un lien « Créer mon foyer ». |
+| `signedOutPage` | À la place de Connexion, sur un appareil qui n'a pas encore de foyer. Par exemple, une page d'accueil. |
+| `afterSignIn` | Une étape juste après la connexion, avant d'entrer dans l'app. Par exemple, « Quel foyer ? ». |
+| `whoIsReadingFooter` | À côté de « Gérer les profils », sous « Qui lit ? ». Par exemple, « Changer de foyer ». |
+| `ageConsent` | Après la case « J'ai au moins 13 ans ». Par exemple, « et j'accepte les conditions ». |
 
 ## Exemple
 

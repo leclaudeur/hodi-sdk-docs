@@ -11,12 +11,12 @@ icon: "package"
 Un plugin passe par quatre étapes avant d'arriver chez les gens. Les trois premières se font seul, sur sa machine. La dernière passe par le mainteneur de Hodi.
 
 <!-- prettier-ignore -->
-| Étape | Ce qu'elle fait | La commande |
-| --- | --- | --- |
-| [Tester](#tester) | Vérifie la partie serveur, sans aucun Hodi. | `npm test` |
-| [Essayer](#essayer-sur-un-hodi-de-test) | Installe le plugin sur un Hodi de test, à chaque enregistrement. | `npx hodi-plugin dev` |
-| [Construire](#construire) | Fabrique le fichier `.hodi-plugin` à installer. | `npm run build` |
-| [Être vérifié](#être-vérifié) | Le mainteneur relit le code et signe le fichier. | Une pull request |
+| Étape | Ce que fait cette étape |
+| --- | --- |
+| Tester | Cette étape vérifie la partie serveur du plugin, sans avoir besoin d'un Hodi. La commande à lancer est `npm test`. |
+| Essayer | Cette étape installe le plugin sur un Hodi de test, à chaque enregistrement d'un fichier. La commande à lancer est `npx hodi-plugin dev`. |
+| Construire | Cette étape fabrique le fichier `.hodi-plugin`, le fichier que Hodi installe. La commande à lancer est `npm run build`. |
+| Être vérifié | Pendant cette étape, le mainteneur de Hodi relit le code du plugin et signe le fichier `.hodi-plugin`. Cette étape passe par une pull request. |
 
 Le [modèle de plugin](https://github.com/leclaudeur/hodi-plugin-template) contient déjà tout : le SDK, les scripts et la CI. Il n'y a rien à installer en plus.
 
@@ -96,7 +96,9 @@ La CI du modèle les relance à chaque push. Un plugin qui passe ses tests se co
 | `runTask(name)` | Lance une tâche, comme Hodi le ferait à son heure. |
 | `readFeed(key)` | Lit un flux du plugin, comme un foyer qui le suit. |
 | `exportData(person)` | Demande la copie des données d'une personne. |
-| `mails`, `notifications`, `questions` | Ce qui est sorti du serveur, dans l'ordre : e-mails, notifications, questions à l'IA. |
+| `mails` | Les e-mails que le plugin a envoyés, dans l'ordre. |
+| `notifications` | Les notifications que le plugin a envoyées, dans l'ordre. |
+| `questions` | Les questions que le plugin a posées à l'IA, dans l'ordre. |
 | `log` | Les lignes du journal du plugin, et celles de Hodi à son sujet (une permission refusée, par exemple). |
 | `stop()` | Arrête le petit Hodi à la fin des tests. |
 
@@ -206,7 +208,8 @@ Le [README du registre](https://github.com/leclaudeur/hodi-plugin-registry#add-o
 
 ### Ensuite
 
-- Le plugin apparaît dans _Serveur › Plugins › Disponibles_ de chaque Hodi, prêt à installer en un clic.
+- Le plugin apparaît dans _Serveur › Plugins › Disponibles_ de chaque Hodi.
+- Il s'y installe en un clic.
 - Chaque nouvelle version passe par une nouvelle pull request.
 
 Cette nouvelle version est relue, puis signée à son tour.

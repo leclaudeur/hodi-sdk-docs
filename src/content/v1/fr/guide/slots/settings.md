@@ -1,21 +1,27 @@
 ---
 title: "Réglages"
-description: "Une entrée de Réglages rien qu'au plugin, avec sa propre page, pour ce que chaque profil du foyer règle ou consulte lui-même."
-intro: "Une entrée de Réglages rien qu'au plugin, avec sa propre page. Elle sert à ce que chaque profil du foyer règle ou consulte lui-même : ses notes, ses statistiques, ses préférences pour le plugin…"
+description: "Une page du plugin dans Réglages, pour ce que chaque profil du foyer règle ou consulte lui-même."
+intro: "Un plugin peut ajouter sa propre entrée dans la page Réglages de Hodi. Cette entrée ouvre une page que le plugin dessine lui-même. Le plugin y met ce que chaque profil du foyer règle ou consulte pour lui-même : ses notes, ses statistiques, ses préférences pour le plugin."
 order: 2
 icon: "settings"
 topic: "world"
 key: "page"
 ---
 
-## Où elle s'affiche
+## Où s'affiche la page du plugin dans Réglages
 
-Réglages liste ses entrées en six groupes. Le plugin y ajoute une entrée, qui ouvre sa page. Deux fichiers y participent :
+Dans Hodi, chaque profil a sa page Réglages. La page Réglages liste des entrées, rangées en six groupes : Lecture, Sujets, Toi, Foyer, Cet appareil et Hodi. Chaque entrée ouvre une page.
 
-- `plugin.json` dit **où** placer l'entrée, avec `menu` ;
-- `web/index.tsx` dit **ce que** la page affiche, avec `page`.
+Un plugin peut ajouter sa propre entrée à cette liste. L'entrée du plugin porte le nom du plugin. Un clic sur l'entrée du plugin ouvre la page du plugin, que le plugin dessine lui-même.
 
-## Placer l'entrée
+Deux fichiers du plugin servent à cette entrée et à cette page :
+
+- `plugin.json` dit **où** placer l'entrée du plugin, avec le champ `menu`.
+- `web/index.tsx` dit **ce que** la page du plugin affiche, avec la clé `page` de `definePlugin`.
+
+## Choisir où placer l'entrée du plugin
+
+L'entrée du plugin se range dans l'un des six groupes de la page Réglages. Le champ `menu` de `plugin.json` choisit ce groupe, avec `group`. Le champ `menu` peut aussi choisir, avec `after`, l'entrée de Hodi après laquelle l'entrée du plugin se place.
 
 ```json title="plugin.json"
 "menu": {
@@ -24,19 +30,31 @@ Réglages liste ses entrées en six groupes. Le plugin y ajoute une entrée, qui
 }
 ```
 
-`group` est le groupe de Réglages, et `after` l'entrée après laquelle le plugin se place. Sans `menu`, ou avec un groupe inconnu, l'entrée va à la fin du groupe Foyer.
+Avec cet exemple, l'entrée du plugin va dans le groupe « Toi », juste après l'entrée « Statistiques ».
+
+Sans `after`, l'entrée du plugin va à la fin de son groupe. Sans `menu`, ou avec un groupe que Hodi ne connaît pas, l'entrée du plugin va à la fin du groupe « Foyer ».
+
+Voici les six valeurs possibles de `group`. Pour chaque valeur, le nom du groupe dans la page Réglages, et les entrées de Hodi que ce groupe contient déjà, avec la valeur à donner à `after` pour placer l'entrée du plugin après l'une d'elles :
 
 <!-- prettier-ignore -->
-| `group` | Le groupe dans Réglages |
+| Valeur de `group` | Le groupe et ses entrées |
 | --- | --- |
-| `reading` | Lecture |
-| `subjects` | Sujets |
-| `you` | Toi |
-| `household` | Foyer |
-| `device` | Cet appareil |
-| `about` | Hodi |
+| `reading` | Le groupe « Lecture ». Ce groupe contient Lecture et affichage (`reading`), Thèmes (`themes`), Sources (`sources`) et Historique (`history`). |
+| `subjects` | Le groupe « Sujets ». Ce groupe contient Sujets suivis (`followed`) et Sujets masqués (`muted`). |
+| `you` | Le groupe « Toi ». Ce groupe contient Mon profil (`me`), Statistiques (`stats`), Compte et données (`account`) et Partage (`sharing`). |
+| `household` | Le groupe « Foyer ». Ce groupe contient Foyer (`household`), Profils (`profiles`) et IA et crédits (`ai`). C'est le groupe par défaut. |
+| `device` | Le groupe « Cet appareil ». Ce groupe contient Notifications (`notifications`) et Raccourcis clavier (`shortcuts`). |
+| `about` | Le groupe « Hodi ». Ce groupe contient Serveur (`server`) et À propos (`about`). |
 
-## Exemple
+## Dessiner la page du plugin
+
+La page du plugin est un composant React, écrit dans la partie web du plugin (`web/index.tsx`). Le plugin donne ce composant à Hodi avec la clé `page` de `definePlugin`. Sans la clé `page`, la page Réglages n'affiche aucune entrée pour le plugin, même avec un champ `menu` dans `plugin.json`.
+
+Pour que la page du plugin ressemble aux pages de Hodi, la page du plugin se construit avec les mêmes composants que Hodi :
+
+- `SectionPage` dessine la page, avec son titre et sa ligne d'introduction.
+- `SettingsCard` dessine une carte, dans la page.
+- `SettingRow` dessine une ligne, dans une carte.
 
 ```tsx title="web/index.tsx"
 import { SectionPage, SettingRow, SettingsCard, definePlugin } from 'hodi:sdk'
@@ -56,24 +74,39 @@ definePlugin({
 })
 ```
 
-## Ce qu'elle reçoit
+Avec cet exemple, la page Réglages affiche une entrée pour le plugin, avec une icône de carnet. Un clic sur cette entrée ouvre la page « Mes notes ». La page « Mes notes » contient une carte, et cette carte contient une ligne « Notes enregistrées : 12 ».
+
+## Ce que Hodi donne au composant de la page
+
+Hodi donne une seule prop au composant de la page du plugin : `layout`.
+
+Sur un ordinateur, la page Réglages s'affiche en colonnes : la liste des entrées à gauche, la page ouverte à droite. Sur une tablette ou un téléphone, la page Réglages s'affiche page par page. La prop `layout` dit dans lequel de ces deux cas se trouve la page du plugin.
+
+Le composant de la page n'a rien à faire de `layout` lui-même : il suffit de passer `layout` tel quel à `SectionPage`, qui s'occupe de la mise en page.
 
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `layout` | `'desktop' \| 'phone'` | La taille d'écran. À passer tel quel à `SectionPage`, qui dessine la page comme celles de Hodi. |
+| `layout` | `'desktop' \| 'phone'` | `'desktop'` quand la page Réglages s'affiche en colonnes, `'phone'` quand la page Réglages s'affiche page par page. À passer tel quel à `SectionPage`. |
 
-## Les autres clés
+## L'icône et la ligne grise de l'entrée du plugin
+
+Dans la liste de la page Réglages, chaque entrée a une icône à gauche de son nom, et une ligne grise sous son nom. Le nom de l'entrée du plugin est toujours le nom du plugin. L'icône et la ligne grise de l'entrée du plugin se choisissent avec deux autres clés de `definePlugin`, toutes les deux facultatives.
+
+Voici les trois clés de `definePlugin` qui servent à la page Réglages :
 
 <!-- prettier-ignore -->
 | Clé de `definePlugin` | Type | |
 | --- | --- | --- |
-| `page` | `ComponentType<{ layout }>` | La page elle-même. Sans elle, Réglages n'a pas d'entrée pour le plugin. |
-| `menuIcon?` | `ComponentType` | L'icône de l'entrée, une icône Lucide de 18 px. Une pièce de puzzle sans elle. |
-| `menuHint?` | `ComponentType` | La ligne sous le nom de l'entrée, comme « 12 notes ». La description du plugin sans elle. |
+| `page` | `ComponentType<{ layout }>` | Le composant de la page du plugin, décrit plus haut. Sans cette clé, la page Réglages n'a pas d'entrée pour le plugin. |
+| `menuIcon?` | `ComponentType` | L'icône à gauche du nom de l'entrée, une icône Lucide. Sans cette clé, Hodi affiche une pièce de puzzle. |
+| `menuHint?` | `ComponentType` | La ligne grise sous le nom de l'entrée, par exemple « 12 notes ». Sans cette clé, Hodi affiche la description du plugin. |
 
-## À savoir
+`menuHint` est un composant, et pas un simple texte : le composant `menuHint` peut donc lire des données, par exemple le nombre de notes, et afficher ce nombre.
 
-- **Qui la voit** : les profils prévus par `audience`, comme pour ses routes.
-- **Son titre** : c'est le plugin qui le donne, avec `SectionPage`. Hodi n'ajoute rien autour.
-- **Si elle plante** : Hodi affiche un message à sa place, et le reste de Réglages continue de marcher.
+## À savoir sur la page du plugin dans Réglages
+
+- **Qui voit l'entrée du plugin** : les profils prévus par `audience` dans `plugin.json`.
+- **Avec `audience: "admin"`** : seul l'admin du foyer voit l'entrée du plugin et sa page.
+- **Le titre de la page du plugin** : le plugin le donne, avec `SectionPage`.
+- **Si la page du plugin plante** : Hodi affiche un message à la place de cette page.

@@ -1,6 +1,6 @@
 ---
 title: "Sign-in"
-description: "The screens around signing in: another way in, a sign-up, a page in place of Sign in, a step right after it."
+description: "The screens around signing in: another way in, a sign-up, a step right after it."
 intro: "The screens around signing in: another way in, a sign-up, a page in place of Sign in, or a step right after it. They are the only slots someone sees before opening their profile."
 order: 6
 icon: "log-in"
@@ -15,13 +15,13 @@ Before someone has opened their profile, Hodi doesn't know their household yet. 
 ## The slots
 
 <!-- prettier-ignore -->
-| `definePlugin` key | Where | Example |
-| --- | --- | --- |
-| `signInExtras` | Under the Sign in form | "Create my household" |
-| `signedOutPage` | In place of Sign in, on a device with no household | A home page |
-| `afterSignIn` | A step once signed in, before entering the app | "Which household?" |
-| `whoIsReadingFooter` | Next to "Manage profiles", under "Who's in?" | "Switch household" |
-| `ageConsent` | After "I am at least 13 years old" | "and I accept the terms" |
+| `definePlugin` key | Where the screen shows |
+| --- | --- |
+| `signInExtras` | Under the Sign in form. For example, a "Create my household" link. |
+| `signedOutPage` | In place of Sign in, on a device that has no household yet. For example, a home page. |
+| `afterSignIn` | A step right after signing in, before entering the app. For example, "Which household?". |
+| `whoIsReadingFooter` | Next to "Manage profiles", under "Who's in?". For example, "Switch household". |
+| `ageConsent` | After the "I am at least 13 years old" box. For example, "and I accept the terms". |
 
 ## Example
 

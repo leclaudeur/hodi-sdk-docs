@@ -1,6 +1,6 @@
 ---
 title: "Sa carte d'admin"
-description: "Une carte du plugin sur sa page de Serveur › Plugins, sous ses réglages, pour ce que des réglages seuls ne permettent pas."
+description: "Une carte du plugin dans Serveur › Plugins, sous ses réglages, pour ce qu'un réglage seul ne permet pas."
 intro: "Une carte que le plugin dessine lui-même sur sa page de _Serveur › Plugins_, sous les réglages que Hodi dessine pour lui. Elle sert à ce que de simples réglages ne permettent pas : un bouton pour tester, une liste, des statistiques…"
 order: 1
 icon: "sliders-horizontal"
@@ -48,7 +48,8 @@ definePlugin({ settingsPage: HelloCard })
 
 ## À savoir
 
-- **Ce qu'elle reçoit** : rien. Elle lit ses réglages avec ses routes, et les appelle avec `usePluginApi()`.
+- **Ce qu'elle reçoit** : rien.
+- **Ses données** : elle les lit par ses routes, avec `usePluginApi()`.
 - **Qui la voit** : l'admin du serveur seulement, comme toute la page _Serveur › Plugins_.
 - **Quand elle s'affiche** : seulement quand le plugin est activé.
 - **Son dessin** : des `SettingRow`, comme les réglages au-dessus.

@@ -165,7 +165,8 @@ Here is what Hodi draws for four settings, one of each type:
 | `type` | `'text' \| 'boolean' \| 'number' \| 'choice'` | What it holds, and so what Hodi draws. |
 | `default` | Depends on the type | Its value as long as the admin hasn't changed it. |
 | `maxLength?` | `number` | For `text`: the longest length. 2000 by default, and at most. |
-| `min?` and `max?` | `number` | For `number`: the bounds. The default must be between the two. |
+| `min?` | `number` | For `number`: the smallest value allowed. The default cannot be smaller. |
+| `max?` | `number` | For `number`: the largest value allowed. The default cannot be larger. |
 | `options` | `string[]` | For `choice`: the possible values. Each follows the same rules as `key`. |
 
 ### Setting types

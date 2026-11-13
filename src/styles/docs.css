@@ -376,7 +376,8 @@
   color: var(--text);
 }
 
-/* Cards of the pages under this one: two columns, an icon in the page's colour, three lines of text. */
+/* Cards of the pages under this one, like the Composants cards (components.css): the same text, arrow and hover, an
+   icon in the page's colour in place of a preview, three lines of text at most. */
 .slots {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -384,17 +385,18 @@
   gap: 14px;
   margin: 8px 0 32px;
 }
-.slot {
+.prose a.slot {
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr);
+  align-items: start;
   gap: 14px;
-  padding: 18px 20px;
+  padding: 18px 20px 20px;
   border: 1px solid var(--border);
   border-radius: 18px;
   background: var(--column);
   color: inherit;
   text-decoration: none;
-  transition: background-color var(--duration) var(--ease);
+  transition: border-color var(--duration) var(--ease);
 }
 .slot .ic {
   display: grid;
@@ -409,26 +411,22 @@
 .slot .tx {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   min-width: 0;
-  padding-top: 2px;
 }
 .slot b {
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  gap: 8px;
   color: var(--text);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  line-height: 1.4;
 }
 .slot b svg {
-  width: 14px;
-  height: 14px;
+  flex: none;
   color: var(--text-3);
-  transition:
-    transform var(--duration) var(--ease),
-    color var(--duration) var(--ease);
+  transition: transform var(--duration) var(--ease);
 }
 .slot .tx > span {
   color: var(--text-2);
@@ -437,12 +435,11 @@
   text-wrap: pretty;
 }
 @media (hover: hover) {
-  .slot:hover {
-    background: var(--card-hover);
+  .prose a.slot:hover {
+    border-color: var(--border-strong);
   }
-  .slot:hover b svg {
+  .prose a.slot:hover b svg {
     transform: translateX(3px);
-    color: var(--text);
   }
 }
 @media (max-width: 600px) {

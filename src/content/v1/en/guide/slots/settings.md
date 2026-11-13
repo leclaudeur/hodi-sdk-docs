@@ -1,6 +1,6 @@
 ---
 title: "Settings"
-description: "An entry in Settings for the plugin alone, with its own page, for what each profile of the household sets or looks up itself."
+description: "A page of the plugin in Settings, for what each profile of the household sets or looks up itself."
 intro: "An entry in Settings for the plugin alone, with its own page. It is for what each profile of the household sets or looks up itself: its notes, its statistics, its preferences for the plugin…"
 order: 2
 icon: "settings"
@@ -27,14 +27,14 @@ Settings lists its entries in six groups. The plugin adds an entry there, which 
 `group` is the Settings group, and `after` the entry the plugin goes after. Without `menu`, or with an unknown group, the entry goes at the end of the Household group.
 
 <!-- prettier-ignore -->
-| `group` | The group in Settings |
+| Value of `group` | Where the plugin's entry shows |
 | --- | --- |
-| `reading` | Reading |
-| `subjects` | Subjects |
-| `you` | You |
-| `household` | Household |
-| `device` | This device |
-| `about` | Hodi |
+| `reading` | The entry goes in the "Reading" group, next to Reading and display, Topics and Sources. |
+| `subjects` | The entry goes in the "Subjects" group, next to Followed and Muted subjects. |
+| `you` | The entry goes in the "You" group, next to My profile, Statistics, Account and data and Sharing. |
+| `household` | The entry goes in the "Household" group, next to Household, Profiles and AI & credits. It is the default group. |
+| `device` | The entry goes in the "This device" group, next to Notifications and Keyboard shortcuts. |
+| `about` | The entry goes in the "Hodi" group, next to Server and About. |
 
 ## Example
 
@@ -76,4 +76,4 @@ definePlugin({
 
 - **Who sees it**: the profiles in `audience`, as for its routes.
 - **Its title**: the plugin gives it, with `SectionPage`. Hodi adds nothing around it.
-- **If it crashes**: Hodi shows a message in its place, and the rest of Settings keeps working.
+- **If it crashes**: Hodi shows a message in its place, the rest keeps working.

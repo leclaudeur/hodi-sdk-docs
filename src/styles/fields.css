@@ -64,7 +64,11 @@
 .prose .props.rows strong {
   font-size: 15px;
 }
-.prose .props .pn .k,
+/* A title of several names: the words between them (« et ») at the names' own size. */
+.prose .props .pn .k {
+  color: var(--text-2);
+  font: 500 13.5px/1.5 var(--font-mono);
+}
 .prose .props .pn .ty {
   font-family: var(--font-mono);
 }

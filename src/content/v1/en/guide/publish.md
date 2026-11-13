@@ -11,12 +11,12 @@ icon: "package"
 A plugin goes through four stages before it reaches people. The first three are done alone, on one's own machine. The last one goes through Hodi's maintainer.
 
 <!-- prettier-ignore -->
-| Stage | What it does | The command |
-| --- | --- | --- |
-| [Test](#test) | Checks the server part, without any Hodi. | `npm test` |
-| [Try](#try-on-a-test-hodi) | Installs the plugin on a test Hodi, at every save. | `npx hodi-plugin dev` |
-| [Build](#build) | Makes the `.hodi-plugin` file to install. | `npm run build` |
-| [Get verified](#getting-verified) | The maintainer reads the code and signs the file. | A pull request |
+| Stage | What this stage does |
+| --- | --- |
+| Test | This stage checks the plugin's server part, without needing a Hodi. The command to run is `npm test`. |
+| Try | This stage installs the plugin on a test Hodi, every time a file is saved. The command to run is `npx hodi-plugin dev`. |
+| Build | This stage makes the `.hodi-plugin` file, the file Hodi installs. The command to run is `npm run build`. |
+| Get verified | During this stage, Hodi's maintainer reads the plugin's code and signs the `.hodi-plugin` file. This stage goes through a pull request. |
 
 The [plugin template](https://github.com/leclaudeur/hodi-plugin-template) already has everything: the SDK, the scripts and the CI. There is nothing more to install.
 
@@ -96,7 +96,9 @@ The template's CI runs them again at every push. A plugin that passes its tests 
 | `runTask(name)` | Runs a task, as Hodi would at its time. |
 | `readFeed(key)` | Reads a feed of the plugin, like a household that follows it. |
 | `exportData(person)` | Asks for a person's copy of their data. |
-| `mails`, `notifications`, `questions` | What left the server, in order: e-mails, notifications, questions to the AI. |
+| `mails` | The e-mails the plugin sent, in order. |
+| `notifications` | The notifications the plugin sent, in order. |
+| `questions` | The questions the plugin asked the AI, in order. |
 | `log` | The plugin's log lines, and Hodi's lines about it (a refused permission, for example). |
 | `stop()` | Stops the small Hodi at the end of the tests. |
 
@@ -206,7 +208,8 @@ The [registry's README](https://github.com/leclaudeur/hodi-plugin-registry#add-o
 
 ### Then
 
-- The plugin shows in _Server › Plugins › Available_ of every Hodi, ready to install in one click.
+- The plugin shows in _Server › Plugins › Available_ of every Hodi.
+- It installs from there in one click.
 - Each new version goes through a new pull request.
 
 That new version is read, then signed in turn.

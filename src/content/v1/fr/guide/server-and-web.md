@@ -55,10 +55,12 @@ Voici ce que devient chaque fichier :
 <!-- prettier-ignore -->
 | Dans le dossier | Dans le fichier `.hodi-plugin` |
 | --- | --- |
-| `server/index.ts` | `server.js`, avec le code des paquets npm qu'il importe |
-| `web/index.tsx` | `web.js` et `web.css` |
-| `web/public.tsx` | `web-public.js` et `web-public.css` |
-| `plugin.json`, `locales/` et `assets/` | Copiés tels quels |
+| `server/index.ts` | Le fichier devient `server.js`, avec le code des paquets npm qu'il importe. |
+| `web/index.tsx` | Le fichier devient `web.js`, et ses styles deviennent `web.css`. |
+| `web/public.tsx` | Le fichier devient `web-public.js`, et ses styles deviennent `web-public.css`. |
+| `plugin.json` | Le fichier est copié tel quel. |
+| `locales/` | Le dossier est copié tel quel, avec les textes de chaque langue. |
+| `assets/` | Le dossier est copié tel quel, avec les images et les autres fichiers. |
 
 Le fichier arrive dans `dist/`, par exemple `dist/hello-world-0.1.0.hodi-plugin`. [Publier](/fr/guide/publish/) explique comment le tester, l'installer et le faire signer.
 
@@ -104,13 +106,13 @@ Dans ce bac à sable, seul le JavaScript standard existe : `JSON`, `Math`, `Date
 Pour tout le reste, la partie serveur passe par `ctx`, le contexte que Hodi donne à chaque route. Quelques exemples :
 
 <!-- prettier-ignore -->
-| Besoin | Avec `ctx` |
+| Ce que le plugin veut faire | Comment le faire avec `ctx` |
 | --- | --- |
-| Lire ou écrire ses données | `ctx.db` |
-| Lire ses réglages | `ctx.settings()` |
-| Lire la page d'un site | `ctx.fetchText()`, avec la permission `network` |
-| Poser une question à l'IA du foyer | `ctx.ai.ask()`, avec la permission `ai` |
-| Écrire une ligne dans le journal | `ctx.log()` |
+| Lire ou écrire ses données | Avec `ctx.db`, qui donne accès à sa base de données. |
+| Lire ses réglages | Avec `ctx.settings()`, qui renvoie la valeur choisie pour chaque réglage. |
+| Lire la page d'un site | Avec `ctx.fetchText()`. Il faut la permission `network`. |
+| Poser une question à l'IA du foyer | Avec `ctx.ai.ask()`. Il faut la permission `ai`. |
+| Écrire une ligne dans le journal | Avec `ctx.log()`, pour suivre ce que fait le plugin. |
 
 Hodi vérifie chaque appel : le plugin n'obtient que ce que ses [permissions](/fr/guide/manifest/#les-permissions) lui ouvrent. [Le contexte serveur](/fr/guide/server-context/) décrit tout ce que `ctx` contient.
 
@@ -121,12 +123,12 @@ La partie serveur peut importer des paquets npm. Pendant la construction, leur c
 Cela ne marche que pour un paquet écrit en JavaScript standard. Un paquet qui a besoin de Node.js plante au premier appel, car Node.js n'existe pas dans le bac à sable.
 
 <!-- prettier-ignore -->
-| Paquet | Marche | Pourquoi |
-| --- | --- | --- |
-| `date-fns` | Oui | Il calcule des dates en JavaScript standard. |
-| `zod` | Oui | Il vérifie des données en JavaScript standard. |
-| `sharp` | Non | Il redimensionne des images avec du code natif de Node.js. |
-| `pg` | Non | Il ouvre une connexion réseau vers PostgreSQL. |
+| Paquet | Marche-t-il ? |
+| --- | --- |
+| `date-fns` | Oui. Il calcule des dates en JavaScript standard. |
+| `zod` | Oui. Il vérifie des données en JavaScript standard. |
+| `sharp` | Non. Il redimensionne des images avec du code natif de Node.js. |
+| `pg` | Non. Il ouvre une connexion réseau vers PostgreSQL. |
 
 En cas de doute, `npm test` répond vite : les tests lancent le plugin dans le même bac à sable que Hodi.
 
@@ -135,14 +137,14 @@ En cas de doute, `npm test` répond vite : les tests lancent le plugin dans le m
 Un plugin ne doit pas pouvoir ralentir Hodi. Le bac à sable a donc des limites :
 
 <!-- prettier-ignore -->
-| Limite | Valeur | Au-delà |
-| --- | --- | --- |
-| Mémoire | 16 Mo, ou jusqu'à 32 Mo avec `memoryMb` | L'appel échoue. |
-| Durée d'un appel | 10 secondes | Hodi arrête l'appel. |
-| Taille d'une réponse | 1 Mo | L'appel échoue. |
-| Taille de la base | 256 Mo | L'écriture échoue. |
-| Appels en attente | 8, derrière celui qui tourne | Hodi répond `busy` sans attendre. |
-| Plantages | 3 en 10 minutes | Le plugin s'arrête jusqu'au prochain démarrage de Hodi. |
+| Limite | Ce qui se passe |
+| --- | --- |
+| Mémoire | La partie serveur a 16 Mo, ou jusqu'à 32 Mo avec `memoryMb`. Au-delà, l'appel échoue. |
+| Durée d'un appel | Un appel dure 10 secondes au plus. Au-delà, Hodi l'arrête. |
+| Taille d'une réponse | Une réponse fait 1 Mo au plus. Au-delà, l'appel échoue. |
+| Taille de la base | La base fait 256 Mo au plus. Au-delà, l'écriture échoue. |
+| Appels en attente | 8 appels peuvent attendre derrière celui qui tourne. Au-delà, Hodi répond `busy` sans attendre. |
+| Plantages | Après 3 plantages en 10 minutes, le plugin s'arrête jusqu'au prochain démarrage de Hodi. |
 
 Le bac à sable s'endort après une minute sans appel, et se réveille au suivant. En s'endormant, il oublie tout ce qui était en mémoire. Une variable globale ne garde donc pas sa valeur d'un appel à l'autre : ce qui doit durer va dans la base, avec `ctx.db`.
 
