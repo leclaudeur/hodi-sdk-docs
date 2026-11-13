@@ -95,19 +95,23 @@
   text-transform: uppercase;
 }
 
-/* A comparison: one card per thing compared, side by side when there is room for both. */
-.prose .compare {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  margin: 4px 0 40px;
+/* A comparison: the switch in the bar shows one thing's values; its buttons are the app's Segmented. */
+.compare .ph {
+  align-items: center;
+  padding-block: 8px;
 }
-.prose .compare .props {
-  margin: 0;
+.compare .ph .seg {
+  letter-spacing: 0;
+  text-transform: none;
 }
-.prose .compare .row-label {
+.compare .cmp-v {
+  display: none;
+}
+.compare[data-show='0'] .cmp-v[data-i='0'],
+.compare[data-show='1'] .cmp-v[data-i='1'],
+.compare[data-show='2'] .cmp-v[data-i='2'],
+.compare[data-show='3'] .cmp-v[data-i='3'] {
   display: block;
-  margin: 0 0 2px;
 }
 
 /* The app's info notice: a blue card, its square and icon at the top left, the title and the text beside them. */

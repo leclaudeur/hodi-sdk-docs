@@ -1,6 +1,7 @@
 import { wirePlay } from './play-window.ts'
 import { wireSearch } from './search.ts'
 import { fitSidebar, spyHeadings } from './sidebar.ts'
+import { wireCompare } from './compare.ts'
 
 const THEME_KEY = 'hodi-sdk-theme'
 
@@ -119,6 +120,7 @@ wireSheet()
 wireCopy()
 wireTree()
 wirePlay()
+wireCompare()
 wireSearch()
 fitSidebar()
 spyHeadings()

@@ -15,7 +15,7 @@ Le plus simple est de partir d'un exemple : le plugin « Hello world » des [pre
 - **Hodi fait le lien** : il transmet le clic au serveur, puis la réponse au bouton.
 
 <!-- prettier-ignore -->
-| | Partie serveur | Partie web |
+| _Les deux parties_ | Serveur | Web |
 | --- | --- | --- |
 | Son fichier | `server/index.ts` | `web/index.tsx` |
 | Où elle tourne | Sur le serveur de Hodi, dans un bac à sable | Dans le navigateur, dans les pages de Hodi |
