@@ -102,9 +102,15 @@ const wireTree = () => {
   const dialog = document.querySelector<HTMLDialogElement>('dialog.dev-tree')
   document.querySelector('.tree-open')?.addEventListener('click', () => dialog?.showModal())
   dialog?.querySelector('.close')?.addEventListener('click', () => dialog.close())
+  // A title of this page closes it to show the page; a link to another page leaves it open until that page comes,
+  // so the old page never shows in between.
   dialog?.addEventListener('click', event => {
-    if (event.target === dialog || (event.target instanceof Element && event.target.closest('a'))) dialog.close()
+    const link = event.target instanceof Element ? event.target.closest('a') : null
+    const here = link !== null && link.pathname === location.pathname && link.hash !== ''
+    if (event.target === dialog || here) dialog.close()
   })
+  // Back to this page from the browser's cache: the panel left open for the way out is closed again.
+  addEventListener('pageshow', () => dialog?.close())
 }
 
 wireMenus()
