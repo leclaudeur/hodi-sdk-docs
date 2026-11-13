@@ -33,6 +33,11 @@ export const codeWindow = (): ShikiTransformer => ({
       icon('copy'),
       el('span', { className: ['lb'] }, [{ type: 'text', value: 'Copier' }])
     ])
-    root.children = [el('div', { className: ['term'] }, [el('div', { className: ['tb'] }, [...dots, name, copy]), pre])]
+    root.children = [
+      el('div', { className: ['term'] }, [
+        el('div', { className: ['tb'], 'data-pagefind-ignore': '' }, [...dots, name, copy]),
+        pre
+      ])
+    ]
   }
 })

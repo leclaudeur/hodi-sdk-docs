@@ -16,7 +16,7 @@ const { doc, group, headings } = Astro.props
 const parent = docs.find(other => other.version === doc.version && other.lang === doc.lang && other.path === doc.parent)
 ---
 
-<nav class="dev-crumb" aria-label={t(doc.lang, 'whereYouAre')}>
+<nav class="dev-crumb" data-pagefind-ignore aria-label={t(doc.lang, 'whereYouAre')}>
   {parent && (
     <a class="round up" href={parent.url} aria-label={t(doc.lang, 'back')}>
       <Icon name="arrow-left" />

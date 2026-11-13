@@ -21,6 +21,7 @@ it. It looks like Hodi itself, with the same tokens, fonts, themes and component
 
 - ⚡ **Fast and plain**: [Astro](https://astro.build) writes every page as HTML, with almost no JavaScript.
 - 🔎 **Made to be found**: real addresses, a sitemap, canonical links and one language per address.
+- ⌨️ **Searchable**: [Pagefind](https://pagefind.app) indexes the pages after the build, and ⌘K opens the search.
 - 🎨 **Hodi's look**: the app's colours, its _Sombre_, _Clair_ and _Poudré_ themes, its menus and its sidebar.
 
 The SDK's own code lives in Hodi's repository. This one only holds the website.
@@ -36,7 +37,8 @@ npm ci
 npm run dev       # → http://localhost:4321/fr/guide/server-and-web/
 ```
 
-Every save reloads the page. `npm run build` writes the whole site into `dist/`, and `npm run preview` serves it.
+Every save reloads the page. `npm run build` writes the whole site into `dist/` with its search index, and
+`npm run preview` serves it. The search only finds something there: `npm run dev` has no index.
 
 ## Writing a page
 

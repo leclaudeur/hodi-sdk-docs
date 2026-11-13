@@ -3,6 +3,7 @@ import { counterpart, groupsOf, languagesOf, latest, versions, type Doc } from '
 import { t } from '../lib/i18n.ts'
 import Brand from './Brand.astro'
 import Icon from './Icon.astro'
+import Search from './Search.astro'
 
 // The bar: the logo, the sections, then the version, GitHub, the language and the theme; a sheet on a phone.
 interface Props {
@@ -39,6 +40,7 @@ const label = (v: string) => `${v}.x`
       ))}
     </nav>
     <div class="nav-end">
+      <Search doc={doc} />
       <div class="menu-w">
         <button
           type="button"
