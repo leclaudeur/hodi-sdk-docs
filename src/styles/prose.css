@@ -24,6 +24,10 @@
   font: 500 18px/1.4 var(--font-mono);
   letter-spacing: 0;
 }
+/* Its name is a code element: it keeps the title's 18 px instead of shrinking like code in a sentence. */
+.prose :is(h2, h3).code-title code {
+  font-size: inherit;
+}
 .prose h3 {
   margin: 40px 0 16px;
   color: var(--text);
