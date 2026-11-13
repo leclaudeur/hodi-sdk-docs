@@ -33,7 +33,8 @@ const plugin = z.object({
 const step = z.object({
   name: z.string(),
   text: z.string(),
-  guide: z.string(),
+  // « En savoir plus » at the foot of the step: the guide's pages behind it, opened in a new tab.
+  more: z.array(z.object({ label: z.string(), href: z.string() })),
   todo: z.array(z.string()),
   file: z.string(),
   lang: z.string(),
