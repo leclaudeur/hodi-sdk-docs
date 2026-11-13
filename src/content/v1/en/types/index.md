@@ -405,7 +405,7 @@ What [askToConfirm()](/en/functions/#asktoconfirm) receives. With `proof`, the w
 | `title` | `string` | The question asked, such as "Clear the history?". |
 | `message` | `ReactNode` | What will happen after the click, in one sentence. |
 | `label` | `string` | The text of the button that confirms. |
-| `onConfirm` | `(proof: Proof) => void \| Promise<void>` | What the click on that button does. |
+| `onConfirm` | `(proof: Proof) => void \| Promise<void>` | What the click on that button does. If the promise fails, the window stays open. |
 | `look?` | `'danger' \| 'primary'` | The button's colour: red by default, for something that erases. |
 | `proof?` | `{}` | Asks for the person's password before confirming, for a route with `proof: true`. |
 | `onCancel?` | `() => void` | What happens when the window closes without the button. |

@@ -405,7 +405,7 @@ Ce que reçoit [askToConfirm()](/fr/functions/#asktoconfirm). Avec `proof`, la f
 | `title` | `string` | La question posée, comme « Effacer l'historique ? ». |
 | `message` | `ReactNode` | Ce qui se passera après le clic, en une phrase. |
 | `label` | `string` | Le texte du bouton qui confirme. |
-| `onConfirm` | `(proof: Proof) => void \| Promise<void>` | Ce que fait le clic sur ce bouton. |
+| `onConfirm` | `(proof: Proof) => void \| Promise<void>` | Ce que fait le clic sur ce bouton. Si la promesse échoue, la fenêtre reste ouverte. |
 | `look?` | `'danger' \| 'primary'` | La couleur du bouton : rouge par défaut, pour une chose qui efface. |
 | `proof?` | `{}` | Demande le mot de passe de la personne avant de confirmer, pour une route avec `proof: true`. |
 | `onCancel?` | `() => void` | Ce qui se passe quand la fenêtre se ferme sans le bouton. |
