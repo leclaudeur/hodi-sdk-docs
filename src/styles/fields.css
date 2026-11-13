@@ -97,7 +97,12 @@
 
 /* A comparison: the switch in the bar shows one thing's values; its buttons are the app's Segmented. */
 .compare .ph {
+  align-items: center;
   padding-block: 8px;
+}
+.compare .ph .seg {
+  letter-spacing: 0;
+  text-transform: none;
 }
 .compare .cmp-v {
   display: none;

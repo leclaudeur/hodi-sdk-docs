@@ -15,7 +15,7 @@ The simplest way is to start from an example: the "Hello world" plugin of [Getti
 - **Hodi links them**: it passes the click on to the server, then the answer back to the button.
 
 <!-- prettier-ignore -->
-| | Server part | Web part |
+| _The two parts_ | Server | Web |
 | --- | --- | --- |
 | Its file | `server/index.ts` | `web/index.tsx` |
 | Where it runs | On Hodi's server, in a sandbox | In the browser, in Hodi's pages |

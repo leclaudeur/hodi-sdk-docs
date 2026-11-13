@@ -1,8 +1,7 @@
 import type { Element, ElementContent } from 'hast'
 
 // Any other Markdown table becomes rows or cards, never a grid: a grid's columns crush or overflow on a phone.
-// A table whose first heading is empty and whose others are named compares those: one card per column, side by side
-// on a wide screen and stacked on a phone. Else each row is a card row: its first cell as the title, a cell that is
+// A table whose first heading is in italics compares things (compareOf). Else each row is a card row: its first cell as the title, a cell that is
 // only code beside it, and every other cell under it, after its column's name when the table has three columns or more.
 
 const el = (tagName: string, className: string[], children: ElementContent[]): Element => ({
@@ -57,7 +56,8 @@ const rowOf = (cells: Element[], names: string[]) => {
   )
 }
 
-// A comparison, as a field list that shows one thing at a time: a switch in its bar picks the thing, each row gives
+// A table whose first heading is in italics compares things: a field list with that heading as its title and, at the
+// right of its bar, a switch that picks the thing, each row gives
 // the point's name and that thing's value (scripts/compare.ts). Every value is in the page, for search engines too.
 const compareOf = (names: string[], rows: Element[][]) => {
   const things = names.slice(1)
@@ -65,7 +65,11 @@ const compareOf = (names: string[], rows: Element[][]) => {
     ...el('button', [], [{ type: 'text', value: name }]),
     properties: { type: 'button', dataI: String(index), ariaPressed: index === 0 ? 'true' : 'false' }
   })
-  const bar = el('div', ['ph', 'mono'], [el('div', ['seg'], things.map(button))])
+  const bar = el(
+    'div',
+    ['ph', 'mono'],
+    [el('span', [], [{ type: 'text', value: names[0] ?? '' }]), el('div', ['seg'], things.map(button))]
+  )
   const value = (cells: Element[], index: number) => ({
     ...el('p', ['cmp-v'], cells[index + 1]?.children ?? []),
     properties: { className: ['cmp-v'], dataI: String(index) }
@@ -88,6 +92,8 @@ export const rowsOf = (table: Element): Element => {
   const rows = elements(table, 'tbody')
     .flatMap(part => elements(part, 'tr'))
     .map(cellsOf)
-  if (names.length > 2 && !names[0] && names.slice(1).every(Boolean)) return compareOf(names, rows)
+  const first = head ? cellsOf(head)[0] : undefined
+  const emphasised = first?.children.some(child => child.type === 'element' && child.tagName === 'em') ?? false
+  if (names.length > 2 && emphasised && names.slice(1).every(Boolean)) return compareOf(names, rows)
   return el('div', ['props', 'rows'], [...(names[0] ? [bar(names[0])] : []), ...rows.map(cells => rowOf(cells, names))])
 }
