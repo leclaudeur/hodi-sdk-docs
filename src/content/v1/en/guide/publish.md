@@ -11,12 +11,12 @@ icon: "package"
 A plugin goes through four stages before it reaches people. The first three are done alone, on one's own machine. The last one goes through Hodi's maintainer.
 
 <!-- prettier-ignore -->
-| Stage | What it does |
+| Stage | What this stage does |
 | --- | --- |
-| [Test](#test) | Checks the server part, without any Hodi. The command is `npm test`. |
-| [Try](#try-on-a-test-hodi) | Installs the plugin on a test Hodi, at every save. The command is `npx hodi-plugin dev`. |
-| [Build](#build) | Makes the `.hodi-plugin` file to install. The command is `npm run build`. |
-| [Get verified](#getting-verified) | The maintainer reads the code and signs the file. It goes through a pull request. |
+| Test | This stage checks the plugin's server part, without needing a Hodi. The command to run is `npm test`. |
+| Try | This stage installs the plugin on a test Hodi, every time a file is saved. The command to run is `npx hodi-plugin dev`. |
+| Build | This stage makes the `.hodi-plugin` file, the file Hodi installs. The command to run is `npm run build`. |
+| Get verified | During this stage, Hodi's maintainer reads the plugin's code and signs the `.hodi-plugin` file. This stage goes through a pull request. |
 
 The [plugin template](https://github.com/leclaudeur/hodi-plugin-template) already has everything: the SDK, the scripts and the CI. There is nothing more to install.
 
