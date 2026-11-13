@@ -77,7 +77,7 @@ import { SourceAvatar } from 'hodi:sdk'
 
 ## HouseholdAvatar
 
-La photo d'un foyer, ou son initiale quand il n'a pas de photo. Elle est ronde, comme un profil sur l'écran « Qui lit ? ».
+La photo d'un foyer, ou son initiale quand il n'a pas de photo. Elle est ronde, comme un profil sur l'écran _Qui lit ?_.
 
 ```tsx title="web/index.tsx" render="householdavatar" play="householdavatar"
 import { HouseholdAvatar } from 'hodi:sdk'

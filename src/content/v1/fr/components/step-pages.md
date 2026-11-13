@@ -1,6 +1,6 @@
 ---
 title: "Pages d'étapes"
-description: "Les pages de l'installation et de « J'ai un code » : une étape, des tuiles, les boutons."
+description: "Les pages de l'installation et de _J'ai un code_ : une étape, des tuiles, les boutons."
 intro: "Ces composants dessinent les écrans en pleine page, comme ceux des emplacements [`signedOutPage`](/fr/guide/slots/signed-out-page/), [`afterSignIn`](/fr/guide/slots/after-sign-in/) et [`setupSteps`](/fr/guide/slots/setup/). Comme sur les écrans de Hodi, le logo est en haut, la licence en bas et la carte au centre."
 order: 3
 icon: "list-checks"
@@ -43,13 +43,13 @@ import { Hand } from 'lucide-react'
 | `step?` | `number` | Le numéro de l'étape, à partir de 1. Avec `total`, il remplit la barre de progression. |
 | `total?` | `number` | Le nombre d'étapes en tout. |
 | `onSubmit?` | `() => void` | Appelé quand la personne appuie sur Entrée dans un des champs, pour valider l'étape. |
-| `onBack?` | `() => void` | Ajoute un bouton « Retour » à gauche, qui appelle cette fonction. |
-| `start?` | `ReactNode` | Un bouton de plus à gauche, comme « Plus tard ». |
+| `onBack?` | `() => void` | Ajoute un bouton _Retour_ à gauche, qui appelle cette fonction. |
+| `start?` | `ReactNode` | Un bouton de plus à gauche, comme _Plus tard_. |
 | `children?` | `ReactNode` | Les champs de l'étape, sous la phrase d'explication. |
 
 ## TilesPage
 
-Un écran de choix en tuiles rondes, dessiné comme l'écran « Qui lit ? » dessine les profils. Chaque tuile a une icône, ou la première lettre de son texte.
+Un écran de choix en tuiles rondes, dessiné comme l'écran _Qui lit ?_ dessine les profils. Chaque tuile a une icône, ou la première lettre de son texte.
 
 ```tsx title="web/index.tsx" render="tilespage" kind="page" play="tilespage"
 import { TilesPage } from 'hodi:sdk'
@@ -71,12 +71,12 @@ import { TilesPage } from 'hodi:sdk'
 | `intro?` | `ReactNode` | Une phrase centrée sous le titre. |
 | `opening?` | `string \| null` | La clé de la tuile en train de s'ouvrir. Cette tuile pulse, et les autres ne se pressent plus en attendant. |
 | `error?` | `string \| null` | Un message d'erreur, affiché sous les tuiles. |
-| `onBack?` | `() => void` | Ajoute un bouton « Retour » sous les tuiles, qui appelle cette fonction. |
-| `actions?` | `ReactNode` | D'autres boutons, à côté de « Retour ». |
+| `onBack?` | `() => void` | Ajoute un bouton _Retour_ sous les tuiles, qui appelle cette fonction. |
+| `actions?` | `ReactNode` | D'autres boutons, à côté de _Retour_. |
 
 ## SetupActions
 
-Les boutons au bas d'une étape que le plugin ajoute à l'installation de Hodi, avec [`setupSteps`](/fr/guide/slots/setup/). Hodi y place lui-même « Retour » à gauche ; les boutons du plugin vont à droite.
+Les boutons au bas d'une étape que le plugin ajoute à l'installation de Hodi, avec [`setupSteps`](/fr/guide/slots/setup/). Hodi y place lui-même _Retour_ à gauche ; les boutons du plugin vont à droite.
 
 ```tsx title="web/index.tsx" render="setupactions" play="setupactions"
 import { Button, SetupActions } from 'hodi:sdk'
@@ -90,4 +90,4 @@ import { Button, SetupActions } from 'hodi:sdk'
 | Props | Type | |
 | --- | --- | --- |
 | `children` | `ReactNode` | Les boutons de droite. Le bouton principal vient en dernier. |
-| `start?` | `ReactNode` | Un bouton de plus à gauche, juste après « Retour ». |
+| `start?` | `ReactNode` | Un bouton de plus à gauche, juste après _Retour_. |

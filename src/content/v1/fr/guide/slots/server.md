@@ -49,7 +49,7 @@ definePlugin({
 | `label` | `string` | Le nom de la section dans la sidebar, une clé des `locales`, comme `server.said`. |
 | `page` | `ComponentType<{ layout }>` | La page de la section, dessinée avec `SectionPage`. |
 | `icon?` | `ComponentType` | Une icône Lucide. Sans icône, Hodi affiche une pièce de puzzle. |
-| `hint?` | `ComponentType` | La ligne sous le nom de la section, sur téléphone, comme « 12 personnes ». |
+| `hint?` | `ComponentType` | La ligne sous le nom de la section, sur téléphone, comme _12 personnes_. |
 
 ## À savoir
 

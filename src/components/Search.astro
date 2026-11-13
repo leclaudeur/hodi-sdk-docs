@@ -1,6 +1,7 @@
 ---
 import { docs, firstStepsOf, groupsOf, type Doc } from '../lib/docs.ts'
 import { t } from '../lib/i18n.ts'
+import { plain } from '../lib/inline.ts'
 import Icon from './Icon.astro'
 
 // The header's search field and its spotlight: suggestions while empty, Pagefind's results once something is typed.
@@ -59,7 +60,7 @@ const icons = [
           </span>
           <span class="tx">
             <b>{page.entry.data.title}</b>
-            <span>{page.entry.data.description.replaceAll('`', '')}</span>
+            <span>{plain(page.entry.data.description)}</span>
           </span>
           <Icon name="corner-down-left" />
         </a>

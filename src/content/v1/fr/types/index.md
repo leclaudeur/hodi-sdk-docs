@@ -181,7 +181,7 @@ Un article lu par Hodi, tel que `ctx.articles.get()` le renvoie ou que `onArticl
 | `title` | `string` | Le titre de l'article. |
 | `url` | `string` | L'adresse de l'article sur son site. |
 | `sourceId` | `string` | L'id de la source qui a publié l'article. |
-| `sourceName` | `string` | Le nom de cette source, comme « RTL info ». |
+| `sourceName` | `string` | Le nom de cette source, comme _RTL info_. |
 | `publishedAt` | `string \| null` | La date de publication, ou `null` quand le site ne la donne pas. |
 | `status` | `'ok' \| 'unreadable' \| 'failed'` | `ok` : le lecteur a le texte de l'article. `unreadable` : la page n'a pas de texte à lire. `failed` : le site n'a pas répondu. |
 | `text` | `{ title; byline; contentHtml; textLength } \| null` | Le texte que le lecteur montre, quand `status` vaut `ok`. Sinon, `null`. |
@@ -299,10 +299,10 @@ L'objet que `definePlugin()` reçoit : un champ par emplacement, tous facultatif
 | `signInExtras?` | `ComponentType<{ layout; signedIn }>` | Un composant sous le formulaire de [Connexion](/fr/guide/slots/sign-in/). |
 | `signedOutPage?` | `ComponentType<SignedOutPageProps>` | Une [page à la place de Connexion](/fr/guide/slots/signed-out-page/), quand l'appareil n'a pas de foyer. |
 | `afterSignIn?` | `ComponentType<AfterSignInProps>` | Une [étape juste après la connexion](/fr/guide/slots/after-sign-in/), avant d'entrer dans l'app. |
-| `whoIsReadingFooter?` | `ComponentType<{ layout }>` | Un composant [sous « Qui lit ? »](/fr/guide/slots/who-is-reading-footer/), à côté de « Gérer les profils ». |
-| `ageConsent?` | `AgeConsent` | Un [texte après « J'ai au moins 13 ans »](/fr/guide/slots/age-consent/). |
+| `whoIsReadingFooter?` | `ComponentType<{ layout }>` | Un composant [sous _Qui lit ?_](/fr/guide/slots/who-is-reading-footer/), à côté de _Gérer les profils_. |
+| `ageConsent?` | `AgeConsent` | Un [texte après _J'ai au moins 13 ans_](/fr/guide/slots/age-consent/). |
 | `setupSteps?` | `SetupStep[]` | Les [étapes du plugin dans l'installation](/fr/guide/slots/setup/) de Hodi. |
-| `accountRows?` | `ComponentType<{ layout }>` | Des [lignes au bout de « Ton compte »](/fr/guide/slots/account-rows/). |
+| `accountRows?` | `ComponentType<{ layout }>` | Des [lignes au bout de _Ton compte_](/fr/guide/slots/account-rows/). |
 | `avatarMenu?` | `AvatarMenuItem[]` | Des [entrées dans le menu de l'avatar](/fr/guide/slots/avatar-menu/). |
 
 ### ServerSection
@@ -385,7 +385,7 @@ L'article ouvert dans le lecteur, que reçoit le composant de `readerAction`. Po
 | `title` | `string` | Le titre de l'article. |
 | `url` | `string` | L'adresse de l'article sur son site. |
 | `sourceId` | `string` | L'id de la source qui a publié l'article. |
-| `sourceName` | `string` | Le nom de cette source, comme « RTL info ». |
+| `sourceName` | `string` | Le nom de cette source, comme _RTL info_. |
 
 ### AgeConsent
 
@@ -404,7 +404,7 @@ Ce que reçoit [askToConfirm()](/fr/functions/#asktoconfirm). Avec `proof`, la f
 <!-- prettier-ignore -->
 | Champs | Type | |
 | --- | --- | --- |
-| `title` | `string` | La question posée, comme « Effacer l'historique ? ». |
+| `title` | `string` | La question posée, comme _Effacer l'historique ?_. |
 | `message` | `ReactNode` | Ce qui se passera après le clic, en une phrase. |
 | `label` | `string` | Le texte du bouton qui confirme. |
 | `onConfirm` | `(proof: Proof) => void \| Promise<void>` | Ce que fait le clic sur ce bouton. Si la promesse échoue, la fenêtre reste ouverte. |

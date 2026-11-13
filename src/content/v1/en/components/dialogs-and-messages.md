@@ -50,7 +50,7 @@ import { Hand } from 'lucide-react'
 
 ## DialogActions
 
-The row of buttons at the bottom of a window, under a line. The secondary button, such as "Cancel", goes on the left; the action's button goes on the right.
+The row of buttons at the bottom of a window, under a line. The secondary button, such as _Cancel_, goes on the left; the action's button goes on the right.
 
 <!-- prettier-ignore -->
 | Props | Type | |
@@ -127,8 +127,8 @@ import { Inbox } from 'lucide-react'
 | Props | Type | |
 | --- | --- | --- |
 | `icon` | `ReactNode` | The icon, shown at 28 px in a square. |
-| `title` | `string` | The title, which says what is missing, such as "No hellos". |
+| `title` | `string` | The title, which says what is missing, such as _No hellos_. |
 | `children?` | `ReactNode` | One line of text under the title, no more. |
-| `actions?` | `ReactNode` | Buttons under the text, such as "Try again". |
+| `actions?` | `ReactNode` | Buttons under the text, such as _Try again_. |
 | `tone?` | `'default' \| 'danger'` | `danger` turns the icon red, when the list couldn't load. |
 | `compact?` | `boolean` | A smaller version, for an empty state placed above other content. |

@@ -10,7 +10,7 @@ key: "setupSteps"
 
 ## Where in Hodi
 
-Hodi's setup is the wizard that opens at the first start. The wizard goes through steps. One of these steps, "Plugins found", lists the plugins present and offers to turn them on. The steps of the plugins turned on come right after, before "The server is ready".
+Hodi's setup is the wizard that opens at the first start. The wizard goes through steps. One of these steps, _Plugins found_, lists the plugins present and offers to turn them on. The steps of the plugins turned on come right after, before _The server is ready_.
 
 ## Example
 
@@ -71,10 +71,10 @@ definePlugin({
 
 ## Who draws what
 
-- **Hodi** draws the card, the title, the line under the title, the numbering and "Back".
-- **The plugin** draws the middle, and ends with `SetupActions`, which shows "Continue".
+- **Hodi** draws the card, the title, the line under the title, the numbering and _Back_.
+- **The plugin** draws the middle, and ends with `SetupActions`, which shows _Continue_.
 
 ## Good to know
 
-- **Who sees the steps**: the admin, if the plugin is on at the "Plugins found" step.
+- **Who sees the steps**: the admin, if the plugin is on at the _Plugins found_ step.
 - **A Hodi step**: `{ id: 'mail', core: 'mail' }` adds the form of _Server › E-mail_.

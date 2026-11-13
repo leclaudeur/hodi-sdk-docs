@@ -126,7 +126,7 @@ With `"all"`, a route can still adapt its answer to the person asking: `request.
 
 A setting is a value the server admin can change without touching the plugin's code. In Hello world, the `greeting` setting is the message the plugin answers.
 
-The plugin declares its settings in the `settings` field of `plugin.json`. Hodi draws a row for each setting itself, with its own components, on the plugin's page in _Server › Plugins_, under the "Options" heading. The plugin has no screen to write for its settings.
+The plugin declares its settings in the `settings` field of `plugin.json`. Hodi draws a row for each setting itself, with its own components, on the plugin's page in _Server › Plugins_, under the _Options_ heading. The plugin has no screen to write for its settings.
 
 Here are four settings, one of each type, and the rows Hodi draws for these four settings:
 
@@ -213,8 +213,8 @@ In `plugin.json`, a setting only has a technical name, such as `greeting`. The t
 
 For a setting whose key is `greeting`:
 
-- `settings.greeting` is its label, in bold on its row: "Message";
-- `settings.greetingHint` is its help line, in grey below: "What the plugin answers";
+- `settings.greeting` is its label, in bold on its row: _Message_;
+- `settings.greetingHint` is its help line, in grey below: _What the plugin answers_;
 - for a `choice`, `settings.momentOptions.morning` is the text of the `morning` option's button.
 
 The help line is optional. Without a label, Hodi shows the setting's key itself: `greeting`.
@@ -310,10 +310,10 @@ The `menu` field says where to put the plugin's entry in Settings. This field is
 }
 ```
 
-- `group`: the Settings group, such as `you` for "You".
+- `group`: the Settings group, such as `you` for _You_.
 - `after`: the Hodi entry just before, such as `stats`.
 
-Without `menu`, or with an unknown group, the plugin's entry goes at the end of the "Household" group. [`page`](/en/guide/slots/settings/) lists the six groups and their entries.
+Without `menu`, or with an unknown group, the plugin's entry goes at the end of the _Household_ group. [`page`](/en/guide/slots/settings/) lists the six groups and their entries.
 
 ### `feeds`
 

@@ -1,7 +1,7 @@
 ---
 title: "ageConsent"
-description: "A text of the plugin after the \"I'm at least 13\" box, such as \"and I accept the terms\"."
-intro: "A text Hodi adds after the \"I'm at least 13\" box, when someone creates their account. It is for having the service's terms accepted with the same box."
+description: "A text of the plugin after the _I'm at least 13_ box, such as _and I accept the terms_."
+intro: "A text Hodi adds after the _I'm at least 13_ box, when someone creates their account. It is for having the service's terms accepted with the same box."
 order: 10
 icon: "square-check"
 topic: "sport"
@@ -10,7 +10,7 @@ key: "ageConsent"
 
 ## Where in Hodi
 
-When someone creates their account, Hodi asks them to tick "I'm at least 13". The `ageConsent` text goes on with this box's sentence, after a space: "I'm at least 13 and I accept the terms of use".
+When someone creates their account, Hodi asks them to tick _I'm at least 13_. The `ageConsent` text goes on with this box's sentence, after a space: _I'm at least 13 and I accept the terms of use_.
 
 `ageConsent` isn't a component: it is a text. Hodi draws it itself, in the box's sentence.
 

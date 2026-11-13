@@ -120,7 +120,7 @@ import { MoreRow, SettingRow, SettingsCard } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `label` | `string` | Le texte de la ligne, comme « Voir les 4 autres », dans les mots du plugin. |
+| `label` | `string` | Le texte de la ligne, comme _Voir les 4 autres_, dans les mots du plugin. |
 | `onClick` | `() => void` | Ce que fait le clic : montrer le reste de la liste. |
 
 ## OverviewCard

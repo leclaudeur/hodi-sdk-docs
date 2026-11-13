@@ -8,7 +8,7 @@ icon: "layers"
 
 ## The two parts of a plugin
 
-The simplest way is to start from an example: the "Hello world" plugin of [Getting started](/en/getting-started/). This plugin adds a "Say hello" button in _Server › Plugins_. A click on this button asks the server for a message, then the button shows the server's answer.
+The simplest way is to start from an example: the _Hello world_ plugin of [Getting started](/en/getting-started/). This plugin adds a _Say hello_ button in _Server › Plugins_. A click on this button asks the server for a message, then the button shows the server's answer.
 
 Here is who does what in this plugin:
 
@@ -158,7 +158,7 @@ The web part is the plugin's code that runs in the browser, in Hodi's pages. The
 
 The web part loads in the background, once the person is signed in. The app never waits for a plugin to show: the plugin appears as soon as it is ready.
 
-Here is Hello world's web part. This web part draws a card with a "Say hello" button, on the plugin's page in _Server › Plugins_. A click on the button calls the `/hello` route, then the card shows the route's answer:
+Here is Hello world's web part. This web part draws a card with a _Say hello_ button, on the plugin's page in _Server › Plugins_. A click on the button calls the `/hello` route, then the card shows the route's answer:
 
 ```tsx title="web/index.tsx"
 import { Button, SettingRow, definePlugin, usePluginApi } from 'hodi:sdk'
@@ -237,7 +237,7 @@ Here is what happens, in order, during this call:
 
 ## The plugin's texts
 
-Every text the person reads in a plugin comes from the plugin's `locales/` files. `locales/fr.json` is the reference, and every key also exists in `locales/en.json`. A plugin's French texts say « tu » to the person, like the rest of Hodi.
+Every text the person reads in a plugin comes from the plugin's `locales/` files. `locales/fr.json` is the reference, and every key also exists in `locales/en.json`. A plugin's French texts say _tu_ to the person, like the rest of Hodi.
 
 ```json title="locales/en.json"
 {

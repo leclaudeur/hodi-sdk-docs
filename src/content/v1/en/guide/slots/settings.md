@@ -30,21 +30,21 @@ The plugin's entry goes in one of the six groups of the Settings page. The `menu
 }
 ```
 
-With this example, the plugin's entry goes in the "You" group, right after the "Statistics" entry.
+With this example, the plugin's entry goes in the _You_ group, right after the _Statistics_ entry.
 
-Without `after`, the plugin's entry goes at the end of its group. Without `menu`, or with a group Hodi doesn't know, the plugin's entry goes at the end of the "Household" group.
+Without `after`, the plugin's entry goes at the end of its group. Without `menu`, or with a group Hodi doesn't know, the plugin's entry goes at the end of the _Household_ group.
 
 Here are the six possible values of `group`. For each value, the group's name in the Settings page, and the Hodi entries this group already holds, with the value to give `after` to put the plugin's entry after one of them:
 
 <!-- prettier-ignore -->
 | Value of `group` | The group and its entries |
 | --- | --- |
-| `reading` | The "Reading" group. This group holds Reading and display (`reading`), Topics (`themes`), Sources (`sources`) and History (`history`). |
-| `subjects` | The "Subjects" group. This group holds Followed subjects (`followed`) and Muted subjects (`muted`). |
-| `you` | The "You" group. This group holds My profile (`me`), Statistics (`stats`), Account and data (`account`) and Sharing (`sharing`). |
-| `household` | The "Household" group. This group holds Household (`household`), Profiles (`profiles`) and AI & credits (`ai`). It is the default group. |
-| `device` | The "This device" group. This group holds Notifications (`notifications`) and Keyboard shortcuts (`shortcuts`). |
-| `about` | The "Hodi" group. This group holds Server (`server`) and About (`about`). |
+| `reading` | The _Reading_ group. This group holds Reading and display (`reading`), Topics (`themes`), Sources (`sources`) and History (`history`). |
+| `subjects` | The _Subjects_ group. This group holds Followed subjects (`followed`) and Muted subjects (`muted`). |
+| `you` | The _You_ group. This group holds My profile (`me`), Statistics (`stats`), Account and data (`account`) and Sharing (`sharing`). |
+| `household` | The _Household_ group. This group holds Household (`household`), Profiles (`profiles`) and AI & credits (`ai`). It is the default group. |
+| `device` | The _This device_ group. This group holds Notifications (`notifications`) and Keyboard shortcuts (`shortcuts`). |
+| `about` | The _Hodi_ group. This group holds Server (`server`) and About (`about`). |
 
 ## Drawing the page
 
@@ -78,7 +78,7 @@ definePlugin({
 })
 ```
 
-With this example, the Settings page shows an entry for the plugin, with a notebook icon. A click on this entry opens the "My notes" page. The "My notes" page holds a card, and this card holds a "Saved notes: 12" row.
+With this example, the Settings page shows an entry for the plugin, with a notebook icon. A click on this entry opens the _My notes_ page. The _My notes_ page holds a card, and this card holds a _Saved notes: 12_ row.
 
 ## Props
 
@@ -104,7 +104,7 @@ Here are the three keys of `definePlugin` used for the Settings page:
 | --- | --- | --- |
 | `page` | `ComponentType<{ layout }>` | The component of the plugin's page, described above. Without this key, the Settings page has no entry for the plugin. |
 | `menuIcon?` | `ComponentType` | The icon left of the entry's name, a Lucide icon. Without this key, Hodi shows a puzzle piece. |
-| `menuHint?` | `ComponentType` | The grey line under the entry's name, for example "12 notes". Without this key, Hodi shows the plugin's description. |
+| `menuHint?` | `ComponentType` | The grey line under the entry's name, for example _12 notes_. Without this key, Hodi shows the plugin's description. |
 
 `menuHint` is a component, not a plain text: the `menuHint` component can therefore read data, for example the number of notes, and show this number.
 

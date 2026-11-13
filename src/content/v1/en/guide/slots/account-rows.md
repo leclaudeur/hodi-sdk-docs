@@ -1,7 +1,7 @@
 ---
 title: "accountRows"
-description: "Rows of the plugin at the end of the \"Your account\" card, in Settings › Account and data."
-intro: "Rows the plugin adds at the end of the \"Your account\" card, in _Settings › Account and data_. They are for showing what the plugin knows about the account, such as a linked Google account."
+description: "Rows of the plugin at the end of the _Your account_ card, in Settings › Account and data."
+intro: "Rows the plugin adds at the end of the _Your account_ card, in _Settings › Account and data_. They are for showing what the plugin knows about the account, such as a linked Google account."
 order: 13
 icon: "user-round"
 topic: "world"
@@ -10,7 +10,7 @@ key: "accountRows"
 
 ## Where in Hodi
 
-Each person has a _Settings › Account and data_ page. The "Your account" card of this page shows the account's e-mail and password. The plugin's `accountRows` rows join the end of this card.
+Each person has a _Settings › Account and data_ page. The _Your account_ card of this page shows the account's e-mail and password. The plugin's `accountRows` rows join the end of this card.
 
 ## Example
 

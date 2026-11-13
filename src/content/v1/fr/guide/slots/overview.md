@@ -10,7 +10,7 @@ key: "overviewCards"
 
 ## Où dans Hodi
 
-_Serveur › Vue d'ensemble_ est le tableau de bord du serveur. En haut de cette page, l'admin du serveur choisit une période : 7 jours, 30 jours… Chaque carte de la page montre un chiffre ou un graphique sur cette période. Les cartes des plugins viennent après les cartes « En ligne » et « Profils » de Hodi, dans l'ordre des plugins.
+_Serveur › Vue d'ensemble_ est le tableau de bord du serveur. En haut de cette page, l'admin du serveur choisit une période : 7 jours, 30 jours… Chaque carte de la page montre un chiffre ou un graphique sur cette période. Les cartes des plugins viennent après les cartes _En ligne_ et _Profils_ de Hodi, dans l'ordre des plugins.
 
 ## Exemple
 

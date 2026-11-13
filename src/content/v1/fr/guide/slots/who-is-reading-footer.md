@@ -1,7 +1,7 @@
 ---
 title: "whoIsReadingFooter"
-description: "Un bouton du plugin à côté de « Gérer les profils », sous les profils de « Qui lit ? »."
-intro: "Un composant du plugin sous les profils de l'écran « Qui lit ? », à côté du bouton « Gérer les profils ». Il sert à une action sur le foyer entier, comme « Changer de foyer »."
+description: "Un bouton du plugin à côté de _Gérer les profils_, sous les profils de _Qui lit ?_."
+intro: "Un composant du plugin sous les profils de l'écran _Qui lit ?_, à côté du bouton _Gérer les profils_. Il sert à une action sur le foyer entier, comme _Changer de foyer_."
 order: 9
 icon: "users"
 topic: "sport"
@@ -10,7 +10,7 @@ key: "whoIsReadingFooter"
 
 ## Où dans Hodi
 
-L'écran « Qui lit ? » s'ouvre quand Hodi démarre : chaque profil du foyer y a sa vignette, et le bouton « Gérer les profils » se trouve sous les vignettes. Le composant `whoIsReadingFooter` s'affiche à côté de ce bouton, à la même hauteur.
+L'écran _Qui lit ?_ s'ouvre quand Hodi démarre : chaque profil du foyer y a sa vignette, et le bouton _Gérer les profils_ se trouve sous les vignettes. Le composant `whoIsReadingFooter` s'affiche à côté de ce bouton, à la même hauteur.
 
 ## Exemple
 
@@ -33,5 +33,5 @@ definePlugin({ whoIsReadingFooter: SwitchHousehold })
 
 ## À savoir
 
-- **Le dessin** : un `Button`, à la hauteur de « Gérer les profils ».
+- **Le dessin** : un `Button`, à la hauteur de _Gérer les profils_.
 - **Plusieurs plugins** : chaque plugin ajoute son composant, dans l'ordre des plugins.

@@ -1,6 +1,6 @@
 ---
 title: "avatarMenu"
-description: "Des entrées du plugin dans le menu de l'avatar, comme « Changer de foyer »."
+description: "Des entrées du plugin dans le menu de l'avatar, comme _Changer de foyer_."
 intro: "Des entrées que le plugin ajoute au menu de l'avatar, le menu du profil ouvert. Elles servent à une action rapide, accessible depuis n'importe quelle page."
 order: 14
 icon: "circle-user-round"

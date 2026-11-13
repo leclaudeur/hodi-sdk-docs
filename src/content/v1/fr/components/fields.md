@@ -88,7 +88,7 @@ import { PinField } from 'hodi:sdk'
 | Props | Type | |
 | --- | --- | --- |
 | `label` | `string` | Le nom du champ, pour les lecteurs d'écran. |
-| `length` | `number` | Le nombre de caractères du code : 8 pour les codes de « J'ai un code », 6 pour une appli d'authentification. |
+| `length` | `number` | Le nombre de caractères du code : 8 pour les codes de _J'ai un code_, 6 pour une appli d'authentification. |
 | `value` | `string` | Ce qui est tapé jusqu'ici. |
 | `onChange` | `(value: string) => void` | Appelé à chaque caractère tapé ou effacé. |
 | `onComplete?` | `(value: string) => void` | Appelé quand le code est tapé en entier, pour le vérifier. |
@@ -141,7 +141,7 @@ import { Checkbox } from 'hodi:sdk'
 
 ## AgeCheckbox
 
-La case « J'ai au moins 13 ans », suivie du texte que chaque plugin ajoute avec [`ageConsent`](/fr/guide/slots/age-consent/). Tout formulaire qui crée un compte a cette case.
+La case _J'ai au moins 13 ans_, suivie du texte que chaque plugin ajoute avec [`ageConsent`](/fr/guide/slots/age-consent/). Tout formulaire qui crée un compte a cette case.
 
 ```tsx title="web/index.tsx" render="agecheckbox" play="agecheckbox"
 import { AgeCheckbox } from 'hodi:sdk'
@@ -157,7 +157,7 @@ import { AgeCheckbox } from 'hodi:sdk'
 
 ## Segmented
 
-Un choix entre quelques options, dans une pilule, comme « Clair · Sombre · Système ». Dans une page de réglages, il se passe à la prop `choice` d'une `SettingRow`.
+Un choix entre quelques options, dans une pilule, comme _Clair · Sombre · Système_. Dans une page de réglages, il se passe à la prop `choice` d'une `SettingRow`.
 
 ```tsx title="web/index.tsx" render="segmented" play="segmented"
 import { Segmented } from 'hodi:sdk'

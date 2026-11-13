@@ -1,7 +1,7 @@
 ---
 title: "ageConsent"
-description: "Un texte du plugin après la case « J'ai au moins 13 ans », comme « et j'accepte les conditions »."
-intro: "Un texte que Hodi ajoute après la case « J'ai au moins 13 ans », quand une personne crée son compte. Il sert à faire accepter les conditions du service avec la même case."
+description: "Un texte du plugin après la case _J'ai au moins 13 ans_, comme _et j'accepte les conditions_."
+intro: "Un texte que Hodi ajoute après la case _J'ai au moins 13 ans_, quand une personne crée son compte. Il sert à faire accepter les conditions du service avec la même case."
 order: 10
 icon: "square-check"
 topic: "sport"
@@ -10,7 +10,7 @@ key: "ageConsent"
 
 ## Où dans Hodi
 
-Quand une personne crée son compte, Hodi lui demande de cocher « J'ai au moins 13 ans ». Le texte `ageConsent` continue la phrase de cette case, après une espace : « J'ai au moins 13 ans et j'accepte les conditions d'utilisation ».
+Quand une personne crée son compte, Hodi lui demande de cocher _J'ai au moins 13 ans_. Le texte `ageConsent` continue la phrase de cette case, après une espace : _J'ai au moins 13 ans et j'accepte les conditions d'utilisation_.
 
 `ageConsent` n'est pas un composant : c'est un texte. Hodi le dessine lui-même, dans la phrase de la case.
 

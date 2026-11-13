@@ -10,7 +10,7 @@ key: "overviewCards"
 
 ## Where in Hodi
 
-_Server › Overview_ is the server's dashboard. At the top of this page, the server admin picks a period: 7 days, 30 days… Each card of the page shows a number or a chart over this period. The plugins' cards come after Hodi's "Online" and "Profiles" cards, in the order of the plugins.
+_Server › Overview_ is the server's dashboard. At the top of this page, the server admin picks a period: 7 days, 30 days… Each card of the page shows a number or a chart over this period. The plugins' cards come after Hodi's _Online_ and _Profiles_ cards, in the order of the plugins.
 
 ## Example
 
