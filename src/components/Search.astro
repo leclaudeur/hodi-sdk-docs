@@ -1,0 +1,102 @@
+---
+import { docs, firstStepsOf, groupsOf, type Doc } from '../lib/docs.ts'
+import { t } from '../lib/i18n.ts'
+import Icon from './Icon.astro'
+
+// The header's search field and its spotlight: suggestions while empty, Pagefind's results once something is typed.
+interface Props {
+  doc: Doc
+}
+
+const { doc } = Astro.props
+const { lang, version } = doc
+const firstSteps = firstStepsOf(version, lang)
+const tops = groupsOf(version, lang).flatMap(group => group.docs.map(({ doc: page }) => page))
+const suggestions = [...(firstSteps ? [firstSteps] : []), ...tops].slice(0, 6)
+// Every icon a result may need, drawn once here so the script only clones them.
+const icons = [
+  ...new Set([
+    'hash',
+    'file-text',
+    ...docs.filter(other => other.lang === lang && other.version === version).map(other => other.entry.data.icon)
+  ])
+]
+---
+
+<button type="button" class="sdk-search" aria-label={t(lang, 'searchLabel')} aria-haspopup="dialog">
+  <Icon name="search" size={15} />
+  <span class="ph">{t(lang, 'search')}</span>
+  <kbd class="mono">⌘K</kbd>
+</button>
+<dialog class="sx" aria-label={t(lang, 'search')}>
+  <div class="sx-h">
+    <Icon name="search" size={18} />
+    <input
+      type="search"
+      role="combobox"
+      aria-expanded="true"
+      aria-controls="sx-list"
+      aria-autocomplete="list"
+      aria-label={t(lang, 'searchLabel')}
+      placeholder={t(lang, 'searchPlaceholder')}
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <button type="button" class="sx-x mono" data-sx-close>
+      {t(lang, 'escape')}
+    </button>
+    <button type="button" class="round sx-close" data-sx-close aria-label={t(lang, 'close')}>
+      <Icon name="x" />
+    </button>
+  </div>
+  <div class="sx-list" id="sx-list" role="listbox">
+    <div class="sx-sugg">
+      <div class="sx-g">{t(lang, 'suggestions')}</div>
+      {suggestions.map(page => (
+        <a class="sx-r" role="option" href={page.url}>
+          <span class="sq">
+            <Icon name={page.entry.data.icon} size={14} />
+          </span>
+          <span class="tx">
+            <b>{page.entry.data.title}</b>
+            <span>{page.entry.data.description.replaceAll('`', '')}</span>
+          </span>
+          <Icon name="corner-down-left" />
+        </a>
+      ))}
+    </div>
+    <div class="sx-res"></div>
+    <div class="sx-empty" hidden>
+      <span class="ic">
+        <Icon name="search" size={20} />
+      </span>
+      <b>{t(lang, 'searchEmptyTitle')}</b>
+      <span>{t(lang, 'searchEmptyText')}</span>
+    </div>
+  </div>
+  <div class="sx-f mono" aria-hidden="true">
+    <span>
+      <kbd>↑</kbd>
+      <kbd>↓</kbd>
+      {t(lang, 'keyMove')}
+    </span>
+    <span>
+      <kbd>↵</kbd>
+      {t(lang, 'keyOpen')}
+    </span>
+    <span>
+      <kbd>esc</kbd>
+      {t(lang, 'keyClose')}
+    </span>
+  </div>
+  <template class="sx-icons">
+    {icons.map(name => (
+      <span data-icon-name={name}>
+        <Icon name={name} size={14} />
+      </span>
+    ))}
+    <span data-icon-name="enter">
+      <Icon name="corner-down-left" />
+    </span>
+  </template>
+</dialog>
