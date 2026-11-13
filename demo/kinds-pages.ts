@@ -94,6 +94,7 @@ export const morerow: Kind = {
 }
 
 export const overviewcard: Kind = {
+  fixed: true,
   wide: true,
   controls: {
     title: text('title', words('Bonjours', 'Hellos')),
@@ -144,6 +145,7 @@ const stepBody = (body: unknown, lang: 'fr' | 'en'): El[] => {
 }
 
 export const steppage: Kind = {
+  fixed: true,
   controls: {
     title: text('title', words('Ton prénom', 'Your first name')),
     intro: text('intro', words('Hodi le met dans chaque salutation.', 'Hodi puts it in every greeting.')),
@@ -197,6 +199,7 @@ export const steppage: Kind = {
 }
 
 export const tilespage: Kind = {
+  fixed: true,
   controls: {
     title: text('title', words('Quel foyer ?', 'Which household?')),
     'intro?': text('intro', words('Choisis le foyer à ouvrir.', 'Pick the household to open.')),

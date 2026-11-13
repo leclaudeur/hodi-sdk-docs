@@ -10,7 +10,13 @@ export type Control =
   | { kind: 'switch'; key: string; value: boolean }
 
 interface Player {
-  draw: (kind: string, host: Element, state: State, lang: 'fr' | 'en') => void
+  draw: (
+    kind: string,
+    host: Element,
+    state: State,
+    lang: 'fr' | 'en',
+    set: (key: string, value: unknown) => void
+  ) => void
 }
 
 const lang = langOf(location.pathname)
@@ -34,12 +40,19 @@ const segment = (label: string, options: [string, string][], value: string, onPi
   return group
 }
 
-const controlOf = (control: Control, label: string, state: State, redraw: () => void): HTMLElement => {
-  const change = (value: string | boolean) => {
-    state[control.key] = value
-    redraw()
+// A control also follows the component: when a click in it changes the state, sync shows the new value.
+type Sync = (value: unknown) => void
+
+const controlOf = (control: Control, label: string, set: (key: string, value: unknown) => void, syncs: Sync[]) => {
+  const change = (value: string | boolean) => set(control.key, value)
+  if (control.kind === 'seg') {
+    const group = segment(label, control.options, control.value, change)
+    syncs.push(value => {
+      for (const [index, [key]] of control.options.entries())
+        group.children[index]?.setAttribute('aria-pressed', String(key === value))
+    })
+    return group
   }
-  if (control.kind === 'seg') return segment(label, control.options, control.value, change)
   const input = document.createElement('input')
   input.setAttribute('aria-label', label)
   if (control.kind === 'switch') {
@@ -48,6 +61,7 @@ const controlOf = (control: Control, label: string, state: State, redraw: () => 
     input.type = 'checkbox'
     input.checked = control.value
     input.addEventListener('change', () => change(input.checked))
+    syncs.push(value => (input.checked = value === true))
     wrap.append(input, Object.assign(document.createElement('span'), { className: 'tr' }))
     return wrap
   }
@@ -55,6 +69,9 @@ const controlOf = (control: Control, label: string, state: State, redraw: () => 
   input.value = control.value
   input.maxLength = 140
   input.addEventListener('input', () => change(input.value))
+  syncs.push(value => {
+    if (input.value !== value) input.value = String(value)
+  })
   return input
 }
 

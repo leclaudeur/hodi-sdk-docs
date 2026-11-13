@@ -40,7 +40,12 @@ Le bouton d'une seule icône. Son `label` est lu par les lecteurs d'écran et s'
 import { RoundButton } from 'hodi:sdk'
 import { Pencil } from 'lucide-react'
 
-<RoundButton icon={Pencil} label="Modifier" size={44} onClick={edit} />
+<RoundButton
+  icon={Pencil}
+  label="Modifier"
+  size={44}
+  onClick={edit}
+/>
 ```
 
 <!-- prettier-ignore -->

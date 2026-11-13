@@ -25,7 +25,12 @@ import { Hand } from 'lucide-react'
   onBack={back}
   actions={<Button look="primary" type="submit">Continuer</Button>}
 >
-  <TextField icon={Hand} aria-label="Prénom" value={name} onChange={e => setName(e.target.value)} />
+  <TextField
+    icon={Hand}
+    aria-label="Prénom"
+    value={name}
+    onChange={e => setName(e.target.value)}
+  />
 </StepPage>
 ```
 

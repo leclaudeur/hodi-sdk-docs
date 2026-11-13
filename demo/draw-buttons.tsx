@@ -23,7 +23,9 @@ import WeekChart from './week-chart.tsx'
 // Buttons, settings and step pages drawn by Hodi's own components from a state: the docs' render, then the
 // playground at each change.
 
-export type Draw = (state: State, lang: Lang) => ReactNode
+// In the playground, a click in the component changes the state as a control would: set keeps both in step.
+export type Set = (key: string, value: unknown) => void
+export type Draw = (state: State, lang: Lang, set?: Set) => ReactNode
 export const no = () => {}
 export const tr = (lang: Lang) => (fr: string, en: string) => (lang === 'en' ? en : fr)
 const ICONS = { Check, Download, Trash2, Plus, Pencil, Bookmark, Flag } as const
@@ -49,7 +51,7 @@ const rowAction = (state: State, lang: Lang) => {
   return undefined
 }
 
-const settingRow: Draw = (state, lang) => (
+const settingRow: Draw = (state, lang, set) => (
   <SettingsCard>
     <SettingRow
       label={s(state, 'label')}
@@ -58,16 +60,23 @@ const settingRow: Draw = (state, lang) => (
       action={rowAction(state, lang)}
       choice={
         state.choice === true ? (
-          <Segmented label="Moment" value="morning" options={momentsOf(lang)} onChange={no} />
+          <Segmented
+            label="Moment"
+            value={String(state.moment ?? 'morning')}
+            options={momentsOf(lang)}
+            onChange={value => set?.('moment', value)}
+          />
         ) : undefined
       }
     >
-      {state.toggle === true && <Toggle checked label={s(state, 'label')} onChange={no} />}
+      {state.toggle === true && (
+        <Toggle checked={state.on !== false} label={s(state, 'label')} onChange={on => set?.('on', on)} />
+      )}
     </SettingRow>
   </SettingsCard>
 )
 
-const stepPage: Draw = (state, lang) => {
+const stepPage: Draw = (state, lang, set) => {
   const w = tr(lang)
   return (
     <StepPage
@@ -86,7 +95,11 @@ const stepPage: Draw = (state, lang) => {
     >
       {state.body === 'field' && <TextField icon={Hand} aria-label={w('Prénom', 'First name')} placeholder="Anna" />}
       {state.body === 'toggle' && (
-        <Toggle checked label={w('Saluer le matin', 'Say hello in the morning')} onChange={no} />
+        <Toggle
+          checked={state.on !== false}
+          label={w('Saluer le matin', 'Say hello in the morning')}
+          onChange={on => set?.('on', on)}
+        />
       )}
     </StepPage>
   )
@@ -124,10 +137,14 @@ export const DRAW_BUTTONS: Record<string, Draw> = {
       {s(state, 'label') || ' '}
     </Button>
   ),
-  readerbutton: state => {
+  readerbutton: (state, _lang, set) => {
     const Icon = iconOf(state.icon)
     return (
-      <ReaderButton icon={Icon ? <Icon size={12} /> : undefined} onClick={no} done={state.done === true}>
+      <ReaderButton
+        icon={Icon ? <Icon size={12} /> : undefined}
+        onClick={() => set?.('done', state.done !== true)}
+        done={state.done === true}
+      >
         {s(state, 'label') || ' '}
       </ReaderButton>
     )

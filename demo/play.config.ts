@@ -5,8 +5,14 @@ import { defineConfig } from 'vite'
 // so that what the app loads only when needed stays in files of its own.
 export default defineConfig({
   plugins: [react()],
-  // Each render's dialog is alone in its window (dialog-stack.ts beside this file).
-  resolve: { alias: [{ find: /^.*\/lib\/dialog-stack\.ts$/, replacement: `${import.meta.dirname}/dialog-stack.ts` }] },
+  // Each render's dialog is alone in its window (dialog-stack.ts), and never stops the page from scrolling
+  // (remove-scroll.tsx).
+  resolve: {
+    alias: [
+      { find: /^.*\/lib\/dialog-stack\.ts$/, replacement: `${import.meta.dirname}/dialog-stack.ts` },
+      { find: /^react-remove-scroll$/, replacement: `${import.meta.dirname}/remove-scroll.tsx` }
+    ]
+  },
   define: { __APP_VERSION__: '"0.0.0"', 'process.env.NODE_ENV': '"production"' },
   build: {
     outDir: process.env.PLAY_OUT,

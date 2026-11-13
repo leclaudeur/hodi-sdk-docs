@@ -16,7 +16,13 @@ Hodi's window, centred, with its tinted header and its cross. Escape, a click be
 import { Button, Dialog, DialogActions, TextField } from 'hodi:sdk'
 import { Hand } from 'lucide-react'
 
-<Dialog open={open} onClose={close} size="compact" title="New greeting" intro="It replaces "Hi".">
+<Dialog
+  open={open}
+  onClose={close}
+  size="compact"
+  title="New greeting"
+  intro="It replaces “Hi”."
+>
   <TextField icon={Hand} aria-label="Greeting" placeholder="Hey" />
   <DialogActions>
     <Button onClick={close}>Cancel</Button>

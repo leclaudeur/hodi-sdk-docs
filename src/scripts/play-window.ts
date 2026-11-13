@@ -1,32 +1,64 @@
 import { t } from '../lib/i18n.ts'
 import type { State } from '../../demo/code.ts'
-import { controlOf, lang, loadBundle, segment } from './play.ts'
+import { controlOf, lang, loadBundle, segment, type Control } from './play.ts'
 
-// « Personnaliser » draws the component again inside its render's own root: the same ground, the same CSS, the same
-// place, so the render never changes until a control does.
-const goLive = async (term: HTMLElement, list: HTMLElement) => {
+type Sync = (value: unknown) => void
+interface Live {
+  controls: Record<string, Control>
+  state: State
+  set: (key: string, value: unknown) => void
+  syncs: Map<string, Sync[]>
+}
+
+// A render comes alive as soon as the pointer or the focus reaches it: Hodi's real component is drawn again inside
+// the render's own root, with the same ground and CSS, so nothing moves, and a click in it works as in the app.
+const start = async (term: HTMLElement): Promise<Live | undefined> => {
   const kind = term.dataset.play ?? ''
   const host = term.querySelector('.cmp-render')?.shadowRoot?.querySelector('.in')
   const { codeOf, controlsOf } = await import('./play-code.ts')
   const player = await loadBundle(term.dataset.playJs ?? '')
-  if (!host || !player) return false
+  if (!host || !player) return undefined
   host.replaceChildren()
   const controls = controlsOf(kind)
   const state: State = Object.fromEntries(Object.values(controls).map(control => [control.key, control.value]))
   const code = term.querySelector('pre code') ?? term.querySelector('pre')
-  const redraw = () => {
-    player.draw(kind, host, state, lang)
+  const syncs = new Map<string, Sync[]>()
+  // A control and a click in the component both go through set, so the render, the controls and the code agree.
+  const set = (key: string, value: unknown) => {
+    state[key] = value as State[string]
+    for (const sync of syncs.get(key) ?? []) sync(value)
+    player.draw(kind, host, state, lang, set)
     if (code) code.innerHTML = codeOf(kind, state)
   }
+  player.draw(kind, host, state, lang, set)
+  return { controls, state, set, syncs }
+}
+
+const lives = new WeakMap<HTMLElement, Promise<Live | undefined>>()
+const liveOf = (term: HTMLElement) => {
+  let live = lives.get(term)
+  if (!live) lives.set(term, (live = start(term)))
+  return live
+}
+
+// « Personnaliser »: the props list turns into controls, each showing the state as it is now.
+const withControls = async (term: HTMLElement, list: HTMLElement) => {
+  const live = await liveOf(term)
+  if (!live) return false
+  if (list.querySelector('.pc')) return true
   for (const row of list.querySelectorAll<HTMLElement>('.pr')) {
     const name = row.querySelector('code.k')?.textContent ?? ''
     const cell = document.createElement('div')
     cell.className = 'pc'
-    const control = controls[name]
-    if (control) cell.append(controlOf(control, name, state, redraw))
+    const control = live.controls[name]
+    if (control) {
+      const now = { ...control, value: live.state[control.key] } as Control
+      const synced: Sync[] = []
+      cell.append(controlOf(now, name, live.set, synced))
+      live.syncs.set(control.key, [...(live.syncs.get(control.key) ?? []), ...synced])
+    }
     row.append(cell)
   }
-  redraw()
   return true
 }
 
@@ -38,18 +70,23 @@ const titleOf = (term: HTMLElement) => {
 }
 
 // Under the render, always in its place: three tabs, Code, Props and Personnaliser, which show one panel at a time. A
-// phone has no Personnaliser: there is no room to change a prop and see it change.
+// phone has no Personnaliser, with no room to change a prop and see it change; nor has a page, a dialog or a toast.
 const tabsOf = (term: HTMLElement, list: HTMLElement) => {
-  const phone = matchMedia('(max-width: 600px)').matches
+  const noPlay = matchMedia('(max-width: 600px)').matches || term.dataset.fixed !== undefined
   const code = term.querySelector<HTMLElement>('.cmp-code')
   let live = false
   const tabs: [string, string][] = [
     ['code', t(lang, 'playCode')],
     ['props', t(lang, 'playProps')],
-    ...(phone ? [] : ([['play', t(lang, 'playEdit')]] as [string, string][]))
+    ...(noPlay ? [] : ([['play', t(lang, 'playEdit')]] as [string, string][]))
   ]
+  // The list's own note, « ? » : facultatif, follows the name while the props show.
+  const note = document.createElement('span')
+  note.className = 'cmp-note'
+  note.textContent = list.querySelector('.ph span:last-child')?.textContent ?? ''
   const show = async (tab: string) => {
-    if (tab === 'play' && !live) live = await goLive(term, list)
+    if (tab === 'play' && !live) live = await withControls(term, list)
+    note.hidden = tab === 'code'
     if (code) code.hidden = tab !== 'code'
     list.hidden = tab === 'code'
     list.classList.toggle('playing', tab === 'play' && live)
@@ -58,9 +95,13 @@ const tabsOf = (term: HTMLElement, list: HTMLElement) => {
   const bar = document.createElement('div')
   bar.className = 'cmp-tabs mono'
   const name = document.createElement('span')
+  name.className = 'cmp-name'
   name.textContent = titleOf(term)
+  const left = document.createElement('span')
+  left.className = 'cmp-head'
+  left.append(name, note)
   bar.append(
-    name,
+    left,
     segment(t(lang, 'playView'), tabs, 'code', tab => void show(tab))
   )
   return { bar, show }
@@ -76,5 +117,8 @@ export const wirePlay = () => {
     term.append(list)
     list.classList.add('in-tabs')
     void show('code')
+    const render = term.querySelector('.cmp-render')
+    for (const type of ['pointerenter', 'focusin', 'touchstart'])
+      render?.addEventListener(type, () => void liveOf(term), { once: true, passive: true })
   }
 }
