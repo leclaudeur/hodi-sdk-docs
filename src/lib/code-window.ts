@@ -53,7 +53,10 @@ export const codeWindow = (): ShikiTransformer => ({
       { type: 'text', value: metaOf(meta, 'title') ?? this.options.lang }
     ])
     root.children = [
-      el('div', { className: ['term'] }, [el('div', { className: ['tb'] }, [...dots, name, copyButton()]), pre])
+      el('div', { className: ['term'] }, [
+        el('div', { className: ['tb'], 'data-pagefind-ignore': '' }, [...dots, name, copyButton()]),
+        pre
+      ])
     ]
   }
 })
