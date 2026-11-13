@@ -150,58 +150,56 @@
   font-size: 16px;
   line-height: 1.6;
 }
+/* Code in a short sentence: the mono font alone sets it apart, a box would chop the line. */
 .tz-step code,
 .v-list code {
-  padding: 1px 6px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--control);
   color: var(--text);
-  font: 500 0.8em var(--font-mono);
+  font: 500 0.9em var(--font-mono);
+  white-space: nowrap;
 }
 /* « En savoir plus »: the guide's pages behind the step, at the foot of its column, opened in a new tab so the
    editor stays where it was. */
 .tz-more {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   margin-top: auto;
   padding-top: 8px;
 }
+/* One row per page, split by a line, as the app's lists of articles. */
 .tz-more ul {
   display: flex;
   flex-direction: column;
-  gap: 2px;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+.tz-more li + li {
+  border-top: 1px solid var(--divider);
 }
 .tz-more a {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 36px;
-  padding: 0 10px;
-  margin: 0 -10px;
-  border-radius: 10px;
+  min-height: 44px;
   color: var(--text-2);
   font-size: 14px;
   text-decoration: none;
+  transition: color var(--duration) var(--ease);
 }
-.tz-more a > :first-child {
+.tz-more a > :first-child,
+.tz-more a > :last-child {
+  flex: none;
   color: var(--text-3);
 }
 .tz-more a > :last-child {
   margin-left: auto;
-  color: var(--text-3);
 }
 @media (hover: hover) {
   .tz-more a:hover {
-    background: var(--control-hover);
     color: var(--text);
   }
 }
-
 .v-label {
   margin-top: 12px;
   color: var(--text-3);
