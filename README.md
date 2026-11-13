@@ -42,20 +42,25 @@ Every save reloads the page. `npm run build` writes the whole site into `dist/` 
 
 ## Writing a page
 
-Each page is a Markdown file, in one folder per major version of the SDK, then one per language. The file's path is
-its address: `src/content/v1/fr/guide/manifest.md` is _/fr/guide/manifest/_.
+### 📁 Where pages live
+
+One Markdown file per page. The file's path is its address:
+`src/content/v1/fr/guide/manifest.md` → _/fr/guide/manifest/_.
 
 ```text
-src/content/v1/fr/
-  guide/            the guide, its pages in the sidebar's order
-    slots/          the pages under « Les emplacements »
-  components/       the components
-  types/            the types
-  getting-started.md  Premiers pas, the editor in four steps
+src/content/v1/
+  fr/                     the reference, in French
+    guide/                the guide, in the sidebar's order
+      slots/              « Les emplacements »
+    components/           the components
+    types/                the types
+    getting-started.md    Premiers pas
+  en/                     the same files, in English
 ```
 
-A page starts with its front matter. The intro is the paragraph under the title, and the description is what search
-engines and link cards show:
+### 🏷️ The front matter
+
+Every page starts with it:
 
 ```yaml
 ---
@@ -67,18 +72,34 @@ icon: 'file-braces'
 ---
 ```
 
-- **`order`** places the page in the sidebar, among its neighbours.
-- **`icon`** is a [Lucide](https://lucide.dev/icons) icon, by its name.
-- **A code block** becomes a window with **Copier**: name its file with `title="web/index.tsx"` after the language.
-- **A link** to another page uses its address, such as `/fr/guide/publish/`.
-- **A type's fields or a component's props** are a table whose second column is `Type`: the site draws it as a
-  field list. Put `<!-- prettier-ignore -->` above it so Prettier keeps one row per line.
+| Field         | What it does                                      |
+| ------------- | ------------------------------------------------- |
+| `title`       | The page's title, in the sidebar too.             |
+| `description` | What search engines and link cards show.          |
+| `intro`       | The paragraph under the title.                    |
+| `order`       | Its place in the sidebar, among its neighbours.   |
+| `icon`        | A [Lucide](https://lucide.dev/icons) icon's name. |
 
-French spaces before `:`, `;`, `!`, `?` and `»` are added when the site is built: write plain spaces.
+### ✍️ In the text
 
-**Premiers pas** has no text of its own: its front matter holds the four `steps` (the file, the line they change, what
-Hodi shows) and the `finish` dialog. The site makes one full-screen page per step, then _/fr/getting-started/done/_. Only
-the first step is listed for search engines.
+| To get…                   | Write                                                    |
+| ------------------------- | -------------------------------------------------------- |
+| A code window with Copier | `title="web/index.tsx"` after the code block's language. |
+| A link to another page    | Its address, such as `/fr/guide/publish/`.               |
+| A list of fields or props | A table whose second column is `Type`.                   |
+
+> [!TIP]
+> Put `<!-- prettier-ignore -->` above a fields table: Prettier then keeps one row per line.
+
+> [!NOTE]
+> French spaces before `:` `;` `!` `?` and `»` are added at build time. Write plain spaces.
+
+### 🎓 Premiers pas
+
+This page has no text of its own. Its front matter holds the four `steps` (the file, the line they change, what Hodi
+shows) and the `finish` dialog. The site makes one full-screen page per step, then _/fr/getting-started/done/_.
+
+Only the first step is listed for search engines.
 
 ## Components
 
@@ -113,21 +134,27 @@ _/v1/fr/…_, with a line that points to the newest version.
 
 ## Deploying
 
-There is no release: what is on `main` is online. Each push to `main` builds the image
-`ghcr.io/leclaudeur/hodi-sdk-docs`, tagged `latest` and with its commit, for amd64 and arm64.
+There is no release: **what is on `main` is online.**
 
-**1.** In the repository's _Settings › Secrets and variables › Actions_, add the variable `SITE_URL` with the site's
-address, such as `https://sdk.example.org`.
+Each push to `main` builds the image `ghcr.io/leclaudeur/hodi-sdk-docs` for amd64 and arm64. It is tagged `latest`
+and with its commit.
 
-**2.** In Portainer, add a stack from [compose.yml](compose.yml). nginx answers on port 8080.
+### 🚀 The first time
 
-**3.** Point the reverse proxy's `sdk.` address at that port.
+1. **Set the address.** In _Settings › Secrets and variables › Actions › Variables_, add `SITE_URL`, such as
+   `https://sdk.example.org`. The build uses it for canonical links and the sitemap.
+2. **Make the image public.** After the first build, open the package's _Package settings_ and set its visibility to
+   **Public**. Portainer then pulls it without a token.
+3. **Add the stack.** In Portainer, paste [compose.yml](compose.yml) as a new stack. nginx answers on port 8080, or on
+   the port set in `SDK_DOCS_PORT`.
+4. **Point the domain.** In the reverse proxy, send the `sdk.` address to that port, with HTTPS.
 
-After a merge, the stack's **Pull and redeploy** takes the new image.
+### 🔄 After each merge
+
+Open the stack and click **Pull and redeploy**. Nothing else changes.
 
 > [!NOTE]
-> GitHub's registry creates the image as private. Once, in the package's _Package settings_, set its visibility to
-> **Public**: Portainer then pulls it without a token.
+> Without the pull, Portainer keeps the image it already has.
 
 ## Rules
 
