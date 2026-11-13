@@ -12,6 +12,8 @@ export type Control =
 export interface Kind {
   // A card, a row or a field fills the stage, as it fills its render; a button or a chip sits in its middle.
   wide?: true
+  // A page, a dialog or a toast shows its example as it is: its props list, without « Personnaliser ».
+  fixed?: true
   // By the prop's name in the list, such as `look?`. A name the list does not show only gives its first value.
   controls: Record<string, Control>
   code: (state: State, lang: Lang) => Snippet

@@ -4,9 +4,10 @@ import { seg, str, text, toggle, tr, words, type Kind } from './controls.ts'
 // Dialogs, messages and the small elements: their controls and their code.
 
 export const dialog: Kind = {
+  fixed: true,
   controls: {
     'title?': text('title', words('Nouvelle salutation', 'New greeting')),
-    'intro?': text('intro', words('Elle remplace « Salut ».', 'It replaces "Hi".')),
+    'intro?': text('intro', words('Elle remplace « Salut ».', 'It replaces “Hi”.')),
     'size?': seg('size', ['compact', 'wide']),
     'onBack?': toggle('back')
   },
@@ -50,6 +51,7 @@ export const dialog: Kind = {
 }
 
 export const asktoconfirm: Kind = {
+  fixed: true,
   controls: {
     title: text('title', words('Vider l’historique ?', 'Clear the history?')),
     message: text(
@@ -76,6 +78,7 @@ export const asktoconfirm: Kind = {
 }
 
 export const toasts: Kind = {
+  fixed: true,
   controls: {
     showDone: text('message', words('Salutation enregistrée', 'Greeting saved')),
     showSaved: toggle('saved'),

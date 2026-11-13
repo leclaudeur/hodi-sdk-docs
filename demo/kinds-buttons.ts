@@ -112,6 +112,7 @@ const changeAction = (lang: 'fr' | 'en') => ({
 })
 
 export const sectionpage: Kind = {
+  fixed: true,
   wide: true,
   controls: {
     title: text('title', 'Hello world'),

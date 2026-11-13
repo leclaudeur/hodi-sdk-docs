@@ -90,6 +90,8 @@ dialog {
 }
 :host(.toast) [data-sonner-toast] {
   position: relative !important;
+  /* A phone's toast leaves a gutter on one side only (sonner): in its window, it spans the toaster. */
+  width: 100% !important;
   transform: none !important;
   inset: auto !important;
 }
@@ -214,4 +216,9 @@ dialog {
 /* A section's name, or a page's head, over its card: 20px apart, as the app's pages space them. */
 :is([class*='_label_'], [class*='_head_']) + [class*='_card_'] {
   margin-top: 20px;
+}
+
+/* A page or an empty state keeps room around it to sit in the app's column: in its window, only what it draws counts. */
+:host(:is(.kind-sectionpage, .kind-emptystate)) :is(.in, .rv-d, .rv-p) > :not(.rv-d, .rv-p) {
+  padding-block: 0 !important;
 }

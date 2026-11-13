@@ -16,7 +16,13 @@ La fenêtre de Hodi, centrée, avec son en-tête teinté et sa croix. Échap, un
 import { Button, Dialog, DialogActions, TextField } from 'hodi:sdk'
 import { Hand } from 'lucide-react'
 
-<Dialog open={open} onClose={close} size="compact" title="Nouvelle salutation" intro="Elle remplace « Salut ».">
+<Dialog
+  open={open}
+  onClose={close}
+  size="compact"
+  title="Nouvelle salutation"
+  intro="Elle remplace « Salut »."
+>
   <TextField icon={Hand} aria-label="Salutation" placeholder="Coucou" />
   <DialogActions>
     <Button onClick={close}>Annuler</Button>
