@@ -8,11 +8,11 @@ topic: "world"
 key: "avatarMenu"
 ---
 
-## Où s'affiche `avatarMenu`
+## Où dans Hodi
 
 Sur un ordinateur, le menu de l'avatar s'ouvre depuis l'avatar, en bas de la sidebar. Sur un téléphone ou une tablette, les entrées de ce menu se trouvent en bas de la fiche du profil. Les entrées `avatarMenu` du plugin s'ajoutent aux entrées de Hodi.
 
-## Une entrée « Changer de foyer »
+## Exemple
 
 `avatarMenu` est une liste d'entrées, et pas un composant : Hodi dessine lui-même chaque entrée.
 
@@ -32,7 +32,7 @@ definePlugin({
 })
 ```
 
-## Les champs d'une entrée de `avatarMenu`
+## Les champs d'une entrée
 
 <!-- prettier-ignore -->
 | Champ | Type | |

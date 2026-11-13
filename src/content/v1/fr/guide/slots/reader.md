@@ -8,11 +8,11 @@ topic: "culture"
 key: "readerAction"
 ---
 
-## Où s'affiche `readerAction`
+## Où dans Hodi
 
 Quand une personne ouvre un article dans le lecteur de Hodi, une rangée de boutons suit le texte de l'article, avec « Lire l'original ». Le bouton du plugin s'ajoute à cette rangée.
 
-## Un bouton « Signaler »
+## Exemple
 
 Ce bouton envoie l'id de l'article à une route du plugin :
 
@@ -33,7 +33,7 @@ const Report = ({ article }) => {
 definePlugin({ readerAction: Report })
 ```
 
-## Ce que Hodi donne au composant de `readerAction`
+## Les props
 
 Hodi donne au composant une seule prop, `article` : l'article ouvert. Voici les champs de `article` :
 
@@ -46,7 +46,7 @@ Hodi donne au composant une seule prop, `article` : l'article ouvert. Voici les 
 | `article.sourceId` | `string` | L'id de la source de l'article. |
 | `article.sourceName` | `string` | Le nom de la source, comme « Le Monde ». |
 
-## Retrouver l'article dans la partie serveur
+## Côté serveur
 
 La route du plugin reçoit l'id de l'article, jamais une adresse à ouvrir. Avec la permission `articles`, la route retrouve l'article chez Hodi :
 
@@ -63,7 +63,7 @@ La route du plugin reçoit l'id de l'article, jamais une adresse à ouvrir. Avec
 
 Ainsi, un plugin ne peut pas se servir du lecteur pour ouvrir n'importe quelle adresse.
 
-## À savoir sur `readerAction`
+## À savoir
 
 - **Le dessin du bouton** : un `ReaderButton`, comme les boutons de Hodi au même endroit.
 - **Qui voit le bouton** : les profils prévus par `audience`.

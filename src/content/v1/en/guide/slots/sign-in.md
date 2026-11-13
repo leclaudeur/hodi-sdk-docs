@@ -8,13 +8,13 @@ topic: "sport"
 key: "signInExtras"
 ---
 
-## Where `signInExtras` shows
+## Where in Hodi
 
 On Hodi's Sign in screen, under the form, before the person has opened their profile.
 
 At that moment, Hodi doesn't know the person's household yet. So Hodi only loads the plugins that have the `publicRoutes` permission, and only the `web/public.tsx` file of these plugins. The five sign-in slots are declared in this file: `signInExtras`, `signedOutPage`, `afterSignIn`, `whoIsReadingFooter` and `ageConsent`.
 
-## A "Create my household" button
+## Example
 
 This button calls a public route of the plugin, which creates an account. Once the route has answered, the button calls `signedIn()`: Hodi restarts the app, with the person signed in.
 
@@ -33,7 +33,7 @@ const SignUp = ({ signedIn }) => {
 definePlugin({ signInExtras: SignUp })
 ```
 
-## What Hodi gives the component of `signInExtras`
+## Props
 
 <!-- prettier-ignore -->
 | Props | Type | |
@@ -41,7 +41,7 @@ definePlugin({ signInExtras: SignUp })
 | `layout` | `'desktop' \| 'phone'` | The screen size. |
 | `signedIn` | `() => void` | Restarts the app, signed in, after a route that answered `signIn`. |
 
-## Signing someone in from a public route
+## Signing the person in
 
 The plugin never sets the session itself. With the `signIn` permission, the plugin's public route answers `signIn` with an account's id, and Hodi signs the device in to this account:
 
@@ -57,7 +57,7 @@ publicRoutes: {
 
 Hodi only accepts the id of an account this call has just created, or whose password this call has just checked. Never the server admin's id.
 
-## Good to know about `signInExtras`
+## Good to know
 
 - **Refusing a sign-in**: `checkSignIn`, in the server part, at each sign-in.
 - **The limits**: 30 requests per minute per address, none coming from another site.

@@ -44,7 +44,7 @@ test/              the tests
 
 Only `plugin.json` is required. This file gives the plugin's name, its version, its settings and its permissions. [The manifest](/en/guide/manifest/) describes `plugin.json` field by field.
 
-## From the folder to an installable file
+## The installable file
 
 Hodi doesn't install a folder, but a single `.hodi-plugin` file. This command makes the `.hodi-plugin` file, from the plugin's folder:
 
@@ -116,7 +116,7 @@ For everything else, the server part goes through `ctx`, the context Hodi gives 
 | Ask the household's AI a question | With `ctx.ai.ask()`. It needs the `ai` permission. |
 | Write a line in the log | With `ctx.log()`, to follow what the plugin does. |
 
-Hodi checks each call: the plugin only gets what its [permissions](/en/guide/manifest/#the-plugins-permissions-permissions) open to it. [The server context](/en/guide/server-context/) describes everything `ctx` holds.
+Hodi checks each call: the plugin only gets what its [permissions](/en/guide/manifest/#permissions-permissions) open to it. [The server context](/en/guide/server-context/) describes everything `ctx` holds.
 
 ### npm packages in the server part
 
@@ -213,7 +213,7 @@ The web part runs in Hodi's page, with the session of the person signed in. For 
 
 An unsigned plugin still installs, but without its web part. [Publish](/en/guide/publish/#getting-verified) explains how to have a plugin signed.
 
-## How the web part calls the server part
+## Calling the server part
 
 The web part calls a route of the server part by that route's path, with `usePluginApi()`. Hodi stands in the middle: Hodi checks who is asking, then passes the request to the server part.
 
@@ -267,7 +267,7 @@ const { t } = usePluginTranslation()
 <Button onClick={sayHello}>{t('say')}</Button>
 ```
 
-## What it takes to write a plugin
+## Before starting
 
 Before writing a plugin, four things need preparing:
 

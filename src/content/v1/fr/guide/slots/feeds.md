@@ -8,13 +8,13 @@ topic: "climate"
 key: "plugin.json › feeds"
 ---
 
-## Où apparaît `feeds`
+## Où dans Hodi
 
 Un flux d'articles du plugin apparaît dans _Réglages › Sources_, parmi les sources proposées, dans le thème que le flux indique. Une fois que le foyer suit le flux, les articles du flux arrivent dans le fil du foyer, avec ceux des autres sources.
 
 Un flux n'a pas besoin de partie web : tout se passe dans `plugin.json` et dans la partie serveur. Pour cette raison, `feeds` n'est pas une clé de `definePlugin()`, mais un champ de `plugin.json`.
 
-## Déclarer un flux dans `plugin.json`
+## Déclarer le flux
 
 Dans `plugin.json`, le champ `feeds` liste les flux du plugin. La permission `network` liste les sites que le plugin lit :
 
@@ -46,7 +46,7 @@ Voici les champs d'un flux de `feeds` :
 | `lang` | `'fr' \| 'en'` | La langue des articles du flux. |
 | `topic` | `string` | Le thème où le flux se range, comme `tech`, `world` ou `climate`. |
 
-## Remplir un flux dans la partie serveur
+## Remplir le flux
 
 Dans la partie serveur, `feeds` donne une fonction par flux, avec la même clé que dans `plugin.json`. Cette fonction renvoie la liste des articles du flux :
 
@@ -65,7 +65,7 @@ const plugin: ServerPlugin = {
 }
 ```
 
-## Les champs d'un article du flux
+## Les champs d'un article
 
 <!-- prettier-ignore -->
 | Champ | Type | |
@@ -76,7 +76,7 @@ const plugin: ServerPlugin = {
 | `publishedAt?` | `string \| number` | La date de l'article, ISO ou en millisecondes. |
 | `image?` | `string` | L'adresse `https` de l'image de l'article. |
 
-## À savoir sur `feeds`
+## À savoir
 
 - **Quand Hodi lit un flux** : toutes les quelques minutes, tant qu'un foyer suit ce flux.
 - **Combien d'articles** : 100 articles par lecture au plus, et 5 flux par plugin au plus.

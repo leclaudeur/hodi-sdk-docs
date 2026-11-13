@@ -8,11 +8,11 @@ topic: "ai"
 key: "overviewCards"
 ---
 
-## Where `overviewCards` shows
+## Where in Hodi
 
 _Server › Overview_ is the server's dashboard. At the top of this page, the server admin picks a period: 7 days, 30 days… Each card of the page shows a number or a chart over this period. The plugins' cards come after Hodi's "Online" and "Profiles" cards, in the order of the plugins.
 
-## A "Hellos" card
+## Example
 
 This card shows how many hellos the plugin said during the chosen period:
 
@@ -35,7 +35,7 @@ definePlugin({
 })
 ```
 
-## The fields of a card of `overviewCards`
+## A card's fields
 
 `overviewCards` is a list. Each card of the list has three fields:
 
@@ -46,7 +46,7 @@ definePlugin({
 | `size` | `'narrow' \| 'wide' \| 'full'` | The card's width, see below. |
 | `component` | `ComponentType<{ from, to }>` | The card's content, drawn with `OverviewCard`. |
 
-## What Hodi gives the card's component
+## Props
 
 Hodi gives the component the period the admin picked:
 
@@ -56,7 +56,7 @@ Hodi gives the component the period the admin picked:
 | `from` | `string` | The first day of the period, included, as `YYYY-MM-DD`. |
 | `to` | `string` | The last day of the period, included, in the same format. |
 
-## A card's width: `size`
+## Card width
 
 <!-- prettier-ignore -->
 | Value of `size` | The card's width |
@@ -65,7 +65,7 @@ Hodi gives the component the period the admin picked:
 | `wide` | Two thirds of the width on a computer, half on a tablet, the whole width on a phone. |
 | `full` | The whole width, on a computer, a tablet and a phone. |
 
-## Good to know about `overviewCards`
+## Good to know
 
 - **Who sees the cards**: the server admin only.
 - **A card's data**: a `serverRoute`, called with `from` and `to`.

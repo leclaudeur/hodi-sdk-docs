@@ -8,13 +8,13 @@ topic: "science"
 key: "serverSections"
 ---
 
-## Où s'affiche `serverSections`
+## Où dans Hodi
 
 L'espace Serveur a sa propre sidebar, avec les groupes de Hodi : Général, Plugins… Le plugin ajoute à cette sidebar un groupe au nom du plugin, sous les groupes de Hodi. Chaque section de ce groupe est une entrée de la sidebar, qui ouvre la page de la section.
 
 Chaque section a sa propre adresse : `#/server/plugin/<id du plugin>/<id de la section>`.
 
-## Une section « Bonjours »
+## Exemple
 
 ```tsx title="web/index.tsx"
 import { SectionPage, definePlugin } from 'hodi:sdk'
@@ -38,7 +38,7 @@ definePlugin({
 })
 ```
 
-## Les champs d'une section de `serverSections`
+## Les champs d'une section
 
 `serverSections` est une liste. Chaque section de la liste a ces champs :
 
@@ -51,7 +51,7 @@ definePlugin({
 | `icon?` | `ComponentType` | Une icône Lucide. Sans icône, Hodi affiche une pièce de puzzle. |
 | `hint?` | `ComponentType` | La ligne sous le nom de la section, sur téléphone, comme « 12 personnes ». |
 
-## À savoir sur `serverSections`
+## À savoir
 
 - **Qui voit les sections** : l'admin du serveur seulement.
 - **Les routes des sections** : les `serverRoutes`, appelées avec `usePluginServerApi()`.

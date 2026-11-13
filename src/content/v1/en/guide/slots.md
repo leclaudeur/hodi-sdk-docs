@@ -13,7 +13,7 @@ Hodi keeps control of its own screens. A plugin can't change a page of Hodi, nor
 
 For each slot, the plugin gives a React component. Hodi shows this component in the right place, at the right time, and only to the right people.
 
-## Declaring the slots with `definePlugin()`
+## Declaring a slot
 
 The web part calls `definePlugin()` once, in `web/index.tsx`. `definePlugin()` receives an object: each key of this object is the name of a slot, and the key's value is what the plugin shows in this slot.
 

@@ -8,7 +8,7 @@ topic: "sport"
 key: "signedOutPage"
 ---
 
-## Où s'affiche `signedOutPage`
+## Où dans Hodi
 
 Sur un appareil qui n'est encore lié à aucun foyer, Hodi ouvre d'habitude son écran de Connexion. Avec `signedOutPage`, Hodi ouvre la page du plugin à la place.
 
@@ -16,7 +16,7 @@ Hodi ne charge à ce moment que les plugins qui ont la permission `publicRoutes`
 
 L'écran de Connexion de Hodi reste toujours joignable : le lien d'un code, le lien d'un nouveau mot de passe et l'adresse `#/sign-in` ouvrent toujours la Connexion de Hodi.
 
-## Une page d'accueil
+## Exemple
 
 Cette page présente le service et propose deux boutons : « Se connecter », qui ouvre la Connexion de Hodi, et « Créer mon foyer », qui appelle une route publique du plugin.
 
@@ -36,7 +36,7 @@ const Welcome = ({ showSignIn }) => (
 definePlugin({ signedOutPage: Welcome })
 ```
 
-## Ce que Hodi donne au composant de `signedOutPage`
+## Les props
 
 <!-- prettier-ignore -->
 | Props | Type | |
@@ -45,7 +45,7 @@ definePlugin({ signedOutPage: Welcome })
 | `showSignIn` | `() => void` | Ouvre l'écran de Connexion de Hodi. |
 | `signedIn` | `() => void` | Redémarre l'app, connectée, après une route qui a répondu `signIn`. |
 
-## À savoir sur `signedOutPage`
+## À savoir
 
 - **Si la page du plugin plante** : Hodi affiche sa propre Connexion, jamais un écran vide.
 - **Connecter quelqu'un** : la route publique répond `signIn`, voir [`signInExtras`](/fr/guide/slots/sign-in/).

@@ -8,11 +8,11 @@ topic: "ai"
 key: "overviewCards"
 ---
 
-## Où s'affiche `overviewCards`
+## Où dans Hodi
 
 _Serveur › Vue d'ensemble_ est le tableau de bord du serveur. En haut de cette page, l'admin du serveur choisit une période : 7 jours, 30 jours… Chaque carte de la page montre un chiffre ou un graphique sur cette période. Les cartes des plugins viennent après les cartes « En ligne » et « Profils » de Hodi, dans l'ordre des plugins.
 
-## Une carte « Bonjours »
+## Exemple
 
 Cette carte montre combien de bonjours le plugin a dits pendant la période choisie :
 
@@ -35,7 +35,7 @@ definePlugin({
 })
 ```
 
-## Les champs d'une carte de `overviewCards`
+## Les champs d'une carte
 
 `overviewCards` est une liste. Chaque carte de la liste a trois champs :
 
@@ -46,7 +46,7 @@ definePlugin({
 | `size` | `'narrow' \| 'wide' \| 'full'` | La largeur de la carte, voir plus bas. |
 | `component` | `ComponentType<{ from, to }>` | Le contenu de la carte, dessiné avec `OverviewCard`. |
 
-## Ce que Hodi donne au composant de la carte
+## Les props
 
 Hodi donne au composant la période que l'admin a choisie :
 
@@ -56,7 +56,7 @@ Hodi donne au composant la période que l'admin a choisie :
 | `from` | `string` | Le premier jour de la période, compris, au format `AAAA-MM-JJ`. |
 | `to` | `string` | Le dernier jour de la période, compris, au même format. |
 
-## La largeur d'une carte : `size`
+## La largeur des cartes
 
 <!-- prettier-ignore -->
 | Valeur de `size` | La largeur de la carte |
@@ -65,7 +65,7 @@ Hodi donne au composant la période que l'admin a choisie :
 | `wide` | Deux tiers de la largeur sur ordinateur, la moitié sur tablette, toute la largeur sur téléphone. |
 | `full` | Toute la largeur, sur ordinateur, tablette et téléphone. |
 
-## À savoir sur `overviewCards`
+## À savoir
 
 - **Qui voit les cartes** : l'admin du serveur seulement.
 - **Les données d'une carte** : une `serverRoute`, appelée avec `from` et `to`.
