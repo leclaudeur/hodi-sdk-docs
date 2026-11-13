@@ -158,10 +158,14 @@
 .dev-side .subs.heads {
   margin: 0 0 6px 10px;
 }
-/* A top page's own titles share the rail of its pages, just above them. */
+/* A top page's own titles sit under its pages, as in the page, and carry on the same rail without a break. */
 .dev-side .grp > .subs.heads {
-  margin: 2px 0 0 19px;
-  padding-bottom: 4px;
+  margin: 2px 0 4px 19px;
+}
+.dev-side .grp > .subs + .subs.heads {
+  /* Back over the pages' bottom margin and the group's gap, so the two rails meet. */
+  margin-top: -7px;
+  padding-top: 2px;
 }
 .dev-side .subs.heads a {
   height: auto;

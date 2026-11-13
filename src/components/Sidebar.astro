@@ -38,7 +38,6 @@ const isOpen = (page: Doc) => page.path === doc.path || page.path === doc.parent
             </span>
             {page.entry.data.title}
           </a>
-          {page.path === doc.path && <Heads headings={heads} />}
           {isOpen(page) && children.length > 0 && (
             <div class="subs">
               {children.map(child => (
@@ -51,6 +50,7 @@ const isOpen = (page: Doc) => page.path === doc.path || page.path === doc.parent
               ))}
             </div>
           )}
+          {page.path === doc.path && <Heads headings={heads} />}
         </>
       ))}
     </div>
