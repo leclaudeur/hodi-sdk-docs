@@ -1,7 +1,7 @@
 ---
 title: "Vue d'ensemble"
-description: "Une carte du tableau de bord du serveur, avec un chiffre ou un graphique de ton plugin sur la période."
-intro: "Une carte du tableau de bord du serveur, après « En ligne » et « Profils » : un chiffre ou un graphique de ton plugin sur la période choisie."
+description: "Une carte du tableau de bord du serveur, avec un chiffre ou un graphique du plugin sur la période."
+intro: "Une carte du tableau de bord du serveur, après « En ligne » et « Profils » : un chiffre ou un graphique du plugin sur la période choisie."
 order: 4
 icon: "layout-dashboard"
 topic: "ai"

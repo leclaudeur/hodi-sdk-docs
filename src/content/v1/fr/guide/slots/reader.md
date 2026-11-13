@@ -1,7 +1,7 @@
 ---
 title: "Lecteur"
 description: "Un bouton au bout d'un article ouvert, à côté de « Lire l'original », pour agir sur cet article, comme le signaler."
-intro: "Un bouton au bout d'un article ouvert, à côté de « Lire l'original » : pour que ton plugin fasse quelque chose de cet article-là, comme le signaler."
+intro: "Un bouton au bout d'un article ouvert, à côté de « Lire l'original » : pour que le plugin fasse quelque chose de cet article-là, comme le signaler."
 order: 5
 icon: "book-open"
 topic: "culture"

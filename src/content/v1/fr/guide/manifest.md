@@ -1,7 +1,7 @@
 ---
 title: "Le manifeste"
-description: "`plugin.json` dit à Hodi qui est ton plugin, pour qui il est, quels réglages il a et ce qu'il a le droit de faire."
-intro: "`plugin.json` dit à Hodi qui est ton plugin, pour qui il est, quels réglages il a et ce qu'il a le droit de faire. Hodi le vérifie à l'installation et refuse un manifeste qui ne va pas, en disant pourquoi."
+description: "`plugin.json` dit à Hodi qui est le plugin, pour qui il est, quels réglages il a et ce qu'il a le droit de faire."
+intro: "`plugin.json` dit à Hodi qui est le plugin, pour qui il est, quels réglages il a et ce qu'il a le droit de faire. Hodi le vérifie à l'installation et refuse un manifeste qui ne va pas, en disant pourquoi."
 order: 2
 icon: "file-braces"
 ---
@@ -34,7 +34,7 @@ icon: "file-braces"
 
 L'id nomme son dossier, ses routes et ses fichiers : le changer ferait un autre plugin, sans ses données. Hodi ne charge pas un plugin écrit pour une autre version de l'API.
 
-Le nom et la description de `plugin.json` servent quand une langue n'a pas les siens. Donne-les quand même dans chaque fichier de `locales/`, sous `manifest`, car un nom peut changer d'une langue à l'autre, et Hodi montre toujours celui de la personne.
+Le nom et la description de `plugin.json` servent quand une langue n'a pas les siens. Ils vont quand même dans chaque fichier de `locales/`, sous `manifest`, car un nom peut changer d'une langue à l'autre, et Hodi montre toujours celui de la personne.
 
 ## Pour qui
 
@@ -50,11 +50,11 @@ Une route reçoit toujours le type du profil, `request.who.kind`.
 Hodi dessine leurs lignes sur la page du plugin, dans _Serveur › Plugins_, au-dessus de [ses options](/fr/guide/slots/options/). 32 réglages au plus, chacun avec une clé, un type et une valeur par défaut :
 
 - `"boolean"` : un interrupteur.
-- `"number"` : un nombre, avec `min` et `max` si tu veux.
+- `"number"` : un nombre, avec `min` et `max` au besoin.
 - `"text"` : un texte, avec `maxLength`, 2000 au plus.
 - `"choice"` : un choix parmi `options`.
 
-Le libellé d'un réglage vient de `settings.<clé>` dans ses locales, et sa ligne d'aide de `settings.<clé>Hint`. Ta partie serveur les lit avec `ctx.settings()`, valeurs par défaut comprises.
+Le libellé d'un réglage vient de `settings.<clé>` dans ses locales, et sa ligne d'aide de `settings.<clé>Hint`. La partie serveur les lit avec `ctx.settings()`, valeurs par défaut comprises.
 
 ## Ses permissions
 
@@ -81,7 +81,7 @@ Pour un plugin signé seulement, parce qu'elles touchent aux gens ou coûtent au
 - `notify` et `mail` : notifications et e-mails.
 - `accounts`, `households` et `signIn` : comptes, foyers et connexion.
 
-Un plugin non signé qui en demande une est refusé à l'installation, sauf `ai`, dont il se passe. Le mode développeur les garde toutes, pour que tu puisses les tester.
+Un plugin non signé qui en demande une est refusé à l'installation, sauf `ai`, dont il se passe. Le mode développeur les garde toutes, pour qu'on puisse les tester.
 
 ## Le reste
 

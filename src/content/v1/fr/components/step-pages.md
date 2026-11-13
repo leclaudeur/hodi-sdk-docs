@@ -72,7 +72,7 @@ import { House } from 'lucide-react'
 
 ## SetupActions
 
-Les boutons au bas d'une étape que ton plugin ajoute à [l’installation](/fr/guide/slots/setup/). Hodi y met « Retour » à gauche, tes boutons vont à droite.
+Les boutons au bas d'une étape qu'un plugin ajoute à [l’installation](/fr/guide/slots/setup/). Hodi y met « Retour » à gauche, ceux du plugin vont à droite.
 
 ```tsx title="web/index.tsx" render="setupactions"
 import { Button, SetupActions } from 'hodi:sdk'

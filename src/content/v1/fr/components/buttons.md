@@ -10,7 +10,7 @@ preview: "button"
 
 ## Button
 
-Le bouton avec un libellé, et une icône Lucide avant lui si tu veux. Il fait 44 px de haut, 34 px en `compact`. Le bouton principal d'un écran est `primary`, ce qui efface est `danger`.
+Le bouton avec un libellé, et, au besoin, une icône Lucide avant lui. Il fait 44 px de haut, 34 px en `compact`. Le bouton principal d'un écran est `primary`, ce qui efface est `danger`.
 
 ```tsx title="web/index.tsx" render="button" play="button"
 import { Button } from 'hodi:sdk'
@@ -31,7 +31,7 @@ import { Check, Download, Plus, Trash2 } from 'lucide-react'
 | `busy?` | `boolean` | Attend le serveur : l'icône devient un rond qui tourne, et le bouton ne se presse plus. |
 | `compact?` | `boolean` | 34 px de haut, pour une ligne ou un en-tête. |
 | `wide?` | `boolean` | Toute la largeur de son parent. |
-| `href?` | `string` | Un lien dessiné en bouton. Pour une adresse de Hodi, prends-la dans [usePluginLinks()](/fr/components/hooks/). |
+| `href?` | `string` | Un lien dessiné en bouton. Une adresse de Hodi vient de [usePluginLinks()](/fr/components/hooks/). |
 | `external?` | `boolean` | Le lien s'ouvre dans un nouvel onglet. |
 | `…` | `ButtonHTMLAttributes` | Ce qu'un `<button>` accepte : `onClick`… |
 
@@ -58,13 +58,13 @@ import { Pencil, Trash2 } from 'lucide-react'
 | `size?` | `28 \| 34 \| 38 \| 44` | 28 dans une carte, 34 dans un en-tête, 38 dans une ligne de réglage sur téléphone, 44 sous le doigt. |
 | `variant?` | `'default' \| 'on' \| 'danger' \| 'primary' \| 'ai' \| 'glass' \| 'image'` | Sa couleur. `on` : allumé, comme un filtre choisi. `glass` et `image` : posé sur une photo. |
 | `filled?` | `boolean` | L'icône pleine, comme un article enregistré. |
-| `busy?` | `boolean` | L'icône tourne : donne-lui une icône de chargement. |
+| `busy?` | `boolean` | L'icône tourne : elle doit donc être une icône de chargement. |
 | `href?` | `string` | Un lien dessiné en rond. |
 | `external?` | `boolean` | Le lien s'ouvre dans un nouvel onglet. |
 
 ## AiButton
 
-Le bouton violet, seule porte vers l'IA du foyer. Un clic lance l'action `aiActions` du même nom sur ton serveur, une seule fois. Hodi le cache pour un ado, un enfant ou un foyer sans IA, et le grise quand la limite du jour est atteinte. Voir [le contexte serveur](/fr/guide/server-context/).
+Le bouton violet, seule porte vers l'IA du foyer. Un clic lance l'action `aiActions` du même nom sur la partie serveur, une seule fois. Hodi le cache pour un ado, un enfant ou un foyer sans IA, et le grise quand la limite du jour est atteinte. Voir [le contexte serveur](/fr/guide/server-context/).
 
 ```tsx title="web/index.tsx" render="aibutton"
 import { AiButton } from 'hodi:sdk'
@@ -77,7 +77,7 @@ import { AiButton } from 'hodi:sdk'
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
-| `action` | `string` | Le nom de l'action dans `aiActions` de ta partie serveur. |
+| `action` | `string` | Le nom de l'action dans `aiActions` de la partie serveur. |
 | `input?` | `unknown` | Son `request.input`, 16 Ko de JSON au plus. |
 | `onAnswer` | `(answer: unknown) => void` | Ce que l'action a répondu. |
 | `onError?` | `(error: AiButtonError) => void` | Appelé à la place du toast de Hodi. `AiButtonError` : `unavailable`, `off`, `limited`, `refused` ou `failed`. |

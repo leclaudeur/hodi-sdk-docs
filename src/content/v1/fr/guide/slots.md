@@ -1,7 +1,7 @@
 ---
 title: "Les emplacements"
 description: "Un plugin s'affiche aux endroits qu'il déclare dans `definePlugin()`, avec les composants de Hodi, et n'en touche aucun autre."
-intro: "Un plugin s'affiche aux endroits qu'il déclare dans `definePlugin()`, avec les composants de Hodi, et n'en touche aucun autre. Chaque carte mène à sa page : où il s'affiche, un exemple de code et ce qu'il faut savoir avant de t'en servir."
+intro: "Un plugin s'affiche aux endroits qu'il déclare dans `definePlugin()`, avec les composants de Hodi, et n'en touche aucun autre. Chaque carte mène à sa page : où il s'affiche, un exemple de code et ce qu'il faut savoir avant de s'en servir."
 order: 3
 icon: "layout-grid"
 cards: "children"

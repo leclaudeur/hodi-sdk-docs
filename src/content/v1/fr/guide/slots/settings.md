@@ -1,7 +1,7 @@
 ---
 title: "Réglages"
 description: "Son entrée et sa page dans Réglages, pour ce que chaque profil règle ou consulte lui-même."
-intro: "Une entrée de Réglages rien qu'à ton plugin, avec sa propre page : pour ce que chaque profil du foyer règle ou consulte lui-même."
+intro: "Une entrée de Réglages rien qu'au plugin, avec sa propre page : pour ce que chaque profil du foyer règle ou consulte lui-même."
 order: 2
 icon: "settings"
 topic: "world"

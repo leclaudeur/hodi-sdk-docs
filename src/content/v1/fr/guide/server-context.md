@@ -27,7 +27,7 @@ export default plugin
 
 ## Ses migrations
 
-`migrations` liste les changements de sa base, dans l'ordre. Hodi applique ceux qui manquent à chaque démarrage. Une fois publiée, une migration ne se modifie plus et ne change plus de place : ajoute la suivante au bout de la liste, même pour corriger une erreur.
+`migrations` liste les changements de sa base, dans l'ordre. Hodi applique ceux qui manquent à chaque démarrage. Une fois publiée, une migration ne se modifie plus et ne change plus de place : la suivante s'ajoute au bout de la liste, même pour corriger une erreur.
 
 ## Ses routes
 
@@ -45,7 +45,7 @@ Une route peut aussi répondre un zip, que Hodi construit et envoie en télécha
 
 `request.who` dit qui demande, tel que Hodi l'a vérifié : son profil, son foyer, son type, et s'il est admin du foyer ou du serveur. Aucun cookie, aucun en-tête de la requête n'arrive jusqu'au plugin.
 
-Une seule base sert tous les foyers du serveur : garde leurs données séparées avec `who.householdId`, dans chaque table et chaque requête.
+Une seule base sert tous les foyers du serveur : leurs données restent séparées avec `who.householdId`, dans chaque table et chaque requête.
 
 Une route qui efface des données ou change un compte prend `proof: true`. Hodi la lance seulement après que la personne a tapé son mot de passe dans sa fenêtre, `askToConfirm()` côté web. Sans lui, la route répond 403 sans avoir tourné.
 
@@ -94,6 +94,6 @@ Une tâche tourne pour aucun foyer : `ctx` y refuse ce qui demande un foyer ou u
 
 ## Les données des gens
 
-Quand un profil, un compte ou un foyer disparaît, Hodi appelle `onProfileDeleted`, `onAccountDeleted` ou `onHouseholdRemoved`. Efface ce que tu gardais de lui : Hodi réessaie chaque minute tant que ça échoue, alors fais en sorte que ça marche deux fois de suite.
+Quand un profil, un compte ou un foyer disparaît, Hodi appelle `onProfileDeleted`, `onAccountDeleted` ou `onHouseholdRemoved`. Le plugin efface ce qu'il gardait de lui. Hodi réessaie chaque minute tant que ça échoue : l'effacement doit donc marcher deux fois de suite.
 
 `exportData` ajoute ce que le plugin garde d'une personne à la copie qu'elle télécharge dans _Réglages › Compte et données_, en JSON de 512 Ko au plus.

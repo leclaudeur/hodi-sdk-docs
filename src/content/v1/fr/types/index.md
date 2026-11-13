@@ -1,7 +1,7 @@
 ---
 title: "Types"
 description: "Tous les types du SDK, partie par partie, avec chacun de leurs champs."
-intro: "Le SDK donne les types de chaque partie. Ton éditeur les montre pendant que tu écris, avec leurs commentaires. Cette page les rassemble tous : la sidebar mène droit à chacun."
+intro: "Le SDK donne les types de chaque partie. L'éditeur les montre pendant l'écriture, avec leurs commentaires. Cette page les rassemble tous : la sidebar mène droit à chacun."
 order: 2
 icon: "type"
 ---
@@ -34,7 +34,7 @@ Ce que `server/index.ts` exporte par défaut. Tout est facultatif. Voir [le cont
 | `aiActions?` | `Record<string, PluginAiAction>` | Ce que lancent ses `AiButton`, par leur nom. Le seul endroit où `ctx.ai` répond. |
 | `onArticle?` | `(article: PluginArticle, ctx) => Promise<void>` | Chaque article que Hodi lit pour la première fois. |
 | `checkSignIn?` | `(who, ctx) => Promise<string \| null>` | Avec `permissions.signIn` : à chaque connexion. null laisse entrer, une clé de ses locales refuse avec ce message. |
-| `onProfileDeleted?` | `(deleted, ctx) => Promise<void>` | Un profil supprimé : efface ce que tu en gardais. |
+| `onProfileDeleted?` | `(deleted, ctx) => Promise<void>` | Un profil supprimé : le plugin efface ce qu'il en gardait. |
 | `onAccountDeleted?` | `(deleted, ctx) => Promise<void>` | Un compte supprimé. |
 | `onHouseholdRemoved?` | `(removed, ctx) => Promise<void>` | Un foyer retiré. |
 | `exportData?` | `(who, ctx) => Promise<unknown>` | Ses données, pour « Télécharger une copie ». |
