@@ -147,13 +147,11 @@ steps:
       - "Look at Server › Plugins: Hello world is there, with the *In development* badge."
     file: "Terminal"
     lang: "text"
-    edit: 3
-    start: "--code"
-    reveal: 4
+    edit: 1
+    start: "$ npx hodi-plugin dev --server http://localhost:3000 --code"
+    reveal: 2
     code: |
-      $ npx hodi-plugin dev \
-          --server http://localhost:3000 \
-          --code 482913
+      $ npx hodi-plugin dev --server http://localhost:3000 --code 482913
 
       ✓ plugin.json
       ✓ server/index.ts
