@@ -37,7 +37,10 @@ const no = () => {}
 const PluginAdmin = () => (
   <>
     <section data-ex="pluginoptions">
-      <PluginOptions plugin={plugin as never} layout={phone ? 'phone' : 'desktop'} onSave={no} />
+      {/* One block: the render frame lines its children up in a row, and the title goes above its card. */}
+      <div>
+        <PluginOptions plugin={plugin as never} layout={phone ? 'phone' : 'desktop'} onSave={no} />
+      </div>
     </section>
     <section data-ex="pluginpermissions">
       {/* One block: the render frame lines its children up in a row, and the title goes above its card. */}
