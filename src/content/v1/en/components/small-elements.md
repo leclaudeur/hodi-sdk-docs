@@ -34,7 +34,13 @@ A filter in a row: a pill, white when chosen.
 ```tsx title="web/index.tsx" render="filterchip" play="filterchip"
 import { FilterChip } from 'hodi:sdk'
 
-<FilterChip selected={filter === 'all'} count={12} onClick={() => setFilter('all')}>All</FilterChip>
+<FilterChip
+  selected={filter === 'all'}
+  count={12}
+  onClick={() => setFilter('all')}
+>
+  All
+</FilterChip>
 ```
 
 <!-- prettier-ignore -->
@@ -55,7 +61,11 @@ A source's icon, taken from its site, or its initials when it has none. Never ro
 ```tsx title="web/index.tsx" render="sourceavatar" play="sourceavatar"
 import { SourceAvatar } from 'hodi:sdk'
 
-<SourceAvatar sourceId={article.sourceId} sourceName="Le Monde" size={44} />
+<SourceAvatar
+  sourceId={article.sourceId}
+  sourceName="Le Monde"
+  size={44}
+/>
 ```
 
 <!-- prettier-ignore -->
@@ -72,7 +82,11 @@ A household's photo, or its initial, round like a profile in "Who's in?".
 ```tsx title="web/index.tsx" render="householdavatar" play="householdavatar"
 import { HouseholdAvatar } from 'hodi:sdk'
 
-<HouseholdAvatar name="Smith" photo={household.photo} size={64} />
+<HouseholdAvatar
+  name="Smith"
+  photo={household.photo}
+  size={64}
+/>
 ```
 
 <!-- prettier-ignore -->

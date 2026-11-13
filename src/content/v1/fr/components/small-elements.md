@@ -34,7 +34,13 @@ Un filtre d'une rangée : une pilule, blanche quand elle est choisie.
 ```tsx title="web/index.tsx" render="filterchip" play="filterchip"
 import { FilterChip } from 'hodi:sdk'
 
-<FilterChip selected={filter === 'all'} count={12} onClick={() => setFilter('all')}>Tout</FilterChip>
+<FilterChip
+  selected={filter === 'all'}
+  count={12}
+  onClick={() => setFilter('all')}
+>
+  Tout
+</FilterChip>
 ```
 
 <!-- prettier-ignore -->
@@ -55,7 +61,11 @@ L'icône d'une source, prise sur son site, ou ses initiales quand elle n'en a pa
 ```tsx title="web/index.tsx" render="sourceavatar" play="sourceavatar"
 import { SourceAvatar } from 'hodi:sdk'
 
-<SourceAvatar sourceId={article.sourceId} sourceName="Le Monde" size={44} />
+<SourceAvatar
+  sourceId={article.sourceId}
+  sourceName="Le Monde"
+  size={44}
+/>
 ```
 
 <!-- prettier-ignore -->
@@ -72,7 +82,11 @@ La photo d'un foyer, ou son initiale, ronde comme un profil de « Qui lit ? ».
 ```tsx title="web/index.tsx" render="householdavatar" play="householdavatar"
 import { HouseholdAvatar } from 'hodi:sdk'
 
-<HouseholdAvatar name="Dupont" photo={household.photo} size={64} />
+<HouseholdAvatar
+  name="Dupont"
+  photo={household.photo}
+  size={64}
+/>
 ```
 
 <!-- prettier-ignore -->

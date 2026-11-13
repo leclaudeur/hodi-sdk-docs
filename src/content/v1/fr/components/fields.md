@@ -106,7 +106,11 @@ L'interrupteur, pour un réglage qui s'allume ou s'éteint. Dans une ligne, il v
 ```tsx title="web/index.tsx" render="toggle" play="toggle"
 import { Toggle } from 'hodi:sdk'
 
-<Toggle checked={morning} label="Saluer le matin" onChange={setMorning} />
+<Toggle
+  checked={morning}
+  label="Saluer le matin"
+  onChange={setMorning}
+/>
 ```
 
 <!-- prettier-ignore -->

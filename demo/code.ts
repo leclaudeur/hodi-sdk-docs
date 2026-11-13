@@ -94,8 +94,8 @@ const childLines = (children: (El | string)[], indent: number): Line[] =>
 
 export const elLines = (el: El, indent: number): Line[] => {
   const attrs = el.attrs.map(([name, value]) => attrLines(name, value, indent + 2))
-  // More than three props always go one per line, whatever the width: the same rule for every component.
-  const inline = attrs.every(lines => lines?.length === 1) && attrs.filter(Boolean).length <= 3
+  // Three props or more always go one per line, whatever the width: the same rule for every component.
+  const inline = attrs.every(lines => lines?.length === 1) && attrs.filter(Boolean).length < 3
   const end = el.children.length === 0 ? ' />' : '>'
   const open: Line = [punct('<'), tagTok(el.tag), ...attrs.flatMap(lines => [plain(' '), ...(lines?.[0] ?? [])])]
   if (inline && indent + width(open) + end.length <= WIDTH) {
