@@ -326,10 +326,6 @@ main {
     font-weight: 500;
     text-decoration: none;
   }
-  /* The sheet's own line closes it: its last row draws none, or the two would double. */
-  .sheet > :last-child {
-    border-bottom: 0;
-  }
   .sheet a.row svg {
     color: var(--text-3);
   }
@@ -343,14 +339,17 @@ main {
     color: var(--text-2);
     font-size: 15px;
   }
+  /* The sheet's own line closes it: its last row draws none, or the two would double. */
+  .sheet > .row:last-child,
+  .sheet > .set-row:last-child {
+    border-bottom: 0;
+  }
   .sheet-scrim {
     display: block;
     position: fixed;
     inset: 0;
     z-index: 28;
     background: color-mix(in srgb, var(--bg) 80%, transparent);
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(3px);
     opacity: 0;
     pointer-events: none;
     transition: opacity 200ms var(--ease);

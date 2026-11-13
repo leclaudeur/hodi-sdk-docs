@@ -54,7 +54,7 @@
   }
 }
 
-/* The spotlight: a card high on the page over a blurred one; full screen on a phone. */
+/* The spotlight: a card high on the page over a dimmed one; full screen on a phone. */
 html:has(dialog.sx[open]) {
   overflow: hidden;
 }
@@ -75,7 +75,7 @@ html:has(dialog.sx[open]) {
   display: flex;
   flex-direction: column;
 }
-/* It fades in a little lower than it rests, and fades back out on closing; a phone's full screen rises further. */
+/* It fades in a little lower than it rests, and fades back out on closing. */
 .sx,
 .sx::backdrop {
   --sx-from: translateY(-8px);
@@ -92,7 +92,6 @@ html:has(dialog.sx[open]) {
 }
 .sx::backdrop {
   background: color-mix(in srgb, var(--bg) 70%, transparent);
-  backdrop-filter: blur(6px);
   transform: none;
 }
 @starting-style {
@@ -295,7 +294,6 @@ html:has(dialog.sx[open]) {
 
 @media (max-width: 600px) {
   .sx {
-    --sx-from: translateY(24px);
     width: 100%;
     height: 100dvh;
     max-height: none;

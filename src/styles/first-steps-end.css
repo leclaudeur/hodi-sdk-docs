@@ -12,8 +12,6 @@
   position: absolute;
   inset: 0;
   background: color-mix(in srgb, var(--bg) 62%, transparent);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
 }
 
 .confetti {
