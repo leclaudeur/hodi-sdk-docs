@@ -15,13 +15,12 @@ Le plus simple est de partir d'un exemple : le plugin « Hello world » des [pre
 - **Hodi fait le lien** : il transmet le clic au serveur, puis la réponse au bouton.
 
 <!-- prettier-ignore -->
-| | Partie serveur | Partie web |
+| | La partie serveur | La partie web |
 | --- | --- | --- |
-| Son fichier | `server/index.ts` | `web/index.tsx` |
-| Où elle tourne | Sur le serveur de Hodi, dans un bac à sable | Dans le navigateur, dans les pages de Hodi |
-| Son rôle | Répondre aux routes, garder des données, lancer des tâches | Dessiner des écrans, des cartes et des boutons |
-| Ce qu'elle utilise | `ctx`, le contexte que Hodi lui donne | `hodi:sdk`, les composants et les hooks de Hodi |
-| Obligatoire | Non | Non |
+| icon | server | monitor |
+| topic | tech | science |
+| | `server/index.ts`, sur le serveur de Hodi. | `web/index.tsx`, dans le navigateur. |
+| | Répond aux routes, garde des données, lance des tâches. | Dessine des écrans, des cartes et des boutons. |
 
 > **Un plugin peut n'avoir qu'une des deux parties.** Un plugin qui ajoute seulement un flux d'articles n'a pas besoin d'écran. Un plugin qui ajoute seulement une entrée au menu de l'avatar n'a pas besoin de serveur.
 

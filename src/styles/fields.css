@@ -95,43 +95,14 @@
   text-transform: uppercase;
 }
 
-/* A comparison: one card, one row per point, each thing's value side by side under the point's name. */
-.compare .cmp-head,
-.compare .cmp-vals {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-  gap: 24px;
+/* A comparison's cards are the page cards' (docs.css), without a link: no hover, no arrow. */
+.slots.parts .slot,
+.slots.parts .slot:hover {
+  background: var(--column);
+  cursor: default;
 }
-.props.rows .ph.cmp-head span {
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.compare .row-label {
-  display: block;
-  margin: 0 0 4px;
-}
-.prose .compare .cmp-val p {
-  margin: 0;
-  color: var(--text);
-}
-.compare .cmp-thing {
-  display: none;
-}
-@media (max-width: 600px) {
-  .compare .cmp-head {
-    display: none;
-  }
-  .compare .cmp-vals {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .compare .cmp-thing {
-    display: block;
-    color: var(--rust-text);
-    font-size: 10.5px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
+.slots.parts .tx > span + span {
+  margin-top: 2px;
 }
 
 /* The app's info notice: a blue card, its square and icon at the top left, the title and the text beside them. */

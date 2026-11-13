@@ -1,4 +1,5 @@
 import type { Element, ElementContent } from 'hast'
+import { iconNode, svgAttributes } from './icons.ts'
 
 // Any other Markdown table becomes rows or cards, never a grid: a grid's columns crush or overflow on a phone.
 // A table whose first heading is empty and whose others are named compares those: one card per column, side by side
@@ -57,38 +58,46 @@ const rowOf = (cells: Element[], names: string[]) => {
   )
 }
 
-// One card, one row per point compared: its name, then each thing's value side by side, so the rows line up. The
-// things' names head the columns; on a phone, where the values stack, each value carries its thing's name.
+// A card per thing compared, as the cards of a page's pages: an icon in a topic's colour, its name, a short text.
+// The table's rows say what goes in it: « icon » and « topic » by name, every other row a line of the text.
+const svg = (name: string) =>
+  ({
+    type: 'element',
+    tagName: 'svg',
+    properties: svgAttributes(20),
+    children: iconNode(name).map(([tag, attributes]) => ({
+      type: 'element',
+      tagName: tag,
+      properties: attributes,
+      children: []
+    }))
+  }) as Element
+
 const compareOf = (names: string[], rows: Element[][]) => {
-  const things = names.slice(1)
-  const head = el(
-    'div',
-    ['ph', 'mono', 'cmp-head'],
-    things.map(name => el('span', [], [{ type: 'text', value: name }]))
-  )
-  const rowOfPoint = (cells: Element[]) =>
-    el(
-      'div',
-      ['pr'],
-      [
-        el('span', ['row-label', 'mono'], [{ type: 'text', value: label(cells[0]) }]),
-        el(
-          'div',
-          ['cmp-vals'],
-          things.map((name, index) =>
-            el(
-              'div',
-              ['cmp-val'],
-              [
-                el('span', ['cmp-thing', 'mono'], [{ type: 'text', value: name }]),
-                el('p', [], cells[index + 1]?.children ?? [])
-              ]
-            )
+  const valueOf = (key: string, index: number) => label(rows.find(cells => label(cells[0]) === key)?.[index + 1])
+  const lines = rows.filter(cells => !['icon', 'topic'].includes(label(cells[0])))
+  const card = (name: string, index: number) => {
+    const topic = valueOf('topic', index)
+    return {
+      ...el(
+        'div',
+        ['slot'],
+        [
+          el('span', ['ic'], [svg(valueOf('icon', index) || 'circle')]),
+          el(
+            'span',
+            ['tx'],
+            [
+              el('b', [], [{ type: 'text', value: name }]),
+              ...lines.map(cells => el('span', [], cells[index + 1]?.children ?? []))
+            ]
           )
-        )
-      ]
-    )
-  return el('div', ['props', 'rows', 'compare'], [head, ...rows.map(rowOfPoint)])
+        ]
+      ),
+      properties: { className: ['slot'], ...(topic ? { dataTopic: topic } : {}) }
+    }
+  }
+  return el('div', ['slots', 'parts'], names.slice(1).map(card))
 }
 
 export const rowsOf = (table: Element): Element => {
