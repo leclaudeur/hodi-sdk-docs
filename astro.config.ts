@@ -16,7 +16,8 @@ const unlisted = /^\/(?:(?:fr|en)\/(?:guide\/)?)?$|^\/v\d+\/|^\/(?:en\/)?404|\/g
 // Static pages only: nginx serves dist/ as plain files, nothing runs on the server.
 export default defineConfig({
   // The site's public address, for canonical links and the sitemap; the image's build sets it.
-  site: process.env.SITE_URL ?? 'http://localhost:4321',
+  // An empty SITE_URL (a build argument nobody set) counts as unset, or Astro refuses the empty address.
+  site: process.env.SITE_URL || 'http://localhost:4321',
   trailingSlash: 'always',
   build: { format: 'directory' },
   integrations: [sitemap({ filter: page => !unlisted.test(new URL(page).pathname) })],

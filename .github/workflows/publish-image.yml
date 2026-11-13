@@ -26,7 +26,7 @@ jobs:
           docker buildx create --use
           docker buildx build \
             --platform linux/amd64,linux/arm64 \
-            --build-arg SITE_URL="${{ vars.SITE_URL }}" \
+            --build-arg SITE_URL="${{ vars.SITE_URL || 'https://sdk.get-hodi.com' }}" \
             --tag "$IMAGE:latest" \
             --tag "$IMAGE:${{ github.sha }}" \
             --push .
