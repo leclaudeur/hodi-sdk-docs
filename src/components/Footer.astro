@@ -24,8 +24,11 @@ const links = [
     <Brand href={home} label={t(doc.lang, 'home')} reuse />
     <div class="ft-r">
       <div class="lks">
-        {links.map(link => (
-          <a href={link.href}>{link.label}</a>
+        {links.map((link, index) => (
+          <>
+            {index === 2 && <span class="br" aria-hidden="true" />}
+            <a href={link.href}>{link.label}</a>
+          </>
         ))}
       </div>
       <span class="mono end">SDK {doc.version}.x · AGPL-3.0</span>
