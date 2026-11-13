@@ -49,7 +49,7 @@ import { Hand } from 'lucide-react'
 
 ## TilesPage
 
-A choice screen in round tiles, drawn the way the "Who's reading?" screen draws profiles. Each tile has an icon, or the first letter of its text.
+A choice screen in round tiles, drawn the way the "Who's in?" screen draws profiles. Each tile has an icon, or the first letter of its text.
 
 ```tsx title="web/index.tsx" render="tilespage" kind="page" play="tilespage"
 import { TilesPage } from 'hodi:sdk'

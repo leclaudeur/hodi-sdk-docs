@@ -297,7 +297,7 @@ The object `definePlugin()` receives: one field per slot, all optional. [The slo
 | `signInExtras?` | `ComponentType<{ layout; signedIn }>` | A component under the [Sign in](/en/guide/slots/sign-in/) form. |
 | `signedOutPage?` | `ComponentType<SignedOutPageProps>` | A [page instead of Sign in](/en/guide/slots/signed-out-page/), when the device has no household. |
 | `afterSignIn?` | `ComponentType<AfterSignInProps>` | A [step right after signing in](/en/guide/slots/after-sign-in/), before entering the app. |
-| `whoIsReadingFooter?` | `ComponentType<{ layout }>` | A component [under "Who's reading?"](/en/guide/slots/who-is-reading-footer/), next to "Manage profiles". |
+| `whoIsReadingFooter?` | `ComponentType<{ layout }>` | A component [under "Who's in?"](/en/guide/slots/who-is-reading-footer/), next to "Manage profiles". |
 | `ageConsent?` | `AgeConsent` | A [text after "I am at least 13 years old"](/en/guide/slots/age-consent/). |
 | `setupSteps?` | `SetupStep[]` | The [plugin's steps in Hodi's setup](/en/guide/slots/setup/). |
 | `accountRows?` | `ComponentType<{ layout }>` | [Rows at the end of "Your account"](/en/guide/slots/account-rows/). |

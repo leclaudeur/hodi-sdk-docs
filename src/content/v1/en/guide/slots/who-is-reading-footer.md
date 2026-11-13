@@ -1,7 +1,7 @@
 ---
 title: "whoIsReadingFooter"
-description: "A button of the plugin next to \"Manage profiles\", under the profiles of \"Who's reading?\"."
-intro: "A component of the plugin under the profiles of the \"Who's reading?\" screen, next to the \"Manage profiles\" button. It is for an action on the whole household, such as \"Switch household\"."
+description: "A button of the plugin next to \"Manage profiles\", under the profiles of \"Who's in?\"."
+intro: "A component of the plugin under the profiles of the \"Who's in?\" screen, next to the \"Manage profiles\" button. It is for an action on the whole household, such as \"Switch household\"."
 order: 9
 icon: "users"
 topic: "sport"
@@ -10,7 +10,7 @@ key: "whoIsReadingFooter"
 
 ## Where in Hodi
 
-The "Who's reading?" screen opens when Hodi starts: each profile of the household has its tile there, and the "Manage profiles" button sits under the tiles. The `whoIsReadingFooter` component shows next to this button, at the same height.
+The "Who's in?" screen opens when Hodi starts: each profile of the household has its tile there, and the "Manage profiles" button sits under the tiles. The `whoIsReadingFooter` component shows next to this button, at the same height.
 
 ## Example
 
