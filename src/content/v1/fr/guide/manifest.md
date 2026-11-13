@@ -114,7 +114,7 @@ Le champ `audience` a deux valeurs possibles :
 
 Avec `"all"`, une route peut quand même adapter sa réponse à la personne qui demande : `request.who.kind` vaut `"adult"`, `"teen"` ou `"child"`.
 
-## Les réglages du plugin : `settings`
+## Les réglages : `settings`
 
 ### À quoi sert un réglage
 
@@ -228,7 +228,7 @@ La partie serveur lit les réglages avec `ctx.settings()`. Cette fonction renvoi
 
 `ctx.settings()` donne toujours la valeur du moment : quand l'admin change un réglage, l'appel suivant voit déjà la nouvelle valeur.
 
-## Les permissions du plugin : `permissions`
+## Les permissions : `permissions`
 
 ### Ce qu'est une permission
 

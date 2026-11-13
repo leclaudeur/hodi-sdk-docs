@@ -8,7 +8,7 @@ topic: "sport"
 key: "signedOutPage"
 ---
 
-## Where `signedOutPage` shows
+## Where in Hodi
 
 On a device that isn't linked to any household yet, Hodi usually opens its Sign in screen. With `signedOutPage`, Hodi opens the plugin's page instead.
 
@@ -16,7 +16,7 @@ At that moment, Hodi only loads the plugins that have the `publicRoutes` permiss
 
 Hodi's Sign in screen always stays reachable: a code's link, a new password's link and the `#/sign-in` address always open Hodi's Sign in.
 
-## A home page
+## Example
 
 This page presents the service and offers two buttons: "Sign in", which opens Hodi's Sign in, and "Create my household", which calls a public route of the plugin.
 
@@ -36,7 +36,7 @@ const Welcome = ({ showSignIn }) => (
 definePlugin({ signedOutPage: Welcome })
 ```
 
-## What Hodi gives the component of `signedOutPage`
+## Props
 
 <!-- prettier-ignore -->
 | Props | Type | |
@@ -45,7 +45,7 @@ definePlugin({ signedOutPage: Welcome })
 | `showSignIn` | `() => void` | Opens Hodi's Sign in screen. |
 | `signedIn` | `() => void` | Restarts the app, signed in, after a route that answered `signIn`. |
 
-## Good to know about `signedOutPage`
+## Good to know
 
 - **If the plugin's page crashes**: Hodi shows its own Sign in, never a blank screen.
 - **Signing someone in**: the public route answers `signIn`, see [`signInExtras`](/en/guide/slots/sign-in/).

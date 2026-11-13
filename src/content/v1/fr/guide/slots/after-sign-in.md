@@ -8,13 +8,13 @@ topic: "sport"
 key: "afterSignIn"
 ---
 
-## Où s'affiche `afterSignIn`
+## Où dans Hodi
 
 Juste après la connexion d'une personne, avant l'écran « Qui lit ? » et avant l'app. La personne ne voit cette étape qu'une fois par connexion.
 
 Si plusieurs plugins donnent un `afterSignIn`, Hodi affiche celui du premier. L'admin du serveur qui n'a pas de foyer ne voit jamais cette étape : il arrive directement dans l'espace Serveur.
 
-## Une étape « Quel foyer ? »
+## Exemple
 
 Cette étape liste les foyers de la personne. Un clic sur un foyer appelle une route du plugin, puis `done()` laisse la personne entrer dans l'app.
 
@@ -37,7 +37,7 @@ const WhichHousehold = ({ done }) => {
 definePlugin({ afterSignIn: WhichHousehold })
 ```
 
-## Ce que Hodi donne au composant de `afterSignIn`
+## Les props
 
 <!-- prettier-ignore -->
 | Props | Type | |
@@ -45,7 +45,7 @@ definePlugin({ afterSignIn: WhichHousehold })
 | `layout` | `'desktop' \| 'phone'` | La taille de l'écran. |
 | `done` | `() => void` | Termine l'étape : la personne entre dans l'app. |
 
-## À savoir sur `afterSignIn`
+## À savoir
 
 - **Si l'étape du plugin plante** : Hodi propose d'entrer quand même, la personne n'est jamais bloquée.
 - **Un rechargement de la page** : la personne revient sur l'étape, tant que `done()` n'a pas été appelé.

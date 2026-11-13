@@ -8,13 +8,13 @@ topic: "sport"
 key: "afterSignIn"
 ---
 
-## Where `afterSignIn` shows
+## Where in Hodi
 
 Right after someone signs in, before the "Who's reading?" screen and before the app. The person only sees this step once per sign-in.
 
 If several plugins give an `afterSignIn`, Hodi shows the first one's. The server admin who has no household never sees this step: they go straight to the Server space.
 
-## A "Which household?" step
+## Example
 
 This step lists the person's households. A click on a household calls a route of the plugin, then `done()` lets the person into the app.
 
@@ -37,7 +37,7 @@ const WhichHousehold = ({ done }) => {
 definePlugin({ afterSignIn: WhichHousehold })
 ```
 
-## What Hodi gives the component of `afterSignIn`
+## Props
 
 <!-- prettier-ignore -->
 | Props | Type | |
@@ -45,7 +45,7 @@ definePlugin({ afterSignIn: WhichHousehold })
 | `layout` | `'desktop' \| 'phone'` | The screen size. |
 | `done` | `() => void` | Ends the step: the person enters the app. |
 
-## Good to know about `afterSignIn`
+## Good to know
 
 - **If the plugin's step crashes**: Hodi offers to go in anyway, the person is never stuck.
 - **A page reload**: the person comes back to the step, as long as `done()` wasn't called.

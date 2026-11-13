@@ -8,7 +8,7 @@ topic: "world"
 key: "page"
 ---
 
-## Where the plugin's page shows in Settings
+## Where in Hodi
 
 In Hodi, each profile has its Settings page. The Settings page lists entries, sorted in six groups: Reading, Subjects, You, Household, This device and Hodi. Each entry opens a page.
 
@@ -19,7 +19,7 @@ Two files of the plugin take part in this entry and this page:
 - `plugin.json` says **where** to put the plugin's entry, with the `menu` field.
 - `web/index.tsx` says **what** the plugin's page shows, with the `page` key of `definePlugin`.
 
-## Choosing where to put the plugin's entry
+## Placing the entry
 
 The plugin's entry goes in one of the six groups of the Settings page. The `menu` field of `plugin.json` picks this group, with `group`. The `menu` field can also pick, with `after`, the Hodi entry the plugin's entry goes after.
 
@@ -46,7 +46,7 @@ Here are the six possible values of `group`. For each value, the group's name in
 | `device` | The "This device" group. This group holds Notifications (`notifications`) and Keyboard shortcuts (`shortcuts`). |
 | `about` | The "Hodi" group. This group holds Server (`server`) and About (`about`). |
 
-## Drawing the plugin's page
+## Drawing the page
 
 The plugin's page is a React component, written in the plugin's web part (`web/index.tsx`). The plugin gives this component to Hodi with the `page` key of `definePlugin`. Without the `page` key, the Settings page shows no entry for the plugin, even with a `menu` field in `plugin.json`.
 
@@ -80,7 +80,7 @@ definePlugin({
 
 With this example, the Settings page shows an entry for the plugin, with a notebook icon. A click on this entry opens the "My notes" page. The "My notes" page holds a card, and this card holds a "Saved notes: 12" row.
 
-## What Hodi gives the page's component
+## Props
 
 Hodi gives a single prop to the component of the plugin's page: `layout`.
 
@@ -93,7 +93,7 @@ The page's component has nothing to do with `layout` itself: passing `layout` as
 | --- | --- | --- |
 | `layout` | `'desktop' \| 'phone'` | `'desktop'` when the Settings page shows in columns, `'phone'` when it shows page by page. To pass as it is to `SectionPage`. |
 
-## The icon and the grey line of the plugin's entry
+## Icon and grey line
 
 In the list of the Settings page, each entry has an icon left of its name, and a grey line under its name. The name of the plugin's entry is always the plugin's name. The icon and the grey line of the plugin's entry are chosen with two other keys of `definePlugin`, both optional.
 
@@ -108,7 +108,7 @@ Here are the three keys of `definePlugin` used for the Settings page:
 
 `menuHint` is a component, not a plain text: the `menuHint` component can therefore read data, for example the number of notes, and show this number.
 
-## Good to know about the plugin's page in Settings
+## Good to know
 
 - **Who sees the plugin's entry**: the profiles allowed by `audience` in `plugin.json`.
 - **With `audience: "admin"`**: only the household's admin sees the plugin's entry and page.

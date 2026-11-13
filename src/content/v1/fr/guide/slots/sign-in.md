@@ -8,13 +8,13 @@ topic: "sport"
 key: "signInExtras"
 ---
 
-## Où s'affiche `signInExtras`
+## Où dans Hodi
 
 Sur l'écran de Connexion de Hodi, sous le formulaire, avant que la personne ait ouvert son profil.
 
 À ce moment, Hodi ne connaît pas encore le foyer de la personne. Hodi ne charge donc que les plugins qui ont la permission `publicRoutes`, et seulement le fichier `web/public.tsx` de ces plugins. Les cinq emplacements de connexion se déclarent dans ce fichier : `signInExtras`, `signedOutPage`, `afterSignIn`, `whoIsReadingFooter` et `ageConsent`.
 
-## Un bouton « Créer mon foyer »
+## Exemple
 
 Ce bouton appelle une route publique du plugin, qui crée un compte. Quand la route a répondu, le bouton appelle `signedIn()` : Hodi redémarre l'app, avec la personne connectée.
 
@@ -33,7 +33,7 @@ const SignUp = ({ signedIn }) => {
 definePlugin({ signInExtras: SignUp })
 ```
 
-## Ce que Hodi donne au composant de `signInExtras`
+## Les props
 
 <!-- prettier-ignore -->
 | Props | Type | |
@@ -41,7 +41,7 @@ definePlugin({ signInExtras: SignUp })
 | `layout` | `'desktop' \| 'phone'` | La taille de l'écran. |
 | `signedIn` | `() => void` | Redémarre l'app, connectée, après une route qui a répondu `signIn`. |
 
-## Connecter quelqu'un depuis une route publique
+## Connecter la personne
 
 Le plugin ne pose jamais la session lui-même. Avec la permission `signIn`, la route publique du plugin répond `signIn` avec l'id d'un compte, et Hodi connecte l'appareil à ce compte :
 
@@ -57,7 +57,7 @@ publicRoutes: {
 
 Hodi n'accepte que l'id d'un compte que cet appel vient de créer, ou dont cet appel vient de vérifier le mot de passe. Jamais l'id de l'admin du serveur.
 
-## À savoir sur `signInExtras`
+## À savoir
 
 - **Refuser une connexion** : `checkSignIn`, dans la partie serveur, à chaque connexion.
 - **Les limites** : 30 requêtes par minute par adresse, aucune venue d'un autre site.

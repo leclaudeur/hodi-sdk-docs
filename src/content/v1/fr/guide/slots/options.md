@@ -8,18 +8,18 @@ topic: "tech"
 key: "settingsPage"
 ---
 
-## Où s'affiche `settingsPage`
+## Où dans Hodi
 
 L'admin du serveur ouvre _Serveur › Plugins_, puis la page d'un plugin. Cette page montre, de haut en bas :
 
 1. Le nom du plugin, sa version et son interrupteur.
-2. « Options » : les [réglages](/fr/guide/manifest/#les-réglages-du-plugin--settings) que Hodi dessine.
+2. « Options » : les [réglages](/fr/guide/manifest/#les-réglages--settings) que Hodi dessine.
 3. La carte `settingsPage`, que le plugin dessine.
 4. Les boutons pour supprimer le plugin.
 
 Le plugin ne dessine que la carte `settingsPage`. Le reste de la page vient de Hodi.
 
-## Une carte « Dire bonjour »
+## Exemple
 
 Hello world met dans cette carte un bouton « Dire bonjour ». Un clic sur ce bouton appelle la route `/hello`, puis la carte affiche la réponse :
 
@@ -46,7 +46,7 @@ const HelloCard = () => {
 definePlugin({ settingsPage: HelloCard })
 ```
 
-## À savoir sur `settingsPage`
+## À savoir
 
 - **Ce que Hodi donne au composant** : aucune prop.
 - **Les données de la carte** : les routes du plugin, avec `usePluginApi()`.

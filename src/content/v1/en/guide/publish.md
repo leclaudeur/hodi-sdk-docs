@@ -173,7 +173,7 @@ Hodi looks at whether the file is signed, and tells the admin:
 | _Unverified code_ | The file isn't signed, or is signed by another key. | The plugin installs after one more confirmation. Its pages don't show. |
 | _Can’t be installed unsigned_ | The file isn't signed and asks for a permission kept for signed plugins. | Hodi refuses to install it. |
 
-The permissions kept for signed plugins are listed in [The manifest](/en/guide/manifest/#the-plugins-permissions-permissions).
+The permissions kept for signed plugins are listed in [The manifest](/en/guide/manifest/#permissions-permissions).
 
 ## Getting verified
 

@@ -8,7 +8,7 @@ topic: "world"
 key: "page"
 ---
 
-## Où s'affiche la page du plugin dans Réglages
+## Où dans Hodi
 
 Dans Hodi, chaque profil a sa page Réglages. La page Réglages liste des entrées, rangées en six groupes : Lecture, Sujets, Toi, Foyer, Cet appareil et Hodi. Chaque entrée ouvre une page.
 
@@ -19,7 +19,7 @@ Deux fichiers du plugin servent à cette entrée et à cette page :
 - `plugin.json` dit **où** placer l'entrée du plugin, avec le champ `menu`.
 - `web/index.tsx` dit **ce que** la page du plugin affiche, avec la clé `page` de `definePlugin`.
 
-## Choisir où placer l'entrée du plugin
+## Placer l'entrée
 
 L'entrée du plugin se range dans l'un des six groupes de la page Réglages. Le champ `menu` de `plugin.json` choisit ce groupe, avec `group`. Le champ `menu` peut aussi choisir, avec `after`, l'entrée de Hodi après laquelle l'entrée du plugin se place.
 
@@ -46,7 +46,7 @@ Voici les six valeurs possibles de `group`. Pour chaque valeur, le nom du groupe
 | `device` | Le groupe « Cet appareil ». Ce groupe contient Notifications (`notifications`) et Raccourcis clavier (`shortcuts`). |
 | `about` | Le groupe « Hodi ». Ce groupe contient Serveur (`server`) et À propos (`about`). |
 
-## Dessiner la page du plugin
+## Dessiner la page
 
 La page du plugin est un composant React, écrit dans la partie web du plugin (`web/index.tsx`). Le plugin donne ce composant à Hodi avec la clé `page` de `definePlugin`. Sans la clé `page`, la page Réglages n'affiche aucune entrée pour le plugin, même avec un champ `menu` dans `plugin.json`.
 
@@ -80,7 +80,7 @@ definePlugin({
 
 Avec cet exemple, la page Réglages affiche une entrée pour le plugin, avec une icône de carnet. Un clic sur cette entrée ouvre la page « Mes notes ». La page « Mes notes » contient une carte, et cette carte contient une ligne « Notes enregistrées : 12 ».
 
-## Ce que Hodi donne au composant de la page
+## Les props
 
 Hodi donne une seule prop au composant de la page du plugin : `layout`.
 
@@ -93,7 +93,7 @@ Le composant de la page n'a rien à faire de `layout` lui-même : il suffit de p
 | --- | --- | --- |
 | `layout` | `'desktop' \| 'phone'` | `'desktop'` quand la page Réglages s'affiche en colonnes, `'phone'` quand la page Réglages s'affiche page par page. À passer tel quel à `SectionPage`. |
 
-## L'icône et la ligne grise de l'entrée du plugin
+## L'icône et la ligne grise
 
 Dans la liste de la page Réglages, chaque entrée a une icône à gauche de son nom, et une ligne grise sous son nom. Le nom de l'entrée du plugin est toujours le nom du plugin. L'icône et la ligne grise de l'entrée du plugin se choisissent avec deux autres clés de `definePlugin`, toutes les deux facultatives.
 
@@ -108,7 +108,7 @@ Voici les trois clés de `definePlugin` qui servent à la page Réglages :
 
 `menuHint` est un composant, et pas un simple texte : le composant `menuHint` peut donc lire des données, par exemple le nombre de notes, et afficher ce nombre.
 
-## À savoir sur la page du plugin dans Réglages
+## À savoir
 
 - **Qui voit l'entrée du plugin** : les profils prévus par `audience` dans `plugin.json`.
 - **Avec `audience: "admin"`** : seul l'admin du foyer voit l'entrée du plugin et sa page.

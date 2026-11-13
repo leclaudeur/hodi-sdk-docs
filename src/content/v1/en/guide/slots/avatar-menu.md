@@ -8,11 +8,11 @@ topic: "world"
 key: "avatarMenu"
 ---
 
-## Where `avatarMenu` shows
+## Where in Hodi
 
 On a computer, the avatar's menu opens from the avatar, at the bottom of the sidebar. On a phone or a tablet, this menu's entries sit at the bottom of the profile's sheet. The plugin's `avatarMenu` entries join Hodi's entries.
 
-## A "Switch household" entry
+## Example
 
 `avatarMenu` is a list of entries, not a component: Hodi draws each entry itself.
 
@@ -32,7 +32,7 @@ definePlugin({
 })
 ```
 
-## The fields of an entry of `avatarMenu`
+## An entry's fields
 
 <!-- prettier-ignore -->
 | Field | Type | |

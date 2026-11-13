@@ -8,11 +8,11 @@ topic: "world"
 key: "accountRows"
 ---
 
-## Où s'affiche `accountRows`
+## Où dans Hodi
 
 Chaque personne a une page _Réglages › Compte et données_. La carte « Compte » de cette page montre l'e-mail et le mot de passe du compte. Les lignes `accountRows` du plugin s'ajoutent à la fin de cette carte.
 
-## Une ligne « Google »
+## Exemple
 
 ```tsx title="web/index.tsx"
 import { SettingRow, definePlugin } from 'hodi:sdk'
@@ -22,14 +22,14 @@ const GoogleRow = () => <SettingRow label="Google" value="anna@gmail.com" />
 definePlugin({ accountRows: GoogleRow })
 ```
 
-## Ce que Hodi donne au composant de `accountRows`
+## Les props
 
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
 | `layout` | `'desktop' \| 'phone'` | La taille de l'écran. |
 
-## À savoir sur `accountRows`
+## À savoir
 
 - **Le dessin des lignes** : des `SettingRow`, comme les lignes de Hodi dans la même carte.
 - **Qui voit les lignes** : chaque personne, sur la page de son propre compte.

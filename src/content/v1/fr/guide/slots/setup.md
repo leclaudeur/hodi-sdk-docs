@@ -8,11 +8,11 @@ topic: "travel"
 key: "setupSteps"
 ---
 
-## Où s'affiche `setupSteps`
+## Où dans Hodi
 
 La mise en route de Hodi est l'assistant qui s'ouvre au premier démarrage. L'assistant enchaîne des étapes. L'une de ces étapes, « Plugins trouvés », liste les plugins présents et propose de les activer. Les étapes des plugins activés viennent juste après, avant « Le serveur est prêt ».
 
-## Une étape « Nom du site »
+## Exemple
 
 Cette étape demande le nom du site, l'enregistre, puis passe à l'étape suivante avec `next()` :
 
@@ -49,7 +49,7 @@ definePlugin({
 })
 ```
 
-## Les champs d'une étape de `setupSteps`
+## Les champs d'une étape
 
 `setupSteps` est une liste. Chaque étape de la liste a quatre champs :
 
@@ -61,7 +61,7 @@ definePlugin({
 | `intro` | `string` | La ligne sous le titre, une clé des `locales`. |
 | `page` | `ComponentType<{ next, layout }>` | Le contenu de l'étape. |
 
-## Ce que Hodi donne au composant de l'étape
+## Les props
 
 <!-- prettier-ignore -->
 | Props | Type | |
@@ -69,12 +69,12 @@ definePlugin({
 | `next` | `() => void` | Passe à l'étape suivante, une fois les valeurs de l'étape enregistrées. |
 | `layout` | `'desktop' \| 'phone'` | La taille de l'écran. |
 
-## Ce que Hodi dessine, et ce que le plugin dessine
+## Qui dessine quoi
 
 - **Hodi** dessine la carte, le titre, la ligne sous le titre, la numérotation et « Retour ».
 - **Le plugin** dessine le milieu, et termine par `SetupActions`, qui affiche « Continuer ».
 
-## À savoir sur `setupSteps`
+## À savoir
 
 - **Qui voit les étapes** : l'admin, si le plugin est activé à l'étape « Plugins trouvés ».
 - **Une étape de Hodi** : `{ id: 'mail', core: 'mail' }` ajoute le formulaire de _Serveur › E-mail_.

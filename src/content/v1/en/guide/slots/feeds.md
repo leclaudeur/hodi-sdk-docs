@@ -8,13 +8,13 @@ topic: "climate"
 key: "plugin.json › feeds"
 ---
 
-## Where `feeds` shows
+## Where in Hodi
 
 A feed of articles of the plugin shows in _Settings › Sources_, among the suggested sources, in the topic the feed gives. Once the household follows the feed, the feed's articles arrive in the household's stream, with those of the other sources.
 
 A feed needs no web part: everything happens in `plugin.json` and in the server part. For that reason, `feeds` isn't a key of `definePlugin()`, but a field of `plugin.json`.
 
-## Declaring a feed in `plugin.json`
+## Declaring the feed
 
 In `plugin.json`, the `feeds` field lists the plugin's feeds. The `network` permission lists the sites the plugin reads:
 
@@ -46,7 +46,7 @@ Here are the fields of a feed of `feeds`:
 | `lang` | `'fr' \| 'en'` | The language of the feed's articles. |
 | `topic` | `string` | The topic the feed goes under, such as `tech`, `world` or `climate`. |
 
-## Filling a feed in the server part
+## Filling the feed
 
 In the server part, `feeds` gives one function per feed, with the same key as in `plugin.json`. This function returns the list of the feed's articles:
 
@@ -65,7 +65,7 @@ const plugin: ServerPlugin = {
 }
 ```
 
-## The fields of an article of the feed
+## An article's fields
 
 <!-- prettier-ignore -->
 | Field | Type | |
@@ -76,7 +76,7 @@ const plugin: ServerPlugin = {
 | `publishedAt?` | `string \| number` | The article's date, ISO or in milliseconds. |
 | `image?` | `string` | The `https` address of the article's image. |
 
-## Good to know about `feeds`
+## Good to know
 
 - **When Hodi reads a feed**: every few minutes, as long as a household follows this feed.
 - **How many articles**: 100 articles per read at most, and 5 feeds per plugin at most.

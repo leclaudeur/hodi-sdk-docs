@@ -8,11 +8,11 @@ topic: "sport"
 key: "whoIsReadingFooter"
 ---
 
-## Où s'affiche `whoIsReadingFooter`
+## Où dans Hodi
 
 L'écran « Qui lit ? » s'ouvre quand Hodi démarre : chaque profil du foyer y a sa vignette, et le bouton « Gérer les profils » se trouve sous les vignettes. Le composant `whoIsReadingFooter` s'affiche à côté de ce bouton, à la même hauteur.
 
-## Un bouton « Changer de foyer »
+## Exemple
 
 ```tsx title="web/public.tsx"
 import { Button, definePlugin } from 'hodi:sdk'
@@ -24,14 +24,14 @@ const SwitchHousehold = () => (
 definePlugin({ whoIsReadingFooter: SwitchHousehold })
 ```
 
-## Ce que Hodi donne au composant de `whoIsReadingFooter`
+## Les props
 
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
 | `layout` | `'desktop' \| 'phone'` | La taille de l'écran. |
 
-## À savoir sur `whoIsReadingFooter`
+## À savoir
 
 - **Le dessin** : un `Button`, à la hauteur de « Gérer les profils ».
 - **Plusieurs plugins** : chaque plugin ajoute son composant, dans l'ordre des plugins.

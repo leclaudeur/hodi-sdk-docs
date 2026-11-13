@@ -8,13 +8,13 @@ topic: "sport"
 key: "ageConsent"
 ---
 
-## Où s'affiche `ageConsent`
+## Où dans Hodi
 
 Quand une personne crée son compte, Hodi lui demande de cocher « J'ai au moins 13 ans ». Le texte `ageConsent` continue la phrase de cette case, après une espace : « J'ai au moins 13 ans et j'accepte les conditions d'utilisation ».
 
 `ageConsent` n'est pas un composant : c'est un texte. Hodi le dessine lui-même, dans la phrase de la case.
 
-## Un texte avec un lien
+## Exemple
 
 Le texte est une clé des `locales` du plugin. Une balise comme `<terms>` dans ce texte devient un lien vers l'adresse donnée dans `links`, ouvert dans un nouvel onglet.
 
@@ -37,7 +37,7 @@ definePlugin({
 
 Sans lien, `ageConsent` peut aussi être la clé seule : `ageConsent: 'consent'`.
 
-## Les champs de `ageConsent`
+## Les champs
 
 <!-- prettier-ignore -->
 | Champs | Type | |

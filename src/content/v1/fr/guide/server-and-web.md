@@ -116,7 +116,7 @@ Pour tout le reste, la partie serveur passe par `ctx`, le contexte que Hodi donn
 | Poser une question à l'IA du foyer | Avec `ctx.ai.ask()`. Il faut la permission `ai`. |
 | Écrire une ligne dans le journal | Avec `ctx.log()`, pour suivre ce que fait le plugin. |
 
-Hodi vérifie chaque appel : le plugin n'obtient que ce que ses [permissions](/fr/guide/manifest/#les-permissions-du-plugin--permissions) lui ouvrent. [Le contexte serveur](/fr/guide/server-context/) décrit tout ce que `ctx` contient.
+Hodi vérifie chaque appel : le plugin n'obtient que ce que ses [permissions](/fr/guide/manifest/#les-permissions--permissions) lui ouvrent. [Le contexte serveur](/fr/guide/server-context/) décrit tout ce que `ctx` contient.
 
 ### Les paquets npm dans la partie serveur
 
@@ -213,7 +213,7 @@ La partie web tourne dans la page de Hodi, avec la session de la personne connec
 
 Un plugin non signé s'installe quand même, mais sans sa partie web. [Publier](/fr/guide/publish/#être-vérifié) explique comment faire signer un plugin.
 
-## Comment la partie web appelle la partie serveur
+## Appeler la partie serveur
 
 La partie web appelle une route de la partie serveur par le chemin de cette route, avec `usePluginApi()`. Hodi se place au milieu : Hodi vérifie qui demande, puis passe la requête à la partie serveur.
 
@@ -267,7 +267,7 @@ const { t } = usePluginTranslation()
 <Button onClick={sayHello}>{t('say')}</Button>
 ```
 
-## Ce qu'il faut pour écrire un plugin
+## Avant de commencer
 
 Avant d'écrire un plugin, quatre choses sont à préparer :
 

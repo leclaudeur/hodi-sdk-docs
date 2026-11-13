@@ -114,7 +114,7 @@ The `audience` field has two possible values:
 
 With `"all"`, a route can still adapt its answer to the person asking: `request.who.kind` is `"adult"`, `"teen"` or `"child"`.
 
-## The plugin's settings: `settings`
+## Settings: `settings`
 
 ### What a setting is for
 
@@ -228,7 +228,7 @@ The server part reads the settings with `ctx.settings()`. This function returns 
 
 `ctx.settings()` always gives the value of the moment: when the admin changes a setting, the next call already sees the new value.
 
-## The plugin's permissions: `permissions`
+## Permissions: `permissions`
 
 ### What a permission is
 

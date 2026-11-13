@@ -13,7 +13,7 @@ Hodi garde la main sur ses propres écrans. Un plugin ne peut pas modifier une p
 
 Pour chaque emplacement, le plugin donne un composant React. Hodi affiche ce composant au bon endroit, au bon moment, et seulement pour les bonnes personnes.
 
-## Déclarer les emplacements avec `definePlugin()`
+## Déclarer un emplacement
 
 La partie web appelle `definePlugin()` une seule fois, dans `web/index.tsx`. `definePlugin()` reçoit un objet : chaque clé de cet objet est le nom d'un emplacement, et la valeur de la clé est ce que le plugin affiche dans cet emplacement.
 
