@@ -1,7 +1,7 @@
 ---
 title: "Hooks"
-description: "Your plugin's texts, its routes, its links and the server's settings."
-intro: "These hooks know which plugin calls them: they only work in its components."
+description: "The plugin's texts, its routes, its links and the server's settings."
+intro: "The hooks of `hodi:sdk` give a plugin's component its texts, its routes, its links and the server's settings. Each hook knows which plugin calls it: it only works in that plugin's components."
 order: 2
 icon: "anchor"
 topic: "science"
@@ -9,7 +9,7 @@ topic: "science"
 
 ## usePluginTranslation()
 
-Your plugin's texts, in the person's language, from `locales/`. Never Hodi's.
+This hook gives the plugin's texts, in the person's language. It reads them in the plugin's `locales/` files, never in Hodi's.
 
 ```tsx title="web/index.tsx"
 import { usePluginTranslation } from 'hodi:sdk'
@@ -21,12 +21,12 @@ t('greeting', { name: 'Anna' })
 <!-- prettier-ignore -->
 | Returns | Type | |
 | --- | --- | --- |
-| `t` | `(key: string, options?) => string` | A key's text, with its variables. |
+| `t` | `(key: string, options?) => string` | Returns a key's text. `options` fills its variables, such as `{{name}}`. |
 | `language` | `'fr' \| 'en'` | The person's language. |
 
 ## usePluginApi()
 
-A request to your `routes`: `api('/hello')` requests `/api/plugins/<id>/hello`. Its two siblings do the same for your other route tables, see [the server context](/en/guide/server-context/).
+This hook returns a function that calls the plugin's `routes`. `api('/hello')` requests `/api/plugins/<id>/hello`: the plugin never writes the whole address. Two other hooks do the same for the two other kinds of routes, which [the server context](/en/guide/server-context/#three-kinds-of-routes) explains.
 
 ```tsx title="web/index.tsx"
 import { usePluginApi, usePluginPublicApi, usePluginServerApi } from 'hodi:sdk'
@@ -39,15 +39,15 @@ const { greeting } = await answer.json()
 <!-- prettier-ignore -->
 | Hooks | Type | |
 | --- | --- | --- |
-| `usePluginApi()` | `(path, init?) => Promise<Response>` | Your `routes`. |
-| `usePluginServerApi()` | `(path, init?) => Promise<Response>` | Your `serverRoutes`, for the server admin only. |
-| `usePluginPublicApi()` | `(path, init?) => Promise<Response>` | Your `publicRoutes`, before anyone signs in. |
+| `usePluginApi()` | `(path, init?) => Promise<Response>` | Calls the plugin's `routes`, for the household's profiles. |
+| `usePluginServerApi()` | `(path, init?) => Promise<Response>` | Calls the plugin's `serverRoutes`. Only the server's admin can call them. |
+| `usePluginPublicApi()` | `(path, init?) => Promise<Response>` | Calls the plugin's `publicRoutes`, even before any sign-in. |
 
-`init` is `fetch`'s, plus `proof`: the password `askToConfirm` received.
+The returned function takes the same options as `fetch`, plus one: `proof`, the proof `askToConfirm()` received when the person typed their password again. A route marked `proof: true` only runs with it.
 
 ## usePluginLinks()
 
-The addresses of Hodi and of your screens. A plugin never writes them: they follow Hodi.
+This hook gives the addresses of Hodi's and the plugin's screens. A plugin never writes them by hand: they stay right even when Hodi changes its addresses.
 
 ```tsx title="web/index.tsx"
 import { Button, navigate, usePluginLinks } from 'hodi:sdk'
@@ -60,18 +60,18 @@ const links = usePluginLinks()
 <!-- prettier-ignore -->
 | Returns | Type | |
 | --- | --- | --- |
-| `frontPage` | `string` | The front page. |
-| `article` | `(id: string) => string` | An article, in the reader. |
-| `settings` | `string` | Settings. |
-| `plugins` | `string` | Your page in Server › Plugins, for the server admin. |
-| `page` | `(path?: string) => string` | Your page, or one of its screens. |
-| `serverPage` | `(section: string, path?: string) => string` | One of your Server sections, or one of its screens. |
+| `frontPage` | `string` | The front page's address. |
+| `article` | `(id: string) => string` | The address of an article in the reader, by its id. |
+| `settings` | `string` | The address of Settings. |
+| `plugins` | `string` | The address of the plugin's page in _Server › Plugins_. Only the server's admin can open it. |
+| `page` | `(path?: string) => string` | The address of the plugin's page in Settings, or of one of its screens with `path`. |
+| `serverPage` | `(section: string, path?: string) => string` | The address of one of the plugin's sections in the Server space, or of one of its screens with `path`. |
 
-`navigate(href)` goes there, like a link, from a button or after an action.
+To go to one of these addresses from code, after an action for example, `navigate(href)` does the same as a click on a link.
 
 ## usePluginPath()
 
-The screen your page shows: what follows its address, `''` at its root.
+This hook says which screen the plugin's page should show. It returns what follows the page's address: `''` at its root, `'week/3'` for the address `links.page('week/3')` gives.
 
 ```tsx title="web/index.tsx"
 import { usePluginPath } from 'hodi:sdk'
@@ -83,11 +83,11 @@ return path.startsWith('week/') ? <Week n={Number(path.slice(5))} /> : <Home />
 <!-- prettier-ignore -->
 | Returns | Type | |
 | --- | --- | --- |
-| `path` | `string` | What follows your page's address. |
+| `path` | `string` | What follows the address of the plugin's page, or `''` at its root. |
 
 ## useServerSettings()
 
-What Server › Content and Backups promise, read only: the numbers your legal pages state. null until the server has answered.
+This hook gives the durations and limits the admin chose in _Server › Content_ and _Backups_, read-only. A plugin uses it to write the real figures, in its legal pages for example. It is `null` until the server has answered.
 
 ```tsx title="web/index.tsx"
 import { useServerSettings } from 'hodi:sdk'
@@ -99,8 +99,8 @@ settings && t('privacy.kept', { days: settings.articleDays })
 <!-- prettier-ignore -->
 | Returns | Type | |
 | --- | --- | --- |
-| `articleDays` | `number` | The days an article is kept. |
-| `videoDays` | `number` | The days a video is kept. |
-| `textDays` | `number` | The days a read text is kept. |
-| `backupCopies` | `number` | The copies of the database kept each night. |
-| `maxSources` | `number \| null` | The sources a household can follow, null for no limit. |
+| `articleDays` | `number` | The number of days Hodi keeps an article. |
+| `videoDays` | `number` | The number of days Hodi keeps a video. |
+| `textDays` | `number` | The number of days Hodi keeps the text of an article read. |
+| `backupCopies` | `number` | The number of database copies Hodi keeps, one per night. |
+| `maxSources` | `number \| null` | The number of sources a household can follow, or `null` when there is no limit. |
