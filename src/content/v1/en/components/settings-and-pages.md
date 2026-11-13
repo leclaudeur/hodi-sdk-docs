@@ -1,7 +1,7 @@
 ---
 title: "Settings and pages"
 description: "A settings page, its cards, its rows, the end of a long list and the Overview cards."
-intro: "The pages of the [Settings](/en/guide/slots/settings/) and [Server](/en/guide/slots/server/) slots are built with these components."
+intro: "The pages of the [`page`](/en/guide/slots/settings/) and [`serverSections`](/en/guide/slots/server/) slots are built with these components."
 order: 2
 icon: "settings"
 topic: "world"
@@ -125,7 +125,7 @@ import { MoreRow, SettingRow, SettingsCard } from 'hodi:sdk'
 
 ## OverviewCard
 
-An [Overview](/en/guide/slots/overview/) card: its title, a number, a chip at the end, then your content.
+A card of [`overviewCards`](/en/guide/slots/overview/): its title, a number, a chip at the end, then your content.
 
 ```tsx title="web/index.tsx" render="overviewcard" play="overviewcard"
 import { Chip, OverviewCard } from 'hodi:sdk'

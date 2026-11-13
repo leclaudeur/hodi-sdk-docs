@@ -1,5 +1,5 @@
 ---
-title: "Serveur"
+title: "serverSections"
 description: "Un groupe de sections dans l'espace Serveur, pour ce que seul l'admin du serveur doit voir et gérer."
 intro: "Un groupe de sections dans l'espace Serveur, au nom du plugin. Il sert à ce que seul l'admin du serveur doit voir et gérer : une liste de comptes, des inscriptions en attente, des statistiques…"
 order: 3
@@ -8,13 +8,13 @@ topic: "science"
 key: "serverSections"
 ---
 
-## Où elles s'affichent
+## Où s'affiche `serverSections`
 
-L'espace Serveur a sa propre sidebar, avec les groupes de Hodi (Général, Plugins…). Le plugin y ajoute un groupe à son nom, sous ceux de Hodi. Chaque section de ce groupe est une entrée de la sidebar, qui ouvre sa page.
+L'espace Serveur a sa propre sidebar, avec les groupes de Hodi : Général, Plugins… Le plugin ajoute à cette sidebar un groupe au nom du plugin, sous les groupes de Hodi. Chaque section de ce groupe est une entrée de la sidebar, qui ouvre la page de la section.
 
 Chaque section a sa propre adresse : `#/server/plugin/<id du plugin>/<id de la section>`.
 
-## Exemple
+## Une section « Bonjours »
 
 ```tsx title="web/index.tsx"
 import { SectionPage, definePlugin } from 'hodi:sdk'
@@ -38,21 +38,23 @@ definePlugin({
 })
 ```
 
-## Une section
+## Les champs d'une section de `serverSections`
+
+`serverSections` est une liste. Chaque section de la liste a ces champs :
 
 <!-- prettier-ignore -->
 | Champ | Type | |
 | --- | --- | --- |
-| `id` | `string` | Son nom dans l'adresse : lettres minuscules, chiffres et tirets, une seule fois par plugin. |
-| `label` | `string` | Une clé de ses `locales`, comme `server.said` : son nom dans la sidebar. |
-| `page` | `ComponentType<{ layout }>` | Sa page, dessinée avec `SectionPage`. |
-| `icon?` | `ComponentType` | Une icône Lucide. Une pièce de puzzle sans elle. |
-| `hint?` | `ComponentType` | La ligne sous son nom, sur téléphone, comme « 12 personnes ». |
+| `id` | `string` | Le nom de la section dans l'adresse : minuscules, chiffres et tirets, une fois par plugin. |
+| `label` | `string` | Le nom de la section dans la sidebar, une clé des `locales`, comme `server.said`. |
+| `page` | `ComponentType<{ layout }>` | La page de la section, dessinée avec `SectionPage`. |
+| `icon?` | `ComponentType` | Une icône Lucide. Sans icône, Hodi affiche une pièce de puzzle. |
+| `hint?` | `ComponentType` | La ligne sous le nom de la section, sur téléphone, comme « 12 personnes ». |
 
-## À savoir
+## À savoir sur `serverSections`
 
-- **Qui les voit** : l'admin du serveur seulement.
-- **Ses routes** : les `serverRoutes`, appelées avec `usePluginServerApi()`.
-- **Une section invalide** : sans `id` valide, ou avec un `id` déjà pris, elle n'est pas affichée.
+- **Qui voit les sections** : l'admin du serveur seulement.
+- **Les routes des sections** : les `serverRoutes`, appelées avec `usePluginServerApi()`.
+- **Une section invalide** : sans `id` valide, ou avec un `id` déjà pris, Hodi ne l'affiche pas.
 
 Les `serverRoutes` refusent toute personne autre que l'admin du serveur.

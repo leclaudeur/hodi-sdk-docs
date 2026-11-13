@@ -1,5 +1,5 @@
 ---
-title: "Reader"
+title: "readerAction"
 description: "A button under an open article, next to \"Read the original\", so the plugin can act on that article."
 intro: "A button under an open article, next to \"Read the original\". It is for doing something with that very article: report it, send it somewhere, rate it…"
 order: 5
@@ -8,13 +8,13 @@ topic: "culture"
 key: "readerAction"
 ---
 
-## Where it shows
+## Where `readerAction` shows
 
-When someone opens an article in Hodi's reader, a row of buttons follows the text, with "Read the original". The plugin's button joins it.
+When someone opens an article in Hodi's reader, a row of buttons follows the article's text, with "Read the original". The plugin's button joins this row.
 
-## Example
+## A "Report" button
 
-This button reports the article to the plugin's server part:
+This button sends the article's id to a route of the plugin:
 
 ```tsx title="web/index.tsx"
 import { ReaderButton, definePlugin, usePluginApi } from 'hodi:sdk'
@@ -33,20 +33,22 @@ const Report = ({ article }) => {
 definePlugin({ readerAction: Report })
 ```
 
-## What it receives
+## What Hodi gives the component of `readerAction`
+
+Hodi gives the component a single prop, `article`: the open article. Here are the fields of `article`:
 
 <!-- prettier-ignore -->
 | Props | Type | |
 | --- | --- | --- |
 | `article.id` | `string` | The article's id in Hodi. |
-| `article.title` | `string` | Its title. |
-| `article.url` | `string` | Its address on the original site. |
-| `article.sourceId` | `string` | Its source's id. |
-| `article.sourceName` | `string` | Its source's name, such as "The Guardian". |
+| `article.title` | `string` | The article's title. |
+| `article.url` | `string` | The article's address on the original site. |
+| `article.sourceId` | `string` | The id of the article's source. |
+| `article.sourceName` | `string` | The source's name, such as "The Guardian". |
 
-## On the server
+## Finding the article again in the server part
 
-The route receives the article's id, never an address to open. With the `articles` permission, it finds the article in Hodi:
+The plugin's route receives the article's id, never an address to open. With the `articles` permission, the route finds the article again in Hodi:
 
 ```tsx title="server/index.ts"
 'POST /report': async (request, ctx) => {
@@ -61,7 +63,7 @@ The route receives the article's id, never an address to open. With the `article
 
 So a plugin can't use the reader to open any address it likes.
 
-## Good to know
+## Good to know about `readerAction`
 
-- **How it looks**: a `ReaderButton`, like Hodi's buttons in the same place.
-- **Who sees it**: the profiles in `audience`.
+- **How the button is drawn**: a `ReaderButton`, like Hodi's buttons in the same place.
+- **Who sees the button**: the profiles allowed by `audience`.

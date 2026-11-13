@@ -1,7 +1,7 @@
 ---
 title: "Pages d'étapes"
 description: "Les pages de l'installation et de « J'ai un code » : une étape, des tuiles, les boutons."
-intro: "Pour les emplacements [Connexion](/fr/guide/slots/sign-in/) et [Installation](/fr/guide/slots/setup/) : ces pages ont le logo en haut, la licence en bas et la carte au centre, comme celles de Hodi."
+intro: "Pour les emplacements [`signInExtras`](/fr/guide/slots/sign-in/), [`afterSignIn`](/fr/guide/slots/after-sign-in/) et [`setupSteps`](/fr/guide/slots/setup/) : ces pages ont le logo en haut, la licence en bas et la carte au centre, comme celles de Hodi."
 order: 3
 icon: "list-checks"
 topic: "climate"
@@ -76,7 +76,7 @@ import { TilesPage } from 'hodi:sdk'
 
 ## SetupActions
 
-Les boutons au bas d'une étape qu'un plugin ajoute à [l’installation](/fr/guide/slots/setup/). Hodi y met « Retour » à gauche, ceux du plugin vont à droite.
+Les boutons au bas d'une étape qu'un plugin ajoute à la mise en route, avec [`setupSteps`](/fr/guide/slots/setup/). Hodi y met « Retour » à gauche, ceux du plugin vont à droite.
 
 ```tsx title="web/index.tsx" render="setupactions" play="setupactions"
 import { Button, SetupActions } from 'hodi:sdk'

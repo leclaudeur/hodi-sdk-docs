@@ -1,5 +1,5 @@
 ---
-title: "Réglages"
+title: "page"
 description: "Une page du plugin dans Réglages, pour ce que chaque profil du foyer règle ou consulte lui-même."
 intro: "Un plugin peut ajouter sa propre entrée dans la page Réglages de Hodi. Cette entrée ouvre une page que le plugin dessine lui-même. Le plugin y met ce que chaque profil du foyer règle ou consulte pour lui-même : ses notes, ses statistiques, ses préférences pour le plugin."
 order: 2

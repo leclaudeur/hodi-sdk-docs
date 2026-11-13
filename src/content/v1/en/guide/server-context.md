@@ -211,13 +211,13 @@ On the web side, `askToConfirm()` opens Hodi's window that asks for the password
 | | |
 | --- | --- |
 | `ctx.db` | Its database, with `query`, `get` and `run`. |
-| `ctx.settings()` | Its [settings](/en/guide/manifest/#settings), with their current value. |
+| `ctx.settings()` | Its [settings](/en/guide/manifest/#the-plugins-settings-settings), with their current value. |
 | `ctx.log(message)` | A line in Hodi's log, which `hodi-plugin dev` shows too. |
 | `ctx.serverSettings()` | How many days Hodi keeps an article, a video and a backup copy. |
 
 ### With a permission
 
-Each of these functions only works if the plugin has the [permission](/en/guide/manifest/#permissions) shown. Otherwise, Hodi refuses the call.
+Each of these functions only works if the plugin has the [permission](/en/guide/manifest/#the-plugins-permissions-permissions) shown. Otherwise, Hodi refuses the call.
 
 <!-- prettier-ignore -->
 | Function | What it does |
@@ -289,7 +289,7 @@ A task runs for no household and no person. So `ctx` refuses there what needs on
 
 - **`onArticle`**: called for each new article Hodi reads on a site, with that article.
 - **`feeds`**: provides the articles of the plugin's [feeds](/en/guide/slots/feeds/), read every few minutes.
-- **`checkSignIn`**: called at each [sign-in](/en/guide/slots/sign-in/), it can refuse it.
+- **`checkSignIn`**: called at each sign-in (see [`signInExtras`](/en/guide/slots/sign-in/)), it can refuse it.
 
 ## People's data
 

@@ -96,7 +96,7 @@ import { AiButton } from 'hodi:sdk'
 
 ## ReaderButton
 
-Un bouton au bout d'un article, à côté de « Lire l'original ». C'est ce que dessine [le lecteur](/fr/guide/slots/reader/).
+Un bouton au bout d'un article, à côté de « Lire l'original ». C'est le bouton de l'emplacement [`readerAction`](/fr/guide/slots/reader/).
 
 ```tsx title="web/index.tsx" render="readerbutton" play="readerbutton"
 import { ReaderButton } from 'hodi:sdk'

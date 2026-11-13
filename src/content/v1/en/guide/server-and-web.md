@@ -6,9 +6,11 @@ order: 1
 icon: "layers"
 ---
 
-## In short
+## The two parts of a plugin
 
-The simplest way is to start from an example: the "Hello world" plugin of [Getting started](/en/getting-started/). It adds a "Say hello" button. A click on this button asks the server for a message, and the button shows the answer.
+The simplest way is to start from an example: the "Hello world" plugin of [Getting started](/en/getting-started/). This plugin adds a "Say hello" button in _Server › Plugins_. A click on this button asks the server for a message, then the button shows the server's answer.
+
+Here is who does what in this plugin:
 
 - **The web part** draws the button. It is the `web/index.tsx` file.
 - **The server part** makes the message. It is the `server/index.ts` file.
@@ -27,7 +29,7 @@ The simplest way is to start from an example: the "Hello world" plugin of [Getti
 
 ## A plugin's files
 
-A plugin is a folder. The simplest way to start is to copy the [plugin template](https://github.com/leclaudeur/hodi-plugin-template). It already has all these files, the SDK, tests and a CI, and it works as it is.
+A plugin is a folder. The simplest way to start is to copy the [plugin template](https://github.com/leclaudeur/hodi-plugin-template). This template already has all the files below, the SDK, tests and a CI, and this template works as it is.
 
 ```text title="hello-world/"
 plugin.json        the plugin's identity card
@@ -40,17 +42,17 @@ assets/            the images, copied as they are
 test/              the tests
 ```
 
-Only `plugin.json` is required. It gives the plugin's name, its version, its settings and its permissions. [The manifest](/en/guide/manifest/) describes it field by field.
+Only `plugin.json` is required. This file gives the plugin's name, its version, its settings and its permissions. [The manifest](/en/guide/manifest/) describes `plugin.json` field by field.
 
 ## From the folder to an installable file
 
-Hodi doesn't install a folder, but a single `.hodi-plugin` file. This command makes it, from the plugin's folder:
+Hodi doesn't install a folder, but a single `.hodi-plugin` file. This command makes the `.hodi-plugin` file, from the plugin's folder:
 
 ```sh title="Terminal"
 npx hodi-plugin build
 ```
 
-Here is what each file becomes:
+Here is what each file of the folder becomes in the `.hodi-plugin` file:
 
 <!-- prettier-ignore -->
 | In the folder | In the `.hodi-plugin` file |
@@ -62,13 +64,13 @@ Here is what each file becomes:
 | `locales/` | The folder is copied as it is, with the texts of each language. |
 | `assets/` | The folder is copied as it is, with the images and the other files. |
 
-The file lands in `dist/`, for example `dist/hello-world-0.1.0.hodi-plugin`. [Publish](/en/guide/publish/) explains how to test it, install it and have it signed.
+The file lands in `dist/`, for example `dist/hello-world-0.1.0.hodi-plugin`. [Publish](/en/guide/publish/) explains how to test this file, install it and have it signed.
 
 ## The server part
 
-### What it does
+### What the server part does
 
-The server part is the plugin's code that runs on the server. It is for three things:
+The server part is the plugin's code that runs on Hodi's server, never in the browser. The server part is for three things:
 
 - **answering the web part**, with routes;
 - **keeping data**, in an SQLite database of its own;
@@ -91,11 +93,11 @@ const plugin: ServerPlugin = {
 export default plugin
 ```
 
-This code declares a single route, `POST /hello`. When the web part calls it, the route reads the `greeting` setting and answers `{ "text": "Hello" }`.
+This code declares a single route, `POST /hello`. When the web part calls this route, the route reads the `greeting` setting and answers `{ "text": "Hello" }`.
 
-### The sandbox
+### The server part's sandbox
 
-A plugin's code can come from anyone. So Hodi doesn't run it with its own code, but in a **sandbox**: a separate JavaScript engine, QuickJS, isolated from the rest of Hodi.
+A plugin's code can come from anyone. So Hodi doesn't run a plugin's code with its own code, but in a **sandbox**: a separate JavaScript engine, QuickJS, isolated from the rest of Hodi.
 
 In this sandbox, only standard JavaScript exists: `JSON`, `Math`, `Date`, promises, classes… Node.js's modules aren't there:
 
@@ -103,7 +105,7 @@ In this sandbox, only standard JavaScript exists: `JSON`, `Math`, `Date`, promis
 - no `fetch`, so no calling a site directly;
 - no `process`, nor `require`.
 
-For everything else, the server part goes through `ctx`, the context Hodi gives each route. A few examples:
+For everything else, the server part goes through `ctx`, the context Hodi gives each route. Here is, for five common needs, the function of `ctx` to use:
 
 <!-- prettier-ignore -->
 | What the plugin wants to do | How to do it with `ctx` |
@@ -114,13 +116,13 @@ For everything else, the server part goes through `ctx`, the context Hodi gives 
 | Ask the household's AI a question | With `ctx.ai.ask()`. It needs the `ai` permission. |
 | Write a line in the log | With `ctx.log()`, to follow what the plugin does. |
 
-Hodi checks each call: the plugin only gets what its [permissions](/en/guide/manifest/#permissions) open to it. [The server context](/en/guide/server-context/) describes everything `ctx` holds.
+Hodi checks each call: the plugin only gets what its [permissions](/en/guide/manifest/#the-plugins-permissions-permissions) open to it. [The server context](/en/guide/server-context/) describes everything `ctx` holds.
 
-### npm packages
+### npm packages in the server part
 
-The server part can import npm packages. During the build, their code is copied into `server.js`. So the sandbox has nothing to download.
+The server part can import npm packages. During the plugin's build, the code of these packages is copied into `server.js`. So the sandbox has nothing to download.
 
-This only works for a package written in standard JavaScript. A package that needs Node.js crashes at its first call, because Node.js doesn't exist in the sandbox.
+An npm package only works in the sandbox if it is written in standard JavaScript. A package that needs Node.js crashes at its first call, because Node.js doesn't exist in the sandbox. Here are four known packages, and why each one works or not:
 
 <!-- prettier-ignore -->
 | Package | Does it work? |
@@ -130,11 +132,11 @@ This only works for a package written in standard JavaScript. A package that nee
 | `sharp` | No. It resizes images with Node.js native code. |
 | `pg` | No. It opens a network connection to PostgreSQL. |
 
-When in doubt, `npm test` answers quickly: the tests run the plugin in the same sandbox as Hodi.
+When in doubt about a package, `npm test` answers quickly: the tests run the plugin in the same sandbox as Hodi.
 
-### Its limits
+### The sandbox's limits
 
-A plugin must not be able to slow Hodi down. So the sandbox has limits:
+A plugin must never slow Hodi down. So the sandbox sets limits on the server part. Here is each limit, and what happens when the server part goes beyond it:
 
 <!-- prettier-ignore -->
 | Limit | What happens |
@@ -146,17 +148,17 @@ A plugin must not be able to slow Hodi down. So the sandbox has limits:
 | Calls waiting | 8 calls can wait behind the one running. Beyond that, Hodi answers `busy` without waiting. |
 | Crashes | After 3 crashes in 10 minutes, the plugin stops until Hodi's next start. |
 
-The sandbox falls asleep after a minute without a call, and wakes up at the next one. When it falls asleep, it forgets everything that was in memory. So a global variable doesn't keep its value from one call to the next: what must last goes in the database, with `ctx.db`.
+The sandbox falls asleep after a minute without a call, and wakes up at the next call. When it falls asleep, the sandbox forgets everything that was in memory. So a global variable doesn't keep its value from one call to the next: what must last goes in the database, with `ctx.db`.
 
 ## The web part
 
-### What it does
+### What the web part does
 
-The web part is the plugin's code that runs in the browser. It draws what the person sees: a page in Settings, a card, a button under an article…
+The web part is the plugin's code that runs in the browser, in Hodi's pages. The web part draws what the person sees: a page in Settings, a card, a button under an article…
 
-It loads once the person is signed in, in the background. The app never waits for a plugin to show: the plugin appears as soon as it is ready.
+The web part loads in the background, once the person is signed in. The app never waits for a plugin to show: the plugin appears as soon as it is ready.
 
-Here is Hello world's web part. It draws a "Say hello" button on the plugin's page, and shows the route's answer:
+Here is Hello world's web part. This web part draws a card with a "Say hello" button, on the plugin's page in _Server › Plugins_. A click on the button calls the `/hello` route, then the card shows the route's answer:
 
 ```tsx title="web/index.tsx"
 import { Button, SettingRow, definePlugin, usePluginApi } from 'hodi:sdk'
@@ -179,16 +181,18 @@ const HelloCard = () => {
 definePlugin({ settingsPage: HelloCard })
 ```
 
-### Hodi's components
+### What the web part imports from `hodi:sdk`
 
-The web part imports everything from `hodi:sdk`: Hodi's components (`Button`, `SettingRow`…), its hooks (`usePluginApi`…) and `definePlugin`. They aren't copies: they are the components of Hodi's page itself. So the plugin looks like the rest of the app, in every theme and on every screen size.
+The web part imports everything from `hodi:sdk`: Hodi's components (`Button`, `SettingRow`…), Hodi's hooks (`usePluginApi`…) and `definePlugin`. These components aren't copies: they are the components of Hodi's page itself. So the plugin looks like the rest of the app, in every theme and on every screen size.
 
-- **Where it shows**: `definePlugin()` says so, see [Slots](/en/guide/slots/).
-- **Its components**: the app's, listed in [Components](/en/components/).
-- **Its texts**: `usePluginTranslation()` reads them in its `locales/` folder.
-- **Its styles**: a CSS file, with classes that start with the plugin's id.
+Here is where to find each topic of the web part:
 
-### Styles
+- **Where the plugin shows**: `definePlugin()` says so, see [Slots](/en/guide/slots/).
+- **The components**: the app's, listed in [Components](/en/components/).
+- **The texts**: `usePluginTranslation()` reads them in the `locales/` folder.
+- **The styles**: a CSS file, with classes prefixed by the plugin's id.
+
+### The web part's styles
 
 Hodi's page refuses inline styles, such as `style={{ color: 'red' }}`. So every style goes through a class, in a CSS file imported by `web/index.tsx`, such as `web/plugin.css` in the template.
 
@@ -200,18 +204,18 @@ Hodi's page refuses inline styles, such as `style={{ color: 'red' }}`. So every 
 
 Colours come from Hodi's variables, such as `var(--text-2)`. These variables change with the theme (Light, Dark, Poudré). A hard-coded colour, such as `#333`, doesn't change and becomes unreadable in another theme.
 
-### Who can show it
+### When Hodi shows the web part
 
-The web part runs in Hodi's page, with the session of the person signed in. For that reason, Hodi only shows it in two cases:
+The web part runs in Hodi's page, with the session of the person signed in. For that reason, Hodi only shows a plugin's web part in two cases:
 
 1. The plugin is **signed** by Hodi's maintainer, after its code was read.
 2. The plugin is **in development**, sent by `hodi-plugin dev` to a test Hodi.
 
-An unsigned plugin still installs, but without its web part. [Publish](/en/guide/publish/#getting-verified) explains how to have it signed.
+An unsigned plugin still installs, but without its web part. [Publish](/en/guide/publish/#getting-verified) explains how to have a plugin signed.
 
-## How they talk
+## How the web part calls the server part
 
-The web part calls a server route by its path, with `usePluginApi()`. Hodi stands in the middle: it checks who is asking, then passes the request to the server part.
+The web part calls a route of the server part by that route's path, with `usePluginApi()`. Hodi stands in the middle: Hodi checks who is asking, then passes the request to the server part.
 
 ```tsx title="web/index.tsx"
 const api = usePluginApi()
@@ -219,7 +223,7 @@ const answer = await api('/hello', { method: 'POST' })
 const { text } = await answer.json()
 ```
 
-Here is what happens during this call:
+Here is what happens, in order, during this call:
 
 1. The browser asks for `/api/plugins/hello-world/hello`.
 2. Hodi checks that the person is signed in.
@@ -229,11 +233,11 @@ Here is what happens during this call:
 6. The route receives no cookie.
 7. Its answer goes back to the web part, as JSON.
 
-`request.who` says who is asking, as Hodi checked it: their profile, their household, whether they are an adult, a teen or a child, and whether they are an admin. So the route has nothing to check itself. It never receives a cookie or a token: the plugin can't pretend to be the person.
+`request.who` says who is asking, as Hodi checked it: the person's profile, their household, whether the person is an adult, a teen or a child, and whether they are an admin. So the route has nothing to check itself. The route never receives a cookie or a token: the plugin can't pretend to be the person.
 
-## Texts
+## The plugin's texts
 
-Every text the person reads comes from the `locales/` files. `locales/fr.json` is the reference, and every key also exists in `locales/en.json`. A plugin's French texts say « tu » to the person, like the rest of Hodi.
+Every text the person reads in a plugin comes from the plugin's `locales/` files. `locales/fr.json` is the reference, and every key also exists in `locales/en.json`. A plugin's French texts say « tu » to the person, like the rest of Hodi.
 
 ```json title="locales/en.json"
 {
@@ -249,13 +253,13 @@ Every text the person reads comes from the `locales/` files. `locales/fr.json` i
 }
 ```
 
-This file has three kinds of keys:
+The `locales/en.json` file has three kinds of keys:
 
 - **`manifest`**: the plugin's name and description in this language.
 - **`settings`**: each setting's label, and its help line.
 - **The others**: the web part's texts, read with `usePluginTranslation()`.
 
-The web part shows a text by its key:
+The web part shows a text by that text's key:
 
 ```tsx title="web/index.tsx"
 const { t } = usePluginTranslation()
@@ -263,7 +267,9 @@ const { t } = usePluginTranslation()
 <Button onClick={sayHello}>{t('say')}</Button>
 ```
 
-## To start
+## What it takes to write a plugin
+
+Before writing a plugin, four things need preparing:
 
 1. Install **Node.js 24** or newer.
 2. Copy the [plugin template](https://github.com/leclaudeur/hodi-plugin-template).
@@ -272,4 +278,4 @@ const { t } = usePluginTranslation()
 
 The template already has the SDK, `@hodi-app/plugin-sdk`: `npm install` installs it with the rest. Without the template, it is added with `npm install --save-dev @hodi-app/plugin-sdk`.
 
-[Getting started](/en/getting-started/) shows these steps for real, in an editor: a very simple plugin, in about ten minutes. It is a guided example to discover the steps: it makes nothing useful day to day.
+[Getting started](/en/getting-started/) shows these steps for real, in an editor: a very simple plugin, in about ten minutes. This plugin is a guided example to discover the steps: it is of no use day to day.
