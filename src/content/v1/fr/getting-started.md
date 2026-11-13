@@ -98,13 +98,11 @@ steps:
       - "Dans l'aperçu, le bouton *Dire bonjour* prend alors le style principal."
     file: "web/index.tsx"
     lang: "tsx"
-    edit: 15
+    edit: 13
     start: "<Button onClick={sayHello}>"
     code: |
       import { useState } from 'react'
-      import {
-        Button, SettingRow, definePlugin, usePluginApi
-      } from 'hodi:sdk'
+      import { Button, SettingRow, definePlugin, usePluginApi } from 'hodi:sdk'
 
       const HelloCard = () => {
         const api = usePluginApi()
