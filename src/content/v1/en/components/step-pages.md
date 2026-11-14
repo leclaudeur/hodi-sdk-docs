@@ -1,7 +1,7 @@
 ---
 title: "Step pages"
 description: "The pages of setup and of _I have a code_: a step, tiles, the buttons."
-intro: "These components draw full-page screens, such as those of the [`signedOutPage`](/en/guide/slots/signed-out-page/), [`afterSignIn`](/en/guide/slots/after-sign-in/) and [`setupSteps`](/en/guide/slots/setup/) slots. As on Hodi's own screens, the logo is at the top, the licence at the bottom and the card in the middle."
+intro: "These components draw full-page screens, such as those of the [`afterSignIn`](/en/guide/slots/after-sign-in/) and [`setupSteps`](/en/guide/slots/setup/) slots. As on Hodi's own screens, the logo is at the top, the licence at the bottom and the card in the middle."
 order: 3
 icon: "list-checks"
 topic: "climate"
