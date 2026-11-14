@@ -49,7 +49,6 @@ Here is each field of `plugin.json`, with its type and its role. Each field has 
 | `menu?` | `{ group, after? }` | Where to put the plugin's entry in Settings. |
 | `feeds?` | `Feed[]` | The feeds of articles the plugin offers, 5 at most. |
 | `memoryMb?` | `number` | The memory of the server part, in MB. 16 by default. |
-| `publicPages?` | `PublicPages` | The plugin's public pages that search engines may read. |
 
 ## The plugin's identity
 
@@ -322,33 +321,3 @@ The `feeds` field declares the feeds of articles the plugin offers, 5 at most. A
 ### `memoryMb`
 
 The `memoryMb` field gives the server part's memory, in MB: 16 by default, and 32 at most. A plugin only raises this memory when it really needs it: all plugins share the server's memory.
-
-### `publicPages`
-
-The `publicPages` field lists the addresses of the plugin's public pages that search engines may read, 20 at most. This field needs the `publicRoutes` permission. Each address has its language, and may have its own title, description and sharing image.
-
-```json title="plugin.json"
-"publicPages": {
-  "defaults": {
-    "title": "Hodi, the news for the whole family",
-    "image": "assets/share.png"
-  },
-  "routes": [
-    {
-      "path": "/",
-      "lang": "fr"
-    },
-    {
-      "path": "/en",
-      "lang": "en"
-    }
-  ]
-}
-```
-
-This field has two parts:
-
-- `defaults`: the default title, description and image.
-- `routes`: each address, with its two-letter language.
-
-A page without a title, description or image of its own takes those of `defaults`. The title has 70 characters at most, the description 200. The image is a `.png`, `.jpg` or `.webp` file of the `assets/` folder, at 1200 × 630.
