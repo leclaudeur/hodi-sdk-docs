@@ -11,9 +11,6 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-# The site's public address, for canonical links, hreflang and the sitemap.
-ARG SITE_URL
-ENV SITE_URL=$SITE_URL
 RUN npm run build
 
 # ==========================================
