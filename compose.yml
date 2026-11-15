@@ -3,6 +3,7 @@
 services:
   sdk-docs:
     image: ghcr.io/leclaudeur/hodi-sdk-docs:latest
+    container_name: hodi-sdk-docs
     restart: unless-stopped
     ports:
       - '${SDK_DOCS_PORT:-8080}:80'
