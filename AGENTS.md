@@ -5,7 +5,7 @@ the front matter, the versions and the deployment.
 
 - The site is static: Astro writes HTML into `dist/`, nginx serves it. Add JavaScript only for what HTML and CSS
   cannot do, as a small script in `src/scripts/`. No framework in a page unless it draws a real component.
-- The look is Hodi's: its tokens in `src/styles/tokens.css` (copied from hodi-next's `web/src/styles/tokens.css`,
+- The look is Hodi's: its tokens in `src/styles/tokens.css` (copied from hodi's `web/src/styles/tokens.css`,
   never edited here), its fonts, its menus (the app's Menu under the profile switcher) and its sidebar. Never
   hard-code a colour; accent text uses `--rust`.
 - The pages are in `src/content/v<major>/<lang>/`. French is the reference. It never speaks to the reader, neither « tu »
