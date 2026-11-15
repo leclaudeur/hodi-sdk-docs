@@ -3,15 +3,22 @@ import { seg, str, text, toggle, words, type Kind } from './controls.ts'
 
 // The fields: their controls and their code.
 
+// What Hodi says under a refused field, the line the playground draws there.
+export const FIELD_ERRORS = {
+  email: words('Cette adresse e-mail ne semble pas valide.', 'This e-mail address doesn’t look right.'),
+  password: words('Ce mot de passe n’est pas le bon.', 'That password is not the right one.')
+}
+
 export const textfield: Kind = {
   wide: true,
   controls: {
     icon: seg('icon', ['Mail', 'Search', 'Hand']),
     'aria-label': text('label', 'E-mail'),
     'onClear?': toggle('clear'),
-    placeholder: text('placeholder', words('toi@exemple.be', 'you@example.com'))
+    placeholder: text('placeholder', words('toi@exemple.be', 'you@example.com')),
+    'aria-invalid?': toggle('invalid')
   },
-  code: state => ({
+  code: (state, lang) => ({
     lucide: [str(state, 'icon')],
     body: [
       h('TextField', [
@@ -20,8 +27,10 @@ export const textfield: Kind = {
         ['placeholder', state.placeholder !== '' && s(str(state, 'placeholder'))],
         ['value', e('email')],
         ['onChange', e('e => setEmail(e.target.value)')],
-        ['onClear', state.clear === true && e("() => setEmail('')")]
-      ])
+        ['onClear', state.clear === true && e("() => setEmail('')")],
+        ['aria-invalid', state.invalid === true]
+      ]),
+      ...(state.invalid === true ? [h('StatusLine', [['tone', s('error')]], FIELD_ERRORS.email[lang])] : [])
     ]
   })
 }
@@ -34,7 +43,7 @@ export const passwordfield: Kind = {
     'lead?': toggle('ring', true),
     value: text('password', words('soleil', 'sunshine'))
   },
-  code: state => ({
+  code: (state, lang) => ({
     body: [
       h('PasswordField', [
         ['aria-label', s(str(state, 'label'))],
@@ -43,7 +52,9 @@ export const passwordfield: Kind = {
         ['invalid', state.invalid === true],
         ['lead', state.ring === true && { el: h('PasswordRing', [['password', e('password')]]) }]
       ]),
-      h('PasswordGauge', [['password', e('password')]])
+      state.invalid === true
+        ? h('StatusLine', [['tone', s('error')]], FIELD_ERRORS.password[lang])
+        : h('PasswordGauge', [['password', e('password')]])
     ]
   })
 }

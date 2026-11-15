@@ -12,6 +12,8 @@ preview: "segmented"
 
 A one-line text field, pill-shaped, with an icon at the start. It has no visible title: its `aria-label` names it for screen readers.
 
+A refused field takes `aria-invalid`: its border, background and text turn to the danger colours. The reason goes right under it, in a `StatusLine` with `tone="error"`, lined up with the field's icon.
+
 ```tsx title="web/index.tsx" render="textfield" play="textfield"
 import { TextField } from 'hodi:sdk'
 import { Mail } from 'lucide-react'
@@ -31,6 +33,7 @@ import { Mail } from 'lucide-react'
 | `icon` | `LucideIcon` | The icon at the start of the field, a Lucide icon. |
 | `aria-label` | `string` | The field's name, for screen readers. |
 | `onClear?` | `() => void` | For a search: a round cross shows as soon as the field holds text, and a click on it calls this function. |
+| `aria-invalid?` | `boolean` | Puts the field in the danger colours, when what was typed was refused. |
 | `…` | `InputHTMLAttributes` | Everything an `<input>` accepts: `value`, `onChange`, `type`, `placeholder`… |
 
 ## PasswordField
@@ -54,7 +57,7 @@ import { PasswordField, PasswordGauge, PasswordRing } from 'hodi:sdk'
 | --- | --- | --- |
 | `aria-label` | `string` | The field's name, for screen readers. |
 | `icon?` | `LucideIcon` | The icon at the start of the field. It is a padlock by default. |
-| `invalid?` | `boolean` | Turns the field's border red, when the password was refused. |
+| `invalid?` | `boolean` | Puts the field in the danger colours, when the password was refused. The reason goes under it, in a `StatusLine`, in place of `PasswordGauge`. |
 | `lead?` | `ReactNode` | An element in place of the icon, such as a `PasswordRing`. |
 | `…` | `InputHTMLAttributes` | Everything an `<input>` accepts, except `type`. |
 
