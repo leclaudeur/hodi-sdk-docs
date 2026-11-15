@@ -2,15 +2,17 @@
 import { latest, orderOf } from '../lib/docs.ts'
 import { t, type Lang } from '../lib/i18n.ts'
 import Base from '../layouts/Base.astro'
-import Brand from './Brand.astro'
+import Header from './Header.astro'
+import Icon from './Icon.astro'
 
-// The page nginx answers an unknown address with, in the language of the address's folder.
+// The page nginx answers an unknown address with, in the language of the address's folder: the app's own 404.
 interface Props {
   lang: Lang
 }
 
 const { lang } = Astro.props
-const home = orderOf(latest, lang)[0]?.url ?? '/'
+const first = orderOf(latest, lang)[0]
+const home = first?.url ?? '/'
 ---
 
 <Base
@@ -20,15 +22,32 @@ const home = orderOf(latest, lang)[0]?.url ?? '/'
   canonical={lang === 'fr' ? '/404.html' : `/${lang}/404/`}
   noindex
 >
+  {first && <Header doc={first} />}
   <main class="lost">
-    <Brand href={home} label={t(lang, 'home')} />
-    <h1 class="title">
-      {t(lang, 'notFoundTitle')}
-      <span class="dot" aria-hidden="true"></span>
-    </h1>
-    <p>{t(lang, 'notFoundText')}</p>
-    <a class="btn primary" href={home}>
-      {t(lang, 'toGuide')}
-    </a>
+    <div class="lost-in" role="alert">
+      <p class="lost-code" aria-hidden="true">
+        404
+      </p>
+      <h1 class="lost-title">
+        {t(lang, 'notFoundTitle')}
+        <span class="dot" aria-hidden="true"></span>
+      </h1>
+      <p class="lost-text">{t(lang, 'notFoundText')}</p>
+      <div class="lost-actions">
+        <a class="btn primary" href={home}>
+          {t(lang, 'toGuide')}
+        </a>
+        <button type="button" class="btn" data-search-open>
+          <Icon name="search" />
+          {t(lang, 'search')}
+        </button>
+      </div>
+      <p class="lost-path">
+        {t(lang, 'notFoundError')} · <span data-lost-path>/</span>
+      </p>
+    </div>
   </main>
+  <script is:inline>
+    document.querySelector('[data-lost-path]').textContent = location.pathname
+  </script>
 </Base>
