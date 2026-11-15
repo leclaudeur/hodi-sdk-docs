@@ -46,5 +46,8 @@
     "prettier-plugin-astro": "1.1.2",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.2"
+  },
+  "overrides": {
+    "minimatch": "^11.0.5"
   }
 }
