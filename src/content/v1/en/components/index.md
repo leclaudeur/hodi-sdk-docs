@@ -1,6 +1,6 @@
 ---
 title: "Components"
-description: "The web part imports Hodi's components from `hodi:sdk`: the app's own, with their sizes, their colours and their three themes."
+description: "The web part imports Hodi's components from `hodi:sdk`: the app's own, with their sizes, colours and three themes."
 intro: "The web part imports Hodi's components from `hodi:sdk`. They are the app's own, with their sizes, their colours and their three themes: the plugin looks like it belongs to Hodi."
 order: 1
 icon: "component"

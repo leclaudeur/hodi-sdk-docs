@@ -1,6 +1,6 @@
 ---
 title: "Composants"
-description: "La partie web importe les composants de Hodi depuis `hodi:sdk` : ceux de l'app, avec leurs tailles, leurs couleurs et leurs trois thèmes."
+description: "La partie web importe les composants de Hodi depuis `hodi:sdk` : ceux de l'app, avec leurs tailles et leurs thèmes."
 intro: "La partie web importe les composants de Hodi depuis `hodi:sdk`. Ce sont ceux de l'app, avec leurs tailles, leurs couleurs et leurs trois thèmes : le plugin a l'air d'être de Hodi."
 order: 1
 icon: "component"

@@ -1,6 +1,6 @@
 ---
 title: "Le manifeste"
-description: "`plugin.json`, la carte d'identité d'un plugin : son nom, pour qui il est, ses réglages et ses permissions, champ par champ."
+description: "`plugin.json`, la carte d'identité d'un plugin : son nom, qui le voit, ses réglages et ses permissions, champ par champ."
 intro: "`plugin.json` est la carte d'identité du plugin. Il dit à Hodi comment le plugin s'appelle, pour qui il est, quels réglages il propose et ce qu'il a le droit de faire. C'est le seul fichier obligatoire d'un plugin."
 order: 2
 icon: "file-braces"
