@@ -18,7 +18,7 @@ L'écran _Qui lit ?_ s'ouvre quand Hodi démarre : chaque profil du foyer y a sa
 import { Button, definePlugin } from 'hodi:sdk'
 
 const SwitchHousehold = () => (
-  <Button onClick={() => (window.location.hash = '#/plugin/village/households')}>Changer de foyer</Button>
+  <Button onClick={() => (window.location.hash = '#/plugin/my-plugin/households')}>Changer de foyer</Button>
 )
 
 definePlugin({ whoIsReadingFooter: SwitchHousehold })
