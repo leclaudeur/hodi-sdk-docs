@@ -12,6 +12,8 @@ preview: "segmented"
 
 Un champ de texte sur une ligne, en forme de pilule, avec une icône au début. Il n'a pas de titre visible : son `aria-label` le nomme pour les lecteurs d'écran.
 
+Un champ refusé prend `aria-invalid` : sa bordure, son fond et son texte passent aux couleurs du danger. La raison va juste en dessous, dans un `StatusLine` en `tone="error"`, alignée sur l'icône du champ.
+
 ```tsx title="web/index.tsx" render="textfield" play="textfield"
 import { TextField } from 'hodi:sdk'
 import { Mail } from 'lucide-react'
@@ -31,6 +33,7 @@ import { Mail } from 'lucide-react'
 | `icon` | `LucideIcon` | L'icône au début du champ, une icône Lucide. |
 | `aria-label` | `string` | Le nom du champ, pour les lecteurs d'écran. |
 | `onClear?` | `() => void` | Pour une recherche : une croix ronde apparaît dès que le champ contient du texte, et un clic sur elle appelle cette fonction. |
+| `aria-invalid?` | `boolean` | Met le champ aux couleurs du danger, quand ce qui est tapé a été refusé. |
 | `…` | `InputHTMLAttributes` | Tout ce qu'un `<input>` accepte : `value`, `onChange`, `type`, `placeholder`… |
 
 ## PasswordField
@@ -54,7 +57,7 @@ import { PasswordField, PasswordGauge, PasswordRing } from 'hodi:sdk'
 | --- | --- | --- |
 | `aria-label` | `string` | Le nom du champ, pour les lecteurs d'écran. |
 | `icon?` | `LucideIcon` | L'icône au début du champ. C'est un cadenas par défaut. |
-| `invalid?` | `boolean` | Met le bord du champ en rouge, quand le mot de passe a été refusé. |
+| `invalid?` | `boolean` | Met le champ aux couleurs du danger, quand le mot de passe a été refusé. La raison va dessous, dans un `StatusLine`, à la place de `PasswordGauge`. |
 | `lead?` | `ReactNode` | Un élément à la place de l'icône, comme un `PasswordRing`. |
 | `…` | `InputHTMLAttributes` | Tout ce qu'un `<input>` accepte, sauf `type`. |
 

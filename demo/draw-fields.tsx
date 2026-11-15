@@ -17,7 +17,7 @@ import Toggle from '../src/ui/Toggle.tsx'
 import AgeCheckbox from '../src/plugins/AgeCheckbox.tsx'
 import householdStyles from '../src/views/household/Household.module.css'
 import { no, tr, type Draw } from './draw-buttons.tsx'
-import { momentsOf } from './kinds-fields.ts'
+import { FIELD_ERRORS, momentsOf } from './kinds-fields.ts'
 
 // Fields, messages and small elements drawn by Hodi's own components from a state.
 
@@ -25,18 +25,23 @@ const FIELD_ICONS = { Mail, Search, Hand } as const
 const s = (state: Record<string, unknown>, key: string) => String(state[key] ?? '')
 
 export const DRAW_FIELDS: Record<string, Draw> = {
+  // A refused field takes the danger colours, and the line saying why goes under it.
   textfield: (state, lang, set) => (
-    <TextField
-      icon={FIELD_ICONS[s(state, 'icon') as keyof typeof FIELD_ICONS] ?? Mail}
-      aria-label={s(state, 'label')}
-      placeholder={s(state, 'placeholder')}
-      value={String(state.email ?? (state.clear === true ? tr(lang)('bonjour', 'hello') : ''))}
-      onChange={event => set?.('email', event.target.value)}
-      onClear={state.clear === true ? () => set?.('email', '') : undefined}
-    />
+    <div className={householdStyles.field}>
+      <TextField
+        icon={FIELD_ICONS[s(state, 'icon') as keyof typeof FIELD_ICONS] ?? Mail}
+        aria-label={s(state, 'label')}
+        placeholder={s(state, 'placeholder')}
+        value={String(state.email ?? (state.clear === true ? tr(lang)('bonjour', 'hello') : ''))}
+        onChange={event => set?.('email', event.target.value)}
+        onClear={state.clear === true ? () => set?.('email', '') : undefined}
+        aria-invalid={state.invalid === true}
+      />
+      {state.invalid === true && <StatusLine tone="error">{FIELD_ERRORS.email[lang]}</StatusLine>}
+    </div>
   ),
   // The field and its hint as Hodi lays them out where an account picks its password (NewPasswordFields).
-  passwordfield: (state, _lang, set) => (
+  passwordfield: (state, lang, set) => (
     <div className={householdStyles.field}>
       <PasswordField
         aria-label={s(state, 'label')}
@@ -45,7 +50,11 @@ export const DRAW_FIELDS: Record<string, Draw> = {
         invalid={state.invalid === true}
         lead={state.ring === true ? <PasswordRing password={s(state, 'password')} /> : undefined}
       />
-      <PasswordHint password={s(state, 'password')} />
+      {state.invalid === true ? (
+        <StatusLine tone="error">{FIELD_ERRORS.password[lang]}</StatusLine>
+      ) : (
+        <PasswordHint password={s(state, 'password')} />
+      )}
     </div>
   ),
   pinfield: (state, _lang, set) => (
