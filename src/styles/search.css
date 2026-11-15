@@ -85,6 +85,8 @@ html:has(dialog.sx[open]) {
 }
 .sx::backdrop {
   background: var(--scrim);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 @keyframes sx-in {
   from {
