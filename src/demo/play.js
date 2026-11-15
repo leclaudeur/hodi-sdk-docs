@@ -1,4 +1,4 @@
-import { A as e, C as t, D as n, E as r, F as i, I as a, M as o, N as s, O as c, P as l, S as u, T as d, _ as f, a as p, b as m, c as h, d as g, f as _, g as v, h as y, i as b, j as x, k as S, l as C, m as w, p as ee, r as te, s as ne, t as re, u as ie, v as T, w as E, x as D, y as ae } from "./play-dGI1oGGf.js";
+import { A as e, C as t, D as n, E as r, F as i, I as a, M as o, N as s, O as c, P as l, S as u, T as d, _ as f, a as p, b as m, c as h, d as g, f as _, g as v, h as y, i as b, j as x, k as S, l as C, m as w, p as ee, r as te, s as ne, t as re, u as ie, v as T, w as E, x as D, y as ae } from "./play-CyVbVkpl.js";
 import { i as oe, n as se, r as ce, t as le } from "./play-0uCLndnB.js";
 // node_modules/scheduler/cjs/scheduler.production.js
 var ue = /* @__PURE__ */ ce(((e) => {
@@ -11820,22 +11820,21 @@ var Ea = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, Da = (e) => [
 		}), r && ` · ${r}`]
 	});
 }, Ba = {
-	field: "_field_1aict_3",
-	start: "_start_1aict_11",
-	label: "_label_1aict_15",
-	boxes: "_boxes_1aict_23",
-	long: "_long_1aict_39",
-	group: "_group_1aict_44",
-	dash: "_dash_1aict_49",
-	input: "_input_1aict_58",
-	box: "_box_1aict_23",
-	filled: "_filled_1aict_93",
-	shown: "_shown_1aict_102",
-	wrong: "_wrong_1aict_113",
-	next: "_next_1aict_118",
-	caret: "_caret_1aict_1",
-	shake: "_shake_1aict_1",
-	right: "_right_1aict_146"
+	field: "_field_174ep_3",
+	start: "_start_174ep_11",
+	label: "_label_174ep_15",
+	boxes: "_boxes_174ep_23",
+	group: "_group_174ep_34",
+	dash: "_dash_174ep_41",
+	input: "_input_174ep_50",
+	box: "_box_174ep_23",
+	filled: "_filled_174ep_86",
+	shown: "_shown_174ep_95",
+	wrong: "_wrong_174ep_106",
+	next: "_next_174ep_111",
+	caret: "_caret_174ep_1",
+	shake: "_shake_174ep_1",
+	right: "_right_174ep_139"
 }, Va = ({ from: e, to: t, value: n, length: r, masked: i }) => /* @__PURE__ */ (0, M.jsx)("span", {
 	className: Ba.group,
 	children: Array.from({ length: t - e }, (t, a) => {
@@ -11854,7 +11853,7 @@ var Ea = (e) => `/api/sources/${encodeURIComponent(e)}/icon`, Da = (e) => [
 			className: Ba.label,
 			children: e
 		}), /* @__PURE__ */ (0, M.jsxs)("span", {
-			className: `${Ba.boxes} ${c > 6 ? Ba.long : ""}`,
+			className: Ba.boxes,
 			children: [
 				/* @__PURE__ */ (0, M.jsx)("input", {
 					ref: d,

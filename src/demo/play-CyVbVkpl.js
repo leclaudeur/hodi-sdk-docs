@@ -1772,7 +1772,7 @@ var L = /* @__PURE__ */ e(t()), ye = (e, t, n, r) => {
 			title: "L’actu de toute la maison",
 			lead: "Tes sites d’info préférés, <b>rangés par thème</b>, et lus <b>sans pub ni pistage</b>. Chacun a son profil, et le foyer se partage ce qui vaut la peine d’être lu.",
 			codeNoticeTitle: "Le code est dans le journal du serveur",
-			codeNoticeText: "Hodi en écrit un nouveau à chaque démarrage, sur la ligne <i>Setup code</i> : prends le dernier, avec <code>docker compose logs app</code>.",
+			codeNoticeText: "Prends la dernière ligne <i>Setup code</i> de <code>docker compose logs app</code>.",
 			code: "Code d’installation",
 			button: "Installer Hodi",
 			length: "Quelques minutes · tout dans le navigateur"
@@ -3358,7 +3358,7 @@ var L = /* @__PURE__ */ e(t()), ye = (e, t, n, r) => {
 	} catch {
 		return null;
 	}
-})(), Ze = null, Qe = null, $e = () => Qe ?? Ze ?? Xe ?? Ye(), et = { en: () => import("./play-CZBmc3dp.js") }, W = /* @__PURE__ */ new Map(), tt = (e) => {
+})(), Ze = null, Qe = null, $e = () => Qe ?? Ze ?? Xe ?? Ye(), et = { en: () => import("./play-BySZ0UCk.js") }, W = /* @__PURE__ */ new Map(), tt = (e) => {
 	if (e === "fr" || I.hasResourceBundle(e, "translation")) return Promise.resolve();
 	let t = W.get(e);
 	return t || (t = et[e]().then((t) => {
@@ -3602,7 +3602,7 @@ var St = Y(xt), Ct = /* @__PURE__ */ n(((e) => {
 })), Tt = "(min-width: 1024px)", Et = (e) => (0, L.useSyncExternalStore)((t) => {
 	let n = window.matchMedia(e);
 	return n.addEventListener("change", t), () => n.removeEventListener("change", t);
-}, () => window.matchMedia(e).matches), Dt = () => Et(Tt), Ot = "(max-width: 600px)", kt = () => Et(Ot), At = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches, jt = () => import("./play-DM4jSBaB.js"), Mt = () => import("./play-D5mSPrp8.js"), X = !1, Z = /* @__PURE__ */ new Set(), Nt = () => {}, Pt = new Promise((e) => Nt = e), Ft = () => {
+}, () => window.matchMedia(e).matches), Dt = () => Et(Tt), Ot = "(max-width: 600px)", kt = () => Et(Ot), At = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches, jt = () => import("./play-DqmXKcmA.js"), Mt = () => import("./play-D5mSPrp8.js"), X = !1, Z = /* @__PURE__ */ new Set(), Nt = () => {}, Pt = new Promise((e) => Nt = e), Ft = () => {
 	X || (X = !0, Z.forEach((e) => e()));
 };
 window.addEventListener("load", () => window.setTimeout(Ft, 3e3), { once: !0 });
