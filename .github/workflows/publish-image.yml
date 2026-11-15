@@ -10,6 +10,11 @@ permissions:
   contents: read
   packages: write
 
+# Merges close together build one after the other: latest is always the last push, never the slowest build.
+concurrency:
+  group: publish-image
+  cancel-in-progress: false
+
 env:
   IMAGE: ghcr.io/leclaudeur/hodi-sdk-docs
 
