@@ -1,6 +1,7 @@
 ---
 import ShareCard from '../components/ShareCard.astro'
 import type { Lang } from '../lib/i18n.ts'
+import '../styles/tokens.css'
 
 // An address with no page of its own (the root, a language, a section): sends the browser on to its first page.
 interface Props {
@@ -27,13 +28,29 @@ const site = Astro.site ?? new URL('http://localhost:4321')
         <ShareCard {...card} url={new URL(card.url, site).href} />
       </>
     )}
-    {english && <script is:inline define:vars={{ english }}>
-      if (!navigator.languages.some(language => language.startsWith('fr'))) location.replace(english)
-    </script>}
+    <script is:inline define:vars={{ to, english }}>
+      // Leaves at once, in the theme chosen on this device: no white page while the next one loads.
+      try {
+        const theme = localStorage.getItem('hodi-sdk-theme')
+        if (theme === 'dark' || theme === 'light' || theme === 'powder') document.documentElement.dataset.theme = theme
+      } catch {
+        // Storage blocked: the system's theme applies.
+      }
+      const french = navigator.languages.some(language => language.startsWith('fr'))
+      location.replace(english && !french ? english : to)
+    </script>
     <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <style>
+      html {
+        background: var(--bg);
+        color-scheme: dark light;
+      }
+    </style>
     <link rel="canonical" href={new URL(to, site).href} />
   </head>
   <body>
-    <a href={to}>{to}</a>
+    <noscript>
+      <a href={to}>{to}</a>
+    </noscript>
   </body>
 </html>
