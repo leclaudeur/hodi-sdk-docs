@@ -2,6 +2,7 @@
 import { docs, latest, orderOf } from '../../../lib/docs.ts'
 import type { Lang } from '../../../lib/i18n.ts'
 import Redirect from '../../../layouts/Redirect.astro'
+import { cardOf } from '../../../lib/redirect-card.ts'
 
 // /fr/guide/: the guide's first page.
 export const getStaticPaths = () =>
@@ -10,4 +11,4 @@ export const getStaticPaths = () =>
 const lang = Astro.params.lang as Lang
 ---
 
-<Redirect to={orderOf(latest, lang)[0]?.url ?? '/'} />
+<Redirect to={orderOf(latest, lang)[0]?.url ?? '/'} card={cardOf(orderOf(latest, lang)[0])} />

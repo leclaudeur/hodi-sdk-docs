@@ -1,25 +1,37 @@
 ---
+import ShareCard from '../components/ShareCard.astro'
+import type { Lang } from '../lib/i18n.ts'
+
 // An address with no page of its own (the root, a language, a section): sends the browser on to its first page.
 interface Props {
   to: string
   // The root only: where a browser that doesn't ask for French goes instead.
   english?: string | undefined
+  // Link cards don't follow the refresh: they read this one here.
+  card?: { lang: Lang; title: string; description: string; url: string } | undefined
 }
 
-const { to, english } = Astro.props
+const { to, english, card } = Astro.props
+const site = Astro.site ?? new URL('http://localhost:4321')
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={card?.lang ?? 'fr'}>
   <head>
     <meta charset="utf-8" />
-    <title>Hodi SDK</title>
+    <title>{card?.title ?? 'Hodi SDK'}</title>
     <meta name="robots" content="noindex, follow" />
+    {card && (
+      <>
+        <meta name="description" content={card.description} />
+        <ShareCard {...card} url={new URL(card.url, site).href} />
+      </>
+    )}
     {english && <script is:inline define:vars={{ english }}>
       if (!navigator.languages.some(language => language.startsWith('fr'))) location.replace(english)
     </script>}
     <meta http-equiv="refresh" content={`0; url=${to}`} />
-    <link rel="canonical" href={to} />
+    <link rel="canonical" href={new URL(to, site).href} />
   </head>
   <body>
     <a href={to}>{to}</a>
