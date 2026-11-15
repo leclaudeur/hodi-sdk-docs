@@ -26,12 +26,9 @@ const home = first?.url ?? '/'
   <main class="lost">
     <div class="lost-in" role="alert">
       <p class="lost-code" aria-hidden="true">
-        404
+        404<span class="dot"></span>
       </p>
-      <h1 class="lost-title">
-        {t(lang, 'notFoundTitle')}
-        <span class="dot" aria-hidden="true"></span>
-      </h1>
+      <h1 class="lost-title">{t(lang, 'notFoundTitle')}</h1>
       <p class="lost-text">{t(lang, 'notFoundText')}</p>
       <div class="lost-actions">
         <a class="btn primary" href={home}>

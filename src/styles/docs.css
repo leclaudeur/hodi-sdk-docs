@@ -643,11 +643,11 @@
   line-height: 1.05;
   text-wrap: balance;
 }
-.lost-title .dot {
+.lost-code .dot {
   display: inline-block;
-  width: round(0.15em, 1px);
-  height: round(0.15em, 1px);
-  margin-left: 0.06em;
+  width: 0.14em;
+  height: 0.14em;
+  margin-left: 0.04em;
   border-radius: 50%;
   background: var(--rust);
 }
