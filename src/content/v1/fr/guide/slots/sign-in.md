@@ -12,7 +12,7 @@ key: "signInExtras"
 
 Sur l'écran de Connexion de Hodi, sous le formulaire, avant que la personne ait ouvert son profil.
 
-À ce moment, Hodi ne connaît pas encore le foyer de la personne. Hodi ne charge donc que les plugins qui ont la permission `publicRoutes`, et seulement le fichier `web/public.tsx` de ces plugins. Les cinq emplacements de connexion se déclarent dans ce fichier : `signInExtras`, `signedOutPage`, `afterSignIn`, `whoIsReadingFooter` et `ageConsent`.
+À ce moment, Hodi ne connaît pas encore le foyer de la personne. Hodi ne charge donc que les plugins qui ont la permission `publicRoutes`, et seulement le fichier `web/public.tsx` de ces plugins. Les quatre emplacements de connexion se déclarent dans ce fichier : `signInExtras`, `afterSignIn`, `whoIsReadingFooter` et `ageConsent`.
 
 ## Exemple
 

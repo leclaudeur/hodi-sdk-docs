@@ -1,7 +1,7 @@
 ---
 title: "Pages d'étapes"
 description: "Les pages de l'installation et de _J'ai un code_ : une étape, des tuiles, les boutons."
-intro: "Ces composants dessinent les écrans en pleine page, comme ceux des emplacements [`signedOutPage`](/fr/guide/slots/signed-out-page/), [`afterSignIn`](/fr/guide/slots/after-sign-in/) et [`setupSteps`](/fr/guide/slots/setup/). Comme sur les écrans de Hodi, le logo est en haut, la licence en bas et la carte au centre."
+intro: "Ces composants dessinent les écrans en pleine page, comme ceux des emplacements [`afterSignIn`](/fr/guide/slots/after-sign-in/) et [`setupSteps`](/fr/guide/slots/setup/). Comme sur les écrans de Hodi, le logo est en haut, la licence en bas et la carte au centre."
 order: 3
 icon: "list-checks"
 topic: "climate"

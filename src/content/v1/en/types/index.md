@@ -234,7 +234,6 @@ What a plugin can know about an account, with the `accounts` permission.
 | `permissions` | `Permissions` | What the plugin asks to be able to do beyond the basics. |
 | `feeds` | `PluginFeed[]` | The article feeds the plugin adds to Hodi. |
 | `memoryMb` | `number \| null` | The server part's memory, in MB: 16 by default, 32 at most. |
-| `publicPages` | `PublicPages \| null` | With the `publicRoutes` permission: the addresses the plugin opens to search engines. |
 
 ### Permissions
 
@@ -297,7 +296,6 @@ The object `definePlugin()` receives: one field per slot, all optional. [The slo
 | `overviewCards?` | `OverviewCardSlot[]` | The [plugin's cards in Overview](/en/guide/slots/overview/). |
 | `readerAction?` | `ComponentType<{ article: ReaderArticle }>` | A component at the end of each article, in [the reader](/en/guide/slots/reader/). |
 | `signInExtras?` | `ComponentType<{ layout; signedIn }>` | A component under the [Sign in](/en/guide/slots/sign-in/) form. |
-| `signedOutPage?` | `ComponentType<SignedOutPageProps>` | A [page instead of Sign in](/en/guide/slots/signed-out-page/), when the device has no household. |
 | `afterSignIn?` | `ComponentType<AfterSignInProps>` | A [step right after signing in](/en/guide/slots/after-sign-in/), before entering the app. |
 | `whoIsReadingFooter?` | `ComponentType<{ layout }>` | A component [under _Who's in?_](/en/guide/slots/who-is-reading-footer/), next to _Manage profiles_. |
 | `ageConsent?` | `AgeConsent` | A [text after _I am at least 13 years old_](/en/guide/slots/age-consent/). |
@@ -340,17 +338,6 @@ A step of `setupSteps`. To place one of Hodi's steps among the plugin's, an entr
 | `title` | `string` | The step's title: a key of the plugin's locales. |
 | `intro` | `string` | The sentence under the title: a key of the plugin's locales. |
 | `page` | `ComponentType<SetupStepProps>` | The step's content. |
-
-### SignedOutPageProps
-
-The props the component of `signedOutPage` receives.
-
-<!-- prettier-ignore -->
-| Fields | Type | |
-| --- | --- | --- |
-| `layout` | `'desktop' \| 'phone'` | The screen's size. |
-| `showSignIn` | `() => void` | Opens Hodi's Sign in screen. |
-| `signedIn` | `() => void` | Restarts the app, signed in, after a public route answered `signIn`. |
 
 ### AfterSignInProps
 

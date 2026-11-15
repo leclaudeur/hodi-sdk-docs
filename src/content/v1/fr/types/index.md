@@ -234,7 +234,6 @@ Ce qu'un plugin peut savoir d'un compte, avec la permission `accounts`.
 | `permissions` | `Permissions` | Ce que le plugin demande à pouvoir faire en plus de l'essentiel. |
 | `feeds` | `PluginFeed[]` | Les flux d'articles que le plugin ajoute à Hodi. |
 | `memoryMb` | `number \| null` | La mémoire de la partie serveur, en Mo : 16 par défaut, 32 au plus. |
-| `publicPages` | `PublicPages \| null` | Avec la permission `publicRoutes` : les adresses que le plugin ouvre aux moteurs de recherche. |
 
 ### Permissions
 
@@ -297,7 +296,6 @@ L'objet que `definePlugin()` reçoit : un champ par emplacement, tous facultatif
 | `overviewCards?` | `OverviewCardSlot[]` | Les [cartes du plugin dans Vue d'ensemble](/fr/guide/slots/overview/). |
 | `readerAction?` | `ComponentType<{ article: ReaderArticle }>` | Un composant au bout de chaque article, dans [le lecteur](/fr/guide/slots/reader/). |
 | `signInExtras?` | `ComponentType<{ layout; signedIn }>` | Un composant sous le formulaire de [Connexion](/fr/guide/slots/sign-in/). |
-| `signedOutPage?` | `ComponentType<SignedOutPageProps>` | Une [page à la place de Connexion](/fr/guide/slots/signed-out-page/), quand l'appareil n'a pas de foyer. |
 | `afterSignIn?` | `ComponentType<AfterSignInProps>` | Une [étape juste après la connexion](/fr/guide/slots/after-sign-in/), avant d'entrer dans l'app. |
 | `whoIsReadingFooter?` | `ComponentType<{ layout }>` | Un composant [sous _Qui lit ?_](/fr/guide/slots/who-is-reading-footer/), à côté de _Gérer les profils_. |
 | `ageConsent?` | `AgeConsent` | Un [texte après _J'ai au moins 13 ans_](/fr/guide/slots/age-consent/). |
@@ -340,17 +338,6 @@ Une étape de `setupSteps`. Pour placer une étape de Hodi parmi celles du plugi
 | `title` | `string` | Le titre de l'étape : une clé des locales du plugin. |
 | `intro` | `string` | La phrase sous le titre : une clé des locales du plugin. |
 | `page` | `ComponentType<SetupStepProps>` | Le contenu de l'étape. |
-
-### SignedOutPageProps
-
-Les props que reçoit le composant de `signedOutPage`.
-
-<!-- prettier-ignore -->
-| Champs | Type | |
-| --- | --- | --- |
-| `layout` | `'desktop' \| 'phone'` | La taille de l'écran. |
-| `showSignIn` | `() => void` | Ouvre l'écran de Connexion de Hodi. |
-| `signedIn` | `() => void` | Redémarre l'app, connectée, après une route publique qui a répondu `signIn`. |
 
 ### AfterSignInProps
 

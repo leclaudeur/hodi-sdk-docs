@@ -49,7 +49,6 @@ Voici chaque champ de `plugin.json`, avec son type et son rôle. Chaque champ a 
 | `menu?` | `{ group, after? }` | Où placer l'entrée du plugin dans Réglages. |
 | `feeds?` | `Feed[]` | Les flux d'articles que le plugin propose, 5 au plus. |
 | `memoryMb?` | `number` | La mémoire de la partie serveur, en Mo. 16 par défaut. |
-| `publicPages?` | `PublicPages` | Les pages publiques du plugin que les moteurs de recherche peuvent lire. |
 
 ## L'identité du plugin
 
@@ -322,33 +321,3 @@ Le champ `feeds` déclare les flux d'articles que le plugin propose, 5 au plus. 
 ### `memoryMb`
 
 Le champ `memoryMb` donne la mémoire de la partie serveur, en Mo : 16 par défaut, et 32 au plus. Un plugin n'augmente cette mémoire qu'en cas de vrai besoin : tous les plugins se partagent la mémoire du serveur.
-
-### `publicPages`
-
-Le champ `publicPages` liste les adresses des pages publiques du plugin que les moteurs de recherche peuvent lire, 20 au plus. Ce champ demande la permission `publicRoutes`. Chaque adresse a sa langue, et peut avoir son propre titre, sa description et son image de partage.
-
-```json title="plugin.json"
-"publicPages": {
-  "defaults": {
-    "title": "Hodi, l'actu de toute la famille",
-    "image": "assets/share.png"
-  },
-  "routes": [
-    {
-      "path": "/",
-      "lang": "fr"
-    },
-    {
-      "path": "/en",
-      "lang": "en"
-    }
-  ]
-}
-```
-
-Ce champ a deux parties :
-
-- `defaults` : le titre, la description et l'image par défaut.
-- `routes` : chaque adresse, avec sa langue en deux lettres.
-
-Une page sans titre, description ou image à elle prend ceux de `defaults`. Le titre a 70 caractères au plus, la description 200. L'image est un fichier `.png`, `.jpg` ou `.webp` du dossier `assets/`, en 1200 × 630.

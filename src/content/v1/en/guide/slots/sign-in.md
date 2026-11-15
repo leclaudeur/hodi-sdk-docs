@@ -12,7 +12,7 @@ key: "signInExtras"
 
 On Hodi's Sign in screen, under the form, before the person has opened their profile.
 
-At that moment, Hodi doesn't know the person's household yet. So Hodi only loads the plugins that have the `publicRoutes` permission, and only the `web/public.tsx` file of these plugins. The five sign-in slots are declared in this file: `signInExtras`, `signedOutPage`, `afterSignIn`, `whoIsReadingFooter` and `ageConsent`.
+At that moment, Hodi doesn't know the person's household yet. So Hodi only loads the plugins that have the `publicRoutes` permission, and only the `web/public.tsx` file of these plugins. The four sign-in slots are declared in this file: `signInExtras`, `afterSignIn`, `whoIsReadingFooter` and `ageConsent`.
 
 ## Example
 
