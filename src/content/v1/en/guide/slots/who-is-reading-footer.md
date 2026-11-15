@@ -18,7 +18,7 @@ The _Who's in?_ screen opens when Hodi starts: each profile of the household has
 import { Button, definePlugin } from 'hodi:sdk'
 
 const SwitchHousehold = () => (
-  <Button onClick={() => (window.location.hash = '#/plugin/village/households')}>Switch household</Button>
+  <Button onClick={() => (window.location.hash = '#/plugin/my-plugin/households')}>Switch household</Button>
 )
 
 definePlugin({ whoIsReadingFooter: SwitchHousehold })
