@@ -25,6 +25,7 @@
   --font-body: 'Geist Hodi', 'Geist Variable', system-ui, sans-serif;
   --font-mono: 'Geist Mono Hodi', 'Geist Mono Variable', ui-monospace, monospace;
   --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --font-title: 'Archivo Variable', 'Archivo', 'Arial Narrow', sans-serif;
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --duration: 160ms;
 }

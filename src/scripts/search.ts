@@ -105,7 +105,8 @@ export const wireSearch = () => {
   if (!/Mac|iPhone|iPad/.test(navigator.userAgent)) {
     for (const hint of document.querySelectorAll('.sdk-search kbd')) hint.textContent = 'Ctrl K'
   }
-  for (const button of document.querySelectorAll('.sdk-search')) button.addEventListener('click', open)
+  for (const button of document.querySelectorAll('.sdk-search, [data-search-open]'))
+    button.addEventListener('click', open)
   for (const button of dialog.querySelectorAll('[data-sx-close]'))
     button.addEventListener('click', () => dialog.close())
   dialog.addEventListener('click', event => {
