@@ -1,10 +1,11 @@
 ---
 import { latest, orderOf } from '../lib/docs.ts'
 import Redirect from '../layouts/Redirect.astro'
+import { siteCard } from '../lib/redirect-card.ts'
 
 // The root: the latest version's guide, in English for a browser that doesn't ask for French.
 const first = orderOf(latest, 'fr')[0]
 const english = orderOf(latest, 'en')[0]
 ---
 
-<Redirect to={first?.url ?? '/fr/'} english={english?.url} />
+<Redirect to={first?.url ?? '/fr/'} english={english?.url} card={siteCard} />
