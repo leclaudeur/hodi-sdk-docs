@@ -1,6 +1,6 @@
 ---
 title: "Publier"
-description: "Du dossier d'un plugin au bouton _Installer_ de chaque Hodi : tester, essayer sur un Hodi de test, construire le fichier, puis le faire vérifier et signer par le registre des plugins."
+description: "Du dossier d'un plugin au bouton _Installer_ de chaque Hodi : tester, construire le fichier, le faire signer par le registre."
 intro: "Du dossier d'un plugin au bouton _Installer_ de chaque Hodi : tester, essayer sur un Hodi de test, construire le fichier, puis le faire vérifier et signer par le registre des plugins."
 order: 5
 icon: "package"

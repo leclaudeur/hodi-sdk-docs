@@ -1,6 +1,6 @@
 ---
 title: "Publish"
-description: "From a plugin's folder to the _Install_ button of every Hodi: test, try on a test Hodi, build the file, then have it checked and signed through the plugin registry."
+description: "From a plugin's folder to the _Install_ button of every Hodi: test it, build the file, then get it signed by the registry."
 intro: "From a plugin's folder to the _Install_ button of every Hodi: test, try on a test Hodi, build the file, then have it checked and signed through the plugin registry."
 order: 5
 icon: "package"
