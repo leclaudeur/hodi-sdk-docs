@@ -75,15 +75,11 @@ HODI_DIR=../hodi sh demo/build.sh
 There is no release: what is on `main` is online.\
 Each merge builds the image `ghcr.io/leclaudeur/hodi-sdk-docs`, which Portainer runs on the server.
 
-1. **Set the address**: add the variable `SITE_URL` in _Settings › Secrets and variables › Actions_.
-2. **Make the image public**: after the first build, in the package's _Package settings_.
-3. **Add the stack**: paste [compose.yml](compose.yml) into Portainer, with your port in `SDK_DOCS_PORT`.
-4. **Point the domain**: in the reverse proxy, send the `sdk.` address to that port, with HTTPS.
+1. **Make the image public**: after the first build, in its _Package settings_.
+2. **Add the stack**: paste [compose.yml](compose.yml) into Portainer, port in `SDK_DOCS_PORT`.
+3. **Point the domain**: send `sdk.get-hodi.com` to that port, with HTTPS.
 
 After each merge, open the stack and click **Pull and redeploy**.
-
-> [!IMPORTANT]
-> Set `SITE_URL` before the first merge: the canonical links and the sitemap are written with it.
 
 ## Rules
 
