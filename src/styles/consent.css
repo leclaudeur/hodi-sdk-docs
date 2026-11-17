@@ -1,0 +1,67 @@
+/* The cookie question (vanilla-cookieconsent) wears Hodi's colours: a card like the menus, and two buttons of the
+   same weight, since refusing must be as easy as accepting. */
+:root #cc-main {
+  --cc-font-family: var(--font-body);
+  --cc-z-index: 60;
+  --cc-modal-margin: 16px;
+  --cc-modal-border-radius: 16px;
+  --cc-btn-border-radius: 999px;
+  --cc-bg: var(--card);
+  --cc-primary-color: var(--text);
+  --cc-secondary-color: var(--text-2);
+  --cc-link-color: var(--text);
+  --cc-btn-primary-bg: var(--control);
+  --cc-btn-primary-color: var(--text);
+  --cc-btn-primary-border-color: var(--border);
+  --cc-btn-primary-hover-bg: var(--control-hover);
+  --cc-btn-primary-hover-color: var(--text);
+  --cc-btn-primary-hover-border-color: var(--border-strong);
+  --cc-btn-secondary-bg: var(--control);
+  --cc-btn-secondary-color: var(--text);
+  --cc-btn-secondary-border-color: var(--border);
+  --cc-btn-secondary-hover-bg: var(--control-hover);
+  --cc-btn-secondary-hover-color: var(--text);
+  --cc-btn-secondary-hover-border-color: var(--border-strong);
+}
+
+:root #cc-main .cm {
+  max-width: 440px;
+  border: 1px solid var(--border);
+  box-shadow:
+    0 16px 40px var(--shadow),
+    0 2px 8px var(--shadow);
+}
+
+:root #cc-main .cm__texts {
+  padding: 18px 20px 0;
+}
+
+:root #cc-main .cm__desc {
+  padding: 0 !important;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+/* Refuser left, Accepter right, side by side at every size, like a dialog's footer. */
+:root #cc-main .cm__btns {
+  padding: 16px 20px 20px !important;
+  border-top: 0 !important;
+}
+
+:root #cc-main .cm__btn-group {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+:root #cc-main .cm .cm__btn {
+  height: 44px;
+  min-height: 0;
+  margin: 0 !important;
+  font: 600 14px/1 var(--font-body);
+}
+
+:root #cc-main .cm__btn[data-role='necessary'] {
+  order: -1;
+}

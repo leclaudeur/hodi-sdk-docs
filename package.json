@@ -31,7 +31,8 @@
     "@lezer/highlight": "1.2.5",
     "astro": "7.4.11",
     "lucide": "1.72.0",
-    "shiki": "4.6.0"
+    "shiki": "4.6.0",
+    "vanilla-cookieconsent": "3.3.0"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
