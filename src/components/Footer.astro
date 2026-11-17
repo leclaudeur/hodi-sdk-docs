@@ -30,6 +30,12 @@ const links = [
             <a href={link.href}>{link.label}</a>
           </>
         ))}
+        <a
+          href={doc.lang === 'en' ? 'https://get-hodi.com/en/privacy' : 'https://get-hodi.com/privacy'}
+          data-consent-open
+        >
+          Cookies
+        </a>
       </div>
       <span class="mono end">SDK {doc.version}.x · AGPL-3.0</span>
     </div>
