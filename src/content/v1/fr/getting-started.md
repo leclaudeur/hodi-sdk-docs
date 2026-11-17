@@ -13,7 +13,7 @@ steps:
       - label: "Serveur et web"
         href: "/fr/guide/server-and-web/"
     todo:
-      - "Ouvrir `plugin.json`, dans les onglets au-dessus du code."
+      - "Le fichier `plugin.json` est ouvert, dans les onglets au-dessus du code."
       - "Sur la ligne surlignée, remplacer *Bonjour* par *Salut*. C'est la valeur que le réglage a au départ."
       - "Dans l'aperçu, la ligne Salutation affiche alors *Salut*."
     file: "plugin.json"
@@ -51,9 +51,10 @@ steps:
       - label: "Serveur et web"
         href: "/fr/guide/server-and-web/"
     todo:
-      - "Ouvrir `server/index.ts` : c'est la partie du plugin qui tourne sur le serveur."
+      - "Le fichier `server/index.ts` est ouvert : c'est la partie du plugin qui tourne sur le serveur."
       - "Sur la ligne surlignée, ajouter un point d'exclamation après `greeting`, dans le texte que la route renvoie."
       - "Cliquer sur *Dire bonjour* dans l'aperçu : la route répond *Salut !*."
+    click: 3
     file: "server/index.ts"
     lang: "ts"
     edit: 7
@@ -93,7 +94,7 @@ steps:
       - label: "Boutons"
         href: "/fr/components/buttons/"
     todo:
-      - "Ouvrir `web/index.tsx` : c'est la partie du plugin qui s'affiche dans Hodi."
+      - "Le fichier `web/index.tsx` est ouvert : c'est la partie du plugin qui s'affiche dans Hodi."
       - "Sur la ligne surlignée, ajouter `look=\"primary\"` au bouton pour qu'il ressorte."
       - "Dans l'aperçu, le bouton *Dire bonjour* prend alors le style principal."
     file: "web/index.tsx"

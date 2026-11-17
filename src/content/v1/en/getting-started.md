@@ -13,7 +13,7 @@ steps:
       - label: "Server and web"
         href: "/en/guide/server-and-web/"
     todo:
-      - "Open `plugin.json`, in the tabs above the code."
+      - "The file `plugin.json` is open, in the tabs above the code."
       - "On the highlighted line, replace *Hello* with *Hi*. It's the value the setting starts with."
       - "Look at the preview: the Greeting row already shows *Hi*."
     file: "plugin.json"
@@ -51,9 +51,10 @@ steps:
       - label: "Server and web"
         href: "/en/guide/server-and-web/"
     todo:
-      - "Open `server/index.ts`: it's the part of your plugin that runs on the server."
+      - "The file `server/index.ts` is open: it's the part of your plugin that runs on the server."
       - "On the highlighted line, add an exclamation mark after `greeting`, in the text the route sends back."
       - "Click *Say hello* in the preview: your route answers *Hi!*."
+    click: 3
     file: "server/index.ts"
     lang: "ts"
     edit: 7
@@ -93,7 +94,7 @@ steps:
       - label: "Buttons"
         href: "/en/components/buttons/"
     todo:
-      - "Open `web/index.tsx`: it's the part of your plugin that shows in Hodi."
+      - "The file `web/index.tsx` is open: it's the part of your plugin that shows in Hodi."
       - "On the highlighted line, add `look=\"primary\"` to the button so it stands out."
       - "Look at the preview: the *Say hello* button takes the main style."
     file: "web/index.tsx"

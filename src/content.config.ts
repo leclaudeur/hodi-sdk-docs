@@ -36,6 +36,8 @@ const step = z.object({
   // « En savoir plus » at the foot of the step: the guide's pages behind it, opened in a new tab.
   more: z.array(z.object({ label: z.string(), href: z.string() })),
   todo: z.array(z.string()),
+  // The to-do, from 1, that asks for a click in the preview: the step waits for that click, after the change.
+  click: z.number().optional(),
   file: z.string(),
   lang: z.string(),
   // The line the person changes, as it starts; the code is the file once the step is done.
