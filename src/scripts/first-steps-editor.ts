@@ -16,6 +16,8 @@ interface Setup {
   start: string
   finished: string
   label: string
+  // The to-do, from 1, that asks for a click in the preview once the code is right.
+  click?: number
 }
 
 const panel = document.querySelector<HTMLElement>('.tz-file[data-editor]')
@@ -80,13 +82,24 @@ const showLive = (file: string, code: string) => {
   if (live.primary !== undefined) row.querySelector('.btn')?.classList.toggle('primary', live.primary)
 }
 
+const tick = (item: Element) => {
+  item.className = 'done'
+  const icon = document.querySelector<HTMLTemplateElement>('template[data-tick]')?.content.cloneNode(true)
+  if (icon) item.querySelector('.b')?.replaceChildren(icon)
+}
+
+// The code is right: its to-dos are ticked, and the one that asks for a click in the preview becomes the current one.
+const showCodeDone = (click: number | undefined) => {
+  const items = [...document.querySelectorAll<HTMLElement>('.v-list li')]
+  items.forEach((item, index) => {
+    if (index + 1 === click) item.className = 'cur'
+    else tick(item)
+  })
+}
+
 // Done: every to-do is ticked, what the step brings shows, and the way on opens.
 const showDone = () => {
-  for (const item of document.querySelectorAll<HTMLElement>('.v-list li')) {
-    item.className = 'done'
-    const tick = document.querySelector<HTMLTemplateElement>('template[data-tick]')?.content.cloneNode(true)
-    if (tick) item.querySelector('.b')?.replaceChildren(tick)
-  }
+  for (const item of document.querySelectorAll<HTMLElement>('.v-list li')) tick(item)
   for (const element of document.querySelectorAll<HTMLElement>('[data-after]')) element.hidden = false
   const next = document.querySelector<HTMLElement>('[data-next]')
   next?.removeAttribute('aria-disabled')
@@ -94,15 +107,26 @@ const showDone = () => {
 }
 
 const mount = (host: HTMLElement, config: Setup) => {
-  let done = false
+  let codeDone = false
+  // A step that asks for a click in the preview waits for it: only a click made once the code is right counts.
+  let clicked = !config.click || read(`${key}:click`) === 'yes'
   const check = (view: EditorView) => {
     const code = view.state.doc.toString()
     keep(key, code)
     showLive(config.file, code)
-    if (done || !isDone(config.file, code, config.finished)) return
-    done = true
+    if (codeDone || !isDone(config.file, code, config.finished)) return
+    codeDone = true
     view.dispatch({ effects: finish.of(null) })
-    showDone()
+    if (clicked) showDone()
+    else showCodeDone(config.click)
+  }
+  for (const button of document.querySelectorAll('[data-answers]')) {
+    button.addEventListener('click', () => {
+      if (!codeDone || clicked) return
+      clicked = true
+      keep(`${key}:click`, 'yes')
+      showDone()
+    })
   }
   const view = new EditorView({
     state: EditorState.create({
