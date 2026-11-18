@@ -1,6 +1,6 @@
 ---
 title: "avatarMenu"
-description: "Des entrées du plugin dans le menu de l'avatar, comme _Changer de foyer_."
+description: "Des entrées du plugin dans le menu de l'avatar, comme _Inviter un ami_."
 intro: "Des entrées que le plugin ajoute au menu de l'avatar, le menu du profil ouvert. Elles servent à une action rapide, accessible depuis n'importe quelle page."
 order: 14
 icon: "circle-user-round"
@@ -18,15 +18,15 @@ Sur un ordinateur, le menu de l'avatar s'ouvre depuis l'avatar, en bas de la sid
 
 ```tsx title="web/index.tsx"
 import { definePlugin } from 'hodi:sdk'
-import { House } from 'lucide-react'
+import { UserPlus } from 'lucide-react'
 
 definePlugin({
   avatarMenu: [
     {
-      id: 'switch',
-      label: 'menu.switch',
-      icon: House,
-      onClick: () => openSwitcher()
+      id: 'invite',
+      label: 'menu.invite',
+      icon: UserPlus,
+      onClick: () => openInvite()
     }
   ]
 })

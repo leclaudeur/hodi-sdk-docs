@@ -1,6 +1,6 @@
 ---
 title: "avatarMenu"
-description: "Entries of the plugin in the avatar's menu, such as _Switch household_."
+description: "Entries of the plugin in the avatar's menu, such as _Invite a friend_."
 intro: "Entries the plugin adds to the avatar's menu, the menu of the open profile. They are for a quick action, reachable from any page."
 order: 14
 icon: "circle-user-round"
@@ -18,15 +18,15 @@ On a computer, the avatar's menu opens from the avatar, at the bottom of the sid
 
 ```tsx title="web/index.tsx"
 import { definePlugin } from 'hodi:sdk'
-import { House } from 'lucide-react'
+import { UserPlus } from 'lucide-react'
 
 definePlugin({
   avatarMenu: [
     {
-      id: 'switch',
-      label: 'menu.switch',
-      icon: House,
-      onClick: () => openSwitcher()
+      id: 'invite',
+      label: 'menu.invite',
+      icon: UserPlus,
+      onClick: () => openInvite()
     }
   ]
 })

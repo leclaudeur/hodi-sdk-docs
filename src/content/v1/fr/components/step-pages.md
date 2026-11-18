@@ -1,7 +1,7 @@
 ---
 title: "Pages d'étapes"
 description: "Les pages de l'installation et de _J'ai un code_ : une étape, des tuiles, les boutons."
-intro: "Ces composants dessinent les écrans en pleine page, comme ceux des emplacements [`afterSignIn`](/fr/guide/slots/after-sign-in/) et [`setupSteps`](/fr/guide/slots/setup/). Comme sur les écrans de Hodi, le logo est en haut, la licence en bas et la carte au centre."
+intro: "Ces composants dessinent les écrans en pleine page, comme ceux de l'emplacement [`setupSteps`](/fr/guide/slots/setup/). Comme sur les écrans de Hodi, le logo est en haut, la licence en bas et la carte au centre."
 order: 3
 icon: "list-checks"
 topic: "climate"
@@ -55,9 +55,9 @@ Un écran de choix en tuiles rondes, dessiné comme l'écran _Qui lit ?_ dessine
 import { TilesPage } from 'hodi:sdk'
 
 <TilesPage
-  title="Quel foyer ?"
-  intro="Choisis le foyer à ouvrir."
-  tiles={households.map(h => ({ key: h.id, label: h.name, onClick: () => open(h.id) }))}
+  title="Par quoi commencer ?"
+  intro="Choisis un thème pour ton premier fil."
+  tiles={topics.map(topic => ({ key: topic.id, label: topic.name, onClick: () => pick(topic.id) }))}
   opening={opening}
   onBack={back}
 />

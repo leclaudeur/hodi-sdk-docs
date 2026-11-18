@@ -1,7 +1,7 @@
 ---
 title: "Step pages"
 description: "The pages of setup and of _I have a code_: a step, tiles, the buttons."
-intro: "These components draw full-page screens, such as those of the [`afterSignIn`](/en/guide/slots/after-sign-in/) and [`setupSteps`](/en/guide/slots/setup/) slots. As on Hodi's own screens, the logo is at the top, the licence at the bottom and the card in the middle."
+intro: "These components draw full-page screens, such as those of the [`setupSteps`](/en/guide/slots/setup/) slot. As on Hodi's own screens, the logo is at the top, the licence at the bottom and the card in the middle."
 order: 3
 icon: "list-checks"
 topic: "climate"
@@ -55,9 +55,9 @@ A choice screen in round tiles, drawn the way the _Who's in?_ screen draws profi
 import { TilesPage } from 'hodi:sdk'
 
 <TilesPage
-  title="Which household?"
-  intro="Pick the household to open."
-  tiles={households.map(h => ({ key: h.id, label: h.name, onClick: () => open(h.id) }))}
+  title="Where to start?"
+  intro="Pick a topic for your first feed."
+  tiles={topics.map(topic => ({ key: topic.id, label: topic.name, onClick: () => pick(topic.id) }))}
   opening={opening}
   onBack={back}
 />
