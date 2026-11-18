@@ -1,6 +1,6 @@
 ---
 title: "Fields"
-description: "Text, password, codes, switches and choices."
+description: "Text, password, codes, switches, choices and numbers."
 intro: "The fields where the person types or picks something. They are as tall as a button: a field and a button placed side by side line up."
 order: 4
 icon: "text-cursor-input"
@@ -185,3 +185,40 @@ import { Segmented } from 'hodi:sdk'
 | `options` | `{ value; label; title? }[]` | The options, in order. Each has a value and a text; its `title` shows on hover. |
 | `onChange` | `(value) => void` | Called when the person picks an option, with its value. |
 | `wide?` | `boolean` | The choice takes the whole width, shared equally between the options. |
+
+## Stepper
+
+A number picked step by step: its value in the middle, a round − and + on each side, in a pill as tall as a button. Quick clicks or a button held down move on to the next steps of `fastSteps`. With `editable`, the value can also be typed, for a number too far for the buttons.
+
+```tsx title="web/index.tsx" render="stepper" play="stepper"
+import { Stepper } from 'hodi:sdk'
+
+<Stepper
+  label="Days kept"
+  lessLabel="One day fewer"
+  moreLabel="One day more"
+  value={days}
+  min={1}
+  max={365}
+  step={1}
+  fastSteps={[7, 30]}
+  onChange={setDays}
+>
+  {days} days
+</Stepper>
+```
+
+<!-- prettier-ignore -->
+| Props | Type | |
+| --- | --- | --- |
+| `label` | `string` | The number's name, for screen readers. |
+| `lessLabel` | `string` | The − button's name, such as _One day fewer_. |
+| `moreLabel` | `string` | The + button's name, such as _One day more_. |
+| `value` | `number` | The number picked. |
+| `min` | `number` | The smallest number: the − button turns off when the value reaches it. |
+| `max` | `number` | The largest number: the + button turns off when the value reaches it. |
+| `step` | `number` | The step of one click. |
+| `fastSteps?` | `number[]` | The bigger steps, in order, taken by quick clicks or a button held down. Each lands on its own multiples, so the values stay round. |
+| `editable?` | `boolean` | The value can also be typed. A number between `min` and `max` counts at once; one outside them is brought back inside when the field is left, and an emptied field goes back to the last value. |
+| `children?` | `ReactNode` | How the value reads, such as _7 days_. Not shown with `editable`. |
+| `onChange` | `(value: number) => void` | Called with each new value. |

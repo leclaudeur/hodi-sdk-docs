@@ -1,6 +1,6 @@
 ---
 title: "Champs"
-description: "Le texte, le mot de passe, les codes, les interrupteurs et les choix."
+description: "Le texte, le mot de passe, les codes, les interrupteurs, les choix et les nombres."
 intro: "Les champs où la personne tape ou choisit quelque chose. Ils ont la même hauteur qu'un bouton : un champ et un bouton posés côte à côte s'alignent."
 order: 4
 icon: "text-cursor-input"
@@ -185,3 +185,40 @@ import { Segmented } from 'hodi:sdk'
 | `options` | `{ value; label; title? }[]` | Les options, dans l'ordre. Chacune a une valeur et un texte ; son `title` s'affiche au survol. |
 | `onChange` | `(value) => void` | Appelé quand la personne choisit une option, avec sa valeur. |
 | `wide?` | `boolean` | Le choix prend toute la largeur, partagée à parts égales entre les options. |
+
+## Stepper
+
+Un nombre choisi pas à pas : sa valeur au milieu, un − et un + ronds de chaque côté, dans une pilule de la hauteur d'un bouton. Des clics rapides ou un bouton tenu enfoncé passent aux pas suivants de `fastSteps`. Avec `editable`, la valeur se tape aussi au clavier, pour un nombre trop loin pour les boutons.
+
+```tsx title="web/index.tsx" render="stepper" play="stepper"
+import { Stepper } from 'hodi:sdk'
+
+<Stepper
+  label="Jours gardés"
+  lessLabel="Un jour de moins"
+  moreLabel="Un jour de plus"
+  value={days}
+  min={1}
+  max={365}
+  step={1}
+  fastSteps={[7, 30]}
+  onChange={setDays}
+>
+  {days} jours
+</Stepper>
+```
+
+<!-- prettier-ignore -->
+| Props | Type | |
+| --- | --- | --- |
+| `label` | `string` | Le nom du nombre, pour les lecteurs d'écran. |
+| `lessLabel` | `string` | Le nom du bouton −, comme _Un jour de moins_. |
+| `moreLabel` | `string` | Le nom du bouton +, comme _Un jour de plus_. |
+| `value` | `number` | Le nombre choisi. |
+| `min` | `number` | Le plus petit nombre : le bouton − s'éteint quand la valeur l'atteint. |
+| `max` | `number` | Le plus grand nombre : le bouton + s'éteint quand la valeur l'atteint. |
+| `step` | `number` | Le pas d'un clic. |
+| `fastSteps?` | `number[]` | Les pas plus grands, dans l'ordre, pris par des clics rapides ou un bouton tenu enfoncé. Chacun tombe sur ses multiples : les valeurs restent rondes. |
+| `editable?` | `boolean` | La valeur se tape aussi. Un nombre entre `min` et `max` compte tout de suite ; un nombre en dehors est ramené dedans quand le champ est quitté, et un champ vidé reprend la dernière valeur. |
+| `children?` | `ReactNode` | Comment la valeur se lit, comme _7 jours_. Ne s'affiche pas avec `editable`. |
+| `onChange` | `(value: number) => void` | Appelé à chaque nouvelle valeur. |

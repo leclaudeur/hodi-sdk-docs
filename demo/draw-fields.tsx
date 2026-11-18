@@ -11,6 +11,7 @@ import { PasswordHint, PasswordRing } from '../src/ui/PasswordGauge.tsx'
 import PinField from '../src/ui/PinField.tsx'
 import Segmented from '../src/ui/Segmented.tsx'
 import SourceAvatar from '../src/ui/SourceAvatar.tsx'
+import Stepper from '../src/ui/Stepper.tsx'
 import StatusLine from '../src/ui/StatusLine.tsx'
 import TextField from '../src/ui/TextField.tsx'
 import Toggle from '../src/ui/Toggle.tsx'
@@ -98,6 +99,25 @@ export const DRAW_FIELDS: Record<string, Draw> = {
       wide={state.wide === true}
     />
   ),
+  stepper: (state, lang, set) => {
+    const days = Number(state.count ?? 7)
+    return (
+      <Stepper
+        label={s(state, 'label')}
+        lessLabel={tr(lang)('Un jour de moins', 'One day fewer')}
+        moreLabel={tr(lang)('Un jour de plus', 'One day more')}
+        value={days}
+        min={1}
+        max={365}
+        step={1}
+        fastSteps={[7, 30]}
+        editable={state.editable === true}
+        onChange={value => set?.('count', String(value))}
+      >
+        {tr(lang)(`${days} jours`, `${days} days`)}
+      </Stepper>
+    )
+  },
   statusline: state => <StatusLine tone={s(state, 'tone') as 'info'}>{s(state, 'message')}</StatusLine>,
   notice: (state, lang) => (
     <Notice

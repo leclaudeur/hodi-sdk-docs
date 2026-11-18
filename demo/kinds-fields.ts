@@ -171,3 +171,32 @@ export const segmented: Kind = {
     ]
   })
 }
+
+export const stepper: Kind = {
+  controls: {
+    label: text('label', words('Jours gardés', 'Days kept')),
+    'editable?': toggle('editable'),
+    // Not in the list: only the value the picker starts from.
+    count: text('count', '7')
+  },
+  code: (state, lang) => ({
+    body: [
+      h(
+        'Stepper',
+        [
+          ['label', s(str(state, 'label'))],
+          ['lessLabel', s(lang === 'en' ? 'One day fewer' : 'Un jour de moins')],
+          ['moreLabel', s(lang === 'en' ? 'One day more' : 'Un jour de plus')],
+          ['value', e('days')],
+          ['min', e('1')],
+          ['max', e('365')],
+          ['step', e('1')],
+          ['fastSteps', e('[7, 30]')],
+          ['editable', state.editable === true],
+          ['onChange', e('setDays')]
+        ],
+        ...(state.editable === true ? [] : [lang === 'en' ? '{days} days' : '{days} jours'])
+      )
+    ]
+  })
+}
