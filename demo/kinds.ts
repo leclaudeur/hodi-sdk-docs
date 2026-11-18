@@ -2,6 +2,7 @@ import { aibutton, button, readerbutton, roundbutton, sectionpage, settingscard 
 import {
   agecheckbox,
   checkbox,
+  choicefield,
   passwordfield,
   pinfield,
   segmented,
@@ -35,6 +36,7 @@ export const KINDS: Record<string, Kind> = {
   checkbox,
   agecheckbox,
   segmented,
+  choicefield,
   stepper,
   dialog,
   asktoconfirm,

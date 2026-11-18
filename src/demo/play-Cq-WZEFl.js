@@ -3359,7 +3359,8 @@ var L = /* @__PURE__ */ e(t()), ye = (e, t, n, r) => {
 	seo: {
 		title: "Hodi - L’actu pour toute la famille, gratuite et partout",
 		description: "Tes sites d’actualités préférés, triés par thème et réunis au même endroit. Un profil pour chacun, et le foyer partage ce qui vaut la peine d’être lu."
-	}
+	},
+	choiceField: { remove: "Retirer {{name}}" }
 }, H = ["fr", "en"], U = (e) => H.includes(e), Ke = {
 	fallbackLng: "fr",
 	supportedLngs: H,
@@ -3381,7 +3382,7 @@ var L = /* @__PURE__ */ e(t()), ye = (e, t, n, r) => {
 	} catch {
 		return null;
 	}
-})(), Ze = null, Qe = null, $e = () => Qe ?? Ze ?? Xe ?? Ye(), et = { en: () => import("./play-COmulvbe.js") }, W = /* @__PURE__ */ new Map(), tt = (e) => {
+})(), Ze = null, Qe = null, $e = () => Qe ?? Ze ?? Xe ?? Ye(), et = { en: () => import("./play-lbJYNgtT.js") }, W = /* @__PURE__ */ new Map(), tt = (e) => {
 	if (e === "fr" || I.hasResourceBundle(e, "translation")) return Promise.resolve();
 	let t = W.get(e);
 	return t || (t = et[e]().then((t) => {
@@ -3625,7 +3626,7 @@ var St = Y(xt), Ct = /* @__PURE__ */ n(((e) => {
 })), Tt = "(min-width: 1024px)", Et = (e) => (0, L.useSyncExternalStore)((t) => {
 	let n = window.matchMedia(e);
 	return n.addEventListener("change", t), () => n.removeEventListener("change", t);
-}, () => window.matchMedia(e).matches), Dt = () => Et(Tt), Ot = "(max-width: 600px)", kt = () => Et(Ot), At = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches, jt = () => import("./play-BwUczQ5_.js"), Mt = () => import("./play-D5mSPrp8.js"), X = !1, Z = /* @__PURE__ */ new Set(), Nt = () => {}, Pt = new Promise((e) => Nt = e), Ft = () => {
+}, () => window.matchMedia(e).matches), Dt = () => Et(Tt), Ot = "(max-width: 600px)", kt = () => Et(Ot), At = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches, jt = () => import("./play-BZUfh7zc.js"), Mt = () => import("./play-D5mSPrp8.js"), X = !1, Z = /* @__PURE__ */ new Set(), Nt = () => {}, Pt = new Promise((e) => Nt = e), Ft = () => {
 	X || (X = !0, Z.forEach((e) => e()));
 };
 window.addEventListener("load", () => window.setTimeout(Ft, 3e3), { once: !0 });

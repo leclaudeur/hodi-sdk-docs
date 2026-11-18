@@ -1,6 +1,6 @@
 ---
 title: "Fields"
-description: "Text, password, codes, switches, choices and numbers."
+description: "Text, password, codes, boxes, choices and numbers."
 intro: "The fields where the person types or picks something. They are as tall as a button: a field and a button placed side by side line up."
 order: 4
 icon: "text-cursor-input"
@@ -141,6 +141,7 @@ import { Checkbox } from 'hodi:sdk'
 | `onChange` | `(checked: boolean) => void` | Called at each click, with the new state. |
 | `children` | `ReactNode` | The sentence next to the box. |
 | `disabled?` | `boolean` | The box is greyed out and can't be ticked. |
+| `underField?` | `boolean` | Right under a field: the box lines up with the field's icon, as a `StatusLine`'s icon does. |
 
 ## AgeCheckbox
 
@@ -185,6 +186,40 @@ import { Segmented } from 'hodi:sdk'
 | `options` | `{ value; label; title? }[]` | The options, in order. Each has a value and a text; its `title` shows on hover. |
 | `onChange` | `(value) => void` | Called when the person picks an option, with its value. |
 | `wide?` | `boolean` | The choice takes the whole width, shared equally between the options. |
+
+## ChoiceField
+
+Several options picked from a list, such as a source's topics. Each option picked becomes a tag in the field, with its cross to remove it. The list opens on a click, on typing or with an arrow key, and narrows to what is typed. It goes over everything, even the edge of a `Dialog`.
+
+```tsx title="web/index.tsx" render="choicefield" play="choicefield"
+import { ChoiceField } from 'hodi:sdk'
+
+<ChoiceField
+  choices={[
+    { id: 'cut', label: 'Text cut off' },
+    { id: 'images', label: 'Missing pictures' },
+    { id: 'ads', label: 'Ads' },
+    { id: 'language', label: 'Wrong language' }
+  ]}
+  selected={issues}
+  onChange={setIssues}
+  label="Issues"
+  placeholder="Pick an issue"
+  morePlaceholder="Another issue?"
+/>
+```
+
+<!-- prettier-ignore -->
+| Props | Type | |
+| --- | --- | --- |
+| `choices` | `Choice[]` | The options, in order: `{ id, label, icon? }`. The icon goes before the text, in the tag and in the list. |
+| `selected` | `string[]` | The `id`s of the options picked, in the order they were picked. |
+| `onChange` | `(ids: string[]) => void` | Called with the new list each time an option is added or removed. |
+| `label` | `string` | The field's name, for screen readers. |
+| `placeholder` | `string` | What the empty field says. |
+| `morePlaceholder?` | `string` | What it says once an option is picked, such as _Another issue?_. |
+| `max?` | `number` | How many options can be picked. Once reached, the field only shows the tags. |
+| `disabled?` | `boolean` | The field is greyed out: nothing can be added or removed. |
 
 ## Stepper
 

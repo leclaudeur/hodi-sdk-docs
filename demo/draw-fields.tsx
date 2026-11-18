@@ -1,6 +1,7 @@
 import { Bell, ExternalLink, Hand, Inbox, Info, Mail, Search } from 'lucide-react'
 import Button from '../src/ui/Button.tsx'
 import Checkbox from '../src/ui/Checkbox.tsx'
+import ChoiceField from '../src/ui/ChoiceField.tsx'
 import Chip from '../src/ui/Chip.tsx'
 import EmptyState from '../src/ui/EmptyState.tsx'
 import FilterChip from '../src/ui/FilterChip.tsx'
@@ -18,7 +19,7 @@ import Toggle from '../src/ui/Toggle.tsx'
 import AgeCheckbox from '../src/plugins/AgeCheckbox.tsx'
 import householdStyles from '../src/views/household/Household.module.css'
 import { no, tr, type Draw } from './draw-buttons.tsx'
-import { FIELD_ERRORS, momentsOf } from './kinds-fields.ts'
+import { FIELD_ERRORS, issuesOf, momentsOf } from './kinds-fields.ts'
 
 // Fields, messages and small elements drawn by Hodi's own components from a state.
 
@@ -78,14 +79,38 @@ export const DRAW_FIELDS: Record<string, Draw> = {
       disabled={state.disabled === true}
     />
   ),
-  checkbox: (state, _lang, set) => (
-    <Checkbox
-      checked={state.checked === true}
-      onChange={checked => set?.('checked', checked)}
+  // Under a field, the check lines up with the field's icon: the render shows the field it sits under.
+  checkbox: (state, lang, set) => {
+    const box = (
+      <Checkbox
+        checked={state.checked === true}
+        onChange={checked => set?.('checked', checked)}
+        disabled={state.disabled === true}
+        underField={state.under === true}
+      >
+        {s(state, 'label')}
+      </Checkbox>
+    )
+    if (state.under !== true) return box
+    return (
+      <div className={householdStyles.field}>
+        <TextField icon={Mail} aria-label="E-mail" placeholder={tr(lang)('toi@exemple.be', 'you@example.com')} />
+        {box}
+      </div>
+    )
+  },
+  choicefield: (state, lang, set) => (
+    <ChoiceField
+      choices={issuesOf(lang)}
+      selected={String(state.picked ?? 'cut')
+        .split(',')
+        .filter(Boolean)}
+      onChange={ids => set?.('picked', ids.join(','))}
+      label={s(state, 'label')}
+      placeholder={s(state, 'placeholder')}
+      morePlaceholder={s(state, 'more') || undefined}
       disabled={state.disabled === true}
-    >
-      {s(state, 'label')}
-    </Checkbox>
+    />
   ),
   agecheckbox: (state, _lang, set) => (
     <AgeCheckbox checked={state.checked === true} onChange={checked => set?.('checked', checked)} />

@@ -1,6 +1,6 @@
 ---
 title: "Champs"
-description: "Le texte, le mot de passe, les codes, les interrupteurs, les choix et les nombres."
+description: "Le texte, le mot de passe, les codes, les cases, les choix et les nombres."
 intro: "Les champs où la personne tape ou choisit quelque chose. Ils ont la même hauteur qu'un bouton : un champ et un bouton posés côte à côte s'alignent."
 order: 4
 icon: "text-cursor-input"
@@ -141,6 +141,7 @@ import { Checkbox } from 'hodi:sdk'
 | `onChange` | `(checked: boolean) => void` | Appelé à chaque clic, avec le nouvel état. |
 | `children` | `ReactNode` | La phrase à côté de la case. |
 | `disabled?` | `boolean` | La case est grisée et ne se coche pas. |
+| `underField?` | `boolean` | Juste sous un champ : la case s'aligne sur l'icône du champ, comme l'icône d'un `StatusLine`. |
 
 ## AgeCheckbox
 
@@ -185,6 +186,40 @@ import { Segmented } from 'hodi:sdk'
 | `options` | `{ value; label; title? }[]` | Les options, dans l'ordre. Chacune a une valeur et un texte ; son `title` s'affiche au survol. |
 | `onChange` | `(value) => void` | Appelé quand la personne choisit une option, avec sa valeur. |
 | `wide?` | `boolean` | Le choix prend toute la largeur, partagée à parts égales entre les options. |
+
+## ChoiceField
+
+Un choix de plusieurs options parmi une liste, comme les thèmes d'une source. Chaque option choisie devient une étiquette dans le champ, avec sa croix pour la retirer. La liste s'ouvre au clic, à la frappe ou avec une flèche, et se filtre sur ce qui est tapé. Elle passe par-dessus tout, même le bord d'un `Dialog`.
+
+```tsx title="web/index.tsx" render="choicefield" play="choicefield"
+import { ChoiceField } from 'hodi:sdk'
+
+<ChoiceField
+  choices={[
+    { id: 'cut', label: 'Texte coupé' },
+    { id: 'images', label: 'Images manquantes' },
+    { id: 'ads', label: 'Publicités' },
+    { id: 'language', label: 'Mauvaise langue' }
+  ]}
+  selected={issues}
+  onChange={setIssues}
+  label="Soucis"
+  placeholder="Choisir un souci"
+  morePlaceholder="Un autre souci ?"
+/>
+```
+
+<!-- prettier-ignore -->
+| Props | Type | |
+| --- | --- | --- |
+| `choices` | `Choice[]` | Les options, dans l'ordre : `{ id, label, icon? }`. L'icône se place devant le texte, dans l'étiquette et dans la liste. |
+| `selected` | `string[]` | Les `id` des options choisies, dans l'ordre où elles l'ont été. |
+| `onChange` | `(ids: string[]) => void` | Appelé à chaque option ajoutée ou retirée, avec la nouvelle liste. |
+| `label` | `string` | Le nom du champ, pour les lecteurs d'écran. |
+| `placeholder` | `string` | Ce que dit le champ vide. |
+| `morePlaceholder?` | `string` | Ce qu'il dit dès qu'une option est choisie, comme _Un autre souci ?_. |
+| `max?` | `number` | Le nombre d'options qui peuvent être choisies. Une fois atteint, le champ ne montre plus que les étiquettes. |
+| `disabled?` | `boolean` | Le champ est grisé : rien ne s'ajoute ni ne se retire. |
 
 ## Stepper
 

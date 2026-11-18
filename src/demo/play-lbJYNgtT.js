@@ -1733,7 +1733,7 @@ var e = {
 }, ue = {
 	title: "Hodi - News for the whole family, free and everywhere",
 	description: "Your favourite news sites, sorted by topic, all in one place. A profile for everyone, and the household shares what’s worth reading."
-}, de = {
+}, de = { remove: "Remove {{name}}" }, fe = {
 	common: e,
 	language: t,
 	app: n,
@@ -1798,6 +1798,7 @@ var e = {
 	mail: se,
 	forgot: ce,
 	twoFactor: le,
-	seo: ue
+	seo: ue,
+	choiceField: de
 };
-export { X as addSource, $ as ai, o as aiKey, n as app, v as card, e as common, re as confirm, x as count, z as dailySummary, de as default, ie as dialogIntro, w as feed, V as followed, ce as forgot, G as game, k as help, O as history, ne as hourCycle, i as join, t as language, f as limits, T as lists, r as login, se as mail, u as nav, y as notFound, _ as offline, A as pane, a as password, te as passwordChange, Y as pin, ae as plugins, c as profileForm, d as profiles, C as pull, ee as push, P as questions, j as reader, s as regions, m as requests, E as resume, D as saved, U as search, ue as seo, oe as server, J as settings, l as setup, L as share, F as shareMenu, I as shareTo, H as shares, h as shortcuts, Q as sources, M as speech, S as state, W as stats, B as stories, Z as suggest, N as summary, K as sync, b as time, q as toast, g as tour, le as twoFactor, R as videos, p as young };
+export { X as addSource, $ as ai, o as aiKey, n as app, v as card, de as choiceField, e as common, re as confirm, x as count, z as dailySummary, fe as default, ie as dialogIntro, w as feed, V as followed, ce as forgot, G as game, k as help, O as history, ne as hourCycle, i as join, t as language, f as limits, T as lists, r as login, se as mail, u as nav, y as notFound, _ as offline, A as pane, a as password, te as passwordChange, Y as pin, ae as plugins, c as profileForm, d as profiles, C as pull, ee as push, P as questions, j as reader, s as regions, m as requests, E as resume, D as saved, U as search, ue as seo, oe as server, J as settings, l as setup, L as share, F as shareMenu, I as shareTo, H as shares, h as shortcuts, Q as sources, M as speech, S as state, W as stats, B as stories, Z as suggest, N as summary, K as sync, b as time, q as toast, g as tour, le as twoFactor, R as videos, p as young };
