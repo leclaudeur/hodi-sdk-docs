@@ -101,7 +101,7 @@ import { ExternalLink, Info } from 'lucide-react'
 | `title` | `string` | Le titre de l'encadré. |
 | `icon` | `LucideIcon` | L'icône de l'encadré, une icône Lucide. |
 | `children` | `ReactNode` | Le texte sous le titre. |
-| `tone?` | `'info' \| 'warning' \| 'error'` | La couleur de l'encadré : `info` en bleu par défaut, `warning` en jaune, `error` en rouge. |
+| `tone?` | `'info' \| 'warning' \| 'error' \| 'success'` | La couleur de l'encadré : `info` en bleu par défaut, `warning` en jaune, `error` en rouge, `success` en vert, pour ce qui vient de réussir. |
 | `action?` | `NoticeAction` | Un bouton au bout de l'encadré. Il a un `label`, une `icon`, et un `onClick` ou un `href`. |
 | `side?` | `ReactNode` | Des boutons ronds au bout de l'encadré, à la place de `action`. |
 | `href?` | `string` | Fait de tout l'encadré un lien vers cette adresse, ouvert dans un nouvel onglet. |
