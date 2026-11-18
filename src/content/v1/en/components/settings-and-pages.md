@@ -40,7 +40,7 @@ import { Pencil } from 'lucide-react'
 | --- | --- | --- |
 | `title` | `string` | The page's title, already translated. |
 | `layout` | `'desktop' \| 'phone'` | The screen's size, as the slot gives it to the page. |
-| `intro?` | `ReactNode` | A sentence under the title, which says what the page is for. |
+| `intro?` | `ReactNode` | A sentence under the title, which says what the page is for. A string can put a name or an e-mail address between `<b>` and the name of a screen or a button between `<i>`: Hodi shows them in bold and in italics, as in its own texts. |
 | `aside?` | `ReactNode` | An element next to the title, or under the title on a phone. |
 | `children` | `ReactNode` | The page's cards, `SettingsCard`s. |
 

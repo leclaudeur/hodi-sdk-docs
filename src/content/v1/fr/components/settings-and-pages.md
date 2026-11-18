@@ -40,7 +40,7 @@ import { Pencil } from 'lucide-react'
 | --- | --- | --- |
 | `title` | `string` | Le titre de la page, déjà traduit. |
 | `layout` | `'desktop' \| 'phone'` | La taille de l'écran, telle que l'emplacement la donne à la page. |
-| `intro?` | `ReactNode` | Une phrase sous le titre, qui dit à quoi sert la page. |
+| `intro?` | `ReactNode` | Une phrase sous le titre, qui dit à quoi sert la page. Une chaîne peut mettre un nom ou une adresse e-mail entre `<b>` et le nom d'un écran ou d'un bouton entre `<i>` : Hodi les affiche en gras et en italique, comme dans ses propres textes. |
 | `aside?` | `ReactNode` | Un élément à côté du titre, ou sous le titre sur un téléphone. |
 | `children` | `ReactNode` | Les cartes de la page, des `SettingsCard`. |
 
