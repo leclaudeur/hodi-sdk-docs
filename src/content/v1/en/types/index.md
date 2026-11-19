@@ -113,7 +113,6 @@ What a route returns: JSON, or a zip Hodi builds and sends as a download. Hodi o
 | `status?` | `number` | The response's HTTP code. It is 200 by default. |
 | `body?` | `unknown` | Any JSON value, which the web part reads with `answer.json()`. |
 | `headers?` | `{ 'Cache-Control'?: string }` | The only header a route can choose: how long the browser keeps the response. |
-| `moveDevice?` | `number` | With the `households` permission: a household's id. From this response on, the device reads in that household. |
 | `zip?` | `{ filename; entries: PluginZipEntry[] }` | A zip to download, instead of `body`. Each entry is a text, or the first column of a row of the database (`{ path, blob: { sql, params } }`). |
 
 ### PluginRoutes
@@ -296,8 +295,6 @@ The object `definePlugin()` receives: one field per slot, all optional. [The slo
 | `overviewCards?` | `OverviewCardSlot[]` | The [plugin's cards in Overview](/en/guide/slots/overview/). |
 | `readerAction?` | `ComponentType<{ article: ReaderArticle }>` | A component at the end of each article, in [the reader](/en/guide/slots/reader/). |
 | `signInExtras?` | `ComponentType<{ layout; signedIn }>` | A component under the [Sign in](/en/guide/slots/sign-in/) form. |
-| `afterSignIn?` | `ComponentType<AfterSignInProps>` | A [step right after signing in](/en/guide/slots/after-sign-in/), before entering the app. |
-| `whoIsReadingFooter?` | `ComponentType<{ layout }>` | A component [under _Who's in?_](/en/guide/slots/who-is-reading-footer/), next to _Manage profiles_. |
 | `ageConsent?` | `AgeConsent` | A [text after _I am at least 13 years old_](/en/guide/slots/age-consent/). |
 | `setupSteps?` | `SetupStep[]` | The [plugin's steps in Hodi's setup](/en/guide/slots/setup/). |
 | `accountRows?` | `ComponentType<{ layout }>` | [Rows at the end of _Your account_](/en/guide/slots/account-rows/). |
@@ -338,16 +335,6 @@ A step of `setupSteps`. To place one of Hodi's steps among the plugin's, an entr
 | `title` | `string` | The step's title: a key of the plugin's locales. |
 | `intro` | `string` | The sentence under the title: a key of the plugin's locales. |
 | `page` | `ComponentType<SetupStepProps>` | The step's content. |
-
-### AfterSignInProps
-
-The props the component of `afterSignIn` receives.
-
-<!-- prettier-ignore -->
-| Fields | Type | |
-| --- | --- | --- |
-| `layout` | `'desktop' \| 'phone'` | The screen's size. |
-| `done` | `() => void` | Ends the step and lets the person into the app. |
 
 ### AvatarMenuItem
 

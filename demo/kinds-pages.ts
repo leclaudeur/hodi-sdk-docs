@@ -201,8 +201,8 @@ export const steppage: Kind = {
 export const tilespage: Kind = {
   fixed: true,
   controls: {
-    title: text('title', words('Quel foyer ?', 'Which household?')),
-    'intro?': text('intro', words('Choisis le foyer à ouvrir.', 'Pick the household to open.')),
+    title: text('title', words('Par quoi commencer ?', 'Where to start?')),
+    'intro?': text('intro', words('Choisis un thème pour ton premier fil.', 'Pick a topic for your first feed.')),
     'opening?': toggle('opening'),
     'error?': toggle('error'),
     'onBack?': toggle('back', true)
@@ -212,9 +212,9 @@ export const tilespage: Kind = {
       h('TilesPage', [
         ['title', s(str(state, 'title'))],
         ['intro', state.intro !== '' && s(str(state, 'intro'))],
-        ['tiles', e('households.map(h => ({ key: h.id, label: h.name, onClick: () => open(h.id) }))')],
+        ['tiles', e('topics.map(topic => ({ key: topic.id, label: topic.name, onClick: () => pick(topic.id) }))')],
         ['opening', e('opening')],
-        ['error', state.error === true && s(tr(lang)('Ce foyer ne répond pas.', 'This household does not answer.'))],
+        ['error', state.error === true && s(tr(lang)('Ce thème ne s’ouvre pas.', 'This topic does not open.'))],
         ['onBack', state.back === true && e('back')]
       ])
     ]

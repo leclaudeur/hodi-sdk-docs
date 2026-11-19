@@ -113,7 +113,6 @@ Ce qu'une route renvoie : du JSON, ou un zip que Hodi construit et envoie en té
 | `status?` | `number` | Le code HTTP de la réponse. Il vaut 200 par défaut. |
 | `body?` | `unknown` | N'importe quelle valeur JSON, que la partie web lit avec `answer.json()`. |
 | `headers?` | `{ 'Cache-Control'?: string }` | Le seul en-tête qu'une route peut choisir : combien de temps le navigateur garde la réponse. |
-| `moveDevice?` | `number` | Avec la permission `households` : l'id d'un foyer. À partir de cette réponse, l'appareil lit dans ce foyer. |
 | `zip?` | `{ filename; entries: PluginZipEntry[] }` | Un zip à télécharger, à la place de `body`. Chaque entrée est un texte, ou la première colonne d'une ligne de la base (`{ path, blob: { sql, params } }`). |
 
 ### PluginRoutes
@@ -296,8 +295,6 @@ L'objet que `definePlugin()` reçoit : un champ par emplacement, tous facultatif
 | `overviewCards?` | `OverviewCardSlot[]` | Les [cartes du plugin dans Vue d'ensemble](/fr/guide/slots/overview/). |
 | `readerAction?` | `ComponentType<{ article: ReaderArticle }>` | Un composant au bout de chaque article, dans [le lecteur](/fr/guide/slots/reader/). |
 | `signInExtras?` | `ComponentType<{ layout; signedIn }>` | Un composant sous le formulaire de [Connexion](/fr/guide/slots/sign-in/). |
-| `afterSignIn?` | `ComponentType<AfterSignInProps>` | Une [étape juste après la connexion](/fr/guide/slots/after-sign-in/), avant d'entrer dans l'app. |
-| `whoIsReadingFooter?` | `ComponentType<{ layout }>` | Un composant [sous _Qui lit ?_](/fr/guide/slots/who-is-reading-footer/), à côté de _Gérer les profils_. |
 | `ageConsent?` | `AgeConsent` | Un [texte après _J'ai au moins 13 ans_](/fr/guide/slots/age-consent/). |
 | `setupSteps?` | `SetupStep[]` | Les [étapes du plugin dans l'installation](/fr/guide/slots/setup/) de Hodi. |
 | `accountRows?` | `ComponentType<{ layout }>` | Des [lignes au bout de _Ton compte_](/fr/guide/slots/account-rows/). |
@@ -338,16 +335,6 @@ Une étape de `setupSteps`. Pour placer une étape de Hodi parmi celles du plugi
 | `title` | `string` | Le titre de l'étape : une clé des locales du plugin. |
 | `intro` | `string` | La phrase sous le titre : une clé des locales du plugin. |
 | `page` | `ComponentType<SetupStepProps>` | Le contenu de l'étape. |
-
-### AfterSignInProps
-
-Les props que reçoit le composant de `afterSignIn`.
-
-<!-- prettier-ignore -->
-| Champs | Type | |
-| --- | --- | --- |
-| `layout` | `'desktop' \| 'phone'` | La taille de l'écran. |
-| `done` | `() => void` | Termine l'étape et fait entrer la personne dans l'app. |
 
 ### AvatarMenuItem
 
