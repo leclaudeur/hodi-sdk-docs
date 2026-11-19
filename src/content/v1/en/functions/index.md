@@ -28,7 +28,7 @@ askToConfirm({
 | Props | Type | |
 | --- | --- | --- |
 | `title` | `string` | The question asked, such as _Clear the history?_. |
-| `message` | `ReactNode` | What will happen, in full: what will be erased, for whom, and what will remain. |
+| `message` | `ReactNode` | What will happen, in full: what will be erased, for whom, and what will remain. A string can put a name or an e-mail address between `<b>` and the name of a screen or a button between `<i>`: Hodi shows them in bold and in italics, as in its own texts. |
 | `label` | `string` | The text of the button that confirms, a verb such as _Clear_ or _Delete_. |
 | `onConfirm` | `(proof: Proof) => void \| Promise<void>` | What the click on that button does. With `proof`, it receives the password and code typed. If the promise fails, the window stays open. |
 | `look?` | `'danger' \| 'primary'` | The button's colour: red by default, `primary` for an action that adds instead of erasing. |
