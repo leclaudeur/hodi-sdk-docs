@@ -311,7 +311,7 @@ If the hook fails, Hodi tries again every minute until it succeeds. So it may ru
 
 ### Copying
 
-In _Settings › Account and data_, each person can download a copy of their data. `exportData` adds what the plugin keeps about them, as JSON of 512 KB at most:
+In _Settings › My account_, each person can download a copy of their data. `exportData` adds what the plugin keeps about them, as JSON of 512 KB at most:
 
 ```tsx title="server/index.ts"
 exportData: async ({ profileId }, ctx) => ({

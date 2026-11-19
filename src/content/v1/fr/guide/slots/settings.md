@@ -41,7 +41,7 @@ Voici les six valeurs possibles de `group`. Pour chaque valeur, le nom du groupe
 | --- | --- |
 | `reading` | Le groupe _Lecture_. Ce groupe contient Lecture et affichage (`reading`), Thèmes (`themes`), Sources (`sources`) et Historique (`history`). |
 | `subjects` | Le groupe _Sujets_. Ce groupe contient Sujets suivis (`followed`) et Sujets masqués (`muted`). |
-| `you` | Le groupe _Toi_. Ce groupe contient Mon profil (`me`), Statistiques (`stats`), Compte et données (`account`) et Partage (`sharing`). |
+| `you` | Le groupe _Toi_. Ce groupe contient Général (`general`), Statistiques (`stats`), Mon compte (`account`) et Partage (`sharing`). |
 | `household` | Le groupe _Foyer_. Ce groupe contient Foyer (`household`), Profils (`profiles`) et IA et crédits (`ai`). C'est le groupe par défaut. |
 | `device` | Le groupe _Cet appareil_. Ce groupe contient Notifications (`notifications`) et Raccourcis clavier (`shortcuts`). |
 | `about` | Le groupe _Hodi_. Ce groupe contient Serveur (`server`) et À propos (`about`). |

@@ -41,7 +41,7 @@ Here are the six possible values of `group`. For each value, the group's name in
 | --- | --- |
 | `reading` | The _Reading_ group. This group holds Reading and display (`reading`), Topics (`themes`), Sources (`sources`) and History (`history`). |
 | `subjects` | The _Subjects_ group. This group holds Followed subjects (`followed`) and Muted subjects (`muted`). |
-| `you` | The _You_ group. This group holds My profile (`me`), Statistics (`stats`), Account and data (`account`) and Sharing (`sharing`). |
+| `you` | The _You_ group. This group holds General (`general`), Statistics (`stats`), My account (`account`) and Sharing (`sharing`). |
 | `household` | The _Household_ group. This group holds Household (`household`), Profiles (`profiles`) and AI & credits (`ai`). It is the default group. |
 | `device` | The _This device_ group. This group holds Notifications (`notifications`) and Keyboard shortcuts (`shortcuts`). |
 | `about` | The _Hodi_ group. This group holds Server (`server`) and About (`about`). |

@@ -41,7 +41,7 @@ L'objet que `server/index.ts` exporte par défaut. Tous ses champs sont facultat
 | `onProfileDeleted?` | `(deleted, ctx) => Promise<void>` | Hodi l'appelle quand un profil est supprimé. Le plugin y efface ce qu'il gardait de ce profil. |
 | `onAccountDeleted?` | `(deleted, ctx) => Promise<void>` | Hodi l'appelle quand un compte est supprimé. Le plugin y efface ce qu'il gardait de ce compte. |
 | `onHouseholdRemoved?` | `(removed, ctx) => Promise<void>` | Hodi l'appelle quand un foyer est retiré du serveur. Le plugin y efface ce qu'il gardait de ce foyer. |
-| `exportData?` | `(who, ctx) => Promise<unknown>` | Ce que le plugin garde d'une personne, en JSON. Hodi l'ajoute à la copie que cette personne télécharge dans _Réglages › Compte et données_. |
+| `exportData?` | `(who, ctx) => Promise<unknown>` | Ce que le plugin garde d'une personne, en JSON. Hodi l'ajoute à la copie que cette personne télécharge dans _Réglages › Mon compte_. |
 
 ### PluginContext
 
@@ -300,7 +300,7 @@ L'objet que `definePlugin()` reçoit : un champ par emplacement, tous facultatif
 | `whoIsReadingFooter?` | `ComponentType<{ layout }>` | Un composant [sous _Qui lit ?_](/fr/guide/slots/who-is-reading-footer/), à côté de _Gérer les profils_. |
 | `ageConsent?` | `AgeConsent` | Un [texte après _J'ai au moins 13 ans_](/fr/guide/slots/age-consent/). |
 | `setupSteps?` | `SetupStep[]` | Les [étapes du plugin dans l'installation](/fr/guide/slots/setup/) de Hodi. |
-| `accountRows?` | `ComponentType<{ layout }>` | Des [lignes au bout de _Ton compte_](/fr/guide/slots/account-rows/). |
+| `accountRows?` | `ComponentType<{ layout }>` | Des [lignes au bout de la carte _Compte_](/fr/guide/slots/account-rows/). |
 | `avatarMenu?` | `AvatarMenuItem[]` | Des [entrées dans le menu de l'avatar](/fr/guide/slots/avatar-menu/). |
 
 ### ServerSection

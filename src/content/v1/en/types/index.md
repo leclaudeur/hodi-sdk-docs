@@ -41,7 +41,7 @@ The object `server/index.ts` exports by default. All its fields are optional: a 
 | `onProfileDeleted?` | `(deleted, ctx) => Promise<void>` | Hodi calls it when a profile is deleted. The plugin erases what it kept about that profile. |
 | `onAccountDeleted?` | `(deleted, ctx) => Promise<void>` | Hodi calls it when an account is deleted. The plugin erases what it kept about that account. |
 | `onHouseholdRemoved?` | `(removed, ctx) => Promise<void>` | Hodi calls it when a household is removed from the server. The plugin erases what it kept about that household. |
-| `exportData?` | `(who, ctx) => Promise<unknown>` | What the plugin keeps about a person, as JSON. Hodi adds it to the copy that person downloads in _Settings › Account and data_. |
+| `exportData?` | `(who, ctx) => Promise<unknown>` | What the plugin keeps about a person, as JSON. Hodi adds it to the copy that person downloads in _Settings › My account_. |
 
 ### PluginContext
 
@@ -300,7 +300,7 @@ The object `definePlugin()` receives: one field per slot, all optional. [The slo
 | `whoIsReadingFooter?` | `ComponentType<{ layout }>` | A component [under _Who's in?_](/en/guide/slots/who-is-reading-footer/), next to _Manage profiles_. |
 | `ageConsent?` | `AgeConsent` | A [text after _I am at least 13 years old_](/en/guide/slots/age-consent/). |
 | `setupSteps?` | `SetupStep[]` | The [plugin's steps in Hodi's setup](/en/guide/slots/setup/). |
-| `accountRows?` | `ComponentType<{ layout }>` | [Rows at the end of _Your account_](/en/guide/slots/account-rows/). |
+| `accountRows?` | `ComponentType<{ layout }>` | [Rows at the end of the _Account_ card](/en/guide/slots/account-rows/). |
 | `avatarMenu?` | `AvatarMenuItem[]` | [Entries in the avatar's menu](/en/guide/slots/avatar-menu/). |
 
 ### ServerSection
