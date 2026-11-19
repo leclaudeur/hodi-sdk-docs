@@ -96,8 +96,8 @@ The person calling a route, as Hodi checked them. The route can rely on it witho
 <!-- prettier-ignore -->
 | Fields | Type | |
 | --- | --- | --- |
-| `profileId` | `number \| null` | The profile open on the device. It is `null` in the Server space, when the server's admin has no profile in the household. |
-| `householdId` | `number \| null` | The household the person asks for. Every query that reads a household's data filters on this id. |
+| `profileId` | `number \| null` | The profile open on the device. It is `null` in the Server space, when the server's admin has no profile in the household, and on a `noHousehold` route called by an account with no household. |
+| `householdId` | `number \| null` | The household the person asks for. Every query that reads a household's data filters on this id. It is `null` on a `noHousehold` route called by an account with no household. |
 | `kind` | `'adult' \| 'teen' \| 'child'` | The open profile is an adult's, a teen's or a child's. |
 | `householdAdmin` | `boolean` | `true` when the person is their household's admin. |
 | `serverAdmin` | `boolean` | `true` when the person is the server's admin. |
@@ -125,6 +125,7 @@ An object of routes. Each key has the form `'METHOD /path'`, and a part of the p
 | --- | --- | --- |
 | `handler` | `(request, ctx) => Promise<PluginResponse>` | The route's function. |
 | `proof?` | `boolean` | Marks a sensitive route. Hodi only runs it after the person typed their password again in `askToConfirm()`. Without that password, the route answers 403 without running. |
+| `noHousehold?` | `boolean` | In `routes` only: opens the route to an account that has no household any more, which every other route refuses with 423 `no_household`. [A route for an account with no household](/en/guide/server-context/#a-route-for-an-account-with-no-household) explains it. |
 | `raw?` | `true` | The route receives bytes instead of JSON, such as an image or a file. |
 | `maxBody?` | `number` | The largest size of those bytes, in bytes, up to 10 MB. |
 
@@ -302,6 +303,7 @@ The object `definePlugin()` receives: one field per slot, all optional. [The slo
 | `setupSteps?` | `SetupStep[]` | The [plugin's steps in Hodi's setup](/en/guide/slots/setup/). |
 | `accountRows?` | `ComponentType<{ layout }>` | [Rows at the end of _Your account_](/en/guide/slots/account-rows/). |
 | `avatarMenu?` | `AvatarMenuItem[]` | [Entries in the avatar's menu](/en/guide/slots/avatar-menu/). |
+| `noHouseholdActions?` | `ComponentType<{ layout; done }>` | [Another way on, on the card of an account with no household](/en/guide/slots/no-household-actions/), such as _Create my household_. |
 
 ### ServerSection
 

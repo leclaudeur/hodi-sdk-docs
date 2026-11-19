@@ -92,12 +92,15 @@ The template's CI runs them again at every push. A plugin that passes its tests 
 | --- | --- |
 | `route('POST /hello', { as, body, query })` | Calls a route of the plugin. Without `as`, the household's admin calls. |
 | `addPerson({ name, kind })` | Adds someone to the household: `adult`, `teen` or `child`. |
+| `addAccount({ email })` | Creates an account in no household, and returns its id. |
+| `noHouseholdRoute(route, accountId)` | Calls a route as that account with no household: only `noHousehold` routes answer it. |
 | `click(action, input)` | Plays a click on the plugin's `AiButton`. |
 | `runTask(name)` | Runs a task, as Hodi would at its time. |
 | `readFeed(key)` | Reads a feed of the plugin, like a household that follows it. |
 | `exportData(person)` | Asks for a person's copy of their data. |
 | `mails` | The e-mails the plugin sent, in order. |
 | `notifications` | The notifications the plugin sent, in order. |
+| `serverNotices` | What the plugin told the server's admin, in order. An `important` one has `waiting`, `true` until `ctx.serverNoticeHandled()`. |
 | `questions` | The questions the plugin asked the AI, in order. |
 | `log` | The plugin's log lines, and Hodi's lines about it (a refused permission, for example). |
 | `stop()` | Stops the small Hodi at the end of the tests. |

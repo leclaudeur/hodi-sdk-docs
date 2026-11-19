@@ -203,6 +203,33 @@ routes: {
 
 Côté web, `askToConfirm()` ouvre la fenêtre de Hodi qui demande le mot de passe. Sans lui, la route répond 403 sans avoir tourné. Le plugin ne voit jamais le mot de passe.
 
+### Une route pour un compte sans foyer
+
+Un compte qui a quitté son foyer, ou dont le profil a été supprimé, n'a plus de foyer. Toutes les routes lui répondent 423 `no_household`, sauf une route de `routes` marquée `noHousehold: true` :
+
+```tsx title="server/index.ts"
+routes: {
+  'POST /my-household': {
+    noHousehold: true,
+    handler: async (request, ctx) => {
+      const household = await ctx.households.create({
+        name: 'Famille Martin',
+        admin: {
+          name: 'Paul',
+          accountId: request.who.accountId
+        }
+      })
+      return {
+        status: 201,
+        body: { id: household.id }
+      }
+    }
+  }
+}
+```
+
+Sur une telle route, `request.who.accountId` est ce compte, et `profileId` et `householdId` valent `null`. La partie web l'appelle depuis [`noHouseholdActions`](/fr/guide/slots/no-household-actions/).
+
 ## Ce que le contexte donne
 
 ### À chaque plugin
@@ -227,6 +254,8 @@ Chacune de ces fonctions ne marche que si le plugin a la [permission](/fr/guide/
 | `ctx.articles` | Retrouve un article listé par Hodi, et sa page. Il faut la permission `articles`. |
 | `ctx.ai.ask(question)` | Pose une question à l'IA du foyer, une fois par clic. Il faut la permission `ai`. |
 | `ctx.notify(notice)` | Envoie une notification à une personne, 10 par jour au plus. Il faut la permission `notify`. |
+| `ctx.notifyServerAdmin(type, notice)` | Prévient l'admin du serveur d'un événement d'une des sortes de [`serverNotifications`](/fr/guide/manifest/#servernotifications), 50 par jour au plus. Il faut la permission `notify`. |
+| `ctx.serverNoticeHandled(key)` | Sort de _À traiter_ la demande de cette clé. Il faut la permission `notify`. |
 | `ctx.mail.send(message)` | Envoie un e-mail, 50 par heure au plus. Il faut la permission `mail`. |
 | `ctx.accounts` | Retrouve, crée et vérifie des comptes. Il faut la permission `accounts`. |
 | `ctx.households` | Liste et crée des foyers. Il faut la permission `households`. |
@@ -236,6 +265,30 @@ Chacune de ces fonctions ne marche que si le plugin a la [permission](/fr/guide/
 ```tsx title="server/index.ts"
 const { text } = await ctx.fetchText('https://api.example.com/weather?city=Brussels')
 const weather = JSON.parse(text)
+```
+
+### Prévenir l'admin du serveur
+
+`ctx.notifyServerAdmin()` arrive dans _Serveur › Notifications_, puis par e-mail ou par push, selon ce que l'admin a choisi pour cette sorte dans _Serveur › Alertes_. Le titre fait 80 caractères au plus, le texte 240, en texte brut, en une langue ou une par langue. `path` ouvre une section du plugin dans l'espace Serveur.
+
+Une demande que quelqu'un attend porte une clé `important`, propre au plugin (lettres, chiffres et `. _ : -`, 100 caractères au plus). Elle reste en haut, sous _À traiter_, et la même clé n'est pas envoyée deux fois tant qu'elle attend. Le plugin la sort de là une fois la demande traitée :
+
+```tsx title="server/index.ts"
+await ctx.notifyServerAdmin('waitlist', {
+  title: {
+    fr: 'Nouvelle inscription',
+    en: 'New sign-up'
+  },
+  text: {
+    fr: 'Anna attend une invitation.',
+    en: 'Anna waits for an invitation.'
+  },
+  path: 'waitlist',
+  important: `waitlist:${id}`
+})
+
+// Plus tard, une fois Anna invitée :
+await ctx.serverNoticeHandled(`waitlist:${id}`)
 ```
 
 ## L'IA, seulement sur un clic

@@ -318,6 +318,26 @@ Without `menu`, or with an unknown group, the plugin's entry goes at the end of 
 
 The `feeds` field declares the feeds of articles the plugin offers, 5 at most. A household follows these feeds like any other source. [`feeds`](/en/guide/slots/feeds/) shows a whole example.
 
+### `serverNotifications`
+
+The `serverNotifications` field lists the kinds of events the plugin tells the server's admin of, 10 at most. It needs the `notify` permission. Each kind becomes a row of _Server › Alerts_, under the plugin's name, where the admin chooses e-mail, push, both or neither.
+
+```json title="plugin.json"
+"serverNotifications": [
+  {
+    "type": "waitlist",
+    "label": "Nouvelle inscription",
+    "hint": "Quand quelqu'un rejoint la liste d'attente"
+  }
+]
+```
+
+- `type`: lowercase letters, digits and dashes, 32 characters at most.
+- `label`: the row's name, 60 characters at most.
+- `hint`: optional, the grey line under it, 80 characters at most.
+
+The texts in other languages go in the plugin's locales, under `manifest.serverNotifications.<type>`. The server part tells the admin with [`ctx.notifyServerAdmin()`](/en/guide/server-context/#telling-the-servers-admin).
+
 ### `memoryMb`
 
 The `memoryMb` field gives the server part's memory, in MB: 16 by default, and 32 at most. A plugin only raises this memory when it really needs it: all plugins share the server's memory.

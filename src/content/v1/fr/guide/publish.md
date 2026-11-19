@@ -92,12 +92,15 @@ La CI du modèle les relance à chaque push. Un plugin qui passe ses tests se co
 | --- | --- |
 | `route('POST /hello', { as, body, query })` | Appelle une route du plugin. Sans `as`, c'est l'admin du foyer qui appelle. |
 | `addPerson({ name, kind })` | Ajoute quelqu'un au foyer : `adult`, `teen` ou `child`. |
+| `addAccount({ email })` | Crée un compte qui n'est dans aucun foyer, et renvoie son id. |
+| `noHouseholdRoute(route, accountId)` | Appelle une route comme ce compte sans foyer : seules les routes `noHousehold` lui répondent. |
 | `click(action, input)` | Simule un clic sur l'`AiButton` du plugin. |
 | `runTask(name)` | Lance une tâche, comme Hodi le ferait à son heure. |
 | `readFeed(key)` | Lit un flux du plugin, comme un foyer qui le suit. |
 | `exportData(person)` | Demande la copie des données d'une personne. |
 | `mails` | Les e-mails que le plugin a envoyés, dans l'ordre. |
 | `notifications` | Les notifications que le plugin a envoyées, dans l'ordre. |
+| `serverNotices` | Ce que le plugin a dit à l'admin du serveur, dans l'ordre. Une notice `important` a `waiting`, `true` jusqu'à `ctx.serverNoticeHandled()`. |
 | `questions` | Les questions que le plugin a posées à l'IA, dans l'ordre. |
 | `log` | Les lignes du journal du plugin, et celles de Hodi à son sujet (une permission refusée, par exemple). |
 | `stop()` | Arrête le petit Hodi à la fin des tests. |

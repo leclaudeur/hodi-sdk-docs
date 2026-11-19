@@ -96,8 +96,8 @@ La personne qui appelle une route, telle que Hodi l'a vérifiée. La route peut 
 <!-- prettier-ignore -->
 | Champs | Type | |
 | --- | --- | --- |
-| `profileId` | `number \| null` | Le profil ouvert sur l'appareil. Il vaut `null` dans l'espace Serveur, quand l'admin du serveur n'a pas de profil dans le foyer. |
-| `householdId` | `number \| null` | Le foyer pour lequel la personne demande. Chaque requête qui lit les données d'un foyer filtre sur cet id. |
+| `profileId` | `number \| null` | Le profil ouvert sur l'appareil. Il vaut `null` dans l'espace Serveur, quand l'admin du serveur n'a pas de profil dans le foyer, et sur une route `noHousehold` appelée par un compte sans foyer. |
+| `householdId` | `number \| null` | Le foyer pour lequel la personne demande. Chaque requête qui lit les données d'un foyer filtre sur cet id. Il vaut `null` sur une route `noHousehold` appelée par un compte sans foyer. |
 | `kind` | `'adult' \| 'teen' \| 'child'` | Le profil ouvert est celui d'un adulte, d'un ado ou d'un enfant. |
 | `householdAdmin` | `boolean` | `true` quand la personne est l'admin de son foyer. |
 | `serverAdmin` | `boolean` | `true` quand la personne est l'admin du serveur. |
@@ -125,6 +125,7 @@ Un objet de routes. Chaque clé a la forme `'MÉTHODE /chemin'`, et une partie d
 | --- | --- | --- |
 | `handler` | `(request, ctx) => Promise<PluginResponse>` | La fonction de la route. |
 | `proof?` | `boolean` | Marque une route sensible. Hodi ne la lance qu'après que la personne a retapé son mot de passe dans `askToConfirm()`. Sans ce mot de passe, la route répond 403 sans avoir tourné. |
+| `noHousehold?` | `boolean` | Seulement dans `routes` : ouvre la route à un compte qui n'a plus de foyer, que toutes les autres routes refusent avec 423 `no_household`. [Une route pour un compte sans foyer](/fr/guide/server-context/#une-route-pour-un-compte-sans-foyer) l'explique. |
 | `raw?` | `true` | La route reçoit des octets au lieu du JSON, comme une image ou un fichier. |
 | `maxBody?` | `number` | La taille maximale de ces octets, en octets, jusqu'à 10 Mo. |
 
@@ -302,6 +303,7 @@ L'objet que `definePlugin()` reçoit : un champ par emplacement, tous facultatif
 | `setupSteps?` | `SetupStep[]` | Les [étapes du plugin dans l'installation](/fr/guide/slots/setup/) de Hodi. |
 | `accountRows?` | `ComponentType<{ layout }>` | Des [lignes au bout de _Ton compte_](/fr/guide/slots/account-rows/). |
 | `avatarMenu?` | `AvatarMenuItem[]` | Des [entrées dans le menu de l'avatar](/fr/guide/slots/avatar-menu/). |
+| `noHouseholdActions?` | `ComponentType<{ layout; done }>` | Une [autre suite sur la carte d'un compte sans foyer](/fr/guide/slots/no-household-actions/), comme _Créer mon foyer_. |
 
 ### ServerSection
 
