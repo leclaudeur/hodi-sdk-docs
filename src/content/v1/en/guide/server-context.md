@@ -203,6 +203,33 @@ routes: {
 
 On the web side, `askToConfirm()` opens Hodi's window that asks for the password. Without it, the route answers 403 without having run. The plugin never sees the password.
 
+### A route for an account with no household
+
+An account that left its household, or whose profile was deleted, has no household any more. Every route answers it 423 `no_household`, except a route of `routes` marked `noHousehold: true`:
+
+```tsx title="server/index.ts"
+routes: {
+  'POST /my-household': {
+    noHousehold: true,
+    handler: async (request, ctx) => {
+      const household = await ctx.households.create({
+        name: 'The Martins',
+        admin: {
+          name: 'Paul',
+          accountId: request.who.accountId
+        }
+      })
+      return {
+        status: 201,
+        body: { id: household.id }
+      }
+    }
+  }
+}
+```
+
+On such a route, `request.who.accountId` is that account, and `profileId` and `householdId` are `null`. The web part calls it from [`noHouseholdActions`](/en/guide/slots/no-household-actions/).
+
 ## What the context gives
 
 ### To every plugin
@@ -227,6 +254,8 @@ Each of these functions only works if the plugin has the [permission](/en/guide/
 | `ctx.articles` | Finds an article Hodi listed, and its page. It needs the `articles` permission. |
 | `ctx.ai.ask(question)` | Asks the household's AI a question, once per click. It needs the `ai` permission. |
 | `ctx.notify(notice)` | Sends a notification to a person, 10 a day at most. It needs the `notify` permission. |
+| `ctx.notifyServerAdmin(type, notice)` | Tells the server's admin of an event of one of the kinds of [`serverNotifications`](/en/guide/manifest/#servernotifications), 50 a day at most. It needs the `notify` permission. |
+| `ctx.serverNoticeHandled(key)` | Takes the request of that key out of _To handle_. It needs the `notify` permission. |
 | `ctx.mail.send(message)` | Sends an e-mail, 50 an hour at most. It needs the `mail` permission. |
 | `ctx.accounts` | Finds, creates and checks accounts. It needs the `accounts` permission. |
 | `ctx.households` | Lists and creates households. It needs the `households` permission. |
@@ -236,6 +265,30 @@ Each of these functions only works if the plugin has the [permission](/en/guide/
 ```tsx title="server/index.ts"
 const { text } = await ctx.fetchText('https://api.example.com/weather?city=Brussels')
 const weather = JSON.parse(text)
+```
+
+### Telling the server's admin
+
+`ctx.notifyServerAdmin()` lands in _Server › Notifications_, then by e-mail or push, as the admin chose for that kind in _Server › Alerts_. The title is 80 characters at most and the text 240, in plain text, in one language or one per language. `path` opens a section of the plugin in the Server space.
+
+A request someone waits on carries an `important` key of the plugin's own (letters, digits and `. _ : -`, 100 characters at most). It stays on top, under _To handle_, and the same key is not sent twice while it waits. The plugin takes it out once the request is handled:
+
+```tsx title="server/index.ts"
+await ctx.notifyServerAdmin('waitlist', {
+  title: {
+    fr: 'Nouvelle inscription',
+    en: 'New sign-up'
+  },
+  text: {
+    fr: 'Anna attend une invitation.',
+    en: 'Anna waits for an invitation.'
+  },
+  path: 'waitlist',
+  important: `waitlist:${id}`
+})
+
+// Later, once Anna is invited:
+await ctx.serverNoticeHandled(`waitlist:${id}`)
 ```
 
 ## The AI, only on a click

@@ -318,6 +318,26 @@ Sans `menu`, ou avec un groupe inconnu, l'entrée du plugin va à la fin du grou
 
 Le champ `feeds` déclare les flux d'articles que le plugin propose, 5 au plus. Un foyer suit ces flux comme n'importe quelle autre source. [`feeds`](/fr/guide/slots/feeds/) montre un exemple complet.
 
+### `serverNotifications`
+
+Le champ `serverNotifications` liste les sortes d'événements dont le plugin prévient l'admin du serveur, 10 au plus. Il faut la permission `notify`. Chaque sorte devient une ligne de _Serveur › Alertes_, sous le nom du plugin, où l'admin choisit l'e-mail, le push, les deux ou rien.
+
+```json title="plugin.json"
+"serverNotifications": [
+  {
+    "type": "waitlist",
+    "label": "Nouvelle inscription",
+    "hint": "Quand quelqu'un rejoint la liste d'attente"
+  }
+]
+```
+
+- `type` : des minuscules, des chiffres et des tirets, 32 caractères au plus.
+- `label` : le nom de la ligne, 60 caractères au plus.
+- `hint` : facultatif, la ligne grise dessous, 80 caractères au plus.
+
+Les textes dans les autres langues vont dans les locales du plugin, sous `manifest.serverNotifications.<type>`. La partie serveur prévient l'admin avec [`ctx.notifyServerAdmin()`](/fr/guide/server-context/#prévenir-ladmin-du-serveur).
+
 ### `memoryMb`
 
 Le champ `memoryMb` donne la mémoire de la partie serveur, en Mo : 16 par défaut, et 32 au plus. Un plugin n'augmente cette mémoire qu'en cas de vrai besoin : tous les plugins se partagent la mémoire du serveur.
