@@ -3,7 +3,8 @@ import ShareCard from '../components/ShareCard.astro'
 import type { Lang } from '../lib/i18n.ts'
 import '../styles/tokens.css'
 
-// An address with no page of its own (the root, a language, a section): sends the browser on to its first page.
+// An address with no page of its own (the root, a language, a section): sends the browser on to its first page. In
+// production nginx answers these addresses with a 301 first (src/pages/redirects.nginx.ts): this page serves `npm run dev`.
 interface Props {
   to: string
   // The root only: where a browser that doesn't ask for French goes instead.

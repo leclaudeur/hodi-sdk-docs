@@ -23,6 +23,9 @@ LABEL org.opencontainers.image.source=https://github.com/leclaudeur/hodi-sdk-doc
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
+# The redirects the build wrote are nginx's configuration, not a page to serve.
+COPY --from=build /app/dist/redirects.nginx /etc/nginx/redirects.conf
+RUN rm /usr/share/nginx/html/redirects.nginx
 
 EXPOSE 80
 
