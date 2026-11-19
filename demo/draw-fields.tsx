@@ -1,6 +1,7 @@
 import { Bell, ExternalLink, Hand, Inbox, Info, Mail, Search } from 'lucide-react'
 import Button from '../src/ui/Button.tsx'
 import Checkbox from '../src/ui/Checkbox.tsx'
+import ChoiceField from '../src/ui/ChoiceField.tsx'
 import Chip from '../src/ui/Chip.tsx'
 import EmptyState from '../src/ui/EmptyState.tsx'
 import FilterChip from '../src/ui/FilterChip.tsx'
@@ -11,13 +12,14 @@ import { PasswordHint, PasswordRing } from '../src/ui/PasswordGauge.tsx'
 import PinField from '../src/ui/PinField.tsx'
 import Segmented from '../src/ui/Segmented.tsx'
 import SourceAvatar from '../src/ui/SourceAvatar.tsx'
+import Stepper from '../src/ui/Stepper.tsx'
 import StatusLine from '../src/ui/StatusLine.tsx'
 import TextField from '../src/ui/TextField.tsx'
 import Toggle from '../src/ui/Toggle.tsx'
 import AgeCheckbox from '../src/plugins/AgeCheckbox.tsx'
 import householdStyles from '../src/views/household/Household.module.css'
 import { no, tr, type Draw } from './draw-buttons.tsx'
-import { FIELD_ERRORS, momentsOf } from './kinds-fields.ts'
+import { FIELD_ERRORS, issuesOf, momentsOf } from './kinds-fields.ts'
 
 // Fields, messages and small elements drawn by Hodi's own components from a state.
 
@@ -77,14 +79,38 @@ export const DRAW_FIELDS: Record<string, Draw> = {
       disabled={state.disabled === true}
     />
   ),
-  checkbox: (state, _lang, set) => (
-    <Checkbox
-      checked={state.checked === true}
-      onChange={checked => set?.('checked', checked)}
+  // Under a field, the check lines up with the field's icon: the render shows the field it sits under.
+  checkbox: (state, lang, set) => {
+    const box = (
+      <Checkbox
+        checked={state.checked === true}
+        onChange={checked => set?.('checked', checked)}
+        disabled={state.disabled === true}
+        underField={state.under === true}
+      >
+        {s(state, 'label')}
+      </Checkbox>
+    )
+    if (state.under !== true) return box
+    return (
+      <div className={householdStyles.field}>
+        <TextField icon={Mail} aria-label="E-mail" placeholder={tr(lang)('toi@exemple.be', 'you@example.com')} />
+        {box}
+      </div>
+    )
+  },
+  choicefield: (state, lang, set) => (
+    <ChoiceField
+      choices={issuesOf(lang)}
+      selected={String(state.picked ?? 'cut')
+        .split(',')
+        .filter(Boolean)}
+      onChange={ids => set?.('picked', ids.join(','))}
+      label={s(state, 'label')}
+      placeholder={s(state, 'placeholder')}
+      morePlaceholder={s(state, 'more') || undefined}
       disabled={state.disabled === true}
-    >
-      {s(state, 'label')}
-    </Checkbox>
+    />
   ),
   agecheckbox: (state, _lang, set) => (
     <AgeCheckbox checked={state.checked === true} onChange={checked => set?.('checked', checked)} />
@@ -98,6 +124,25 @@ export const DRAW_FIELDS: Record<string, Draw> = {
       wide={state.wide === true}
     />
   ),
+  stepper: (state, lang, set) => {
+    const days = Number(state.count ?? 7)
+    return (
+      <Stepper
+        label={s(state, 'label')}
+        lessLabel={tr(lang)('Un jour de moins', 'One day fewer')}
+        moreLabel={tr(lang)('Un jour de plus', 'One day more')}
+        value={days}
+        min={1}
+        max={365}
+        step={1}
+        fastSteps={[7, 30]}
+        editable={state.editable === true}
+        onChange={value => set?.('count', String(value))}
+      >
+        {tr(lang)(`${days} jours`, `${days} days`)}
+      </Stepper>
+    )
+  },
   statusline: state => <StatusLine tone={s(state, 'tone') as 'info'}>{s(state, 'message')}</StatusLine>,
   notice: (state, lang) => (
     <Notice

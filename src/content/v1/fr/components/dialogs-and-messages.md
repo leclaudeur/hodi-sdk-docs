@@ -41,7 +41,7 @@ import { Hand } from 'lucide-react'
 | `open` | `boolean` | `true` quand la fenêtre est ouverte. |
 | `onClose` | `() => void` | Appelé quand la personne ferme la fenêtre : avec Échap, la croix ou un clic à côté. |
 | `title?` | `ReactNode` | Le titre de la fenêtre. Sans titre, `labelledBy` doit nommer la fenêtre. |
-| `intro?` | `ReactNode` | Une ou deux phrases sous le titre, qui disent à quoi sert la fenêtre. |
+| `intro?` | `ReactNode` | Une ou deux phrases sous le titre, qui disent à quoi sert la fenêtre. Une chaîne peut mettre un nom ou une adresse e-mail entre `<b>` et le nom d'un écran ou d'un bouton entre `<i>` : Hodi les affiche en gras et en italique, comme dans ses propres textes. |
 | `size?` | `'compact' \| 'wide'` | La largeur de la fenêtre : `compact` pour une question ou un court formulaire, `wide` quand il y a plus à lire. |
 | `onBack?` | `() => void` | Ajoute une flèche de retour avant le titre, qui appelle cette fonction. |
 | `labelledBy?` | `string` | L'id de l'élément qui nomme la fenêtre, pour les lecteurs d'écran. |

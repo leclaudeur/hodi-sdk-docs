@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { ArrowRight, Bookmark, Check, Download, Flag, Hand, House, Pencil, Plus, Trash2 } from 'lucide-react'
+import { ArrowRight, Bookmark, Check, Download, Flag, Hand, House, Pencil, Plus, Trash2, Trophy } from 'lucide-react'
 import Button from '../src/ui/Button.tsx'
 import Chip from '../src/ui/Chip.tsx'
 import MoreRow from '../src/ui/MoreRow.tsx'
@@ -186,11 +186,11 @@ export const DRAW_BUTTONS: Record<string, Draw> = {
       title={s(state, 'title')}
       intro={s(state, 'intro') || undefined}
       tiles={[
-        { key: 'a', label: tr(lang)('Les Dupont', 'The Smiths'), icon: House, onClick: no },
-        { key: 'b', label: tr(lang)('Mamie', 'Grandma'), onClick: no }
+        { key: 'a', label: tr(lang)('Sport', 'Sport'), icon: Trophy, onClick: no },
+        { key: 'b', label: tr(lang)('Cuisine', 'Cooking'), onClick: no }
       ]}
       opening={state.opening === true ? 'a' : null}
-      error={state.error === true ? tr(lang)('Ce foyer ne répond pas.', 'This household does not answer.') : null}
+      error={state.error === true ? tr(lang)('Ce thème ne s’ouvre pas.', 'This topic does not open.') : null}
       onBack={state.back === true ? no : undefined}
     />
   ),

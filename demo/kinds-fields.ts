@@ -107,7 +107,8 @@ export const checkbox: Kind = {
   controls: {
     checked: toggle('checked', true),
     children: text('label', words('Garder mes salutations', 'Keep my greetings')),
-    'disabled?': toggle('disabled')
+    'disabled?': toggle('disabled'),
+    'underField?': toggle('under')
   },
   code: state => ({
     body: [
@@ -116,7 +117,8 @@ export const checkbox: Kind = {
         [
           ['checked', e('keep')],
           ['onChange', e('setKeep')],
-          ['disabled', state.disabled === true]
+          ['disabled', state.disabled === true],
+          ['underField', state.under === true]
         ],
         str(state, 'label')
       )
@@ -167,6 +169,76 @@ export const segmented: Kind = {
         ],
         ['onChange', e('setMoment')],
         ['wide', state.wide === true]
+      ])
+    ]
+  })
+}
+
+export const stepper: Kind = {
+  controls: {
+    label: text('label', words('Jours gardés', 'Days kept')),
+    'editable?': toggle('editable'),
+    // Not in the list: only the value the picker starts from.
+    count: text('count', '7')
+  },
+  code: (state, lang) => ({
+    body: [
+      h(
+        'Stepper',
+        [
+          ['label', s(str(state, 'label'))],
+          ['lessLabel', s(lang === 'en' ? 'One day fewer' : 'Un jour de moins')],
+          ['moreLabel', s(lang === 'en' ? 'One day more' : 'Un jour de plus')],
+          ['value', e('days')],
+          ['min', e('1')],
+          ['max', e('365')],
+          ['step', e('1')],
+          ['fastSteps', e('[7, 30]')],
+          ['editable', state.editable === true],
+          ['onChange', e('setDays')]
+        ],
+        ...(state.editable === true ? [] : [lang === 'en' ? '{days} days' : '{days} jours'])
+      )
+    ]
+  })
+}
+
+const ISSUES = [
+  ['cut', words('Texte coupé', 'Text cut off')],
+  ['images', words('Images manquantes', 'Missing pictures')],
+  ['ads', words('Publicités', 'Ads')],
+  ['language', words('Mauvaise langue', 'Wrong language')]
+] as const
+
+export const issuesOf = (lang: 'fr' | 'en') =>
+  ISSUES.map(([id, label]) => ({ id, label: typeof label === 'string' ? label : label[lang] }))
+
+export const choicefield: Kind = {
+  wide: true,
+  controls: {
+    label: text('label', words('Soucis', 'Issues')),
+    placeholder: text('placeholder', words('Choisir un souci', 'Pick an issue')),
+    'morePlaceholder?': text('more', words('Un autre souci ?', 'Another issue?')),
+    'disabled?': toggle('disabled')
+  },
+  code: (state, lang) => ({
+    body: [
+      h('ChoiceField', [
+        [
+          'choices',
+          {
+            a: issuesOf(lang).map(({ id, label }) => [
+              ['id', s(id)],
+              ['label', s(label)]
+            ])
+          }
+        ],
+        ['selected', e('issues')],
+        ['onChange', e('setIssues')],
+        ['label', s(str(state, 'label'))],
+        ['placeholder', s(str(state, 'placeholder'))],
+        ['morePlaceholder', state.more !== '' && s(str(state, 'more'))],
+        ['disabled', state.disabled === true]
       ])
     ]
   })

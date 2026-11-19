@@ -28,7 +28,7 @@ askToConfirm({
 | Props | Type | |
 | --- | --- | --- |
 | `title` | `string` | La question posée, comme _Vider l'historique ?_. |
-| `message` | `ReactNode` | Ce qui va se passer, en entier : ce qui sera effacé, pour qui, et ce qui restera. |
+| `message` | `ReactNode` | Ce qui va se passer, en entier : ce qui sera effacé, pour qui, et ce qui restera. Une chaîne peut mettre un nom ou une adresse e-mail entre `<b>` et le nom d'un écran ou d'un bouton entre `<i>` : Hodi les affiche en gras et en italique, comme dans ses propres textes. |
 | `label` | `string` | Le texte du bouton qui confirme, un verbe comme _Vider_ ou _Effacer_. |
 | `onConfirm` | `(proof: Proof) => void \| Promise<void>` | Ce que fait le clic sur ce bouton. Avec `proof`, il reçoit le mot de passe et le code tapés. Si la promesse échoue, la fenêtre reste ouverte. |
 | `look?` | `'danger' \| 'primary'` | La couleur du bouton : rouge par défaut, `primary` pour une action qui ajoute au lieu d'effacer. |

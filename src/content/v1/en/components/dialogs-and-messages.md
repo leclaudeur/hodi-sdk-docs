@@ -41,7 +41,7 @@ import { Hand } from 'lucide-react'
 | `open` | `boolean` | `true` when the window is open. |
 | `onClose` | `() => void` | Called when the person closes the window: with Escape, the cross or a click beside it. |
 | `title?` | `ReactNode` | The window's title. Without a title, `labelledBy` must name the window. |
-| `intro?` | `ReactNode` | One or two sentences under the title, which say what the window is for. |
+| `intro?` | `ReactNode` | One or two sentences under the title, which say what the window is for. A string can put a name or an e-mail address between `<b>` and the name of a screen or a button between `<i>`: Hodi shows them in bold and in italics, as in its own texts. |
 | `size?` | `'compact' \| 'wide'` | The window's width: `compact` for a question or a short form, `wide` when there is more to read. |
 | `onBack?` | `() => void` | Adds a back arrow before the title, which calls this function. |
 | `labelledBy?` | `string` | The id of the element that names the window, for screen readers. |

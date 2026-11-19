@@ -1,5 +1,5 @@
-import { t as e } from "./play-BfT0TPL5.js";
-// node_modules/@zxcvbn-ts/language-common/dist/adjacencyGraphs.json.mjs
+import { t as e } from "./play-B-3mqr2r.js";
+// ../../../home/user/hodi/node_modules/@zxcvbn-ts/language-common/dist/adjacencyGraphs.json.mjs
 var t = {
 	azerty: {
 		0: [
