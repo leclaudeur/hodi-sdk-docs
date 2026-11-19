@@ -101,7 +101,7 @@ import { ExternalLink, Info } from 'lucide-react'
 | `title` | `string` | The box's title. |
 | `icon` | `LucideIcon` | The box's icon, a Lucide icon. |
 | `children` | `ReactNode` | The text under the title. |
-| `tone?` | `'info' \| 'warning' \| 'error'` | The box's colour: `info` in blue by default, `warning` in yellow, `error` in red. |
+| `tone?` | `'info' \| 'warning' \| 'error' \| 'success'` | The box's colour: `info` in blue by default, `warning` in yellow, `error` in red, `success` in green, for what just worked. |
 | `action?` | `NoticeAction` | A button at the end of the box. It has a `label`, an `icon`, and an `onClick` or an `href`. |
 | `side?` | `ReactNode` | Round buttons at the end of the box, in place of `action`. |
 | `href?` | `string` | Makes the whole box a link to this address, opened in a new tab. |

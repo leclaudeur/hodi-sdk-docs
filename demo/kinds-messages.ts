@@ -107,7 +107,7 @@ export const notice: Kind = {
       'body',
       words('Hello world 0.2 dit bonjour en néerlandais.', 'Hello world 0.2 says hello in Dutch.')
     ),
-    'tone?': seg('tone', ['info', 'warning', 'error']),
+    'tone?': seg('tone', ['info', 'warning', 'error', 'success']),
     'action?': toggle('action', true)
   },
   code: (state, lang) => ({
