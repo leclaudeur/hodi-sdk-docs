@@ -1,5 +1,15 @@
 import { aibutton, button, readerbutton, roundbutton, sectionpage, settingscard } from './kinds-buttons.ts'
-import { agecheckbox, checkbox, passwordfield, pinfield, segmented, textfield, toggleKind } from './kinds-fields.ts'
+import {
+  agecheckbox,
+  checkbox,
+  choicefield,
+  passwordfield,
+  pinfield,
+  segmented,
+  stepper,
+  textfield,
+  toggleKind
+} from './kinds-fields.ts'
 import { asktoconfirm, dialog, emptystate, notice, statusline, toasts } from './kinds-messages.ts'
 import { morerow, overviewcard, settingrow, setupactions, steppage, tilespage } from './kinds-pages.ts'
 import { chip, filterchip, householdavatar, sourceavatar } from './kinds-small.ts'
@@ -26,6 +36,8 @@ export const KINDS: Record<string, Kind> = {
   checkbox,
   agecheckbox,
   segmented,
+  choicefield,
+  stepper,
   dialog,
   asktoconfirm,
   toasts,
