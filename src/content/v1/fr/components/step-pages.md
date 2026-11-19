@@ -38,7 +38,7 @@ import { Hand } from 'lucide-react'
 | Props | Type | |
 | --- | --- | --- |
 | `title` | `string` | Le titre de l'étape, déjà traduit. |
-| `intro` | `ReactNode` | La phrase sous le titre, qui explique l'étape. |
+| `intro` | `ReactNode` | La phrase sous le titre, qui explique l'étape. Une chaîne peut mettre un nom ou une adresse e-mail entre `<b>` et le nom d'un écran ou d'un bouton entre `<i>` : Hodi les affiche en gras et en italique, comme dans ses propres textes. |
 | `actions` | `ReactNode` | Les boutons à droite du bas de la carte. Le bouton principal vient en dernier. |
 | `step?` | `number` | Le numéro de l'étape, à partir de 1. Avec `total`, il remplit la barre de progression. |
 | `total?` | `number` | Le nombre d'étapes en tout. |
@@ -68,7 +68,7 @@ import { TilesPage } from 'hodi:sdk'
 | --- | --- | --- |
 | `title` | `string` | Le titre de l'écran, déjà traduit. |
 | `tiles` | `Tile[]` | Les tuiles, dans l'ordre. Une `Tile` a une `key`, un `label`, un `onClick` et, au besoin, une icône Lucide `icon`. Sans icône, la tuile montre la première lettre de son `label`. |
-| `intro?` | `ReactNode` | Une phrase centrée sous le titre. |
+| `intro?` | `ReactNode` | Une phrase centrée sous le titre. Une chaîne peut mettre un nom ou une adresse e-mail entre `<b>` et le nom d'un écran ou d'un bouton entre `<i>` : Hodi les affiche en gras et en italique, comme dans ses propres textes. |
 | `opening?` | `string \| null` | La clé de la tuile en train de s'ouvrir. Cette tuile pulse, et les autres ne se pressent plus en attendant. |
 | `error?` | `string \| null` | Un message d'erreur, affiché sous les tuiles. |
 | `onBack?` | `() => void` | Ajoute un bouton _Retour_ sous les tuiles, qui appelle cette fonction. |

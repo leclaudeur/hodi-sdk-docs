@@ -38,7 +38,7 @@ import { Hand } from 'lucide-react'
 | Props | Type | |
 | --- | --- | --- |
 | `title` | `string` | The step's title, already translated. |
-| `intro` | `ReactNode` | The sentence under the title, which explains the step. |
+| `intro` | `ReactNode` | The sentence under the title, which explains the step. A string can put a name or an e-mail address between `<b>` and the name of a screen or a button between `<i>`: Hodi shows them in bold and in italics, as in its own texts. |
 | `actions` | `ReactNode` | The buttons on the right of the card's bottom. The main button comes last. |
 | `step?` | `number` | The step's number, from 1. With `total`, it fills the progress bar. |
 | `total?` | `number` | The number of steps in all. |
@@ -68,7 +68,7 @@ import { TilesPage } from 'hodi:sdk'
 | --- | --- | --- |
 | `title` | `string` | The screen's title, already translated. |
 | `tiles` | `Tile[]` | The tiles, in order. A `Tile` has a `key`, a `label`, an `onClick` and, if needed, a Lucide `icon`. Without an icon, the tile shows the first letter of its `label`. |
-| `intro?` | `ReactNode` | A centred sentence under the title. |
+| `intro?` | `ReactNode` | A centred sentence under the title. A string can put a name or an e-mail address between `<b>` and the name of a screen or a button between `<i>`: Hodi shows them in bold and in italics, as in its own texts. |
 | `opening?` | `string \| null` | The key of the tile that is opening. That tile pulses, and the others can't be pressed while waiting. |
 | `error?` | `string \| null` | An error message, shown under the tiles. |
 | `onBack?` | `() => void` | Adds a _Back_ button under the tiles, which calls this function. |
