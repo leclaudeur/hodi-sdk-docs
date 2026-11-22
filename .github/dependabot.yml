@@ -1,0 +1,11 @@
+# The base images, pinned by digest in the Dockerfile: a security fix in Alpine (libxslt, OpenSSL…) reaches the image
+# only through a new digest, and Dependabot's security alerts never cover a base image. Only the maintainer merges.
+version: 2
+updates:
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: daily
+    ignore:
+      - dependency-name: node
+        update-types: ['version-update:semver-major']
