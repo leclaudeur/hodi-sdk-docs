@@ -2,7 +2,7 @@
 # Build stage: Astro writes every page of the site into dist/.
 # ==========================================
 # The pages are the same on every processor: build them once, on the machine that builds the image.
-FROM --platform=$BUILDPLATFORM node:24-alpine AS build
+FROM --platform=$BUILDPLATFORM node:24-alpine@sha256:116b800c3754b440ee0aa3ed2f20f5bf3d99a554bfd9adeea09ea8017f6e85f5 AS build
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ RUN npm run build
 # ==========================================
 # Runtime stage: nginx serves the pages as plain files, nothing else runs.
 # ==========================================
-FROM nginx:1.30-alpine
+FROM nginx:1.30-alpine@sha256:caf4e1e032a20f9c3c5e28fc7f25ffd768ad8677b4975c54193075997b3a97e3
 
 # Links the image on GitHub's registry to this repository.
 LABEL org.opencontainers.image.source=https://github.com/leclaudeur/hodi-sdk-docs
