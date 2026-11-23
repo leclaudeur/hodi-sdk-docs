@@ -269,7 +269,7 @@ const weather = JSON.parse(text)
 
 ### The accounts the plugin created
 
-`ctx.accounts.list()` returns the accounts the plugin created with `ctx.accounts.create()`, newest first. The plugin can suspend, resume or delete each of them, and no other: for any other account, and always for the server's admin, Hodi refuses with `not_allowed`.
+`ctx.accounts.list()` returns the accounts the plugin created with `ctx.accounts.create()`, newest first. The plugin can suspend, resume or delete each of them, and no other: for any other account, a teen's or a child's, and always for the server's admin, Hodi refuses with `not_allowed`.
 
 ```tsx title="server/index.ts"
 serverRoutes: {
@@ -280,7 +280,7 @@ serverRoutes: {
 }
 ```
 
-A suspended account is signed out of all its devices, and Hodi refuses each of its sign-ins until `resume()`. The sign-in page then shows the text of the `signIn.suspended` key in the plugin's `locales`. `remove()` deletes the account as _Server › Accounts_ does, and every plugin's `onAccountDeleted` hears of it.
+A suspended account is signed out of all its devices: Hodi refuses each of its requests and each of its sign-ins until `resume()`. The sign-in page then shows the text of the `signIn.suspended` key in the plugin's `locales`. `remove()` deletes the account as _Server › Accounts_ does, and every plugin's `onAccountDeleted` hears of it.
 
 ### Telling the server's admin
 

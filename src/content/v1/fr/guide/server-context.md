@@ -269,7 +269,7 @@ const weather = JSON.parse(text)
 
 ### Les comptes créés par le plugin
 
-`ctx.accounts.list()` renvoie les comptes que le plugin a créés avec `ctx.accounts.create()`, du plus récent au plus ancien. Le plugin peut suspendre, reprendre ou supprimer chacun d'eux, et aucun autre : pour tout autre compte, et toujours pour l'admin du serveur, Hodi refuse avec `not_allowed`.
+`ctx.accounts.list()` renvoie les comptes que le plugin a créés avec `ctx.accounts.create()`, du plus récent au plus ancien. Le plugin peut suspendre, reprendre ou supprimer chacun d'eux, et aucun autre : pour tout autre compte, celui d'un ado ou d'un enfant, et toujours pour l'admin du serveur, Hodi refuse avec `not_allowed`.
 
 ```tsx title="server/index.ts"
 serverRoutes: {
@@ -280,7 +280,7 @@ serverRoutes: {
 }
 ```
 
-Un compte suspendu est déconnecté de tous ses appareils, et Hodi refuse chacune de ses connexions jusqu'à `resume()`. La page de connexion affiche alors le texte de la clé `signIn.suspended` des `locales` du plugin. `remove()` supprime le compte comme _Serveur › Comptes_, et le `onAccountDeleted` de chaque plugin en est prévenu.
+Un compte suspendu est déconnecté de tous ses appareils : Hodi refuse chacune de ses requêtes et chacune de ses connexions jusqu'à `resume()`. La page de connexion affiche alors le texte de la clé `signIn.suspended` des `locales` du plugin. `remove()` supprime le compte comme _Serveur › Comptes_, et le `onAccountDeleted` de chaque plugin en est prévenu.
 
 ### Prévenir l'admin du serveur
 
