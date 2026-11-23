@@ -59,8 +59,8 @@ The `ctx` Hodi gives every route, task and hook. Only through it does the plugin
 | `articles` | `{ get; page }` | With the `articles` permission: finds an article Hodi read, and that article's page. |
 | `serverSettings` | `() => Promise<ServerSettings>` | The durations chosen in _Server › Content_ and _Backups_: how many days Hodi keeps an article, a video and a backup copy. |
 | `mail` | `{ available; appUrl; send }` | With the `mail` permission: sends an e-mail through the server set in _Server › E-mail_, 50 per hour at most. `available` says whether that server is set. |
-| `households` | `{ list; get; of; create; suspend; resume; remove }` | With the `households` permission: lists, creates, suspends and removes the server's households. |
-| `accounts` | `{ get; findByEmail; create; checkPassword; findByLogin; addLogin }` | With the `accounts` permission: finds, creates and checks accounts. The plugin never gets anything that signs into an account. |
+| `households` | `{ list; get; of; create; suspend; resume; remove }` | Deprecated, replaced by `accounts`. With the `households` permission: lists, creates, suspends and removes the server's households. |
+| `accounts` | `{ get; findByEmail; create; checkPassword; findByLogin; addLogin; list; suspend; resume; remove }` | With the `accounts` permission: finds, creates and checks accounts, and suspends, resumes or deletes those the plugin created. The plugin never gets anything that signs into an account. |
 | `notify?` | `(notice) => Promise<void>` | With the `notify` permission: sends a notification to a profile, ten per day per profile at most. |
 | `ai?` | `{ ask }` | With the `ai` permission, for a signed plugin: asks the household's AI a question, once per click on an `AiButton`. |
 
@@ -188,7 +188,7 @@ An article Hodi read, as `ctx.articles.get()` returns it or `onArticle` receives
 
 ### PluginHousehold
 
-What a plugin can know about a household, with the `households` permission. It never sees what the household holds: neither its profiles, nor its sources, nor its reading.
+Deprecated: households are leaving Hodi, and `PluginAccount` replaces them. What a plugin can know about a household, with the `households` permission. It never sees what the household holds: neither its profiles, nor its sources, nor its reading.
 
 <!-- prettier-ignore -->
 | Fields | Type | |
@@ -210,8 +210,12 @@ What a plugin can know about an account, with the `accounts` permission.
 | --- | --- | --- |
 | `id` | `number` | The account's id. |
 | `email` | `string` | The account's e-mail address. |
+| `name` | `string \| null` | For an account this plugin created, the first name chosen in _My account_. Otherwise `null`, as until there is one. |
+| `createdAt` | `number \| null` | For an account this plugin created, when it was created, in milliseconds since 1970. Otherwise `null`. |
 | `loginOnly` | `boolean` | `true` when the account has no password: it was created with a login of the plugin's, such as `google:<id>`, and the person comes in through the plugin. |
 | `serverAdmin` | `boolean` | `true` when this account is the server's admin. |
+| `mine` | `boolean` | `true` when this plugin created the account. A plugin can only suspend, resume or delete its own accounts. |
+| `suspended` | `boolean` | `true` when the plugin that created the account suspended it: the account can no longer sign in. |
 
 ## The manifest
 
@@ -247,8 +251,8 @@ What a plugin can ask for beyond the basics: without a permission, it can only k
 | `publicRoutes` | `boolean` | Opens the public routes and the screens before sign-in. |
 | `notify` | `boolean` | Opens `ctx.notify`: sending a notification. |
 | `mail` | `boolean` | Opens `ctx.mail`: sending an e-mail. |
-| `accounts` | `boolean` | Opens `ctx.accounts`: finding, creating and checking accounts. |
-| `households` | `boolean` | Opens `ctx.households`: managing the server's households. |
+| `accounts` | `boolean` | Opens `ctx.accounts`: finding, creating and checking accounts, and managing those the plugin created. |
+| `households` | `boolean` | Deprecated. Opens `ctx.households`: managing the server's households. |
 | `signIn` | `boolean` | Opens a public route's `signIn` answer and the `checkSignIn` hook. |
 | `ai` | `boolean` | Opens `ctx.ai`: asking the household's AI a question, on a click. |
 

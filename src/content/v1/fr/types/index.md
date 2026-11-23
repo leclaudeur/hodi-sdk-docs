@@ -59,8 +59,8 @@ Le `ctx` que Hodi donne à chaque route, tâche et hook. C'est par lui seul que 
 | `articles` | `{ get; page }` | Avec la permission `articles` : retrouve un article que Hodi a lu, et la page de cet article. |
 | `serverSettings` | `() => Promise<ServerSettings>` | Les durées choisies dans _Serveur › Contenu_ et _Sauvegardes_ : combien de jours Hodi garde un article, une vidéo et une copie de sauvegarde. |
 | `mail` | `{ available; appUrl; send }` | Avec la permission `mail` : envoie un e-mail par le serveur réglé dans _Serveur › E-mail_, 50 par heure au plus. `available` dit si ce serveur est réglé. |
-| `households` | `{ list; get; of; create; suspend; resume; remove }` | Avec la permission `households` : liste, crée, suspend et retire les foyers du serveur. |
-| `accounts` | `{ get; findByEmail; create; checkPassword; findByLogin; addLogin }` | Avec la permission `accounts` : retrouve, crée et vérifie des comptes. Le plugin n'obtient jamais de quoi se connecter à un compte. |
+| `households` | `{ list; get; of; create; suspend; resume; remove }` | Obsolète, remplacé par `accounts`. Avec la permission `households` : liste, crée, suspend et retire les foyers du serveur. |
+| `accounts` | `{ get; findByEmail; create; checkPassword; findByLogin; addLogin; list; suspend; resume; remove }` | Avec la permission `accounts` : retrouve, crée et vérifie des comptes, et suspend, reprend ou supprime ceux que le plugin a créés. Le plugin n'obtient jamais de quoi se connecter à un compte. |
 | `notify?` | `(notice) => Promise<void>` | Avec la permission `notify` : envoie une notification à un profil, dix par jour et par profil au plus. |
 | `ai?` | `{ ask }` | Avec la permission `ai`, pour un plugin signé : pose une question à l'IA du foyer, une seule fois par clic sur un `AiButton`. |
 
@@ -188,7 +188,7 @@ Un article lu par Hodi, tel que `ctx.articles.get()` le renvoie ou que `onArticl
 
 ### PluginHousehold
 
-Ce qu'un plugin peut savoir d'un foyer, avec la permission `households`. Il ne voit jamais ce que le foyer contient : ni ses profils, ni ses sources, ni ses lectures.
+Obsolète : les foyers quittent Hodi, `PluginAccount` les remplace. Ce qu'un plugin peut savoir d'un foyer, avec la permission `households`. Il ne voit jamais ce que le foyer contient : ni ses profils, ni ses sources, ni ses lectures.
 
 <!-- prettier-ignore -->
 | Champs | Type | |
@@ -210,8 +210,12 @@ Ce qu'un plugin peut savoir d'un compte, avec la permission `accounts`.
 | --- | --- | --- |
 | `id` | `number` | L'id du compte. |
 | `email` | `string` | L'adresse e-mail du compte. |
+| `name` | `string \| null` | Pour un compte créé par ce plugin, le prénom choisi dans _Mon compte_. Sinon `null`, comme tant qu'il n'y en a pas. |
+| `createdAt` | `number \| null` | Pour un compte créé par ce plugin, sa date de création, en millisecondes depuis 1970. Sinon `null`. |
 | `loginOnly` | `boolean` | `true` quand le compte n'a pas de mot de passe : il a été créé avec un login du plugin, comme `google:<id>`, et la personne entre par le plugin. |
 | `serverAdmin` | `boolean` | `true` quand ce compte est celui de l'admin du serveur. |
+| `mine` | `boolean` | `true` quand ce plugin a créé le compte. Un plugin ne peut suspendre, reprendre ou supprimer que ses propres comptes. |
+| `suspended` | `boolean` | `true` quand le plugin qui a créé le compte l'a suspendu : le compte ne peut plus se connecter. |
 
 ## Le manifeste
 
@@ -247,8 +251,8 @@ Ce qu'un plugin peut demander en plus de l'essentiel : sans permission, il ne pe
 | `publicRoutes` | `boolean` | Ouvre les routes publiques et les écrans d'avant la connexion. |
 | `notify` | `boolean` | Ouvre `ctx.notify` : envoyer une notification. |
 | `mail` | `boolean` | Ouvre `ctx.mail` : envoyer un e-mail. |
-| `accounts` | `boolean` | Ouvre `ctx.accounts` : retrouver, créer et vérifier des comptes. |
-| `households` | `boolean` | Ouvre `ctx.households` : gérer les foyers du serveur. |
+| `accounts` | `boolean` | Ouvre `ctx.accounts` : retrouver, créer et vérifier des comptes, et gérer ceux que le plugin a créés. |
+| `households` | `boolean` | Obsolète. Ouvre `ctx.households` : gérer les foyers du serveur. |
 | `signIn` | `boolean` | Ouvre la réponse `signIn` d'une route publique et le hook `checkSignIn`. |
 | `ai` | `boolean` | Ouvre `ctx.ai` : poser une question à l'IA du foyer, sur un clic. |
 

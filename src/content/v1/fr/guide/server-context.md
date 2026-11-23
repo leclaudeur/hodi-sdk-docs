@@ -257,8 +257,8 @@ Chacune de ces fonctions ne marche que si le plugin a la [permission](/fr/guide/
 | `ctx.notifyServerAdmin(type, notice)` | Prévient l'admin du serveur d'un événement d'une des sortes de [`serverNotifications`](/fr/guide/manifest/#servernotifications), 50 par jour au plus. Il faut la permission `notify`. |
 | `ctx.serverNoticeHandled(key)` | Sort de _À traiter_ la demande de cette clé. Il faut la permission `notify`. |
 | `ctx.mail.send(message)` | Envoie un e-mail, 50 par heure au plus. Il faut la permission `mail`. |
-| `ctx.accounts` | Retrouve, crée et vérifie des comptes. Il faut la permission `accounts`. |
-| `ctx.households` | Liste et crée des foyers. Il faut la permission `households`. |
+| `ctx.accounts` | Retrouve, crée et vérifie des comptes, et gère ceux que le plugin a créés. Il faut la permission `accounts`. |
+| `ctx.households` | Obsolète, remplacé par `ctx.accounts`. Liste et crée des foyers. Il faut la permission `households`. |
 
 `ctx.fetchText()` et `ctx.http()` ne joignent que les sites listés dans `network`. Ils refusent une redirection vers un autre site, et n'envoient un corps ou un en-tête `Authorization` qu'en https.
 
@@ -266,6 +266,21 @@ Chacune de ces fonctions ne marche que si le plugin a la [permission](/fr/guide/
 const { text } = await ctx.fetchText('https://api.example.com/weather?city=Brussels')
 const weather = JSON.parse(text)
 ```
+
+### Les comptes créés par le plugin
+
+`ctx.accounts.list()` renvoie les comptes que le plugin a créés avec `ctx.accounts.create()`, du plus récent au plus ancien. Le plugin peut suspendre, reprendre ou supprimer chacun d'eux, et aucun autre : pour tout autre compte, et toujours pour l'admin du serveur, Hodi refuse avec `not_allowed`.
+
+```tsx title="server/index.ts"
+serverRoutes: {
+  'POST /accounts/:id/suspend': async (request, ctx) => {
+    await ctx.accounts.suspend(Number(request.params.id))
+    return { status: 204 }
+  }
+}
+```
+
+Un compte suspendu est déconnecté de tous ses appareils, et Hodi refuse chacune de ses connexions jusqu'à `resume()`. La page de connexion affiche alors le texte de la clé `signIn.suspended` des `locales` du plugin. `remove()` supprime le compte comme _Serveur › Comptes_, et le `onAccountDeleted` de chaque plugin en est prévenu.
 
 ### Prévenir l'admin du serveur
 
