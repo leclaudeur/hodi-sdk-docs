@@ -16,7 +16,7 @@ RUN npm run build
 # ==========================================
 # Runtime stage: nginx serves the pages as plain files, nothing else runs.
 # ==========================================
-FROM nginx:1.30-alpine@sha256:caf4e1e032a20f9c3c5e28fc7f25ffd768ad8677b4975c54193075997b3a97e3
+FROM nginx:1.31-alpine@sha256:fb4658584bd9a916ffb6f6e365f97c25cfdb2923801f551ea08356e695f14ff7
 
 # Links the image on GitHub's registry to this repository.
 LABEL org.opencontainers.image.source=https://github.com/leclaudeur/hodi-sdk-docs
