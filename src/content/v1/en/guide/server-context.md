@@ -269,7 +269,7 @@ const weather = JSON.parse(text)
 
 ### The accounts the plugin created
 
-`ctx.accounts.list()` returns the accounts the plugin created with `ctx.accounts.create()`, newest first. The plugin can suspend, resume or delete each of them, and no other: for any other account, a teen's or a child's, and always for the server's admin, Hodi refuses with `not_allowed`.
+`ctx.accounts.list()` returns the accounts the plugin created with `ctx.accounts.create()`, newest first. `create()` also takes `name`, the person's first name as _My account_ shows it. The plugin can suspend, resume or delete each of them, and no other: for any other account, a teen's or a child's, and always for the server's admin, Hodi refuses with `not_allowed`.
 
 ```tsx title="server/index.ts"
 serverRoutes: {
