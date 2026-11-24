@@ -1,7 +1,7 @@
 ---
 title: "Petits éléments"
-description: "Les puces, les filtres, l'avatar d'une source et celui d'un foyer."
-intro: "Les petits éléments qui accompagnent une ligne ou un titre : une puce, un filtre, l'avatar d'une source ou d'un foyer. Comme les légendes et les métadonnées de Hodi, les puces sont écrites en police mono."
+description: "Les puces, les filtres et l'avatar d'une source."
+intro: "Les petits éléments qui accompagnent une ligne ou un titre : une puce, un filtre ou l'avatar d'une source. Comme les légendes et les métadonnées de Hodi, les puces sont écrites en police mono."
 order: 6
 icon: "tag"
 topic: "sport"
@@ -56,7 +56,7 @@ import { FilterChip } from 'hodi:sdk'
 
 ## SourceAvatar
 
-L'icône d'une source, prise sur son site, ou ses initiales quand le site n'en a pas. Elle n'est jamais ronde : le rond est réservé aux personnes et aux foyers.
+L'icône d'une source, prise sur son site, ou ses initiales quand le site n'en a pas. Elle n'est jamais ronde : le rond est réservé aux personnes.
 
 ```tsx title="web/index.tsx" render="sourceavatar" play="sourceavatar"
 import { SourceAvatar } from 'hodi:sdk'
@@ -74,25 +74,3 @@ import { SourceAvatar } from 'hodi:sdk'
 | `sourceId` | `string` | L'id de la source, tel qu'un article le donne. |
 | `sourceName` | `string` | Le nom de la source, dont l'avatar prend les initiales quand il n'a pas d'icône. |
 | `size?` | `18 \| 20 \| 22 \| 26 \| 44` | La taille de l'avatar, en px. Elle vaut 18 par défaut. |
-
-## HouseholdAvatar
-
-La photo d'un foyer, ou son initiale quand il n'a pas de photo. Elle est ronde, comme un profil sur l'écran _Qui lit ?_.
-
-```tsx title="web/index.tsx" render="householdavatar" play="householdavatar"
-import { HouseholdAvatar } from 'hodi:sdk'
-
-<HouseholdAvatar
-  name="Dupont"
-  photo={household.photo}
-  size={64}
-/>
-```
-
-<!-- prettier-ignore -->
-| Props | Type | |
-| --- | --- | --- |
-| `name` | `string` | Le nom du foyer, dont l'avatar prend l'initiale quand il n'a pas de photo. |
-| `photo` | `string \| null` | L'adresse de la photo du foyer (`household.photo`), ou `null`. |
-| `size` | `number` | La largeur de l'avatar, en px, anneau compris. |
-| `preview?` | `string \| null` | Une photo que la personne vient de choisir mais n'a pas encore envoyée. Elle s'affiche à la place de `photo`. |

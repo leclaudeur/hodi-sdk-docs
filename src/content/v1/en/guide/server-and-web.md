@@ -113,7 +113,7 @@ For everything else, the server part goes through `ctx`, the context Hodi gives 
 | Read or write its data | With `ctx.db`, which gives access to its database. |
 | Read its settings | With `ctx.settings()`, which returns the value chosen for each setting. |
 | Read a site's page | With `ctx.fetchText()`. It needs the `network` permission. |
-| Ask the household's AI a question | With `ctx.ai.ask()`. It needs the `ai` permission. |
+| Ask the AI of the person who clicks a question | With `ctx.ai.ask()`. It needs the `ai` permission. |
 | Write a line in the log | With `ctx.log()`, to follow what the plugin does. |
 
 Hodi checks each call: the plugin only gets what its [permissions](/en/guide/manifest/#permissions) open to it. [The server context](/en/guide/server-context/) describes everything `ctx` holds.
@@ -233,7 +233,7 @@ Here is what happens, in order, during this call:
 6. The route receives no cookie.
 7. Its answer goes back to the web part, as JSON.
 
-`request.who` says who is asking, as Hodi checked it: the person's profile, their household, whether the person is an adult, a teen or a child, and whether they are an admin. So the route has nothing to check itself. The route never receives a cookie or a token: the plugin can't pretend to be the person.
+`request.who` says who is asking, as Hodi checked it: the person's profile, whether they are an adult, a teen or a child, whether they are the server's admin, and their account. So the route has nothing to check itself. The route never receives a cookie or a token: the plugin can't pretend to be the person.
 
 ## The plugin's texts
 

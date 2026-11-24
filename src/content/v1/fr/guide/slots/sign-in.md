@@ -1,7 +1,7 @@
 ---
 title: "signInExtras"
-description: "Un bouton ou un lien du plugin sous le formulaire de Connexion, comme _Créer mon foyer_."
-intro: "Un composant du plugin sous le formulaire de Connexion de Hodi. Il sert à proposer une autre façon d'entrer : un lien _Créer mon foyer_, un bouton _Continuer avec Google_…"
+description: "Un bouton ou un lien du plugin sous le formulaire de Connexion, comme _Créer un compte_."
+intro: "Un composant du plugin sous le formulaire de Connexion de Hodi. Il sert à proposer une autre façon d'entrer : un lien _Créer un compte_, un bouton _Continuer avec Google_…"
 order: 6
 icon: "log-in"
 topic: "sport"
@@ -12,7 +12,7 @@ key: "signInExtras"
 
 Sur l'écran de Connexion de Hodi, sous le formulaire, avant que la personne ait ouvert son profil.
 
-À ce moment, Hodi ne connaît pas encore le foyer de la personne. Hodi ne charge donc que les plugins qui ont la permission `publicRoutes`, et seulement le fichier `web/public.tsx` de ces plugins. Les deux emplacements de connexion se déclarent dans ce fichier : `signInExtras` et `ageConsent`.
+À ce moment, Hodi ne sait pas encore qui est la personne. Hodi ne charge donc que les plugins qui ont la permission `publicRoutes`, et seulement le fichier `web/public.tsx` de ces plugins. Les deux emplacements de connexion se déclarent dans ce fichier : `signInExtras` et `ageConsent`.
 
 ## Exemple
 
@@ -27,7 +27,7 @@ const SignUp = ({ signedIn }) => {
     const answer = await publicApi('/signup', { method: 'POST', body: JSON.stringify(form) })
     if (answer.ok) signedIn()
   }
-  return <Button onClick={join}>Créer mon foyer</Button>
+  return <Button onClick={join}>Créer un compte</Button>
 }
 
 definePlugin({ signInExtras: SignUp })

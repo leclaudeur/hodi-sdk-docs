@@ -53,7 +53,6 @@ const PluginAdmin = () => (
             accounts: false,
             mail: false,
             signIn: false,
-            households: false,
             notify: true,
             ai: true
           }}

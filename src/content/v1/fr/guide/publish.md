@@ -30,7 +30,7 @@ Un test lance la partie serveur du plugin **comme Hodi la lance** :
 2. Il le charge dans le même bac à sable que Hodi.
 3. Il appelle ses routes avec les mêmes vérifications que Hodi.
 
-Autour, il y a un petit Hodi en mémoire : un foyer, son admin, et des remplaçants pour les sites, les e-mails, les notifications et l'IA. Un test n'envoie donc jamais rien à personne. Il tourne pareil sur sa machine et dans la CI.
+Autour, il y a un petit Hodi en mémoire : un serveur, son admin, les personnes qu'un test ajoute, et des remplaçants pour les sites, les e-mails, les notifications et l'IA. Un test n'envoie donc jamais rien à personne. Il tourne pareil sur sa machine et dans la CI.
 
 ### Un exemple
 
@@ -80,9 +80,10 @@ La CI du modèle les relance à chaque push. Un plugin qui passe ses tests se co
 | `settings` | `object` | Les réglages, comme l'admin les aurait choisis. Les autres gardent leur valeur par défaut. |
 | `sites` | `object` | La réponse de chaque site de `permissions.network`, par adresse. Une autre adresse échoue, comme un site fermé. |
 | `articles` | `object` | Les articles que Hodi connaît, par id, pour `ctx.articles`. |
-| `ai` | `(question) => string` | La réponse de l'IA à chaque question. Sans cette option, le foyer n'a pas d'IA. |
+| `ai` | `(question) => string` | La réponse de l'IA à chaque question. Sans cette option, le serveur n'a pas d'IA. |
 | `mail` | `boolean` | L'e-mail est configuré sur le serveur (`true` par défaut). |
-| `household` | `object` | Le nom (`name`) et la langue (`language`) du foyer. |
+| `publicHome` | `string` | Le site public de _Serveur › Général_, pour `ctx.serverSettings().publicHome`. |
+| `language` | `'fr' \| 'en'` | La langue du serveur. |
 | `unsigned` | `boolean` | Le plugin est construit sans signature. Hodi refuse alors ce qu'il refuserait en vrai. |
 
 ### Ce que le petit Hodi permet
@@ -90,13 +91,12 @@ La CI du modèle les relance à chaque push. Un plugin qui passe ses tests se co
 <!-- prettier-ignore -->
 | Nom | Ce qu'il fait |
 | --- | --- |
-| `route('POST /hello', { as, body, query })` | Appelle une route du plugin. Sans `as`, c'est l'admin du foyer qui appelle. |
-| `addPerson({ name, kind })` | Ajoute quelqu'un au foyer : `adult`, `teen` ou `child`. |
-| `addAccount({ email })` | Crée un compte qui n'est dans aucun foyer, et renvoie son id. |
-| `noHouseholdRoute(route, accountId)` | Appelle une route comme ce compte sans foyer : seules les routes `noHousehold` lui répondent. |
+| `route('POST /hello', { as, body, query })` | Appelle une route du plugin. Sans `as`, c'est l'admin du serveur qui appelle. |
+| `addPerson({ name, kind, email, password })` | Ajoute quelqu'un au serveur : `adult` (par défaut), `teen` ou `child`. |
+| `addAccount({ email, password })` | Crée un compte sans profil, et renvoie son id. Hodi lui donne un profil à sa première connexion. |
 | `click(action, input)` | Simule un clic sur l'`AiButton` du plugin. |
 | `runTask(name)` | Lance une tâche, comme Hodi le ferait à son heure. |
-| `readFeed(key)` | Lit un flux du plugin, comme un foyer qui le suit. |
+| `readFeed(key)` | Lit un flux du plugin, comme une personne qui le suit. |
 | `exportData(person)` | Demande la copie des données d'une personne. |
 | `mails` | Les e-mails que le plugin a envoyés, dans l'ordre. |
 | `notifications` | Les notifications que le plugin a envoyées, dans l'ordre. |
@@ -114,7 +114,7 @@ Un test vérifie la partie serveur. Pour voir aussi la partie web, il faut un vr
 - Un Hodi à soi, sur sa machine par exemple (`http://localhost:3000`).
 - Être l'admin de son serveur.
 
-Un Hodi de test évite de mélanger ses essais avec les données de son foyer.
+Un Hodi de test évite de mélanger ses essais avec les données de sa famille.
 
 ### Les étapes
 
@@ -224,7 +224,7 @@ Le mainteneur vérifie chacune de ces règles avant de signer un plugin.
 <!-- prettier-ignore -->
 | Règle | Pourquoi |
 | --- | --- |
-| **Pas d'IA sans un clic.** Seul `AiButton` interroge l'IA, une fois par clic. | L'IA coûte de l'argent au foyer : rien ne doit la lancer dans son dos. |
+| **Pas d'IA sans un clic.** Seul `AiButton` interroge l'IA, une fois par clic. | L'IA coûte de l'argent au compte qui clique : rien ne doit la lancer dans son dos. |
 | **Chaque texte dans les locales**, en français et en anglais. Les textes du plugin disent _tu_. | Hodi est bilingue, et parle à chacun de la même façon. |
 | **Les composants et les couleurs de Hodi**, pas des boutons ni des couleurs maison. | Le plugin ressemble au reste de Hodi, dans les trois thèmes. |
 | **Les données des gens** : le plugin dit ce qu'il garde, et l'efface quand ils partent. | Chacun peut récupérer ou effacer ce que Hodi sait de lui. |

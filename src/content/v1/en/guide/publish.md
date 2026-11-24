@@ -30,7 +30,7 @@ A test runs the plugin's server part **the way Hodi runs it**:
 2. It loads it in the same sandbox as Hodi.
 3. It calls its routes with the same checks as Hodi.
 
-Around it is a small Hodi in memory: a household, its admin, and stand-ins for sites, e-mails, notifications and the AI. So a test never sends anything to anyone. It runs the same way on one's machine and in the CI.
+Around it is a small Hodi in memory: a server, its admin, the people a test adds, and stand-ins for sites, e-mails, notifications and the AI. So a test never sends anything to anyone. It runs the same way on one's machine and in the CI.
 
 ### An example
 
@@ -80,9 +80,10 @@ The template's CI runs them again at every push. A plugin that passes its tests 
 | `settings` | `object` | The settings, as the admin would have chosen them. The others keep their default. |
 | `sites` | `object` | The answer of each site in `permissions.network`, by address. Any other address fails, like a closed site. |
 | `articles` | `object` | The articles Hodi knows, by id, for `ctx.articles`. |
-| `ai` | `(question) => string` | The AI's answer to each question. Without this option, the household has no AI. |
+| `ai` | `(question) => string` | The AI's answer to each question. Without this option, the server has no AI. |
 | `mail` | `boolean` | E-mail is set up on the server (`true` by default). |
-| `household` | `object` | The household's name (`name`) and language (`language`). |
+| `publicHome` | `string` | The public site of _Server › General_, for `ctx.serverSettings().publicHome`. |
+| `language` | `'fr' \| 'en'` | The server's language. |
 | `unsigned` | `boolean` | The plugin is built unsigned. Hodi then refuses what it would refuse for real. |
 
 ### What the small Hodi offers
@@ -90,13 +91,12 @@ The template's CI runs them again at every push. A plugin that passes its tests 
 <!-- prettier-ignore -->
 | Name | What it does |
 | --- | --- |
-| `route('POST /hello', { as, body, query })` | Calls a route of the plugin. Without `as`, the household's admin calls. |
-| `addPerson({ name, kind })` | Adds someone to the household: `adult`, `teen` or `child`. |
-| `addAccount({ email })` | Creates an account in no household, and returns its id. |
-| `noHouseholdRoute(route, accountId)` | Calls a route as that account with no household: only `noHousehold` routes answer it. |
+| `route('POST /hello', { as, body, query })` | Calls a route of the plugin. Without `as`, the server's admin calls. |
+| `addPerson({ name, kind, email, password })` | Adds someone to the server: `adult` (the default), `teen` or `child`. |
+| `addAccount({ email, password })` | Creates an account with no profile, and returns its id. Hodi gives it a profile at its first sign-in. |
 | `click(action, input)` | Plays a click on the plugin's `AiButton`. |
 | `runTask(name)` | Runs a task, as Hodi would at its time. |
-| `readFeed(key)` | Reads a feed of the plugin, like a household that follows it. |
+| `readFeed(key)` | Reads a feed of the plugin, like a person who follows it. |
 | `exportData(person)` | Asks for a person's copy of their data. |
 | `mails` | The e-mails the plugin sent, in order. |
 | `notifications` | The notifications the plugin sent, in order. |
@@ -114,7 +114,7 @@ A test checks the server part. To see the web part too, a real Hodi is needed: *
 - A Hodi of one's own, on one's machine for example (`http://localhost:3000`).
 - Being its server's admin.
 
-A test Hodi keeps the trials apart from one's household's data.
+A test Hodi keeps the trials apart from one's family's data.
 
 ### The steps
 
@@ -224,7 +224,7 @@ The maintainer checks each of these rules before signing a plugin.
 <!-- prettier-ignore -->
 | Rule | Why |
 | --- | --- |
-| **No AI without a click.** Only `AiButton` asks the AI, once per click. | The AI costs the household money: nothing may start it behind its back. |
+| **No AI without a click.** Only `AiButton` asks the AI, once per click. | The AI costs the account that clicks money: nothing may start it behind its back. |
 | **Every text in the locales**, in French and in English. The plugin's French texts say _tu_. | Hodi is bilingual, and speaks to everyone the same way. |
 | **Hodi's components and colours**, not home-made buttons or colours. | The plugin looks like the rest of Hodi, in all three themes. |
 | **People's data**: the plugin says what it keeps, and deletes it when they leave. | Everyone can get or delete what Hodi knows about them. |

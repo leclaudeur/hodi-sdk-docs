@@ -30,7 +30,7 @@ L'objet que `server/index.ts` exporte par défaut. Tous ses champs sont facultat
 | Champs | Type | |
 | --- | --- | --- |
 | `migrations?` | `readonly string[]` | Les instructions SQL qui construisent la base du plugin, dans l'ordre. Une migration publiée ne change plus jamais. |
-| `routes?` | `PluginRoutes` | Les routes que la partie web appelle pour les profils du foyer. Hodi les sert sous `/api/plugins/<id>/`, aux seuls profils prévus par `audience`. |
+| `routes?` | `PluginRoutes` | Les routes que la partie web appelle pour les personnes connectées. Hodi les sert sous `/api/plugins/<id>/`, aux seuls profils prévus par `audience`. |
 | `serverRoutes?` | `PluginRoutes` | Les routes de l'espace Serveur. Hodi les sert sous `/api/server/plugins/<id>/`, à l'admin du serveur seulement. |
 | `publicRoutes?` | `PublicRoutes` | Les routes ouvertes à tout le monde, même sans être connecté. Hodi les sert sous `/api/public/plugins/<id>/`, avec la permission `publicRoutes`, à 30 requêtes par minute et par adresse. |
 | `tasks?` | `Record<string, PluginTask>` | Les travaux que Hodi lance tout seul, à intervalle régulier, comme effacer chaque nuit ce qui a expiré. |
@@ -40,7 +40,6 @@ L'objet que `server/index.ts` exporte par défaut. Tous ses champs sont facultat
 | `checkSignIn?` | `(who, ctx) => Promise<string \| null>` | Hodi l'appelle à chaque connexion, avec la permission `signIn`. `null` laisse entrer la personne ; une clé des locales du plugin refuse la connexion avec ce message. |
 | `onProfileDeleted?` | `(deleted, ctx) => Promise<void>` | Hodi l'appelle quand un profil est supprimé. Le plugin y efface ce qu'il gardait de ce profil. |
 | `onAccountDeleted?` | `(deleted, ctx) => Promise<void>` | Hodi l'appelle quand un compte est supprimé. Le plugin y efface ce qu'il gardait de ce compte. |
-| `onHouseholdRemoved?` | `(removed, ctx) => Promise<void>` | Hodi l'appelle quand un foyer est retiré du serveur. Le plugin y efface ce qu'il gardait de ce foyer. |
 | `exportData?` | `(who, ctx) => Promise<unknown>` | Ce que le plugin garde d'une personne, en JSON. Hodi l'ajoute à la copie que cette personne télécharge dans _Réglages › Mon compte_. |
 
 ### PluginContext
@@ -59,10 +58,9 @@ Le `ctx` que Hodi donne à chaque route, tâche et hook. C'est par lui seul que 
 | `articles` | `{ get; page }` | Avec la permission `articles` : retrouve un article que Hodi a lu, et la page de cet article. |
 | `serverSettings` | `() => Promise<ServerSettings>` | Les durées choisies dans _Serveur › Contenu_ et _Sauvegardes_ : combien de jours Hodi garde un article, une vidéo et une copie de sauvegarde. |
 | `mail` | `{ available; appUrl; send }` | Avec la permission `mail` : envoie un e-mail par le serveur réglé dans _Serveur › E-mail_, 50 par heure au plus. `available` dit si ce serveur est réglé. |
-| `households` | `{ list; get; of; create; suspend; resume; remove }` | Obsolète, remplacé par `accounts`. Avec la permission `households` : liste, crée, suspend et retire les foyers du serveur. |
 | `accounts` | `{ get; findByEmail; create; checkPassword; findByLogin; addLogin; list; suspend; resume; remove }` | Avec la permission `accounts` : retrouve, crée et vérifie des comptes, et suspend, reprend ou supprime ceux que le plugin a créés. Le plugin n'obtient jamais de quoi se connecter à un compte. |
 | `notify?` | `(notice) => Promise<void>` | Avec la permission `notify` : envoie une notification à un profil, dix par jour et par profil au plus. |
-| `ai?` | `{ ask }` | Avec la permission `ai`, pour un plugin signé : pose une question à l'IA du foyer, une seule fois par clic sur un `AiButton`. |
+| `ai?` | `{ ask }` | Avec la permission `ai`, pour un plugin signé : pose une question à l'IA de la personne qui clique, une seule fois par clic sur un `AiButton`. |
 
 ### PluginDatabase
 
@@ -96,10 +94,8 @@ La personne qui appelle une route, telle que Hodi l'a vérifiée. La route peut 
 <!-- prettier-ignore -->
 | Champs | Type | |
 | --- | --- | --- |
-| `profileId` | `number \| null` | Le profil ouvert sur l'appareil. Il vaut `null` dans l'espace Serveur, quand l'admin du serveur n'a pas de profil dans le foyer, et sur une route `noHousehold` appelée par un compte sans foyer. |
-| `householdId` | `number \| null` | Le foyer pour lequel la personne demande. Chaque requête qui lit les données d'un foyer filtre sur cet id. Il vaut `null` sur une route `noHousehold` appelée par un compte sans foyer. |
+| `profileId` | `number \| null` | Le profil ouvert sur l'appareil. Il vaut `null` dans l'espace Serveur, pour un admin du serveur qui n'a pas encore de profil. |
 | `kind` | `'adult' \| 'teen' \| 'child'` | Le profil ouvert est celui d'un adulte, d'un ado ou d'un enfant. |
-| `householdAdmin` | `boolean` | `true` quand la personne est l'admin de son foyer. |
 | `serverAdmin` | `boolean` | `true` quand la personne est l'admin du serveur. |
 | `accountId` | `number \| null` | Le compte connecté sur l'appareil. Il peut être différent du compte du profil ouvert, par exemple quand un parent ouvre le profil de son enfant. |
 
@@ -124,7 +120,6 @@ Un objet de routes. Chaque clé a la forme `'MÉTHODE /chemin'`, et une partie d
 | --- | --- | --- |
 | `handler` | `(request, ctx) => Promise<PluginResponse>` | La fonction de la route. |
 | `proof?` | `boolean` | Marque une route sensible. Hodi ne la lance qu'après que la personne a retapé son mot de passe dans `askToConfirm()`. Sans ce mot de passe, la route répond 403 sans avoir tourné. |
-| `noHousehold?` | `boolean` | Seulement dans `routes` : ouvre la route à un compte qui n'a plus de foyer, que toutes les autres routes refusent avec 423 `no_household`. [Une route pour un compte sans foyer](/fr/guide/server-context/#une-route-pour-un-compte-sans-foyer) l'explique. |
 | `raw?` | `true` | La route reçoit des octets au lieu du JSON, comme une image ou un fichier. |
 | `maxBody?` | `number` | La taille maximale de ces octets, en octets, jusqu'à 10 Mo. |
 
@@ -139,7 +134,7 @@ Les routes ouvertes à tout le monde, avant toute connexion. Elles ont la même 
 
 ### PluginTask
 
-Un travail de `tasks`, que Hodi lance tout seul à intervalle régulier. Une tâche ne tourne pour aucun foyer ni aucune personne : `ctx` y refuse donc ce qui en demande un, comme l'IA ou une notification.
+Un travail de `tasks`, que Hodi lance tout seul à intervalle régulier. Une tâche ne tourne pour aucune personne : `ctx` y refuse donc ce qui en demande une, comme l'IA ou les articles d'un lecteur.
 
 <!-- prettier-ignore -->
 | Champs | Type | |
@@ -168,7 +163,7 @@ Une action de `aiActions`. Hodi la lance quand quelqu'un clique sur l'`AiButton`
 | Reçoit | Type | |
 | --- | --- | --- |
 | `request.input` | `unknown` | La valeur que le bouton a envoyée avec le clic, 16 Ko de JSON au plus. |
-| `request.who` | `{ householdId; profileId }` | L'adulte qui a cliqué, et son foyer. |
+| `request.who` | `{ profileId }` | Le profil de l'adulte qui a cliqué. |
 
 ### PluginArticle
 
@@ -185,21 +180,6 @@ Un article lu par Hodi, tel que `ctx.articles.get()` le renvoie ou que `onArticl
 | `publishedAt` | `string \| null` | La date de publication, ou `null` quand le site ne la donne pas. |
 | `status` | `'ok' \| 'unreadable' \| 'failed'` | `ok` : le lecteur a le texte de l'article. `unreadable` : la page n'a pas de texte à lire. `failed` : le site n'a pas répondu. |
 | `text` | `{ title; byline; contentHtml; textLength } \| null` | Le texte que le lecteur montre, quand `status` vaut `ok`. Sinon, `null`. |
-
-### PluginHousehold
-
-Obsolète : les foyers quittent Hodi, `PluginAccount` les remplace. Ce qu'un plugin peut savoir d'un foyer, avec la permission `households`. Il ne voit jamais ce que le foyer contient : ni ses profils, ni ses sources, ni ses lectures.
-
-<!-- prettier-ignore -->
-| Champs | Type | |
-| --- | --- | --- |
-| `id` | `number` | L'id du foyer. |
-| `name` | `string` | Le nom du foyer. |
-| `language` | `'fr' \| 'en'` | La langue du foyer. |
-| `createdAt` | `number` | La date de création du foyer, en millisecondes depuis 1970. |
-| `suspended` | `boolean` | `true` quand le plugin qui a créé le foyer l'a suspendu. |
-| `mine` | `boolean` | `true` quand ce plugin a créé le foyer. Un plugin ne peut suspendre ou retirer que ses propres foyers. |
-| `photo` | `string \| null` | L'adresse de la photo du foyer, à passer à `HouseholdAvatar`. |
 
 ### PluginAccount
 
@@ -231,7 +211,7 @@ Ce qu'un plugin peut savoir d'un compte, avec la permission `accounts`.
 | `version` | `string` | La version du plugin, comme `1.2.0`. |
 | `description` | `string` | Une phrase qui dit ce que fait le plugin, 280 caractères au plus. |
 | `api` | `number` | La version de l'API des plugins pour laquelle le plugin est écrit. |
-| `audience` | `'admin' \| 'all'` | Qui voit le plugin dans un foyer : l'admin du foyer seulement, ou tous les profils. |
+| `audience` | `'admin' \| 'all'` | Qui voit le plugin : l'admin du serveur seulement, ou tous les profils. |
 | `provides` | `string[]` | Ce que le plugin apporte à Hodi : un genre de profil (`profile-kind:child`), une interface (`shell:child`) ou la voix (`speech`). |
 | `menu` | `{ group; after?; icon? } \| null` | Où se place l'entrée du plugin dans Réglages : son groupe, l'entrée après laquelle elle vient, et son icône. |
 | `settings` | `SettingSpec[]` | Les réglages du plugin, que l'admin du serveur change dans _Serveur › Plugins_. |
@@ -241,7 +221,7 @@ Ce qu'un plugin peut savoir d'un compte, avec la permission `accounts`.
 
 ### Permissions
 
-Ce qu'un plugin peut demander en plus de l'essentiel : sans permission, il ne peut que garder ses données dans sa base, lire ses réglages et écrire dans le journal. Hodi vérifie chaque appel. Les six dernières permissions ne sont accordées qu'à un plugin signé.
+Ce qu'un plugin peut demander en plus de l'essentiel : sans permission, il ne peut que garder ses données dans sa base, lire ses réglages et écrire dans le journal. Hodi vérifie chaque appel. Les cinq dernières permissions ne sont accordées qu'à un plugin signé.
 
 <!-- prettier-ignore -->
 | Champs | Type | |
@@ -252,9 +232,8 @@ Ce qu'un plugin peut demander en plus de l'essentiel : sans permission, il ne pe
 | `notify` | `boolean` | Ouvre `ctx.notify` : envoyer une notification. |
 | `mail` | `boolean` | Ouvre `ctx.mail` : envoyer un e-mail. |
 | `accounts` | `boolean` | Ouvre `ctx.accounts` : retrouver, créer et vérifier des comptes, et gérer ceux que le plugin a créés. |
-| `households` | `boolean` | Obsolète. Ouvre `ctx.households` : gérer les foyers du serveur. |
 | `signIn` | `boolean` | Ouvre la réponse `signIn` d'une route publique et le hook `checkSignIn`. |
-| `ai` | `boolean` | Ouvre `ctx.ai` : poser une question à l'IA du foyer, sur un clic. |
+| `ai` | `boolean` | Ouvre `ctx.ai` : poser une question à l'IA de la personne qui clique, sur un clic. |
 
 ### SettingSpec
 
@@ -304,7 +283,6 @@ L'objet que `definePlugin()` reçoit : un champ par emplacement, tous facultatif
 | `setupSteps?` | `SetupStep[]` | Les [étapes du plugin dans l'installation](/fr/guide/slots/setup/) de Hodi. |
 | `accountRows?` | `ComponentType<{ layout }>` | Des [lignes au bout de la carte _Compte_](/fr/guide/slots/account-rows/). |
 | `avatarMenu?` | `AvatarMenuItem[]` | Des [entrées dans le menu de l'avatar](/fr/guide/slots/avatar-menu/). |
-| `noHouseholdActions?` | `ComponentType<{ layout; done }>` | Une [autre suite sur la carte d'un compte sans foyer](/fr/guide/slots/no-household-actions/), comme _Créer mon foyer_. |
 
 ### ServerSection
 

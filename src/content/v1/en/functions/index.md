@@ -18,7 +18,7 @@ import { askToConfirm, usePluginApi } from 'hodi:sdk'
 const api = usePluginApi()
 askToConfirm({
   title: 'Clear the history?',
-  message: 'The last 30 hellos of this household will be deleted.',
+  message: 'The last 30 hellos of this profile will be deleted.',
   label: 'Clear',
   onConfirm: () => api('/history', { method: 'DELETE' })
 })

@@ -43,7 +43,7 @@ Here is each field of `plugin.json`, with its type and its role. Each field has 
 | `version` | `string` | The version number, such as `1.2.0`. |
 | `description` | `string` | A sentence that says what the plugin does, 280 characters at most. |
 | `api` | `2` | The version of the plugin API the plugin is written for. |
-| `audience?` | `'admin' \| 'all'` | Who sees the plugin in a household. `all` by default. |
+| `audience?` | `'admin' \| 'all'` | Who sees the plugin: the server's admin or every profile. `all` by default. |
 | `settings?` | `Setting[]` | The plugin's settings, which the server admin changes. |
 | `permissions?` | `Permissions` | What the plugin is allowed to do, besides keeping its data. |
 | `menu?` | `{ group, after? }` | Where to put the plugin's entry in Settings. |
@@ -107,15 +107,15 @@ Hodi doesn't load a plugin written for another version of the API: that plugin's
 
 ### `audience`
 
-The `audience` field says which profiles of a household see the plugin: the plugin's page in Settings, its cards and its buttons. Hodi applies the same rule to the plugin's [routes](/en/guide/server-context/#routes): someone who doesn't see the plugin can't call its routes either.
+The `audience` field says which profiles see the plugin: the plugin's page in Settings, its cards and its buttons. Hodi applies the same rule to the plugin's [routes](/en/guide/server-context/#routes): someone who doesn't see the plugin can't call its routes either.
 
 The `audience` field has two possible values:
 
 <!-- prettier-ignore -->
 | Value | Who sees the plugin |
 | --- | --- |
-| `"all"` | Every profile of the household: adults, teens and children. It is the default. |
-| `"admin"` | The household's admin only. |
+| `"all"` | Every profile of the server: adults, teens and children. It is the default. |
+| `"admin"` | The server's admin only. |
 
 With `"all"`, a route can still adapt its answer to the person asking: `request.who.kind` is `"adult"`, `"teen"` or `"child"`.
 
@@ -280,19 +280,18 @@ These three permissions work for any plugin, signed or not:
 
 ### Permissions for signed plugins
 
-These six permissions touch people's accounts, or cost the household money. Only a signed plugin, read by Hodi's maintainer, gets these permissions:
+These five permissions touch people's accounts, or cost the person who clicks money. Only a signed plugin, read by Hodi's maintainer, gets these permissions:
 
 <!-- prettier-ignore -->
 | Permission | Type | What the permission opens |
 | --- | --- | --- |
-| `ai` | `boolean` | Asking the household's AI a question, one per click on the plugin's AI button, with `ctx.ai.ask()`. |
-| `notify` | `boolean` | Sending a notification to a person's devices, 10 a day at most, with `ctx.notify()`. |
+| `ai` | `boolean` | Asking the AI of the person who clicks a question, one per click on the plugin's AI button, with `ctx.ai.ask()`. |
+| `notify` | `boolean` | Sending a notification to a person's devices, 10 a day and 3 an hour at most, with `ctx.notify()`. |
 | `mail` | `boolean` | Sending an e-mail through Hodi's mail server, 50 an hour at most, with `ctx.mail`. |
 | `accounts` | `boolean` | Creating accounts, finding them and checking a password, with `ctx.accounts`. |
-| `households` | `boolean` | Listing and creating households, and suspending or deleting those it created, with `ctx.households`. |
 | `signIn` | `boolean` | Signing someone in from a public route, and refusing a sign-in with `checkSignIn`. |
 
-An unsigned plugin that asks for `notify`, `mail`, `accounts`, `households` or `signIn` is refused at install. An unsigned plugin that asks for `ai` still installs, but without the AI: the plugin's AI button doesn't answer.
+An unsigned plugin that asks for `notify`, `mail`, `accounts` or `signIn` is refused at install. An unsigned plugin that asks for `ai` still installs, but without the AI: the plugin's AI button doesn't answer.
 
 In development, with `hodi-plugin dev`, the plugin keeps all its permissions, even unsigned. So each permission can be tested before asking for the signature.
 
@@ -312,11 +311,11 @@ The `menu` field says where to put the plugin's entry in Settings. This field is
 - `group`: the Settings group, such as `you` for _You_.
 - `after`: the Hodi entry just before, such as `stats`.
 
-Without `menu`, or with an unknown group, the plugin's entry goes at the end of the _Household_ group. [`page`](/en/guide/slots/settings/) lists the six groups and their entries.
+Without `menu`, or with an unknown group, the plugin's entry goes at the end of the _You_ group. [`page`](/en/guide/slots/settings/) lists the five groups and their entries.
 
 ### `feeds`
 
-The `feeds` field declares the feeds of articles the plugin offers, 5 at most. A household follows these feeds like any other source. [`feeds`](/en/guide/slots/feeds/) shows a whole example.
+The `feeds` field declares the feeds of articles the plugin offers, 5 at most. Anyone follows these feeds like any other source. [`feeds`](/en/guide/slots/feeds/) shows a whole example.
 
 ### `serverNotifications`
 

@@ -68,9 +68,9 @@ import { Pencil } from 'lucide-react'
 
 ## AiButton
 
-Le bouton violet. C'est le seul moyen pour un plugin de poser une question à l'IA du foyer. Chaque clic lance une fois l'action du même nom dans `aiActions`, côté serveur, et renvoie sa réponse à `onAnswer`.
+Le bouton violet. C'est le seul moyen pour un plugin de poser une question à l'IA de la personne qui clique. Chaque clic lance une fois l'action du même nom dans `aiActions`, côté serveur, et renvoie sa réponse à `onAnswer`.
 
-Hodi cache ce bouton pour un ado, un enfant ou un foyer sans IA. Il le grise quand le foyer a atteint sa limite du jour. [Le contexte serveur](/fr/guide/server-context/#lia-seulement-sur-un-clic) explique le côté serveur.
+Hodi cache ce bouton pour un ado, un enfant ou une personne sans IA. Au-delà de 10 questions par heure pour ce plugin et ce profil, `onError` reçoit `limited`. [Le contexte serveur](/fr/guide/server-context/#lia-seulement-sur-un-clic) explique le côté serveur.
 
 ```tsx title="web/index.tsx" render="aibutton" play="aibutton"
 import { AiButton } from 'hodi:sdk'

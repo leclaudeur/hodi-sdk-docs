@@ -1,28 +1,28 @@
 ---
 title: "The server context"
 description: "What a plugin's server part exports (routes, migrations, tasks, hooks) and everything `ctx` gives it."
-intro: "A plugin's server part exports a `ServerPlugin` object: its routes, its database, its tasks and its hooks. Each of them receives `ctx`, the context Hodi gives it. Through `ctx`, and through it alone, the plugin reads its database, its settings, a site or the household's AI."
+intro: "A plugin's server part exports a `ServerPlugin` object: its routes, its database, its tasks and its hooks. Each of them receives `ctx`, the context Hodi gives it. Through `ctx`, and through it alone, the plugin reads its database, its settings, a site or the AI of the person who clicks."
 order: 4
 icon: "braces"
 ---
 
 ## A whole example
 
-This plugin counts each household's hellos. It creates a table, and its `POST /hello` route adds a row to it at each call, then answers the message and the household's number of hellos.
+This plugin counts each person's hellos. It creates a table, and its `POST /hello` route adds a row to it at each call, then answers the message and that person's number of hellos.
 
 ```tsx title="server/index.ts"
 import type { ServerPlugin } from '@hodi-app/plugin-sdk/server'
 
 const plugin: ServerPlugin = {
   migrations: [
-    'CREATE TABLE said (household INTEGER NOT NULL, at TEXT NOT NULL)'
+    'CREATE TABLE said (profile INTEGER NOT NULL, at TEXT NOT NULL)'
   ],
   routes: {
     'POST /hello': async (request, ctx) => {
       const { greeting } = ctx.settings()
-      const household = request.who.householdId
-      ctx.db.run('INSERT INTO said VALUES (?, ?)', [household, new Date().toISOString()])
-      const row = ctx.db.get('SELECT COUNT(*) AS count FROM said WHERE household = ?', [household])
+      const profile = request.who.profileId
+      ctx.db.run('INSERT INTO said VALUES (?, ?)', [profile, new Date().toISOString()])
+      const row = ctx.db.get('SELECT COUNT(*) AS count FROM said WHERE profile = ?', [profile])
       return { body: { text: greeting, count: row?.count } }
     }
   }
@@ -41,7 +41,7 @@ The rest of this page explains each piece: `migrations`, `routes`, `request`, `c
 | Field | |
 | --- | --- |
 | `migrations` | The changes to its database, in order. |
-| `routes` | The routes the web part calls, for the household's profiles. |
+| `routes` | The routes the web part calls, for the people signed in. |
 | `serverRoutes` | The routes of the Server space, for the server admin. |
 | `publicRoutes` | The routes open to everyone, even signed out. |
 | `aiActions` | What each AI button of the plugin does. |
@@ -51,7 +51,6 @@ The rest of this page explains each piece: `migrations`, `routes`, `request`, `c
 | `checkSignIn` | Called at each sign-in, to accept or refuse it. |
 | `onProfileDeleted` | Called when a profile is deleted, to erase what the plugin keeps about it. |
 | `onAccountDeleted` | Called when an account is deleted, to erase what the plugin keeps about it. |
-| `onHouseholdRemoved` | Called when a household is removed, to erase what the plugin keeps about it. |
 | `exportData` | What the plugin keeps about a person, for their copy of their data. |
 
 ## Its database
@@ -66,8 +65,8 @@ A migration is an SQL statement that changes the database's structure: creating 
 
 ```tsx title="server/index.ts"
 migrations: [
-  'CREATE TABLE said (household INTEGER NOT NULL, at TEXT NOT NULL)',
-  'ALTER TABLE said ADD COLUMN profile INTEGER'
+  'CREATE TABLE said (profile INTEGER NOT NULL, at TEXT NOT NULL)',
+  'ALTER TABLE said ADD COLUMN greeting TEXT'
 ]
 ```
 
@@ -93,20 +92,20 @@ To fix a mistake in a published migration, a new one that fixes it must be added
 | `ctx.db.run(sql, params)` | For an `INSERT`, an `UPDATE` or a `DELETE`. It returns `{ changes, lastInsertRowid }`. |
 
 ```tsx title="server/index.ts"
-const rows = ctx.db.query('SELECT at FROM said WHERE household = ? ORDER BY at DESC', [household])
+const rows = ctx.db.query('SELECT at FROM said WHERE profile = ? ORDER BY at DESC', [profile])
 // rows = [{ at: '2026-11-13T09:12:00.000Z' }, { at: '2026-11-12T18:40:00.000Z' }]
 ```
 
 Values always go through `?`, never pasted into the query's text. SQLite then receives them apart, and a value someone typed can't change the query.
 
-### One database for every household
+### One database for the whole server
 
-A single Hodi server can host several households, and the plugin has one database for all of them. It is up to the plugin to keep their data apart:
+A single Hodi server hosts several people and several families, and the plugin has one database for all of them. It is up to the plugin to keep their data apart:
 
-- each table that holds a household's data has a column for it, such as `household`;
-- each query filters on that column, with `request.who.householdId`.
+- each table that holds a person's data has a column for them, such as `profile` or `account`;
+- each query filters on that column, with `request.who.profileId` or `request.who.accountId`.
 
-Without this filter, a household would see the others' data.
+Without this filter, a person would see the others' data.
 
 ## Routes
 
@@ -117,11 +116,11 @@ A route is a function the web part can call. It has a key, `'METHOD /path'`, and
 ```tsx title="server/index.ts"
 routes: {
   'GET /notes': async (request, ctx) => {
-    const notes = ctx.db.query('SELECT id, text FROM notes WHERE household = ?', [request.who.householdId])
+    const notes = ctx.db.query('SELECT id, text FROM notes WHERE profile = ?', [request.who.profileId])
     return { body: notes }
   },
   'DELETE /notes/:id': async (request, ctx) => {
-    ctx.db.run('DELETE FROM notes WHERE id = ? AND household = ?', [request.params.id, request.who.householdId])
+    ctx.db.run('DELETE FROM notes WHERE id = ? AND profile = ?', [request.params.id, request.who.profileId])
     return { status: 204 }
   }
 }
@@ -136,7 +135,7 @@ Hodi serves routes in three places, each for other people:
 <!-- prettier-ignore -->
 | Field | Who can call these routes |
 | --- | --- |
-| `routes` | The household's profiles in `audience`. The web part calls them with `usePluginApi()`. |
+| `routes` | The people signed in that `audience` allows. The web part calls them with `usePluginApi()`. |
 | `serverRoutes` | The server admin only. The web part calls them with `usePluginServerApi()`. |
 | `publicRoutes` | Everyone, even signed out. The web part calls them with `usePluginPublicApi()`, and it needs the `publicRoutes` permission. |
 
@@ -162,9 +161,7 @@ A public route doesn't know who calls it: `request.who` is `null` there. Hodi li
 | `who` field | Type | |
 | --- | --- | --- |
 | `profileId` | `number \| null` | The profile open on the device. |
-| `householdId` | `number \| null` | The household the person asks for. |
 | `kind` | `'adult' \| 'teen' \| 'child'` | Adult, teen or child. |
-| `householdAdmin` | `boolean` | The person is the household's admin. |
 | `serverAdmin` | `boolean` | The person is the server's admin. |
 | `accountId` | `number \| null` | The account signed in on the device. |
 
@@ -194,7 +191,7 @@ routes: {
   'DELETE /history': {
     proof: true,
     handler: async (request, ctx) => {
-      ctx.db.run('DELETE FROM said WHERE household = ?', [request.who.householdId])
+      ctx.db.run('DELETE FROM said WHERE profile = ?', [request.who.profileId])
       return { status: 204 }
     }
   }
@@ -202,33 +199,6 @@ routes: {
 ```
 
 On the web side, `askToConfirm()` opens Hodi's window that asks for the password. Without it, the route answers 403 without having run. The plugin never sees the password.
-
-### A route for an account with no household
-
-An account that left its household, or whose profile was deleted, has no household any more. Every route answers it 423 `no_household`, except a route of `routes` marked `noHousehold: true`:
-
-```tsx title="server/index.ts"
-routes: {
-  'POST /my-household': {
-    noHousehold: true,
-    handler: async (request, ctx) => {
-      const household = await ctx.households.create({
-        name: 'The Martins',
-        admin: {
-          name: 'Paul',
-          accountId: request.who.accountId
-        }
-      })
-      return {
-        status: 201,
-        body: { id: household.id }
-      }
-    }
-  }
-}
-```
-
-On such a route, `request.who.accountId` is that account, and `profileId` and `householdId` are `null`. The web part calls it from [`noHouseholdActions`](/en/guide/slots/no-household-actions/).
 
 ## What the context gives
 
@@ -252,13 +222,16 @@ Each of these functions only works if the plugin has the [permission](/en/guide/
 | `ctx.fetchText(url)` | Reads a page of a listed site, and returns its text. It needs the `network` permission. |
 | `ctx.http(url, options)` | Sends a request to a listed site, with a body, such as an OAuth exchange. It needs the `network` permission. |
 | `ctx.articles` | Finds an article Hodi listed, and its page. It needs the `articles` permission. |
-| `ctx.ai.ask(question)` | Asks the household's AI a question, once per click. It needs the `ai` permission. |
-| `ctx.notify(notice)` | Sends a notification to a person, 10 a day at most. It needs the `notify` permission. |
+| `ctx.ai.ask(question)` | Asks the AI of the person who clicks a question, once per click. It needs the `ai` permission. |
+| `ctx.notify(notice)` | Sends a notification to a person, 10 a day and 3 an hour at most. It needs the `notify` permission. |
 | `ctx.notifyServerAdmin(type, notice)` | Tells the server's admin of an event of one of the kinds of [`serverNotifications`](/en/guide/manifest/#servernotifications), 50 a day at most. It needs the `notify` permission. |
 | `ctx.serverNoticeHandled(key)` | Takes the request of that key out of _To handle_. It needs the `notify` permission. |
 | `ctx.mail.send(message)` | Sends an e-mail, 50 an hour at most. It needs the `mail` permission. |
 | `ctx.accounts` | Finds, creates and checks accounts, and manages those the plugin created. It needs the `accounts` permission. |
-| `ctx.households` | Deprecated, replaced by `ctx.accounts`. Lists and creates households. It needs the `households` permission. |
+
+`ctx.articles` only answers for a person who reads: in a route of the app, an `aiActions` action, `exportData` and `onArticle`. Anywhere else it refuses with `no_reader`.
+
+`ctx.notify()` reaches the profile an account reads with. In a person's route or on their click, it reaches only them and the people they have a tie with: their family, or someone they exchanged a share with. A task, a hook, a public route or the Server space reach anyone.
 
 `ctx.fetchText()` and `ctx.http()` only reach the sites listed in `network`. They refuse a redirect to another site, and only send a body or an `Authorization` header over https.
 
@@ -284,7 +257,7 @@ A suspended account is signed out of all its devices: Hodi refuses each of its r
 
 ### Telling the server's admin
 
-`ctx.notifyServerAdmin()` lands in _Server › Notifications_, then by e-mail or push, as the admin chose for that kind in _Server › Alerts_. The title is 80 characters at most and the text 240, in plain text, in one language or one per language. `path` opens a section of the plugin in the Server space.
+`ctx.notifyServerAdmin()` lands in _Server › To do_, then by e-mail or push, as the admin chose for that kind in _Server › Alerts_. The title is 80 characters at most and the text 240, in plain text, in one language or one per language. `path` opens a section of the plugin in the Server space.
 
 A request someone waits on carries an `important` key of the plugin's own (letters, digits and `. _ : -`, 100 characters at most). It stays on top, under _To handle_, and the same key is not sent twice while it waits. The plugin takes it out once the request is handled:
 
@@ -308,7 +281,7 @@ await ctx.serverNoticeHandled(`waitlist:${id}`)
 
 ## The AI, only on a click
 
-A question to the AI costs the household money. So Hodi never asks it unless someone clicked. Here is how it works:
+A question to the AI costs the person who clicks money: they pay with their own key. So Hodi never asks it unless someone clicked. Here is how it works:
 
 1. The web part shows an `AiButton`, with the name of an action, such as `summarize`.
 2. The person clicks this button.
@@ -327,7 +300,7 @@ aiActions: {
 
 `ctx.ai.ask()` only answers in an action of `aiActions`. Elsewhere, in a route or a task, it refuses.
 
-A question is 8000 characters at most. It counts towards the household's daily cap, and a limit of 10 an hour for the plugin. The plugin never sees the AI's key, nor the provider, nor the model.
+A question is 8000 characters at most. It counts in the calls of the account that clicks, and in a limit of 10 an hour for this plugin and this profile. The plugin never sees the AI's key, nor the provider, nor the model.
 
 ## What runs on its own
 
@@ -351,7 +324,7 @@ tasks: {
 
 Hodi remembers when each task started. So a restart doesn't run it again too early.
 
-A task runs for no household and no person. So `ctx` refuses there what needs one, such as the AI or a notification.
+A task runs for no person. So `ctx` refuses there what needs one, such as the AI or a reader's articles (`no_reader`).
 
 ### The other hooks
 
@@ -366,12 +339,13 @@ A task runs for no household and no person. So `ctx` refuses there what needs on
 When someone leaves Hodi, the plugin must delete what it kept about that person. Hodi calls for that:
 
 - `onProfileDeleted` when a profile is deleted;
-- `onAccountDeleted` when an account is deleted;
-- `onHouseholdRemoved` when a whole household goes away.
+- `onAccountDeleted` when an account is deleted.
+
+When the last adult deletes their account, the whole server is erased: Hodi then calls `onProfileDeleted` for each profile and `onAccountDeleted` for each account.
 
 ```tsx title="server/index.ts"
-onHouseholdRemoved: async ({ householdId }, ctx) => {
-  ctx.db.run('DELETE FROM said WHERE household = ?', [householdId])
+onProfileDeleted: async ({ profileId }, ctx) => {
+  ctx.db.run('DELETE FROM said WHERE profile = ?', [profileId])
 }
 ```
 

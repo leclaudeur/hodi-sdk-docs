@@ -68,9 +68,9 @@ import { Pencil } from 'lucide-react'
 
 ## AiButton
 
-The purple button. It is the only way for a plugin to ask the household's AI a question. Each click runs the action of the same name in `aiActions` once, on the server side, and sends its answer to `onAnswer`.
+The purple button. It is the only way for a plugin to ask a question to the AI of the person who clicks. Each click runs the action of the same name in `aiActions` once, on the server side, and sends its answer to `onAnswer`.
 
-Hodi hides this button for a teen, a child or a household without AI. It greys it out when the household has reached its limit for the day. [The server context](/en/guide/server-context/#the-ai-only-on-a-click) explains the server side.
+Hodi hides this button for a teen, a child or a person without AI. Beyond 10 questions an hour for this plugin and this profile, `onError` receives `limited`. [The server context](/en/guide/server-context/#the-ai-only-on-a-click) explains the server side.
 
 ```tsx title="web/index.tsx" render="aibutton" play="aibutton"
 import { AiButton } from 'hodi:sdk'

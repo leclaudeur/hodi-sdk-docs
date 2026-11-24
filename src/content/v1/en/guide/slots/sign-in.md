@@ -1,7 +1,7 @@
 ---
 title: "signInExtras"
-description: "A button or a link of the plugin under the Sign in form, such as _Create my household_."
-intro: "A component of the plugin under Hodi's Sign in form. It is for offering another way in: a _Create my household_ link, a _Continue with Google_ button…"
+description: "A button or a link of the plugin under the Sign in form, such as _Create an account_."
+intro: "A component of the plugin under Hodi's Sign in form. It is for offering another way in: a _Create an account_ link, a _Continue with Google_ button…"
 order: 6
 icon: "log-in"
 topic: "sport"
@@ -12,7 +12,7 @@ key: "signInExtras"
 
 On Hodi's Sign in screen, under the form, before the person has opened their profile.
 
-At that moment, Hodi doesn't know the person's household yet. So Hodi only loads the plugins that have the `publicRoutes` permission, and only the `web/public.tsx` file of these plugins. The two sign-in slots are declared in this file: `signInExtras` and `ageConsent`.
+At that moment, Hodi doesn't know who the person is yet. So Hodi only loads the plugins that have the `publicRoutes` permission, and only the `web/public.tsx` file of these plugins. The two sign-in slots are declared in this file: `signInExtras` and `ageConsent`.
 
 ## Example
 
@@ -27,7 +27,7 @@ const SignUp = ({ signedIn }) => {
     const answer = await publicApi('/signup', { method: 'POST', body: JSON.stringify(form) })
     if (answer.ok) signedIn()
   }
-  return <Button onClick={join}>Create my household</Button>
+  return <Button onClick={join}>Create an account</Button>
 }
 
 definePlugin({ signInExtras: SignUp })

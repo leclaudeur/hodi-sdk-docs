@@ -1,6 +1,6 @@
 import type { Lang } from './code.ts'
 
-// What a plugin puts in its OverviewCard: here the household's hellos day by day this week, today in the accent.
+// What a plugin puts in its OverviewCard: here the hellos day by day this week, today in the accent.
 // Each bar's height is in shadow.css, by its place in the week: 12, 18, 9, 22, 16, 27 and 24.
 const WEEK = [12, 18, 9, 22, 16, 27, 24]
 const DAYS = { fr: ['L', 'M', 'M', 'J', 'V', 'S', 'D'], en: ['M', 'T', 'W', 'T', 'F', 'S', 'S'] }

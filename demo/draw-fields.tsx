@@ -5,7 +5,6 @@ import ChoiceField from '../src/ui/ChoiceField.tsx'
 import Chip from '../src/ui/Chip.tsx'
 import EmptyState from '../src/ui/EmptyState.tsx'
 import FilterChip from '../src/ui/FilterChip.tsx'
-import HouseholdAvatar from '../src/ui/HouseholdAvatar.tsx'
 import Notice from '../src/ui/Notice.tsx'
 import PasswordField from '../src/ui/PasswordField.tsx'
 import { PasswordHint, PasswordRing } from '../src/ui/PasswordGauge.tsx'
@@ -17,7 +16,7 @@ import StatusLine from '../src/ui/StatusLine.tsx'
 import TextField from '../src/ui/TextField.tsx'
 import Toggle from '../src/ui/Toggle.tsx'
 import AgeCheckbox from '../src/plugins/AgeCheckbox.tsx'
-import householdStyles from '../src/views/household/Household.module.css'
+import fieldStyles from '../src/views/household/Household.module.css'
 import { no, tr, type Draw } from './draw-buttons.tsx'
 import { FIELD_ERRORS, issuesOf, momentsOf } from './kinds-fields.ts'
 
@@ -29,7 +28,7 @@ const s = (state: Record<string, unknown>, key: string) => String(state[key] ?? 
 export const DRAW_FIELDS: Record<string, Draw> = {
   // A refused field takes the danger colours, and the line saying why goes under it.
   textfield: (state, lang, set) => (
-    <div className={householdStyles.field}>
+    <div className={fieldStyles.field}>
       <TextField
         icon={FIELD_ICONS[s(state, 'icon') as keyof typeof FIELD_ICONS] ?? Mail}
         aria-label={s(state, 'label')}
@@ -44,7 +43,7 @@ export const DRAW_FIELDS: Record<string, Draw> = {
   ),
   // The field and its hint as Hodi lays them out where an account picks its password (NewPasswordFields).
   passwordfield: (state, lang, set) => (
-    <div className={householdStyles.field}>
+    <div className={fieldStyles.field}>
       <PasswordField
         aria-label={s(state, 'label')}
         value={s(state, 'password')}
@@ -93,7 +92,7 @@ export const DRAW_FIELDS: Record<string, Draw> = {
     )
     if (state.under !== true) return box
     return (
-      <div className={householdStyles.field}>
+      <div className={fieldStyles.field}>
         <TextField icon={Mail} aria-label="E-mail" placeholder={tr(lang)('toi@exemple.be', 'you@example.com')} />
         {box}
       </div>
@@ -186,6 +185,5 @@ export const DRAW_FIELDS: Record<string, Draw> = {
   ),
   sourceavatar: state => (
     <SourceAvatar sourceId="" sourceName={s(state, 'name') || ' '} size={Number(state.size) as 44} />
-  ),
-  householdavatar: state => <HouseholdAvatar name={s(state, 'name') || ' '} photo={null} size={Number(state.size)} />
+  )
 }
