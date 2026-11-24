@@ -257,8 +257,8 @@ Each of these functions only works if the plugin has the [permission](/en/guide/
 | `ctx.notifyServerAdmin(type, notice)` | Tells the server's admin of an event of one of the kinds of [`serverNotifications`](/en/guide/manifest/#servernotifications), 50 a day at most. It needs the `notify` permission. |
 | `ctx.serverNoticeHandled(key)` | Takes the request of that key out of _To handle_. It needs the `notify` permission. |
 | `ctx.mail.send(message)` | Sends an e-mail, 50 an hour at most. It needs the `mail` permission. |
-| `ctx.accounts` | Finds, creates and checks accounts. It needs the `accounts` permission. |
-| `ctx.households` | Lists and creates households. It needs the `households` permission. |
+| `ctx.accounts` | Finds, creates and checks accounts, and manages those the plugin created. It needs the `accounts` permission. |
+| `ctx.households` | Deprecated, replaced by `ctx.accounts`. Lists and creates households. It needs the `households` permission. |
 
 `ctx.fetchText()` and `ctx.http()` only reach the sites listed in `network`. They refuse a redirect to another site, and only send a body or an `Authorization` header over https.
 
@@ -266,6 +266,21 @@ Each of these functions only works if the plugin has the [permission](/en/guide/
 const { text } = await ctx.fetchText('https://api.example.com/weather?city=Brussels')
 const weather = JSON.parse(text)
 ```
+
+### The accounts the plugin created
+
+`ctx.accounts.list()` returns the accounts the plugin created with `ctx.accounts.create()`, newest first. `create()` also takes `name`, the person's first name as _My account_ shows it. The plugin can suspend, resume or delete each of them, and no other: for any other account, a teen's or a child's, and always for the server's admin, Hodi refuses with `not_allowed`.
+
+```tsx title="server/index.ts"
+serverRoutes: {
+  'POST /accounts/:id/suspend': async (request, ctx) => {
+    await ctx.accounts.suspend(Number(request.params.id))
+    return { status: 204 }
+  }
+}
+```
+
+A suspended account is signed out of all its devices: Hodi refuses each of its requests and each of its sign-ins until `resume()`. The sign-in page then shows the text of the `signIn.suspended` key in the plugin's `locales`. `remove()` deletes the account as _Server › Accounts_ does, and every plugin's `onAccountDeleted` hears of it.
 
 ### Telling the server's admin
 
