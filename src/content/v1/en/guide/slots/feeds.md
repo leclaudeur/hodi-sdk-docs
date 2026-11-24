@@ -1,7 +1,7 @@
 ---
 title: "feeds"
-description: "Feeds of articles the plugin provides, which a household follows like any other source."
-intro: "Feeds of articles the plugin provides. A household follows them like any other source: the plugin gives the articles, and Hodi files them under the right topic."
+description: "Feeds of articles the plugin provides, which anyone follows like any other source."
+intro: "Feeds of articles the plugin provides. Anyone follows them like any other source: the plugin gives the articles, and Hodi files them under the right topic."
 order: 11
 icon: "rss"
 topic: "climate"
@@ -10,7 +10,7 @@ key: "plugin.json › feeds"
 
 ## Where in Hodi
 
-A feed of articles of the plugin shows in _Settings › Sources_, among the suggested sources, in the topic the feed gives. Once the household follows the feed, the feed's articles arrive in the household's stream, with those of the other sources.
+A feed of articles of the plugin shows in _Settings › Sources_, among the suggested sources, in the topic the feed gives. Once a person follows the feed, the feed's articles arrive in their stream, with those of the other sources.
 
 A feed needs no web part: everything happens in `plugin.json` and in the server part. For that reason, `feeds` isn't a key of `definePlugin()`, but a field of `plugin.json`.
 
@@ -41,7 +41,7 @@ Here are the fields of a feed of `feeds`:
 | Field | Type | |
 | --- | --- | --- |
 | `key` | `string` | The feed's technical name, the same as in `feeds` in the server part. |
-| `name` | `string` | The name the household sees, 60 characters at most. |
+| `name` | `string` | The name everyone sees, 60 characters at most. |
 | `site` | `string` | The site of the feed's articles. This site must be in `network`. |
 | `lang` | `'fr' \| 'en'` | The language of the feed's articles. |
 | `topic` | `string` | The topic the feed goes under, such as `tech`, `world` or `climate`. |
@@ -78,6 +78,6 @@ const plugin: ServerPlugin = {
 
 ## Good to know
 
-- **When Hodi reads a feed**: every few minutes, as long as a household follows this feed.
+- **When Hodi reads a feed**: every few minutes, as long as someone follows this feed.
 - **How many articles**: 100 articles per read at most, and 5 feeds per plugin at most.
 - **How an article opens**: with its summary and a link to the site, never in the reader.

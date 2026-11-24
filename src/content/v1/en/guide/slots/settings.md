@@ -1,7 +1,7 @@
 ---
 title: "page"
-description: "A page of the plugin in Settings, for what each profile of the household sets or looks up itself."
-intro: "A plugin can add its own entry to Hodi's Settings page. This entry opens a page the plugin draws itself. The plugin puts there what each profile of the household sets or looks up for itself: its notes, its statistics, its preferences for the plugin."
+description: "A page of the plugin in Settings, for what each person sets or looks up themselves."
+intro: "A plugin can add its own entry to Hodi's Settings page. This entry opens a page the plugin draws itself. The plugin puts there what each person sets or looks up for themselves: its notes, its statistics, its preferences for the plugin."
 order: 2
 icon: "settings"
 topic: "world"
@@ -10,7 +10,7 @@ key: "page"
 
 ## Where in Hodi
 
-In Hodi, each profile has its Settings page. The Settings page lists entries, sorted in six groups: Reading, Subjects, You, Household, This device and Hodi. Each entry opens a page.
+In Hodi, each profile has its Settings page. The Settings page lists entries, sorted in five groups: Reading, Subjects, You, This device and Hodi. Each entry opens a page.
 
 A plugin can add its own entry to this list. The plugin's entry bears the plugin's name. A click on the plugin's entry opens the plugin's page, which the plugin draws itself.
 
@@ -21,7 +21,7 @@ Two files of the plugin take part in this entry and this page:
 
 ## Placing the entry
 
-The plugin's entry goes in one of the six groups of the Settings page. The `menu` field of `plugin.json` picks this group, with `group`. The `menu` field can also pick, with `after`, the Hodi entry the plugin's entry goes after.
+The plugin's entry goes in one of the five groups of the Settings page. The `menu` field of `plugin.json` picks this group, with `group`. The `menu` field can also pick, with `after`, the Hodi entry the plugin's entry goes after.
 
 ```json title="plugin.json"
 "menu": {
@@ -32,17 +32,16 @@ The plugin's entry goes in one of the six groups of the Settings page. The `menu
 
 With this example, the plugin's entry goes in the _You_ group, right after the _Statistics_ entry.
 
-Without `after`, the plugin's entry goes at the end of its group. Without `menu`, or with a group Hodi doesn't know, the plugin's entry goes at the end of the _Household_ group.
+Without `after`, the plugin's entry goes at the end of its group. Without `menu`, or with a group Hodi doesn't know, the plugin's entry goes at the end of the _You_ group.
 
-Here are the six possible values of `group`. For each value, the group's name in the Settings page, and the Hodi entries this group already holds, with the value to give `after` to put the plugin's entry after one of them:
+Here are the five possible values of `group`. For each value, the group's name in the Settings page, and the Hodi entries this group already holds, with the value to give `after` to put the plugin's entry after one of them:
 
 <!-- prettier-ignore -->
 | Value of `group` | The group and its entries |
 | --- | --- |
 | `reading` | The _Reading_ group. This group holds Reading and display (`reading`), Topics (`themes`), Sources (`sources`) and History (`history`). |
 | `subjects` | The _Subjects_ group. This group holds Followed subjects (`followed`) and Muted subjects (`muted`). |
-| `you` | The _You_ group. This group holds General (`general`), Statistics (`stats`), My account (`account`) and Sharing (`sharing`). |
-| `household` | The _Household_ group. This group holds Household (`household`), Profiles (`profiles`) and AI & credits (`ai`). It is the default group. |
+| `you` | The _You_ group. This group holds General (`general`), Statistics (`stats`), My account (`account`), Sharing (`sharing`) and AI & credits (`ai`). It is the default group. |
 | `device` | The _This device_ group. This group holds Notifications (`notifications`) and Keyboard shortcuts (`shortcuts`). |
 | `about` | The _Hodi_ group. This group holds Server (`server`) and About (`about`). |
 
@@ -111,6 +110,6 @@ Here are the three keys of `definePlugin` used for the Settings page:
 ## Good to know
 
 - **Who sees the plugin's entry**: the profiles allowed by `audience` in `plugin.json`.
-- **With `audience: "admin"`**: only the household's admin sees the plugin's entry and page.
+- **With `audience: "admin"`**: only the server's admin sees the plugin's entry and page.
 - **The title of the plugin's page**: the plugin gives it, with `SectionPage`.
 - **If the plugin's page crashes**: Hodi shows a message in place of this page.

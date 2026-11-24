@@ -1,4 +1,4 @@
-// ../../../home/user/hodi/node_modules/@zxcvbn-ts/dictionary-compression/dist/decompress.mjs
+// node_modules/@zxcvbn-ts/dictionary-compression/dist/decompress.mjs
 function e(e) {
 	let t = e.split(/([A-Z])/g), n = [], r = "", i = 1;
 	for (; i < t.length; i += 2) r = r.slice(0, t[i].charCodeAt(0) - 65) + t[i + 1], n.push(r);

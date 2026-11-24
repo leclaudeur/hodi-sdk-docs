@@ -57,8 +57,8 @@ export const asktoconfirm: Kind = {
     message: text(
       'message',
       words(
-        'Les 30 derniers bonjours de ce foyer seront effacés.',
-        'The last 30 hellos of this household will be deleted.'
+        'Les 30 derniers bonjours de ce profil seront effacés.',
+        'The last 30 hellos of this profile will be deleted.'
       )
     ),
     label: text('label', words('Vider', 'Clear')),
@@ -140,10 +140,7 @@ export const emptystate: Kind = {
   wide: true,
   controls: {
     title: text('title', words('Aucun bonjour', 'No hellos')),
-    'children?': text(
-      'body',
-      words('Les salutations du foyer arrivent ici.', 'The household’s greetings arrive here.')
-    ),
+    'children?': text('body', words('Les salutations de chacun arrivent ici.', 'Everyone’s greetings arrive here.')),
     'actions?': toggle('actions'),
     'tone?': seg('tone', ['default', 'danger']),
     'compact?': toggle('compact', true)

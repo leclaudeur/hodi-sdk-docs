@@ -39,7 +39,7 @@ const { greeting } = await answer.json()
 <!-- prettier-ignore -->
 | Hooks | Type | |
 | --- | --- | --- |
-| `usePluginApi()` | `(path, init?) => Promise<Response>` | Calls the plugin's `routes`, for the household's profiles. |
+| `usePluginApi()` | `(path, init?) => Promise<Response>` | Calls the plugin's `routes`, for the person signed in. |
 | `usePluginServerApi()` | `(path, init?) => Promise<Response>` | Calls the plugin's `serverRoutes`. Only the server's admin can call them. |
 | `usePluginPublicApi()` | `(path, init?) => Promise<Response>` | Calls the plugin's `publicRoutes`, even before any sign-in. |
 
@@ -103,4 +103,4 @@ settings && t('privacy.kept', { days: settings.articleDays })
 | `videoDays` | `number` | The number of days Hodi keeps a video. |
 | `textDays` | `number` | The number of days Hodi keeps the text of an article read. |
 | `backupCopies` | `number` | The number of database copies Hodi keeps, one per night. |
-| `maxSources` | `number \| null` | The number of sources a household can follow, or `null` when there is no limit. |
+| `maxSources` | `number \| null` | The number of sources a person can follow, or `null` when there is no limit. |

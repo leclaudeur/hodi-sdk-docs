@@ -13,7 +13,10 @@ export const GET: APIRoute = () => {
     to('/fr/', fr),
     to('/fr/guide/', fr),
     to('/en/', en),
-    to('/en/guide/', en)
+    to('/en/guide/', en),
+    // A slot SDK 1.0.0-beta.6 removed: its old address leads to the list of slots.
+    to('/fr/guide/slots/no-household-actions/', '/fr/guide/slots/'),
+    to('/en/guide/slots/no-household-actions/', '/en/guide/slots/')
   ]
   return new Response(`${lines.join('\n')}\n`)
 }

@@ -119,7 +119,7 @@ import { Inbox } from 'lucide-react'
   title="No hellos"
   compact
 >
-  The household’s greetings arrive here.
+  Everyone’s greetings arrive here.
 </EmptyState>
 ```
 

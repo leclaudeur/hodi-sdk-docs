@@ -21,8 +21,6 @@ var e = {
 }, t = {
 	label: "Language",
 	profileHint: "The interface’s; articles stay in their own",
-	householdLabel: "Home language",
-	householdHint: "For the sign-in screen and the profiles that haven’t picked one",
 	in: {
 		fr: "In French",
 		en: "In English"
@@ -34,6 +32,7 @@ var e = {
 }, r = {
 	tagline: "Your news, just for you.",
 	email: "E-mail",
+	emailOrHandle: "E-mail or username",
 	password: "Password",
 	wrongCredentials: "Wrong e-mail or password, try again.",
 	failed: "Something went wrong. Try again in a moment.",
@@ -41,50 +40,36 @@ var e = {
 	enter: "Enter",
 	haveCode: "I have a code",
 	forgot: "Forgot password",
-	refused: "Your sign-in was refused. If it keeps happening, ask whoever runs the server."
+	refused: "Your sign-in was refused. If it keeps happening, ask whoever runs the server.",
+	blocked: "This account was blocked on this server."
 }, i = {
 	code: {
 		title: "Enter the code",
-		intro: "The 8 characters an adult of the household gave you, or the link that came with them.",
+		intro: "The 8 characters the server’s admin gave you, or the link that came with them.",
 		label: "Code",
 		helpTitle: "Where does this code come from?",
-		help: "An adult of the household makes it in Settings › Profiles, with “Invite an adult” or “Connect a device”. For a forgotten password, the server’s admin gives it. It works once, for 24 hours.",
+		help: "The server’s admin makes it in <i>Server › Accounts</i>, to invite someone or for a forgotten password. It works once, for 24 hours.",
 		wrong: "This code doesn’t work: it may have been used already, or its 24 hours are over. Ask for a new one."
 	},
 	invite: {
-		title: "Join {{household}}",
+		title: "Welcome to Hodi",
 		intro: "<b>{{name}}</b> invites you. Create your account: your e-mail and password will sign you in on each of your devices.",
 		introNoName: "Create your account: your e-mail and password will sign you in on each of your devices."
 	},
 	profile: {
 		title: "Last step: the profile",
-		intro: "In <b>{{household}}</b>. Create your account: this profile becomes yours, with its reading.",
-		introExisting: "In <b>{{household}}</b>. Sign in with the account you already have: this profile will be linked to it, with its reading."
+		intro: "Create your account: this profile becomes yours, with its reading."
 	},
-	full: {
-		title: "The household is full",
-		intro: "It already has 5 profiles. Ask the admin to remove one, then try this code again."
-	},
-	who: { intro: "Your name and colour in the household. You can change them in <i>Settings</i>." },
+	who: { intro: "Your name and colour, which others will see. You can change them in <i>My account</i>." },
 	age: "I am at least 13 years old",
 	create: "Create my account",
 	emailTaken: "This address already has an account: sign in with it.",
 	failed: "Your account could not be created. Try again in a moment.",
-	device: {
-		title: "Link this device",
-		intro: "This device will open only <b>{{name}}</b>’s profile, with no e-mail or password. It stays signed in as long as it is used at least once every 90 days, or until a parent removes it.",
-		button: "Confirm"
-	},
 	reset: {
 		title: "New password",
 		intro: "Choose the new password for <b>{{name}}</b>’s account. Your other devices are signed out: you’ll sign in again on them with it.",
 		button: "Confirm"
-	},
-	existing: "I already have an account",
-	newAccount: "Create a new account",
-	signIn: "Join",
-	alreadyMember: "This account already has a profile in this household: sign in with it.",
-	otherHousehold: "Your account {{email}} is already in {{current}}. To join {{household}}, leave your household first in Settings › My account."
+	}
 }, a = {
 	show: "Show password",
 	hide: "Hide password",
@@ -179,15 +164,13 @@ var e = {
 		title: "Soon, an app just for them",
 		text: "The Child profile is on its way. Until then, choose Teen or Adult."
 	},
-	account: "Account",
-	noAccount: "No account",
-	noAccountHint: "A code, on their device",
 	connect: "Connect a device",
-	inviteHint: "An adult makes their own account: you give them an invitation code, to type in “I have a code”.",
-	invite: "Invite",
-	makeAdmin: "Household admin",
-	makeAdminHint: "Hand over your role: a household has one admin.",
-	makeAdminButton: "Hand over the admin role"
+	handle: "Username",
+	handleFree: "@{{handle}} is free.",
+	handleTaken: "@{{handle}} is taken. Try @{{other}}.",
+	handleRules: "3 to 20 characters: letters, digits, dot or underscore.",
+	handleLocked: "You can change it on {{date}}.",
+	handleEvery: "You can change it once every 30 days."
 }, l = {
 	step: "Step {{step}} of {{total}}",
 	codeWrong: "This code doesn’t match.",
@@ -197,7 +180,7 @@ var e = {
 	start: {
 		kicker: "Welcome to Hodi",
 		title: "News for the whole home",
-		lead: "Your favourite news sites, <b>sorted by topic</b>, read <b>with no ads or tracking</b>. Everyone has a profile, and the household shares what’s worth reading.",
+		lead: "Your favourite news sites, <b>sorted by topic</b>, read <b>with no ads or tracking</b>. Everyone has their own account, and you share what’s worth reading.",
 		codeNoticeTitle: "The code is in the server’s log",
 		codeNoticeText: "Take the last <i>Setup code</i> line of <code>docker compose logs app</code>.",
 		code: "Setup code",
@@ -206,7 +189,7 @@ var e = {
 	},
 	account: {
 		title: "Account",
-		intro: "It’s yours, not the household’s: everyone you invite will have their own. You become this server’s admin.",
+		intro: "It’s yours alone: everyone you invite will have their own. You become this server’s admin.",
 		helpTitle: "E-mail and password",
 		help: "You sign in with them on each of your devices, which remember them for 90 days. 8 characters minimum: the longer the password is and the more it mixes capitals, digits and symbols, the stronger it is.",
 		email: "E-mail",
@@ -217,9 +200,8 @@ var e = {
 	},
 	ready: {
 		title: "The server is ready",
-		intro: "Create the household that will read Hodi now, or go to the <i>Server</i> space first: a household can be created there later too, for you or for someone else.",
-		household: "Create my household",
-		server: "Later"
+		intro: "Create the profile you’ll read Hodi with now. The <i>Server</i> space is right there afterwards.",
+		household: "Create my profile"
 	},
 	plugins: {
 		title: "Plugins found",
@@ -235,26 +217,15 @@ var e = {
 		intro: "Hodi uses it to send <i>Forgot password</i> links and the plugins’ e-mails. It can also be set later, in <i>Server › E-mail</i>.",
 		later: "Later"
 	},
-	household: {
-		title: "Your household",
-		intro: "The household brings together up to 5 profiles, each with its own reading. No shared password: everyone has their own account.",
-		helpTitle: "The household’s name",
-		help: "It shows on the sign-in page and in Hodi. You can change it in Settings › Household.",
-		name: "Household",
-		namePlaceholder: "E.g. The Smiths",
-		confirm: "Confirm the password",
-		mismatch: "The two passwords aren’t the same.",
-		laterFailed: "Could not open the Server space. Try again in a moment."
-	},
 	profile: {
 		title: "And who are you?",
-		intro: "Your profile is the household admin: it runs sources, the AI and other profiles."
+		intro: "The name and colour others will see. You can change them in <i>My account</i>."
 	},
 	ai: {
 		title: "AI, if you like",
 		intro: "Summarise an article, ask it questions, the <i>Daily summary</i>: with your own key, paid per use. Without AI, all else works the same.",
 		helpTitle: "Nothing without a click",
-		help: "Each purple button is a call paid from your credits, never automatic. Set a monthly spending limit in the provider’s console. You can add, change or remove the key in Settings › AI and credits.",
+		help: "Each purple button is a call paid from this key’s credits, never automatic. Set a monthly spending limit in the provider’s console. You can add, change or remove the key in My account › AI and credits.",
 		label: "AI",
 		providerHint: "With your API key, billed as you go",
 		none: "No AI",
@@ -265,8 +236,7 @@ var e = {
 		intro: "We guessed your region from this browser. Correct it if needed, then enter Hodi.",
 		account: "Account",
 		serverAdmin: "{{email}} · Server admin",
-		household: "Home",
-		admin: "{{household}} · {{profile}}, admin",
+		household: "Profile",
 		ai: "AI",
 		keyChecked: "{{provider}} · key checked",
 		enter: "Enter Hodi"
@@ -299,8 +269,6 @@ var e = {
 	switch: "Switch profile",
 	switchFrom: "{{name}}, switch profile",
 	create: "New profile",
-	new: "New profile",
-	added: "{{name}} added",
 	yours: "{{name}} (you)",
 	of: "{{name}}’s profile",
 	loadFailed: "The profiles couldn’t be loaded. Reload the page in a moment.",
@@ -309,9 +277,9 @@ var e = {
 	add: "Add",
 	admin: "Admin",
 	code: {
-		invite: "Invite an adult",
-		inviteTitle: "Invite an adult",
-		inviteIntro: "With this code, an adult joins your household with their own account. On their device, they open Hodi, choose <i>I have a code</i> on the <i>Sign in</i> page and type these 8 characters. Then they choose their e-mail and password.",
+		invite: "Invite someone",
+		inviteTitle: "Invite someone",
+		inviteIntro: "With this code, they create their account on this server. On their device, they open Hodi, choose <i>I have a code</i> on the <i>Sign in</i> page and type these 8 characters. Then they choose their e-mail and password.",
 		connectTitle: "Connect {{name}}",
 		connectIntro: "With this code, {{name}} signs in to their profile with their own account. On their device, {{name}} opens Hodi, chooses <i>I have a code</i> on the sign-in page, types these 8 characters, then chooses an e-mail and password. <b>The profile becomes theirs</b>, with all its reading.",
 		label: "Code",
@@ -323,38 +291,26 @@ var e = {
 		copyFailed: "The link could not be copied.",
 		done: "Done",
 		failed: "The code could not be made. Try again in a moment.",
-		deviceIntro: "With this code, {{name}}’s device opens on their profile, with no e-mail or password. On that device, open Hodi, choose <i>I have a code</i> on the sign-in page and type these 8 characters. <b>The device will open only {{name}}’s profile.</b>",
 		resetTitle: "New password",
 		resetIntro: "With this code, {{name}} chooses a new password. On their device, {{name}} opens Hodi, chooses <i>I have a code</i> on the sign-in page, types these 8 characters, then the new password. <b>Their other devices are signed out</b>: they sign in again with the new one."
 	},
 	wrongPassword: "That password is not the right one.",
-	passwordOf: "{{name}}’s password",
 	yourPassword: "Password",
 	open: "Open",
 	noAccount: "{{name}} has no account yet. This profile opens once {{name}} makes one with their code.",
 	loginOnly: "{{name}} signs in without a password: continue with the same button as at sign-in to open their profile.",
-	loginOnlyNoWay: "{{name}} signs in without a password, through a plugin that is gone. An adult of the household can give them a code to choose a password.",
-	invite: {
-		intro: "An 8-character code to join the household with their own account. The name is how you recognise the invitation in <i>Invited people</i>: the person picks their own when they create their account.",
-		name: "Name",
-		email: "E-mail (optional)",
-		send: "Send the code",
-		create: "Create the code",
-		sent: "Code sent to {{email}}",
-		invalid: "Check the name (40 characters at most) and the e-mail address."
-	},
+	loginOnlyNoWay: "{{name}} signs in without a password, through a plugin that is gone. The server’s admin can give them a code to choose a password.",
 	parentalCode: "Parental code",
 	wrongCode: "That code is not the right one.",
 	trustDevice: "Don’t ask again on this device",
-	codeHint: "Ask the household’s admin.",
 	addAccount: {
 		title: "Add my account",
-		intro: "Sign in to find your profile on this device, in the <b>{{household}}</b> household. The accounts already added to <i>Who’s in?</i> stay as they are.",
+		intro: "Sign in to add an account to this device. The accounts already added to <i>Who’s in?</i> stay as they are.",
 		submit: "Sign in",
-		otherHousehold: "<b>{{email}}</b> is in the <b>{{household}}</b> household, and this device serves the <b>{{here}}</b> household.",
 		recovery: "Recovery code",
 		app: "App code"
-	}
+	},
+	forgotCode: "Forgot the code? The account’s password"
 }, f = {
 	fiveMinutes: "Only 5 minutes of reading left today",
 	byeChild: "See you tomorrow, {{name}}!",
@@ -447,12 +403,11 @@ var e = {
 	perDayCount: "{{count}} / day",
 	channels: "YouTube channels",
 	devices: "Devices",
-	ownDevice: "Their device",
-	ownDeviceHint: "A code, on their tablet or phone",
 	removeDevice: "Remove",
 	removeDeviceLabel: "Remove {{device}}",
 	deviceRemoved: "{{device}} removed",
-	deviceRemoveFailed: "Couldn’t remove this device."
+	deviceRemoveFailed: "Couldn’t remove this device.",
+	deleteTwoParents: "{{name}} has two parents: one of you first has to stop being a parent."
 }, m = {
 	push: "{{name}} asks for {{source}}",
 	ask: "Ask for a source",
@@ -477,7 +432,8 @@ var e = {
 		following: "You already read this source.",
 		pending: "You already asked for this source.",
 		full: "Already 3 waiting: wait for your parents.",
-		other: "The request could not be sent. Try again in a moment."
+		other: "The request could not be sent. Try again in a moment.",
+		unavailable: "Source unavailable on this server."
 	},
 	title: "Requests",
 	waiting_one: "{{count}} waiting",
@@ -554,26 +510,16 @@ var e = {
 	sources: {
 		title: "Sources",
 		what: "The sites and channels Hodi reads for you.",
-		open: "Open “Sources”."
-	},
-	add: {
-		title: "Add a source",
-		how: "By its link or from our suggestions.",
-		press: "Tap here to add one."
-	},
-	byTopic: {
-		title: "By topic",
-		noLink: "No link at hand?",
-		offers: "Hodi suggests sites by topic.",
-		pick: "Pick “By topic”."
+		open: "Open <i>Sources</i>."
 	},
 	topic: {
-		suggestions: "Each topic has its suggestions.",
-		pick: "Pick “{{topic}}”."
+		suggestions: "Each topic has its sources.",
+		pick: "Pick <i>{{topic}}</i>.",
+		via: "Open the list of topics, then pick {{topic}}."
 	},
 	site: {
-		title: "Pick a site",
-		feed: "Hodi finds its feed on its own.",
+		title: "Pick a source",
+		feed: "Each one is ready to read.",
 		add: "Add the one you like."
 	},
 	direction: {
@@ -609,7 +555,6 @@ var e = {
 			sources: "Then Sources.",
 			paste: "Paste the link of a site you like here.",
 			parents: "Your parents get your request and decide.",
-			requests: "Open My requests.",
 			press: "Tap Ask for a source."
 		},
 		end: {
@@ -617,6 +562,11 @@ var e = {
 			enjoy: "Happy reading.",
 			go: "Let's go"
 		}
+	},
+	catalogue: {
+		title: "The catalogue",
+		what: "The server’s sources, by topic.",
+		open: "Open the catalogue."
 	}
 }, _ = {
 	title: "Offline",
@@ -758,13 +708,13 @@ var e = {
 	},
 	shares: {
 		title: "Shared",
-		desktop: ["What other profiles of the household sent you with “For…”, for 7 days. A read or hidden article goes away. At the end of an article, react with an emoji: the sender sees it atop their Shared."],
-		phone: ["What other profiles of the household sent you with “For…”, for 7 days. A read article, or one swiped left, goes away. At the end of an article, react with an emoji: the sender sees it atop their Shared."]
+		desktop: ["What other people sent you with <i>For…</i>, for 7 days. A read or hidden article goes away. At the end of an article, react with an emoji: the sender sees it atop their Shared."],
+		phone: ["What other people sent you with <i>For…</i>, for 7 days. A read article, or one swiped left, goes away. At the end of an article, react with an emoji: the sender sees it atop their Shared."]
 	},
 	videos: {
 		title: "Videos",
-		desktop: ["Videos and episodes from the channels you follow, one week at a time, without Shorts. They play here, beside the list. A video watched to the end leaves the list; once started, it waits for you in “Pick up” on the feed. Add channels in Settings › Sources."],
-		phone: ["Videos and episodes from the channels you follow, one week at a time, without Shorts. A video watched to the end leaves the list; once started, it waits for you in “Pick up” on the home screen. Add channels in Settings › Sources."]
+		desktop: ["Videos and episodes from the channels you follow, one week at a time, without Shorts. They play here, beside the list. A video watched to the end leaves the list; once started, it waits for you in <i>Pick up</i> on the feed. Add channels in Settings › Sources."],
+		phone: ["Videos and episodes from the channels you follow, one week at a time, without Shorts. A video watched to the end leaves the list; once started, it waits for you in <i>Pick up</i> on the home screen. Add channels in Settings › Sources."]
 	}
 }, A = {
 	article: "Pick an article",
@@ -804,35 +754,33 @@ var e = {
 	stop: "Stop"
 }, N = {
 	summarizeArticle: "Article summary",
-	capped: "No more summaries today: the daily limit is reached.",
 	offer: "The article’s gist.",
 	summarize: "Sum up",
 	title: "The gist",
 	writing: "Summarizing…",
 	note: "Written by AI · may contain mistakes",
 	errors: {
-		limited: "The daily summary limit is reached. Try again tomorrow.",
 		refused: "The AI couldn’t sum up this article.",
 		unreadable: "This article can’t be summarized.",
 		unknown: "This article has left the feeds.",
 		unavailable: "AI summaries aren’t turned on on the server.",
-		failed: "The summary couldn’t be written."
+		failed: "The summary couldn’t be written.",
+		limited: "Too many requests to the AI in a minute. Try again in a moment."
 	}
 }, P = {
 	ask: "Ask a question",
 	sources: "Sources",
 	answering: "Answering…",
-	capped: "No more questions today: limit reached",
 	placeholder: "A question about this article?",
 	yours: "Question",
 	send: "Send the question",
 	errors: {
-		limited: "The daily question limit is reached. Try again tomorrow.",
 		refused: "The AI couldn’t answer this question.",
 		unreadable: "This article can’t be analysed.",
 		unknown: "This article has left the feeds.",
 		unavailable: "AI questions aren’t turned on on the server.",
-		noAnswer: "No answer for now. Try again."
+		noAnswer: "No answer for now. Try again.",
+		limited: "Too many requests to the AI in a minute. Try again in a moment."
 	}
 }, F = {
 	share: "Share",
@@ -848,12 +796,17 @@ var e = {
 }, I = {
 	sent: "Sent to {{names}}",
 	failed: "The article couldn’t be sent.",
-	label: "Send to a household profile",
+	label: "Send to someone",
 	title: "Send to…",
-	nobody: "Nobody else in the household receives shares yet.",
+	nobody: "Nobody else receives shares yet.",
 	noteLabel: "A note with it",
 	notePlaceholder: "Add a word…",
-	send: "Send"
+	send: "Send",
+	handle: "Their username",
+	handlePlaceholder: "username",
+	add: "Add",
+	unknown: "This account does not exist.",
+	findFailed: "The search failed. Try again."
 }, L = {
 	sentBy: "Sent by {{name}}",
 	sentYouArticle: "<b>{{name}}</b> sent you this article",
@@ -881,13 +834,12 @@ var e = {
 	errors: {
 		failed: "The Daily summary couldn’t be written.",
 		refused: "The AI refused to write the Daily summary.",
-		limited: "Enough Daily summaries for today: try again tomorrow."
+		limited: "Too many requests to the AI in a minute. Try again in a moment."
 	},
 	yesterdayAt: "YESTERDAY {{time}}",
 	writingShort: "Writing…",
 	regenerate: "Redo",
 	writeNew: "Write a new summary (1 call)",
-	capped: "No more Daily summary today: the daily limit is reached",
 	upToDate: "Already up to date: a new summary is possible at {{time}}",
 	listen: "Listen to the summary",
 	writing: "The AI is writing…",
@@ -923,7 +875,7 @@ var e = {
 	filter: "Filter by profile",
 	loadFailed: "Couldn’t load your shares",
 	empty: "Nothing yet",
-	emptyText: "What the household sends lands here.",
+	emptyText: "What others send you lands here.",
 	reactions: "Reactions to your shares",
 	reacted: "<b>{{name}}</b> reacted {{reaction}}",
 	dismiss: "Dismiss"
@@ -945,7 +897,6 @@ var e = {
 	nothingText: "Try another word, or follow this subject to be told."
 }, W = {
 	yours: "My stats",
-	title: "Statistics",
 	articles: "Articles",
 	favourites: "Faves",
 	topTopics: "Most read topics",
@@ -1001,7 +952,6 @@ var e = {
 	loading: "Loading the stats",
 	intro: "What you read, on all your devices. An article is read once you scrolled through 80% of it and spent at least a third of its reading time on it; a video, once 80% watched. Past 15%, it stays in progress and waits for you in <i>Pick up</i>; below that, it was skimmed."
 }, G = {
-	yourHousehold: "Household",
 	tiers: {
 		1: "Bronze",
 		2: "Silver",
@@ -1019,14 +969,7 @@ var e = {
 	badgeWorn: "{{name}}, {{tier}}, worn",
 	badgeWear: "{{name}}, {{tier}}, wear it",
 	badgeLocked: "{{name}}, to earn",
-	household: "Household",
 	thisWeek: "This week",
-	challenge: "Shared goal",
-	challengeReached: "Challenge met: {{read}} of {{goal}} articles read, bravo!",
-	challengeAlone_one: "{{count}} article read out of {{goal}}, by Sunday",
-	challengeAlone_other: "{{count}} articles read out of {{goal}}, by Sunday",
-	challengeTogether_one: "{{count}} of {{goal}} articles read by you {{profiles}}, by Sunday",
-	challengeTogether_other: "{{count}} of {{goal}} articles read by you {{profiles}}, by Sunday",
 	rankLabel_one: "{{rank}}. {{name}}, {{grade}}, {{count}} point",
 	rankLabel_other: "{{rank}}. {{name}}, {{grade}}, {{count}} points",
 	back: "Back",
@@ -1070,7 +1013,7 @@ var e = {
 		},
 		postman: {
 			rule: "Shared with a note",
-			text: "Articles you send to someone in the household with a note.",
+			text: "Articles you send to someone with a note.",
 			unit_one: "share",
 			unit_other: "shares"
 		},
@@ -1093,8 +1036,8 @@ var e = {
 			unit_other: "reads"
 		},
 		"team-player": {
-			rule: "Household challenges",
-			text: "The weekly challenges the household completes together.",
+			rule: "Family challenges",
+			text: "The weekly challenges the family completes together.",
 			unit_one: "challenge",
 			unit_other: "challenges"
 		}
@@ -1110,7 +1053,7 @@ var e = {
 }, K = {
 	offline: "Offline: your changes will be sent when you’re back online.",
 	refused: "A change couldn’t be saved on the server."
-}, q = { saved: "Setting saved" }, J = /*#__PURE__*/ JSON.parse("{\"logout\":\"Sign out\",\"groups\":{\"reading\":\"Reading\",\"subjects\":\"Subjects\",\"you\":\"You\",\"household\":\"Household\",\"device\":\"This device\",\"about\":\"Hodi\"},\"nav\":{\"reading\":\"Reading and display\",\"themes\":\"Topics\",\"sources\":\"Sources\",\"followed\":\"Followed\",\"muted\":\"Muted subjects\",\"stats\":\"Statistics\",\"sharing\":\"Sharing\",\"household\":\"Household\",\"profiles\":\"Profiles\",\"ai\":\"AI & credits\",\"notifications\":\"Notifications\",\"account\":\"My account\",\"shortcuts\":\"Keyboard shortcuts\",\"server\":\"Server\",\"about\":\"About\",\"general\":\"General\"},\"hints\":{\"history\":\"Read and watched, 7 days\",\"reading\":\"Appearance, text size\",\"themes\":\"Order, visibility\",\"sources\":\"Feed status\",\"failing\":\"{{count}} failing\",\"none\":\"None\",\"stats\":\"Reading and videos\",\"on\":\"On\",\"off\":\"Off\",\"household\":\"Name, language, region\",\"callsLeft_one\":\"{{count}} call left today\",\"callsLeft_other\":\"{{count}} calls left today\",\"aiOff\":\"Off\",\"ai\":\"Today’s calls\",\"onPlural\":\"On\",\"offPlural\":\"Off\",\"account\":\"Profile, sign-in, devices, data\",\"shortcuts\":\"Press ?\",\"server\":\"Plugins, for the whole server\",\"about\":\"Version, source code, credits\",\"plugins\":\"Add features\",\"general\":\"Guided tour, reset\"},\"titles\":{\"reading\":\"Reading\",\"themes\":\"Topics\",\"sources\":\"Sources\",\"followed\":\"Followed\",\"muted\":\"Muted subjects\",\"notifications\":\"Notifications\",\"stats\":\"Statistics\",\"ai\":\"AI & credits\",\"household\":\"Household\",\"profiles\":\"Profiles\",\"sharing\":\"Sharing\",\"account\":\"My account\",\"shortcuts\":\"Shortcuts\",\"about\":\"About\",\"plugins\":\"Plugins\",\"plugin\":\"Plugin\",\"general\":\"General\"},\"themes\":{\"intro\":\"The sections of your feed, in the menu’s order. Drag them to change that order. A hidden topic leaves your feed and the menu, but stays visible to the other profiles. A topic with no source doesn’t show.\",\"move\":\"Move {{name}} (up and down arrows)\",\"hidden\":\"hidden\",\"show\":\"Show {{name}}\"},\"reading\":{\"intro\":\"Hodi’s language, its colours and the size of the articles’ text. These settings are yours alone and follow you on all your devices. Hiding what you’ve read keeps your feed short: everything stays in search, the stats and <i>History</i>.\",\"appearance\":\"Theme\",\"appearanceHint\":\"Poudré: the dark theme, in pink\",\"themes\":{\"system\":\"System\",\"light\":\"Light\",\"dark\":\"Dark\",\"powder\":\"Poudré\"},\"accent\":\"Accent colour\",\"accentHint\":\"Logo, active tab, counters, progress\",\"accents\":{\"auto\":\"Rust (the theme’s)\",\"autoPowder\":\"Powder pink (the theme’s)\",\"rose\":\"Pink\",\"corail\":\"Coral\",\"ocre\":\"Gold\",\"vert\":\"Sage\",\"turquoise\":\"Turquoise\",\"bleu\":\"Blue\",\"lavande\":\"Lilac\"},\"textSize\":\"Text size\",\"textSizeHint\":\"Applies to the text of articles\",\"sizes\":[\"Very small\",\"Normal\",\"Large\",\"Very large\",\"Huge\"],\"hideRead\":\"Hide read articles and watched videos\",\"hideReadHint\":\"They stay in searches, stats and history\",\"history\":\"History\"},\"followed\":{\"intro\":\"A word or a phrase. Articles and videos about it get a star and go to <i>Followed</i>. With its alert, a subject sends you a notification when a new article mentions it, at most one every 3 hours.\",\"placeholder\":\"Add a subject, e.g. “Silksong”\",\"field\":\"Subject to add\",\"add\":\"Follow\",\"emptyTitle\":\"Nothing followed\",\"emptyHint\":\"Add a word above: its articles will go to Followed.\",\"searching\":\"Searching…\",\"nothingThisWeek\":\"Nothing this week\",\"thisWeek\":\"{{count}} this week\",\"alert\":\"Alert\",\"alertFor\":\"Alert for “{{word}}”\",\"unfollow\":\"Stop following “{{word}}”\",\"pausedTitle\":\"Alerts paused\",\"paused\":\"Alerts need notifications turned on on this device: <link>Notifications</link>.\"},\"muted\":{\"intro\":\"Articles and videos whose title or summary contains one of these words disappear from the feed, the stories and <i>Videos</i>, but stay in search. <i>foot</i> also hides <i>football</i>.\",\"placeholder\":\"Add a word, e.g. “Kardashian”\",\"field\":\"Word to hide\",\"add\":\"Hide\",\"emptyTitle\":\"No hidden subjects\",\"emptyHint\":\"Add a word above: its articles will leave your feed.\",\"hiddenToday_zero\":\"No article hidden today\",\"hiddenToday_one\":\"{{count}} article hidden today\",\"hiddenToday_other\":\"{{count}} articles hidden today\",\"unmute\":\"Stop hiding “{{word}}”\"},\"sharing\":{\"intro\":\"Send articles to the household’s other profiles, and receive theirs. In the reader, <i>For…</i> sends the article to a profile, with a note if you like. What others send you arrives in <i>Shares</i>, never in the feed.\",\"toggle\":\"Share at home\",\"onHint\":\"You send and receive articles\",\"offHint\":\"Nothing sent or received, Shares hidden\",\"receiveFrom\":\"Get from\",\"mutedHint\":\"You no longer get theirs\",\"receivingHint\":\"You get their articles\",\"receive\":\"Receive shares from {{name}}\"},\"account\":{\"browser\":\"Browser\",\"intro\":\"Your name, photo and language, how you sign in, your devices and everything Hodi keeps about you.\",\"sessionHint\":\"Signed in for 90 days, then the password is asked again\",\"thisDevice\":\"This device\",\"offline\":\"Offline\",\"offlineReading\":\"Offline reading\",\"ready_one\":\"{{count}} here\",\"ready_other\":\"{{count}} here\",\"offlineHint\":\"The text of the feed’s unread articles, kept while the app is open\",\"deviceIntro\":\"What this device keeps of Hodi, and for how long. Your sign-in lasts 90 days, then the password is asked again. The text of articles not read yet is kept here, to read them offline.\",\"yourAccount\":\"Account\",\"email\":\"E-mail\",\"password\":\"Password\",\"passwordChanged\":\"Changed on {{date}}\",\"change\":\"Change\",\"devices\":\"Devices\",\"used\":\"Used {{when}}\",\"signOut\":\"Sign out\",\"signOutLabel\":\"Sign out {{device}}\",\"signedOut\":\"{{device}} signed out\",\"signOutFailed\":\"The device could not be signed out. Try again in a moment.\",\"yourData\":\"Data\",\"copy\":\"Download a copy\",\"copyHint\":\"Your account, household, profiles, sources, saved, read, shares and statistics, in a JSON file\",\"download\":\"Download\",\"delete\":\"Delete your account\",\"deleteHint\":\"Erased at once, with everything in it\",\"deleteButton\":\"Delete\",\"deleteFailed\":\"Your account could not be deleted. Try again in a moment.\",\"emailTitle\":\"Change e-mail\",\"emailIntro\":\"Your new address replaces the old one as soon as you save it.\",\"newEmail\":\"New address\",\"yourPassword\":\"Password\",\"emailTaken\":\"This address already has an account.\",\"emailFailed\":\"The e-mail could not be changed. Try again in a moment.\",\"emailSaved\":\"E-mail changed\",\"passwordIntro\":\"Your other devices will have to sign in again, this one stays signed in.\",\"passwordSaved\":\"Password changed\",\"wrongPassword\":\"This password is not the right one.\",\"loadFailed\":\"Your account could not be loaded.\",\"noPassword\":\"None, you sign in without one\",\"choose\":\"Choose\",\"choosePasswordTitle\":\"Choose a password\",\"choosePasswordIntro\":\"You will be able to sign in with your e-mail and this password, besides your other way.\",\"signInAgain\":\"To confirm it is you, sign in again just before (less than 5 minutes ago), then come back here.\",\"noWayIn\":\"To confirm it is you, you must have signed in less than 5 minutes ago, but your way to sign in is gone. Use “Forgot password” or ask an adult of the household for a code.\",\"sessionHintNoPassword\":\"Signed in for 90 days, then you sign in again\",\"moreDevices_one\":\"See the other one\",\"moreDevices_other\":\"See the {{count}} others\",\"profile\":\"Profile\",\"household\":\"Household\",\"householdAdmin\":\"Household admin\",\"householdMember\":\"Household member\",\"lastAdult\":\"{{role}} · the only adult with an account\",\"leave\":\"Leave\",\"private\":\"Private profile\",\"privateHint\":\"Your password to open your profile\",\"trusted\":\"Opens without a password\",\"askAgain\":\"Ask again\",\"trustedDevices\":\"Trusted devices\",\"privateFailed\":\"Your private profile couldn’t be changed. Try again in a moment.\"},\"roles\":{\"admin\":\"Admin\",\"member\":\"Member\"},\"edit\":\"Edit\",\"editName\":\"Edit {{name}}\",\"editProfileTitle\":\"Edit profile\",\"profileSaved\":\"Profile saved\",\"me\":{\"intro\":\"Replay the guided tour, or put your settings back to default. Your name, photo, language and stats are in <i>My account</i>.\",\"help\":\"Help\",\"tour\":\"Guided tour\",\"tourHint\":\"Add a source step by step, like on the first day\",\"replay\":\"Replay\",\"reset\":\"Reset\",\"resetSettingsHint\":\"Topics, sources, subjects, look: all back to default\",\"resetSettingsTitle\":\"Reset your settings?\",\"resetSettingsMessage\":\"Topics, sources, subjects and look go back to default.\",\"resetAction\":\"Reset\",\"resetSettingsDone\":\"Settings reset\",\"clearStats\":\"Reading stats\",\"clearStatsHint\":\"With the badges and levels, on all devices\",\"clearStatsTitle\":\"Clear your reading stats?\",\"clearStatsMessage\":\"Your reads are cleared on all your devices. This cannot be undone.\",\"clearAction\":\"Clear\",\"clearStatsDone\":\"Stats cleared\",\"tourHintTeen\":\"The feed and asking for a source, step by step\"},\"profiles\":{\"intro\":\"Up to {{max}} readers on this account, each with their own saved articles, reads, stats and settings. The admin adds and deletes profiles, the others change their own. An adult profile with its own account asks for its password on another account’s device.\",\"deleteTitle\":\"Delete {{name}}?\",\"deleteMessage\":\"Their saved articles, reads and settings are deleted too. This cannot be undone.\",\"deleted\":\"{{name}} deleted\",\"deleteFailed\":\"The deletion failed. Try again in a moment.\",\"active\":\"Open\",\"add\":\"Add a profile\",\"groups\":{\"adults\":\"Adults\",\"teens\":\"Teens\",\"children\":\"Children\",\"invited\":\"Invited people\"},\"ownAccount\":\"Their own account\",\"waitingAccount\":\"Waiting for their account\",\"invited\":{\"untilToday\":\"until {{time}}\",\"untilTomorrow\":\"until tomorrow, {{time}}\",\"code\":\"Code valid {{until}}\",\"unnamed\":\"Invitation\",\"resend\":\"Send again\",\"resendName\":\"Send a code to {{name}} again\",\"show\":\"See the code\",\"showName\":\"See a code for {{name}}\",\"cancelName\":\"Cancel {{name}}’s invitation\",\"cancelled\":\"{{name}}’s invitation cancelled\",\"cancelFailed\":\"The invitation could not be cancelled. Try again in a moment.\"}},\"notifications\":{\"errors\":{\"denied\":\"Notifications are blocked for Hodi. Allow them in the device’s settings, then try again.\",\"unavailable\":\"Notifications are not turned on on the server yet.\",\"brave\":\"Brave blocks notifications by default. In brave://settings/privacy, turn on “Use Google services for push messaging”, restart Brave and try again.\",\"failed\":\"Turning them on did not work. Try again in a moment.\"},\"disabled\":\"Notifications turned off\",\"enabled\":\"Notifications on\",\"unsupportedTitle\":\"Not available in this browser\",\"unsupported\":\"On iPhone, add Hodi to the home screen (iOS 16.4 or later) and open it there.\",\"onHere\":\"On for this device\",\"offHere\":\"Off for this device\",\"perDevice\":\"Each device is turned on separately.\",\"toggle\":\"Notifications on this device\",\"intro\":\"Hodi can tell you about a new article on a followed subject with an alert, an article someone sends you, or a reaction to what you shared. Each device is turned on separately, nothing is sent without your OK, and nothing arrives during your quiet hours.\",\"test\":\"Test notification\",\"testHint\":\"To check that they arrive.\",\"testAction\":\"Test\",\"triggers\":\"What sends a notification\",\"noSubject\":\"You follow no subject yet.\",\"subjects\":\"A new article on a subject with an alert: {{alerts}} of {{total}}. One per subject every 3 hours, 12 a day at most.\",\"shares\":\"Shared articles\",\"sharesHint\":\"When someone in the household sends you an article or video with “For…”.\",\"reactions\":\"Reactions to your shares\",\"reactionsHint\":\"When someone reacts with an emoji to an article you sent them.\",\"badge\":\"Badge on the icon\",\"badgeHint\":\"The number of new articles. Back to zero when you open Followed.\",\"silence\":\"Quiet\",\"dnd\":\"Do not disturb\",\"dndHint\":\"No notification during these hours.\",\"hours\":\"Time range\",\"start\":\"Quiet from\",\"end\":\"Quiet until\",\"testBody\":\"Notifications reach this device.\",\"plugins\":\"Plugins\",\"pluginsHint\":\"What the household’s plugins send you, such as the answer to a request.\"},\"data\":{\"kb\":\"{{value}} kB\",\"mb\":\"{{value}} MB\",\"clearedFreed\":\"Texts cleared ({{size}} freed)\",\"cleared\":\"Cleared\",\"clearFailed\":\"The texts could not be cleared. Try again in a moment.\",\"server\":\"Server\",\"database\":\"Database\",\"articles_one\":\"{{total}} article, {{texts}} with its text\",\"articles_other\":\"{{total}} articles, {{texts}} with their text\",\"databaseHint\":\"Articles, settings, reads and AI summaries\",\"texts\":\"Article text\",\"textsHint\":\"Kept to read again outside the feeds; after that, title and link remain\",\"days_one\":\"{{count}} day\",\"days_other\":\"{{count}} days\",\"kept\":\"Kept texts\",\"keptHint\":\"Except Saved ones; an article opened again is re-read from its site\",\"clearTitle\":\"Clear the texts?\",\"clearMessage\":\"Article texts kept on the server are deleted. Saved articles keep theirs.\",\"clear\":\"Clear\",\"clearing\":\"Clearing…\",\"backups\":\"Backups\",\"backupsHint\":\"A copy of the database every night, the last 7 kept\",\"backupsCount_one\":\"A copy of the database every night, the last 7 kept ({{count}} so far)\",\"backupsCount_other\":\"A copy of the database every night, the last 7 kept ({{count}} so far)\",\"sevenKept\":\"7 kept\"},\"household\":{\"renameTitle\":\"Rename household\",\"renameFailed\":\"The name could not be saved. Try again in a moment.\",\"wrongPassword\":\"The current password is wrong.\",\"passwordFailed\":\"The password could not be changed. Try again in a moment.\",\"passwordTitle\":\"Change the password\",\"currentPassword\":\"Current password\",\"newPassword\":\"New password\",\"intro\":\"What holds for the whole install, and only the admin sees: its name, its language, its region and what all profiles share. The time zone sets when the day changes for the feed, the <i>Daily summary</i> and quiet hours; the country helps the AI place your questions.\",\"loadFailed\":\"The household’s settings could not be read. Try again in a moment.\",\"heading\":\"Household\",\"photo\":\"Photo\",\"photoHint\":\"JPEG, PNG, WebP · 20 MB\",\"photoAdd\":\"Add\",\"photoChange\":\"Change\",\"photoRemove\":\"Remove\",\"photoFailed\":\"The photo could not be saved.\",\"photoRemoveTitle\":\"Remove the household’s photo?\",\"photoRemoveMessage\":\"The photo of <b>{{name}}</b> goes for the whole household, in Hodi and in <i>Server › Households</i>: the household’s initial takes its place. You can add another at any time.\",\"name\":\"Name\",\"rename\":\"Rename\",\"region\":\"Region\",\"timeZone\":\"Time zone\",\"regionFailed\":\"The region could not be saved. Try again in a moment.\",\"game\":\"Game\",\"gameToggle\":\"Levels and badges\",\"gameHint\":\"Points for every read, a challenge and a ranking each week\",\"gameOn\":\"Game on\",\"gameOff\":\"Game off\",\"gameFailed\":\"The game could not be changed. Try again in a moment.\",\"timeZoneValue\":\"{{zone}} · {{offset}}\",\"adults\":\"Adult profiles\",\"parentalCode\":\"Parental code\",\"parentalCodeHint\":\"Asked to open an adult profile\",\"code\":\"Code\",\"codeValue\":\"6 digits\",\"codeTitle\":\"Parental code\",\"codeIntro\":\"Six digits, asked to open an adult profile from <i>Who’s reading?</i>. A private profile asks for its password instead.\",\"newCode\":\"New code\"},\"proposals\":{\"errors\":{\"limit\":\"The household has hit its source limit.\",\"followed\":\"Source already followed.\",\"none\":\"This site has no readable feed now. Try another source.\",\"failed\":\"The site isn’t answering. Try again in a moment.\"},\"trying\":\"Hodi looks for the site’s feed and tries 3 articles.\",\"inLanguage\":{\"fr\":\"In French\",\"en\":\"In English\"}},\"addSource\":{\"replace\":\"Replace {{name}}\",\"replaceTitle\":\"Replace the source\",\"title\":\"Add a source\",\"how\":\"How to add\",\"byLink\":\"With a link\",\"forTopic\":\"For a topic\",\"pickTopic\":\"Pick a topic\",\"changeTopic\":\"Change topic\"},\"about\":{\"intro\":\"Hodi is free software, under the AGPL-3.0 licence: its code is open to all, and anyone can install it at home. Here, this install’s version and the credits of those who made it possible.\",\"app\":\"Hodi\",\"version\":\"Version\",\"versionHint\":\"The number of this install\",\"licence\":\"Licence\",\"licenceHint\":\"Free software, AGPL-3.0 licence\",\"source\":\"Source code\",\"support\":\"Support Hodi\",\"supportHint\":\"Free and ad-free, thanks to those who give\",\"supportButton\":\"Patreon\",\"credits\":\"Credits\",\"people\":{\"antho\":{\"name\":\"Antho\",\"role\":\"Idea, design and project lead\"},\"claude\":{\"name\":\"Claude, by Anthropic\",\"role\":\"The AI that wrote the code with Antho\"},\"gptImage\":{\"name\":\"GPT Image, by OpenAI\",\"role\":\"The Child profiles’ avatars\"},\"lucide\":{\"name\":\"Lucide\",\"role\":\"The icons, ISC licence\"},\"fonts\":{\"name\":\"Bebas Neue, Archivo and Geist\",\"role\":\"The fonts, SIL OFL licence\"}}}}"), Y = { change: "Change" }, X = {
+}, q = { saved: "Setting saved" }, J = /*#__PURE__*/ JSON.parse("{\"logout\":\"Sign out\",\"groups\":{\"reading\":\"Reading\",\"subjects\":\"Subjects\",\"you\":\"You\",\"household\":\"Family\",\"device\":\"This device\",\"about\":\"Hodi\"},\"nav\":{\"reading\":\"Reading and display\",\"themes\":\"Topics\",\"sources\":\"Sources\",\"followed\":\"Followed\",\"muted\":\"Muted subjects\",\"stats\":\"Statistics\",\"sharing\":\"Sharing\",\"profiles\":\"Teens and children\",\"ai\":\"AI & credits\",\"notifications\":\"Notifications\",\"account\":\"My account\",\"shortcuts\":\"Keyboard shortcuts\",\"server\":\"Server\",\"about\":\"About\",\"general\":\"General\"},\"hints\":{\"history\":\"Read and watched, 7 days\",\"reading\":\"Appearance, text size\",\"themes\":\"Order, visibility\",\"sources\":\"Feed status\",\"failing\":\"{{count}} failing\",\"none\":\"None\",\"stats\":\"Reading and videos\",\"on\":\"On\",\"off\":\"Off\",\"callsUsed_one\":\"{{count}} call in 24 hours\",\"callsUsed_other\":\"{{count}} calls in 24 hours\",\"aiOff\":\"Off\",\"ai\":\"Today’s calls\",\"onPlural\":\"On\",\"offPlural\":\"Off\",\"account\":\"Profile, sign-in, region, data\",\"shortcuts\":\"Press ?\",\"server\":\"Plugins, for the whole server\",\"about\":\"Version, source code, credits\",\"plugins\":\"Add features\",\"general\":\"Guided tour, reset\"},\"titles\":{\"reading\":\"Reading\",\"themes\":\"Topics\",\"sources\":\"Sources\",\"followed\":\"Followed\",\"muted\":\"Muted subjects\",\"notifications\":\"Notifications\",\"stats\":\"Statistics\",\"ai\":\"AI & credits\",\"profiles\":\"Teens and children\",\"sharing\":\"Sharing\",\"account\":\"My account\",\"shortcuts\":\"Shortcuts\",\"about\":\"About\",\"plugins\":\"Plugins\",\"plugin\":\"Plugin\",\"general\":\"General\"},\"themes\":{\"intro\":\"The sections of your feed, in the menu’s order. Drag them to change that order. A hidden topic leaves your feed and the menu, but stays visible to the other profiles. A topic with no source doesn’t show.\",\"move\":\"Move {{name}} (up and down arrows)\",\"hidden\":\"hidden\",\"show\":\"Show {{name}}\"},\"reading\":{\"intro\":\"Hodi’s language, its colours and the size of the articles’ text. These settings are yours alone and follow you on all your devices. Hiding what you’ve read keeps your feed short: everything stays in search, the stats and <i>History</i>.\",\"appearance\":\"Theme\",\"appearanceHint\":\"Poudré: the dark theme, in pink\",\"themes\":{\"system\":\"System\",\"light\":\"Light\",\"dark\":\"Dark\",\"powder\":\"Poudré\"},\"accent\":\"Accent colour\",\"accentHint\":\"Logo, active tab, counters, progress\",\"accents\":{\"auto\":\"Rust (the theme’s)\",\"autoPowder\":\"Powder pink (the theme’s)\",\"rose\":\"Pink\",\"corail\":\"Coral\",\"ocre\":\"Gold\",\"vert\":\"Sage\",\"turquoise\":\"Turquoise\",\"bleu\":\"Blue\",\"lavande\":\"Lilac\"},\"textSize\":\"Text size\",\"textSizeHint\":\"Applies to the text of articles\",\"sizes\":[\"Very small\",\"Normal\",\"Large\",\"Very large\",\"Huge\"],\"hideRead\":\"Hide read articles and watched videos\",\"hideReadHint\":\"They stay in searches, stats and history\",\"history\":\"History\"},\"followed\":{\"intro\":\"A word or a phrase. Articles and videos about it get a star and go to <i>Followed</i>. With its alert, a subject sends you a notification when a new article mentions it, at most one every 3 hours.\",\"placeholder\":\"Add a subject, e.g. “Silksong”\",\"field\":\"Subject to add\",\"add\":\"Follow\",\"emptyTitle\":\"Nothing followed\",\"emptyHint\":\"Add a word above: its articles will go to Followed.\",\"searching\":\"Searching…\",\"nothingThisWeek\":\"Nothing this week\",\"thisWeek\":\"{{count}} this week\",\"alert\":\"Alert\",\"alertFor\":\"Alert for “{{word}}”\",\"unfollow\":\"Stop following “{{word}}”\",\"pausedTitle\":\"Alerts paused\",\"paused\":\"Alerts need notifications turned on on this device: <link>Notifications</link>.\"},\"muted\":{\"intro\":\"Articles and videos whose title or summary contains one of these words disappear from the feed, the stories and <i>Videos</i>, but stay in search. <i>foot</i> also hides <i>football</i>.\",\"placeholder\":\"Add a word, e.g. “Kardashian”\",\"field\":\"Word to hide\",\"add\":\"Hide\",\"emptyTitle\":\"No hidden subjects\",\"emptyHint\":\"Add a word above: its articles will leave your feed.\",\"hiddenToday_zero\":\"No article hidden today\",\"hiddenToday_one\":\"{{count}} article hidden today\",\"hiddenToday_other\":\"{{count}} articles hidden today\",\"unmute\":\"Stop hiding “{{word}}”\"},\"sharing\":{\"intro\":\"Send articles to the other accounts, and receive theirs. In the reader, <i>For…</i> sends the article to someone, with a note if you like. What others send you arrives in <i>Shares</i>, never in the feed.\",\"toggle\":\"Share with others\",\"onHint\":\"You send and receive articles\",\"offHint\":\"Nothing sent or received, Shares hidden\",\"receiveFrom\":\"Get from\",\"mutedHint\":\"You no longer get theirs\",\"receivingHint\":\"You get their articles\",\"receive\":\"Receive shares from {{name}}\"},\"account\":{\"browser\":\"Browser\",\"sessionHint\":\"Signed in for 90 days, then the password is asked again\",\"thisDevice\":\"This device\",\"offline\":\"Offline\",\"offlineReading\":\"Offline reading\",\"ready_one\":\"{{count}} here\",\"ready_other\":\"{{count}} here\",\"offlineHint\":\"The text of the feed’s unread articles, kept while the app is open\",\"deviceIntro\":\"What this device keeps of Hodi, and for how long. Your sign-in lasts 90 days, then the password is asked again. The text of articles not read yet is kept here, to read them offline.\",\"timeZone\":\"Time zone\",\"timeZoneValue\":\"{{zone}} · {{offset}}\",\"regionFailed\":\"The time zone could not be saved. Try again in a moment.\",\"email\":\"E-mail\",\"password\":\"Password\",\"passwordChanged\":\"Changed on {{date}}\",\"change\":\"Change\",\"devices\":\"Devices\",\"used\":\"Used {{when}}\",\"signOut\":\"Sign out\",\"signOutLabel\":\"Sign out {{device}}\",\"signedOut\":\"{{device}} signed out\",\"signOutFailed\":\"The device could not be signed out. Try again in a moment.\",\"yourData\":\"Data\",\"copy\":\"Download a copy\",\"copyHint\":\"Your account, profile, sources, saved, read, shares and statistics, in a JSON file\",\"download\":\"Download\",\"delete\":\"Delete your account\",\"deleteHint\":\"Erased at once, with everything in it\",\"deleteHandOver\":\"First make someone else a server admin in Server › Accounts\",\"deleteButton\":\"Delete\",\"deleteFailed\":\"Your account could not be deleted. Try again in a moment.\",\"emailTitle\":\"Change e-mail\",\"emailIntro\":\"Your new address replaces the old one as soon as you save it.\",\"newEmail\":\"New address\",\"yourPassword\":\"Password\",\"emailTaken\":\"This address already has an account.\",\"emailFailed\":\"The e-mail could not be changed. Try again in a moment.\",\"emailSaved\":\"E-mail changed\",\"passwordIntro\":\"Your other devices will have to sign in again, this one stays signed in.\",\"passwordSaved\":\"Password changed\",\"wrongPassword\":\"This password is not the right one.\",\"loadFailed\":\"Your account could not be loaded.\",\"noPassword\":\"None, you sign in without one\",\"choose\":\"Choose\",\"choosePasswordTitle\":\"Choose a password\",\"choosePasswordIntro\":\"You will be able to sign in with your e-mail and this password, besides your other way.\",\"signInAgain\":\"To confirm it is you, sign in again just before (less than 5 minutes ago), then come back here.\",\"noWayIn\":\"To confirm it is you, you must have signed in less than 5 minutes ago, but your way to sign in is gone. Use <i>Forgot password</i> or ask the server’s admin for a code.\",\"sessionHintNoPassword\":\"Signed in for 90 days, then you sign in again\",\"moreDevices_one\":\"See the other one\",\"moreDevices_other\":\"See the {{count}} others\",\"private\":\"Private profile\",\"privateHint\":\"Your password to open your profile\",\"trusted\":\"Opens without a password\",\"askAgain\":\"Ask again\",\"trustedDevices\":\"Trusted devices\",\"privateFailed\":\"Your private profile couldn’t be changed. Try again in a moment.\"},\"edit\":\"Edit\",\"editName\":\"Edit {{name}}\",\"editProfileTitle\":\"Edit profile\",\"profileSaved\":\"Profile saved\",\"me\":{\"intro\":\"Replay the guided tour, or put your settings back to default. Your name, photo, language and stats are in <i>My account</i>.\",\"help\":\"Help\",\"tour\":\"Guided tour\",\"tourHint\":\"Add a source step by step, like on the first day\",\"replay\":\"Replay\",\"reset\":\"Reset\",\"resetSettingsHint\":\"Topics, sources, subjects, look: all back to default\",\"resetSettingsTitle\":\"Reset your settings?\",\"resetSettingsMessage\":\"Topics, sources, subjects and look go back to default.\",\"resetAction\":\"Reset\",\"resetSettingsDone\":\"Settings reset\",\"clearStats\":\"Reading stats\",\"clearStatsHint\":\"With the badges and levels, on all devices\",\"clearStatsTitle\":\"Clear your reading stats?\",\"clearStatsMessage\":\"Your reads are cleared on all your devices. This cannot be undone.\",\"clearAction\":\"Clear\",\"clearStatsDone\":\"Stats cleared\",\"tourHintTeen\":\"The feed and asking for a source, step by step\"},\"profiles\":{\"intro\":\"Teens and children, each with their sources, hours and time a day. Each has their own account, run by their parents in <i>My account › My children</i>.\",\"deleteTitle\":\"Delete {{name}}?\",\"deleteMessage\":\"Their saved articles, reads and settings are deleted too. This cannot be undone.\",\"active\":\"Open\",\"groups\":{\"teens\":\"Teens\",\"children\":\"Children\"}},\"notifications\":{\"errors\":{\"denied\":\"Notifications are blocked for Hodi. Allow them in the device’s settings, then try again.\",\"unavailable\":\"Notifications are not turned on on the server yet.\",\"brave\":\"Brave blocks notifications by default. In brave://settings/privacy, turn on “Use Google services for push messaging”, restart Brave and try again.\",\"failed\":\"Turning them on did not work. Try again in a moment.\"},\"disabled\":\"Notifications turned off\",\"enabled\":\"Notifications on\",\"unsupportedTitle\":\"Not available in this browser\",\"unsupported\":\"On iPhone, add Hodi to the home screen (iOS 16.4 or later) and open it there.\",\"onHere\":\"On for this device\",\"offHere\":\"Off for this device\",\"perDevice\":\"Each device is turned on separately.\",\"toggle\":\"Notifications on this device\",\"intro\":\"Hodi can tell you about a new article on a followed subject with an alert, an article someone sends you, or a reaction to what you shared. Each device is turned on separately, nothing is sent without your OK, and nothing arrives during your quiet hours.\",\"test\":\"Test notification\",\"testHint\":\"To check that they arrive.\",\"testAction\":\"Test\",\"triggers\":\"What sends a notification\",\"noSubject\":\"You follow no subject yet.\",\"subjects\":\"A new article on a subject with an alert: {{alerts}} of {{total}}. One per subject every 3 hours, 12 a day at most.\",\"shares\":\"Shared articles\",\"sharesHint\":\"When someone sends you an article or video with <i>For…</i>.\",\"reactions\":\"Reactions to your shares\",\"reactionsHint\":\"When someone reacts with an emoji to an article you sent them.\",\"badge\":\"Badge on the icon\",\"badgeHint\":\"The number of new articles. Back to zero when you open Followed.\",\"silence\":\"Quiet\",\"dnd\":\"Do not disturb\",\"dndHint\":\"No notification during these hours.\",\"hours\":\"Time range\",\"start\":\"Quiet from\",\"end\":\"Quiet until\",\"testBody\":\"Notifications reach this device.\",\"plugins\":\"Plugins\",\"pluginsHint\":\"What plugins send you, such as the answer to a request.\"},\"data\":{\"kb\":\"{{value}} kB\",\"mb\":\"{{value}} MB\",\"clearedFreed\":\"Texts cleared ({{size}} freed)\",\"cleared\":\"Cleared\",\"clearFailed\":\"The texts could not be cleared. Try again in a moment.\",\"server\":\"Server\",\"database\":\"Database\",\"articles_one\":\"{{total}} article, {{texts}} with its text\",\"articles_other\":\"{{total}} articles, {{texts}} with their text\",\"databaseHint\":\"Articles, settings, reads and AI summaries\",\"texts\":\"Article text\",\"textsHint\":\"Kept to read again outside the feeds; after that, title and link remain\",\"days_one\":\"{{count}} day\",\"days_other\":\"{{count}} days\",\"kept\":\"Kept texts\",\"keptHint\":\"Except Saved ones; an article opened again is re-read from its site\",\"clearTitle\":\"Clear the texts?\",\"clearMessage\":\"Article texts kept on the server are deleted. Saved articles keep theirs.\",\"clear\":\"Clear\",\"clearing\":\"Clearing…\",\"backups\":\"Backups\",\"backupsHint\":\"A copy of the database every night, the last 7 kept\",\"backupsCount_one\":\"{{count}} copy\",\"backupsCount_other\":\"{{count}} copies\",\"sevenKept\":\"7 kept\"},\"household\":{\"wrongPassword\":\"The current password is wrong.\",\"passwordFailed\":\"The password could not be changed. Try again in a moment.\",\"passwordTitle\":\"Change the password\",\"currentPassword\":\"Current password\",\"newPassword\":\"New password\",\"game\":\"Game\",\"gameToggle\":\"Levels and badges\",\"gameHint\":\"Points for every read, levels and badges\"},\"proposals\":{\"inLanguage\":{\"fr\":\"In French\",\"en\":\"In English\"}},\"addSource\":{\"replace\":\"Replace {{name}}\",\"replaceTitle\":\"Replace the source\",\"title\":\"Add a source\",\"how\":\"How to add\",\"byLink\":\"With a link\",\"forTopic\":\"For a topic\",\"pickTopic\":\"Pick a topic\",\"changeTopic\":\"Change topic\"},\"about\":{\"intro\":\"Hodi is free software, under the AGPL-3.0 licence: its code is open to all, and anyone can install it at home. Here, this install’s version and the credits of those who made it possible.\",\"app\":\"Hodi\",\"version\":\"Version\",\"versionHint\":\"The number of this install\",\"licence\":\"Licence\",\"licenceHint\":\"Free software, AGPL-3.0 licence\",\"source\":\"Source code\",\"support\":\"Support Hodi\",\"supportHint\":\"Free and ad-free, thanks to those who give\",\"supportButton\":\"Patreon\",\"credits\":\"Credits\",\"people\":{\"antho\":{\"name\":\"Antho\",\"role\":\"Idea, design and project lead\"},\"claude\":{\"name\":\"Claude, by Anthropic\",\"role\":\"The AI that wrote the code with Antho\"},\"gptImage\":{\"name\":\"GPT Image, by OpenAI\",\"role\":\"The Child profiles’ avatars\"},\"lucide\":{\"name\":\"Lucide\",\"role\":\"The icons, ISC licence\"},\"fonts\":{\"name\":\"Bebas Neue, Archivo and Geist\",\"role\":\"The fonts, SIL OFL licence\"}}}}"), Y = {
 	videos: "Its videos go to Videos.",
 	readable_one: "{{count}} of {{tried}} articles opens in Hodi.",
 	readable_other: "{{count}} of {{tried}} articles open in Hodi.",
@@ -1127,9 +1070,10 @@ var e = {
 		empty: "This feed is empty for now.",
 		failed: "The site isn’t answering. Try again in a moment.",
 		reddit: "Hodi dropped Reddit: its feeds are closing.",
-		limit: "The household has hit its source limit. Remove one to add another.",
+		limit: "The server already follows as many sources as its admin allows.",
 		followed: "Source already followed.",
-		bad_section: "Pick another topic for this source."
+		bad_section: "Pick another topic for this source.",
+		unavailable: "Source unavailable on this server."
 	},
 	origins: {
 		feed: "Feed",
@@ -1144,17 +1088,16 @@ var e = {
 	whichTopics: "In which topics?",
 	whichSection: "In which Videos section?",
 	topics: "Source topics",
-	count: "{{added}} / {{limit}} home sources",
+	count: "{{added}} / {{limit}} sources on the server",
 	adding: "Adding",
-	countAll_one: "{{count}} home source",
-	countAll_other: "{{count}} home sources"
-}, Z = {
+	countAll_one: "{{count}} source on the server",
+	countAll_other: "{{count}} sources on the server"
+}, X = {
 	add: {
-		limit: "The household has hit its source limit.",
+		limit: "The server already follows as many sources as its admin allows.",
 		followed: "Followed.",
 		failed: "The source could not be added. Try again in a moment."
 	},
-	capped: "No more suggestions today: the daily limit is reached.",
 	offer: "Sources for {{topic}}, found by the AI.",
 	pickTopic: "Pick a topic, the AI suggests sources.",
 	button: "Suggest",
@@ -1162,74 +1105,56 @@ var e = {
 	errors: {
 		unavailable: "AI isn’t turned on on this server.",
 		not_found: "This topic is gone.",
-		limited: "No more suggestions today: the daily limit is reached. Come back tomorrow.",
 		refused: "The AI couldn’t suggest sources for this topic.",
-		failed: "The suggestions could not be made. Try again in a moment."
+		failed: "The suggestions could not be made. Try again in a moment.",
+		limited: "Too many requests to the AI in a minute. Try again in a moment."
 	},
 	noFeed: "None of the sites has a readable feed. Try again later.",
 	last: "Last article: {{title}}"
-}, Q = {
-	deleteMessage: "It goes for the whole household and won’t come back by itself.",
+}, Z = {
 	deleted: "{{name}} deleted",
 	deleteFailed: "The source could not be deleted. Try again in a moment.",
 	hideLowTitle_one: "Hide the little-read source?",
 	hideLowTitle_other: "Hide the {{count}} little-read sources?",
 	hideOneTitle: "Hide {{name}}?",
 	hideLowMessage: "Their articles leave this profile’s feed and topics. You can show them again here one by one.",
-	hideAll: "Hide all",
-	hidden_one: "Source hidden",
-	hidden_other: "{{count}} sources hidden",
-	replaced: "Source added, {{name}} hidden",
+	hideAll: "Take all out",
+	hidden_one: "Source taken out of your sources",
+	hidden_other: "{{count}} sources taken out of your sources",
+	replaced: "Source added, {{name}} taken out of your sources",
 	added: "Source added",
 	topicsSaved: "Topics saved",
 	topicsFailed: "The topics could not be saved. Try again in a moment.",
-	kinds: {
-		article: "Articles",
-		video: "Videos",
-		podcast: "Podcasts"
-	},
 	groups: {
 		mine: "My sources",
-		channels: "My channels",
-		household: "Added by the home",
 		base: "Base sources"
 	},
 	status: { error: "Error" },
-	deletedProfile: "a deleted profile",
 	errorTitle: "Error: {{error}}",
-	by: "By {{name}}",
+	readers_one: "{{formatted}} readers",
+	readers_other: "{{formatted}} readers",
 	changeTopicsOf: "Change {{name}}’s topics",
 	changeTopics: "Change topics",
-	seeSite: "See the site",
-	deleteFor: "Delete {{name}} for the whole home",
-	intro: "The sites and channels that fill your feed, checked every 15 minutes. A source you add joins the whole household’s list, hidden for the other profiles: each shows it if they want. Base sources can be hidden but not deleted.",
+	intro: "The sites and channels that fill the feed, checked every 15 minutes. A source added here only goes into this account’s sources. Base sources can be removed but not deleted.",
 	search: "Search a source or a topic",
 	searchLabel: "Search a source",
 	filter: "Filter sources",
 	filters: {
 		all: "All",
 		low: "Little read",
-		error: "Failing",
-		hidden: "Hidden"
+		error: "Failing"
 	},
 	filterTopic: "Filter by topic",
 	allTopics: "All topics",
 	loadFailed: "The sources could not be loaded. Try again in a moment.",
 	noMatch: "No source matches.",
 	topicsOf: "{{name}}’s topics",
-	groupIntros: {
-		mine: "The sites you added. Only you, and the admin, can change their topics or delete them.",
-		channels: "The YouTube channels and podcasts you follow. They arrive in Videos, never in the feed.",
-		household: "Added by the other profiles. They stay hidden for you until you show them.",
-		parents: "The sources your parents chose for you. Hide the ones you don’t care about.",
-		base: "Chosen with Hodi for a good start. You can hide them, not delete them.",
-		requests: "The sources you asked for. They come into your feed when your parents accept them."
-	},
-	moreFor: "Actions for {{name}}",
 	replace: "Replace with another",
 	delete: "Delete the source",
-	filterValue: "Filter sources: {{value}}"
-}, $ = {
+	filterValue: "Filter sources: {{value}}",
+	replaceOf: "Replace {{name}} with another",
+	deleteOf: "Delete {{name}}"
+}, Q = {
 	kinds: {
 		summary: "Article summaries",
 		question: "Article questions",
@@ -1237,15 +1162,12 @@ var e = {
 		sources: "Source suggestions",
 		plugin: "Plugins"
 	},
-	resetKindLabel: "Reset: {{kind}}",
 	replaceKey: "Replace the key",
 	turnOn: "Turn on AI",
 	keyFailed: "The key could not be saved. Try again in a moment.",
 	countryFailed: "The country could not be saved. Try again in a moment.",
 	on: "AI on",
 	removed: "AI removed",
-	removeTitle: "Remove the key?",
-	removeMessage: "Violet buttons disappear for the whole household. What the AI already wrote stays.",
 	remove: "Remove",
 	removeFailed: "The key could not be removed. Try again in a moment.",
 	provider: "Provider",
@@ -1255,43 +1177,18 @@ var e = {
 	off: "AI not on",
 	offAdmin: "Add an API key for summaries, questions and the Daily summary.",
 	addKey: "Add a key",
-	resetDone: "Reset",
-	resetFailed: "The reset failed. Try again in a moment.",
-	resetHousehold: {
-		summary: "Reset the household’s summaries?",
-		question: "Reset the household’s questions?",
-		dailySummary: "Reset the household’s Daily summaries?",
-		sources: "Reset the household’s source suggestions?",
-		plugin: "Reset the household’s plugin requests?"
-	},
-	resetHouseholdAll: "Reset all for the household?",
-	resetHouseholdMessage: "Calls from the last 24 hours no longer count, for any profile.",
-	resetProfile: {
-		summary: "Reset {{name}}’s summaries?",
-		question: "Reset {{name}}’s questions?",
-		dailySummary: "Reset {{name}}’s Daily summaries?",
-		sources: "Reset {{name}}’s source suggestions?",
-		plugin: "Reset {{name}}’s plugin requests?"
-	},
-	resetProfileAll: "Reset everything for {{name}}?",
-	resetProfileMessage: "{{name}} gets their credits back. The household total doesn’t change.",
-	intro: "Each violet button is one AI call, paid on the household’s credits: nothing is sent without a click. The household cap is split evenly between profiles and counts over a rolling 24 hours. Cap reached, the AI buttons turn off.",
-	loadFailed: "Today’s calls could not be read. Try again in a moment.",
-	offMember: "The admin can turn it on here with an API key.",
-	householdDay: "All household · 24 hours",
-	profilesDay: "Per profile · 24 hours",
-	yoursOf: "Calls · {{name}} · 24 hours",
 	yours: "Calls · 24 hours",
-	introAdmin: "Resetting a profile gives back its credits without lowering the household total.",
 	plugins: {
 		title: "Plugins",
 		calls_one: "{{count}} call in 24 hours",
 		calls_other: "{{count}} calls in 24 hours",
 		toggle: "AI for {{name}}",
 		failed: "The change wasn’t saved. Try again in a moment."
-	}
-}, ee = {
-	someone: "Someone at home",
+	},
+	calls_one: "call",
+	calls_other: "calls"
+}, $ = {
+	someone: "Someone",
 	shared: {
 		article: "{{name}} sent you an article",
 		video: "{{name}} sent you a video",
@@ -1299,14 +1196,14 @@ var e = {
 	},
 	note: "“{{note}}” · {{title}}",
 	reacted: "{{name}} reacted {{reaction}}"
-}, te = { confirm: "Confirm the new password" }, ne = {
+}, ee = { confirm: "Confirm the new password" }, te = {
 	label: "Time format",
-	hint: "For every profile: settings, notifications, times",
+	hint: "Settings, notifications, times",
 	option24: "24 h",
 	option12: "12 h",
 	example24: "21:00",
 	example12: "9:00 PM"
-}, re = {
+}, ne = {
 	history: {
 		title: "Clear your history?",
 		message: "Articles you <b>read</b> or <b>hid</b> come back to your feed, on <b>all your devices</b>. Your reading stats and points don’t change.",
@@ -1315,27 +1212,26 @@ var e = {
 	deleteProfile: {
 		title: "Delete this profile?",
 		message: "<b>{{name}}</b>’s profile is deleted with its saved articles, reading history, points and settings. <b>This can’t be undone.</b>",
-		button: "Delete profile",
-		messageAccount: "<b>{{name}}</b>’s profile is deleted with its saved articles, reading history, points and settings, and <b>their account no longer opens this household</b>. This can’t be undone: type your password to confirm."
+		button: "Delete profile"
 	},
 	deleteSource: {
 		title: "Delete the source?",
-		message: "The source <b>{{name}}</b> is deleted <b>for the whole household</b>: its articles leave every profile’s feed. It only comes back if someone adds it again.",
+		message: "The source <b>{{name}}</b> is deleted <b>for the whole server</b>: its articles leave every profile’s feed. It only comes back if someone adds it again.",
 		button: "Delete source"
 	},
 	hideSource: {
-		title: "Hide the source?",
-		message: "Articles from <b>{{name}}</b> leave your feed and topics, <b>for your profile only</b>. You can show it again here.",
-		button: "Hide source"
+		title: "Take the source out?",
+		message: "Articles from <b>{{name}}</b> leave your feed and topics. You can take it back from the <i>Catalogue</i>.",
+		button: "Take the source out"
 	},
 	hideSources: {
-		title: "Hide {{count}} sources?",
-		message: "Articles from these {{count}} sources leave your feed and topics, <b>for your profile only</b>. You can show them again here, one by one.",
-		button: "Hide {{count}} sources"
+		title: "Take {{count}} sources out?",
+		message: "Articles from these {{count}} sources leave your feed and topics. You can take them back from the <i>Catalogue</i>.",
+		button: "Take the {{count}} sources out"
 	},
 	clearTexts: {
 		title: "Free up space?",
-		message: "On its server, Hodi keeps a copy of the articles already opened, to show them faster. These copies are deleted <b>for the whole household</b>, except those of <b>saved</b> articles. An article opened again reloads from its site.",
+		message: "On its server, Hodi keeps a copy of the articles already opened, to show them faster. These copies are deleted <b>for the whole server</b>, except those of <b>saved</b> articles. An article opened again reloads from its site.",
 		button: "Free up space"
 	},
 	resetSettings: {
@@ -1350,42 +1246,16 @@ var e = {
 	},
 	removeKey: {
 		title: "Remove the AI key?",
-		message: "The purple buttons disappear <b>for the whole household</b> until a new key is added. Summaries and answers the AI already wrote stay.",
+		message: "The purple buttons disappear <b>for this account</b> until a new key is added. Summaries and answers already written stay.",
 		button: "Remove key"
-	},
-	resetHousehold: {
-		title: "Refill everyone’s AI?",
-		message: "What was asked of the AI in the last 24 hours no longer counts, <b>for every profile</b>: everyone gets today’s credits back.",
-		button: "Refill"
-	},
-	resetHouseholdKind: {
-		title: "Refill everyone’s AI?",
-		message: "What was asked of the AI for <b>{{kind}}</b> in the last 24 hours no longer counts, <b>for every profile</b>.",
-		button: "Refill"
-	},
-	resetProfile: {
-		title: "Refill the profile’s AI?",
-		message: "<b>{{name}}</b> gets all of today’s AI credits back. The household’s credits don’t move.",
-		button: "Refill"
-	},
-	resetProfileKind: {
-		title: "Refill the profile’s AI?",
-		message: "<b>{{name}}</b> gets today’s credits for <b>{{kind}}</b> back. The household’s credits don’t move.",
-		button: "Refill"
-	},
-	kinds: {
-		summary: "summaries",
-		question: "questions",
-		dailySummary: "Daily summaries",
-		sources: "source suggestions",
-		plugin: "plugin requests"
 	},
 	deleteAccount: {
 		title: "Delete your account?",
 		message: "<b>{{email}}</b> and everything in it are erased at once: your profile, saved articles, reading, shares and statistics. Backup copies forget it within {{days}}.",
-		messageHousehold: "<b>{{email}}</b> and everything in it are erased at once: your profile, saved articles, reading, shares and statistics. <b>The household {{name}} has no other adult with an account: it goes too.</b> Backup copies forget it within {{days}}.",
-		messageHouseholdWith: "<b>{{email}}</b> and everything in it are erased at once: your profile, saved articles, reading, shares and statistics. <b>The household {{name}} has no other adult with an account: it goes too, with the profiles of {{profiles}}.</b> Backup copies forget it within {{days}}.",
-		button: "Delete"
+		messageServer: "<b>{{email}}</b> and everything in it are erased at once: your profile, saved articles, reading, shares and statistics. <b>No other adult has an account on this server: the whole server is erased, every profile with it, and starts again from scratch.</b> Backup copies forget it within {{days}}.",
+		messageServerWith: "<b>{{email}}</b> and everything in it are erased at once: your profile, saved articles, reading, shares and statistics. <b>No other adult has an account on this server: the whole server is erased, the profiles of {{profiles}} with it, and starts again from scratch.</b> Backup copies forget it within {{days}}.",
+		button: "Delete",
+		messageChildren: "<b>{{email}}</b> and everything in it are erased at once: your profile, saved articles, reading, shares and statistics. <b>You are the only parent of {{children}}: their accounts go too.</b> Backup copies forget it within {{days}}."
 	},
 	signOutDevice: {
 		title: "Sign out {{device}}?",
@@ -1409,35 +1279,20 @@ var e = {
 		code: "Code from your authenticator app",
 		wrongCode: "That code doesn’t work: use the one your app shows now."
 	},
+	makeServerAdmin: {
+		title: "Make {{name}} a server admin?",
+		message: "<b>{{name}}</b> will run all of <i>Server</i> as you do: accounts, backups, plugins and e-mail. Confirm with your password.",
+		button: "Make admin"
+	},
 	resetPassword: {
 		title: "New password?",
 		message: "The next code lets someone choose a new password for <b>{{name}}</b>’s account, and so get into it. Type your password to make it.",
 		button: "Make the code"
 	},
-	makeAdmin: {
-		title: "Hand over the admin role?",
-		message: "<b>{{name}}</b> then manages the household’s profiles, sources, AI key and settings. <b>You become an adult like the others</b>, and only <b>{{name}}</b> can give the role back. Type your password to confirm.",
-		button: "Hand over"
-	},
-	leaveHousehold: {
-		title: "Leave {{name}}?",
-		message: "Your profile in <b>{{name}}</b> goes, with what you read, saved and followed there. Your account <b>{{email}}</b> stays: an adult of a household can invite you there with a code.",
-		messageAdmin: "Your profile in <b>{{name}}</b> goes, with what you read, saved and followed there, and <b>{{heir}}</b> becomes the household’s admin. Your account <b>{{email}}</b> stays: an adult of a household can invite you there with a code.",
-		button: "Leave the household"
-	},
 	cancelInvitation: {
 		title: "Cancel the invitation?",
 		message: "<b>{{name}}</b>’s code will stop working. You can invite them again.",
 		button: "Cancel the invitation"
-	},
-	parentalOn: {
-		title: "Save this parental code?",
-		message: "It will be asked to open every adult profile that is not private, from <i>Who’s reading?</i>, on every device."
-	},
-	parentalOff: {
-		title: "Turn the parental code off?",
-		message: "Adult profiles that are not private will open again without a code from <i>Who’s reading?</i>, on every device.",
-		button: "Turn off"
 	},
 	privateOn: {
 		title: "Make your profile private?",
@@ -1449,36 +1304,37 @@ var e = {
 		message_one: "Your profile leaves <i>Who’s in?</i> on this device, but your account and your reading stay intact. <b>{{others}}</b> stays here. To come back later, tap <i>Add</i> and enter your e-mail and password.",
 		message_other: "Your profile leaves <i>Who’s in?</i> on this device, but your account and your reading stay intact. <b>{{others}}</b> stay here. To come back later, tap <i>Add</i> and enter your e-mail and password.",
 		messageAlone: "This device goes back to sign-in. Your account and your reading stay intact.",
-		messageLast_one: "No adult will be signed in on this device any more: <b>{{young}}</b> leaves <i>Who’s in?</i> too, having no account. The device goes back to sign-in, and the reading stays intact. An adult of the household can sign it in again whenever they like.",
-		messageLast_other: "No adult will be signed in on this device any more: <b>{{young}}</b> leave <i>Who’s in?</i> too, having no account. The device goes back to sign-in, and the reading stays intact. An adult of the household can sign it in again whenever they like.",
+		messageLast_one: "No adult will be signed in on this device any more: <b>{{young}}</b> leaves <i>Who’s in?</i> too, having no account. The device goes back to sign-in, and the reading stays intact. An adult can sign it in again whenever they like.",
+		messageLast_other: "No adult will be signed in on this device any more: <b>{{young}}</b> leave <i>Who’s in?</i> too, having no account. The device goes back to sign-in, and the reading stays intact. An adult can sign it in again whenever they like.",
 		button: "Sign out"
 	}
-}, ie = {
-	codeOpen: "Type the household’s <b>parental code</b> to open this profile.",
+}, re = {
+	codeOpen: "Type the <b>parental code</b> to open this profile.",
 	ownOpen: "Type <b>your password</b> to open this profile.",
 	shortcuts: "On a computer, without leaving the keyboard. Press <b>?</b> anywhere to see them again.",
 	timeZone: "It sets <b>when each day starts</b>: new feed, <i>Daily summary</i>, quiet hours and young readers’ screen time.",
 	country: "It places the <b>AI’s web searches</b>: <i>will it rain tomorrow?</i> looks near you.",
 	share: "The <b>original link</b>, to the publisher’s site, to send anywhere.",
-	addSource: "Paste a <b>site’s link</b>, or pick a theme to see suggestions. The source reaches <b>the whole household</b>’s feed.",
+	addSource: "Paste a <b>site’s link</b>, or pick a topic for the AI to suggest sites. The source joins <i>My sources</i>.",
+	addSourceLink: "Paste the <b>link of a site</b>, an RSS feed or a YouTube channel. The source joins <i>My sources</i>.",
 	replaceSource: "Find another source to replace <b>{{name}}</b>. It’s hidden once the new one is added.",
 	aiTurnOn: "Paste an <b>API key</b> from your provider. It’s checked without spending credits, then kept on this server.",
-	aiReplace: "The new key replaces the old one <b>for the whole household</b>. It’s checked without spending credits.",
-	rename: "The household’s name shows <b>on the sign-in screen</b> of every device.",
+	aiReplace: "The new key replaces the old one <b>for this account</b>. It’s checked without spending credits.",
 	sourceTopics: "Choose where to file <b>{{name}}</b>. Its articles show up in <b>each theme</b> ticked.",
 	daily: "The reading time allowed each day. Once it’s used up, the app pauses <b>until tomorrow</b>.",
 	window: "The hours when the app opens. Outside them it stays shut and says <b>when it reopens</b>.",
 	quiet: "During these hours <b>no notification</b> reaches their devices. The app stays open.",
-	explain: "Each time <b>{{name}}</b> asks the AI to explain an article or a word. Counted on the <b>household’s credits</b>.",
+	explain: "Each time <b>{{name}}</b> asks the AI to explain an article or a word. Counted on <b>their account’s credits</b>.",
 	week: "Their screen time and reading over the last 7 days, <b>never the titles</b>.",
 	topics: "Pick the themes shown in their feed. A theme turned off leaves <b>with its sources</b>, nothing is deleted: turn it back on any time.",
 	sources: "The kids’ catalogue, by theme. Base sources start on: keep the ones that suit them. <b>Only sources that are on</b> reach their feed.",
-	shareTo: "Pick one or more profiles of the household. The article lands in their <i>Shares</i>, with your note if you write one.",
+	shareTo: "Pick one or more people. The article lands in their <i>Shares</i>, with your note if you write one.",
 	ask: "Paste the link of a site or a YouTube channel. <b>Your parents</b> get your request: if they accept, it reaches your feed or <i>Videos</i>.",
 	request: "<b>{{name}}</b> would like this source in their feed. Accepted, it shows up <b>for {{name}} only</b>, filed in the theme below.",
 	requestChannel: "<b>{{name}}</b> would like to follow this channel. Accepted, it shows up <b>for {{name}} only</b>, in their <i>Videos</i>.",
-	passwordOpen: "<b>{{name}}</b> has their own account. Type their password to open their profile on this device."
-}, ae = {
+	passwordOpen: "<b>{{name}}</b> has their own account. Type their password to open their profile on this device.",
+	shareToHandle: "Pick one or more people, or add someone by their <b>@username</b>. The article lands in their <i>Shares</i>, with a word if you write one."
+}, ie = {
 	count_one: "{{count}} plugin",
 	count_other: "{{count}} plugins",
 	emptyTitle: "No plugins",
@@ -1492,7 +1348,7 @@ var e = {
 	version: "Version",
 	versionHint: "The installed package’s",
 	enabled: "On",
-	enabledHint: "Its pages and features are there for the household",
+	enabledHint: "Its pages and features are there for everyone",
 	disabledHint: "It keeps its settings and data",
 	options: "Options",
 	remove: "Remove the plugin",
@@ -1518,9 +1374,9 @@ var e = {
 		signedHint: "Signed by a key Hodi knows",
 		unsigned: "Unverified code",
 		unsignedHint: "No one has checked this code: its pages won’t show.",
+		signedOnlyHint: "It asks for access only verified plugins get: accounts, sign-ins, e-mails or notifications.",
 		signedOnly: "Can’t be installed unsigned",
-		signedOnlyHint: "It asks for access only verified plugins get: accounts, households, sign-ins, e-mails or notifications.",
-		forAll: "For the whole household",
+		forAll: "For everyone",
 		forAdmin: "For the admin only",
 		replaces: "Replaces version {{version}}",
 		install: "Allow and install",
@@ -1606,8 +1462,6 @@ var e = {
 		networkHint: "{{hosts}}",
 		articles: "Read the articles",
 		articlesHint: "The ones Hodi’s sources listed",
-		households: "Create and manage households",
-		householdsHint: "It only deletes households it created",
 		accounts: "Create and check accounts",
 		accountsHint: "It never reads stored passwords",
 		signIn: "Sign devices in",
@@ -1618,22 +1472,22 @@ var e = {
 		mailHint: "Through Server › E-mail, 50 an hour at most",
 		notify: "Send notifications",
 		notifyHint: "To people across the whole server, on their devices, 10 a day at most for each",
-		ai: "Household AI",
-		aiHint: "A click on its violet button asks the AI one question, paid from the household’s credits. Only if it is Verified.",
+		ai: "Each account’s AI",
+		aiHint: "A click on its violet button asks the AI one question, paid from the credits of the account that clicks. Only if it is Verified.",
 		feeds_one: "Offer {{count}} source",
 		feeds_other: "Offer {{count}} sources",
-		feedsHint: "In « Add a source »: {{names}}"
+		feedsHint: "In <i>Add a source</i>: {{names}}"
 	},
 	aiButton: {
-		unavailable: "AI isn’t turned on for this household.",
-		off: "The household’s admin turned this plugin’s AI off.",
-		limited: "Today’s cap for plugins is reached.",
+		unavailable: "AI isn’t turned on for this account.",
+		off: "The server’s admin turned this plugin’s AI off.",
+		limited: "Too many requests to the AI for now. Try again later.",
 		refused: "The AI declined to answer this request.",
 		failed: "The request didn’t go through. Try again in a moment."
 	},
 	confirmInstall: {
 		title: "Install {{name}}?",
-		message: "<b>{{name}}</b> is verified. It will read and change what its permissions declare, for <b>every household on the server</b>. Type your password to install it.",
+		message: "<b>{{name}}</b> is verified. It will read and change what its permissions declare, for <b>every account on the server</b>. Type your password to install it.",
 		button: "Install"
 	},
 	catalog: {
@@ -1654,7 +1508,7 @@ var e = {
 			failed: "The download failed. Try again."
 		}
 	}
-}, oe = /*#__PURE__*/ JSON.parse("{\"title\":\"Server\",\"nav\":\"The server’s sections\",\"backToApp\":\"Back to Hodi\",\"support\":\"Support Hodi\",\"supportHint\":\"Free and ad-free\",\"backToServer\":\"Back to the server\",\"groups\":{\"settings\":\"Settings\"},\"titles\":{\"overview\":\"Overview\",\"households\":\"Households\",\"accounts\":\"Accounts\",\"general\":\"General\",\"content\":\"Content\",\"backups\":\"Backups\",\"mail\":\"E-mail\",\"plugins\":\"Plugins\",\"notifications\":\"Alerts\",\"inbox\":\"Notifications\"},\"pluginsIntro\":\"More features, for the whole server, from Hodi’s registry or a file. Each plugin runs apart, with its own data. Only verified plugins add pages to Hodi.\",\"hints\":{\"overview\":\"Totals, who is online\",\"households\":\"Households and their profiles\",\"accounts\":\"E-mails and their household\",\"general\":\"Hodi’s address and the home page\",\"content\":\"Durations and sources per household\",\"backups\":\"Copies of the whole database\",\"mail\":\"The server that sends e-mails\",\"notifications\":\"E-mail and push, for each kind\",\"inbox\":\"What the server tells you\",\"inboxWaiting_one\":\"{{count}} request to handle\",\"inboxWaiting_other\":\"{{count}} requests to handle\"},\"overview\":{\"introOne\":\"The household in totals, beside the period before. The server counts, it doesn’t look: never what a person reads.\",\"introSeveral\":\"Every household together, in totals, beside the period before. The server counts, it doesn’t look: never what a person reads.\",\"period\":\"Period\",\"span\":{\"days\":\"{{count}} d\",\"yearShort\":\"1 yr\",\"all\":\"All\",\"year\":\"1 year\"},\"metrics\":{\"visits\":\"Visits / day\",\"articles\":\"Articles read\",\"hours\":\"Hours of reading\",\"videos\":\"Videos watched\",\"shares\":\"Shares\"},\"hoursUnit\":\"h\",\"byDay\":\"{{metric}}, day by day\",\"legend\":{\"days_one\":\"This day\",\"days_other\":\"These {{count}} days\",\"daysBefore_one\":\"The day before\",\"daysBefore_other\":\"The {{count}} days before\",\"year\":\"These 12 months\",\"yearBefore\":\"The 12 months before\",\"all\":\"Since the start\"},\"online\":\"Online now\",\"live\":\"Live\",\"onlineEmpty\":\"Nobody right now\",\"device\":{\"phone\":\"Phone\",\"tablet\":\"Tablet\",\"computer\":\"Computer\"},\"profiles_one\":\"Profile\",\"profiles_other\":\"Profiles\",\"adults\":\"Adults\",\"young\":\"Teens and children\",\"added\":\"+{{count}} in {{span}}\",\"addedAll\":\"+{{count}} in all\",\"top\":{\"topics\":\"Most read topics\",\"sources\":\"Most read sources\",\"share\":\"Share of reading\",\"read\":\"Articles read\"},\"nothing\":\"Nothing read in this period\",\"health\":{\"title\":\"Server health\",\"sources\":\"Source feeds\",\"sourcesOk\":\"{{count}} of {{count}} up to date\",\"sourcesFailing\":\"{{failing}} failing of {{count}}\",\"backup\":\"Last backup\",\"noBackup\":\"None\",\"mail\":\"E-mail\",\"mailOn\":\"Set up\",\"mailOff\":\"Not set up\",\"plugins\":\"Plugins\",\"pluginsOn_one\":\"{{count}} working\",\"pluginsOn_other\":\"{{count}} working\",\"noPlugins\":\"None\",\"version\":\"Version\"},\"dates\":{\"title\":\"Choose dates\",\"from\":\"From\",\"to\":\"To\",\"previous\":\"Previous month\",\"next\":\"Next month\",\"apply\":\"Apply\",\"clear\":\"Back to 7 days\"},\"pluginFailed\":\"This plugin could not be shown.\"},\"people\":{\"searchHouseholds\":\"Search households\",\"searchAccounts\":\"Search accounts\",\"householdsMeta_one\":\"{{count}} household\",\"householdsMeta_other\":\"{{count}} households\",\"accountsMeta_one\":\"{{count}} account\",\"accountsMeta_other\":\"{{count}} accounts\",\"householdRow_one\":\"{{count}} profile\",\"householdRow_other\":\"{{count}} profiles\",\"householdRowFull\":\"{{count}} profiles, full\",\"householdRowWaiting_one\":\"{{count}} profile · waiting for {{name}}\",\"householdRowWaiting_other\":\"{{count}} profiles · waiting for {{name}}\",\"noHousehold\":\"No household\",\"noMatchHouseholds\":\"No household matches.\",\"noMatchAccounts\":\"No account matches.\",\"backToHouseholds\":\"Back to households\",\"backToAccounts\":\"Back to accounts\",\"failed\":\"The list could not be loaded.\",\"household\":{\"intro\":\"Created on {{date}}. The server sees its accounts and numbers, never what is read there. Only the household’s admin hands over the role, in <i>Settings › Profiles</i>.\",\"this\":\"This household\",\"admin\":\"Household admin\",\"waiting\":\"{{name}} · waiting for an account\",\"adminCode\":\"New code\",\"adminCodeLabel\":\"New code for {{name}}\",\"profiles\":\"Profiles\",\"profilesValue\":\"{{count}} of {{max}}\",\"adults_one\":\"{{count}} adult\",\"adults_other\":\"{{count}} adults\",\"young_one\":\"{{count}} young\",\"young_other\":\"{{count}} young\",\"invite\":\"Invite\",\"inviteLabel\":\"Invite an adult\",\"inviteHint\":\"A code and its QR, valid for 24 h and once\",\"fullHint\":\"Full: a profile has to leave before anyone is invited\",\"full\":\"Full\",\"accounts\":\"Accounts\",\"noAccounts\":\"No account yet\",\"see\":\"See\",\"seeLabel\":\"See {{email}}\",\"more_one\":\"See the other one\",\"more_other\":\"See the {{count}} others\",\"deleteSection\":\"Delete\",\"delete\":\"Delete this household\",\"deleteHint\":\"Its profiles, their reading and its sources go with it\",\"deleteButton\":\"Delete\",\"confirmDelete\":{\"title\":\"Delete this household?\",\"message\":\"<b>{{name}}</b> is deleted at once with its {{count}} profiles, their saved articles, their reading and its sources. Accounts with no other household go too. Backup copies forget it within {{days}} at most. <b>This can’t be undone.</b>\"}},\"account\":{\"intro\":\"The server sees the account, never what is read with it nor its settings.\",\"section\":\"Account\",\"email\":\"E-mail\",\"household\":\"Household\",\"role\":\"Role\",\"roles\":{\"admin\":\"Household admin\",\"member\":\"Adult\",\"none\":\"No profile\"},\"serverAdmin\":\"Server admin\",\"lastSeen\":\"Last seen\",\"never\":\"Never\",\"lastSeenValue\":\"{{date}} · {{time}}\",\"devices\":\"Signed-in devices\",\"created\":\"Created on\",\"reset\":\"Forgotten password\",\"resetLabel\":\"Make a code\",\"resetHint\":\"The person types it after “I have a code”, then picks a new password. Their devices are signed out.\",\"own\":\"Yours changes in Settings › My account\",\"deleteSection\":\"Delete\",\"delete\":\"Delete this account\",\"deleteHint\":\"Its profile and all it holds go with it\",\"deleteButton\":\"Delete\",\"confirmDelete\":{\"title\":\"Delete this account?\",\"message\":\"<b>{{email}}</b> is deleted at once with its profile, saved articles, reading, shares and statistics. Backup copies forget it within {{days}} at most. <b>This can’t be undone.</b>\",\"messageAdmin\":\"<b>{{email}}</b> is deleted at once with its profile, saved articles, reading, shares and statistics. <b>They are {{household}}’s admin</b>: the role goes to the household’s oldest adult with an account, and with no other adult, the household goes too. Backup copies forget it within {{days}} at most. <b>This can’t be undone.</b>\"},\"codeAsked\":\"Code asked\",\"codeAskedTitle\":\"Code asked on {{date}} at {{time}}\",\"codeAskedText\":\"{{name}} forgot their password and this server sends no e-mail. Make them a code, then pass it on in person or by message.\"},\"emptyTitle\":\"No household\",\"emptyText\":\"Create your household to read in it, or a household for someone else, who will be its admin.\",\"createFailed\":\"Could not create the household. Try again in a moment.\",\"createMine\":\"Create my household\",\"createOther\":\"Create a household\",\"otherIntro\":\"For someone else: its profile waits for that person, who becomes its admin with the code. You do not enter this household unless someone invites you.\",\"otherAdmin\":\"Its admin’s first name\",\"otherAdminPlaceholder\":\"E.g. Sophie\",\"otherSubmit\":\"Create and make the code\",\"oneTitle\":\"One household per server\",\"oneText\":\"This server has its own already. To read in it, ask its admin to invite you.\"},\"general\":{\"intro\":\"Hodi’s address, which the e-mails’ links open, and the public home page. A browser that never opened Hodi lands on that site, for example your presentation page; everyone else lands on <i>Sign in</i>.\",\"addresses\":\"Addresses\",\"invalid\":\"Write a full address, with https://.\",\"saved\":\"Address saved\",\"failed\":\"The address could not be saved.\",\"loadFailed\":\"These settings could not be loaded.\",\"appUrl\":{\"label\":\"Hodi’s address\",\"none\":\"Not given yet\",\"intro\":\"The address Hodi opens at, as people type it in a browser. The e-mails’ links lead there: without it, <i>Forgot password</i> doesn’t show on <i>Sign in</i>.\",\"field\":\"Hodi’s address\",\"placeholder\":\"https://hodi.example.com\"},\"publicHome\":{\"label\":\"Public home page\",\"none\":\"None: Sign in opens\",\"intro\":\"Someone who never opened Hodi in their browser lands on this site, for example your presentation page. Leave it empty to open <i>Sign in</i>.\",\"field\":\"Site address\",\"placeholder\":\"https://example.com\"}},\"content\":{\"intro\":\"How long the server keeps what it fetches for every household, and how many sources each may follow. Short durations keep the database light; a saved article always keeps its text.\",\"durations\":\"Durations\",\"sources\":\"Sources\",\"less\":\"Less\",\"more\":\"More\",\"saved\":\"Setting saved\",\"failed\":\"The setting could not be saved.\",\"loadFailed\":\"The settings could not be loaded.\",\"bounds\":\"From {{min}} to {{max}} days, {{byDefault}} by default.\",\"articleDays\":{\"label\":\"Articles\",\"title\":\"How long articles stay\",\"intro\":\"How many days an article stays in the feed, the search and the topics.\"},\"videoDays\":{\"label\":\"Videos\",\"title\":\"How long videos stay\",\"intro\":\"How many days a video or an episode stays in <i>Videos</i>. A video takes almost no room: its title and its picture.\"},\"textDays\":{\"label\":\"Article text\",\"title\":\"How long texts stay\",\"intro\":\"How many days the server keeps the text of an article read in Hodi, and its pictures. A saved article always keeps its own.\"},\"maxSources\":{\"label\":\"Sources per household\",\"title\":\"Sources per household\",\"intro\":\"How many sources a household may follow, all its profiles together: the server fetches each one. A household that already has more keeps them, but cannot add any.\",\"toggle\":\"Limit sources\",\"toggleHint\":\"Otherwise each household adds as many as it likes.\",\"unlimited\":\"Unlimited\"}},\"backups\":{\"intro\":\"Every night, a copy of the whole database and of the plugins’ data. It holds everyone’s data: your password protects it, and keeping one off the server is wise. A single account’s copy is in <i>Settings › My account</i>.\",\"settings\":\"Settings\",\"kept\":\"Copies kept\",\"keptValue_one\":\"{{count}} copy\",\"keptValue_other\":\"{{count}} copies\",\"keptIntro\":\"How many copies the server keeps: the oldest goes when a new one comes. Deleted data stays at most this many days in the copies.\",\"keptBounds\":\"From {{min}} to {{max}}, {{byDefault}} by default.\",\"now\":\"Back up now\",\"nowHint\":\"Before an update, for instance\",\"nowButton\":\"Back up\",\"done\":\"Copy made\",\"failed\":\"The copy could not be made.\",\"saved\":\"Setting saved\",\"saveFailed\":\"The setting could not be saved.\",\"loadFailed\":\"The copies could not be loaded.\",\"list_one\":\"{{count}} copy · {{size}}\",\"list_other\":\"{{count}} copies · {{size}}\",\"empty\":\"No copy yet\",\"when\":\"{{date}} · {{time}}\",\"download\":\"Download\",\"downloadLabel\":\"Download the copy of {{date}}\",\"downloadTitle\":\"Download the copy\",\"downloadIntro\":\"The copy of <b>{{date}} at {{time}}</b> holds everyone’s data. The account’s password protects it.\",\"downloadFailed\":\"The copy could not be downloaded.\",\"more_one\":\"See the other one\",\"more_other\":\"See the {{count}} others\",\"less\":\"Less\",\"more2\":\"More\",\"restore\":\"Restore\",\"restoreLabel\":\"Restore the copy of {{date}}\",\"restoreTitle\":\"Restore the copy\",\"restoreIntro\":\"The whole server goes back to <b>{{date}} at {{time}}</b>: accounts, households, reading, the plugins’ data. What changed since is lost, but Hodi first keeps a copy of how things are now. What was deleted since stays deleted: an account, a profile, a household. A plugin removed since does not come back: its data stays 30 days, time to install it again. Then Hodi restarts, and people sign in again if needed.\",\"restoreFailed\":\"The copy could not be restored.\",\"restoring\":\"Restoring the copy of {{date}} at {{time}}\"},\"mail\":{\"intro\":\"The server Hodi sends its e-mails through: <i>Forgot password</i> and the plugins’ ones. Until it is set, Hodi sends none and that link doesn’t show on <i>Sign in</i>.\",\"server\":\"Mail server\",\"notSet\":\"Not set yet\",\"set\":\"Set up\",\"host\":\"Server\",\"hostValue\":\"{{host}}:{{port}} · {{security}}\",\"security\":\"Security\",\"securities\":{\"starttls\":\"STARTTLS\",\"tls\":\"TLS\",\"none\":\"None\"},\"port\":\"Port\",\"user\":\"User name\",\"userPlaceholder\":\"Empty if the server asks for none\",\"noUser\":\"None\",\"password\":\"Password\",\"passwordKept\":\"Unchanged\",\"sender\":\"Sender\",\"dialogTitle\":\"Mail server\",\"dialogIntro\":\"These settings come from your e-mail provider (Gmail, OVH, Infomaniak…). STARTTLS goes with port 587, TLS with 465.\",\"saved\":\"Settings saved\",\"saveFailed\":\"Couldn’t save the settings.\",\"invalid\":\"A field isn’t valid: check the server, the port and the sender’s address.\",\"loadFailed\":\"Couldn’t load the settings.\",\"test\":\"Send a test\",\"testHint\":\"An e-mail to this account’s address\",\"testButton\":\"Send\",\"testSent\":\"Test sent to {{email}}\",\"failedUnreachable\":\"The server doesn’t answer: check the server, the port and the security.\",\"failedAuth\":\"The server refuses the user name or the password.\",\"failedRefused\":\"The server refuses the e-mail: check the sender’s address.\",\"remove\":\"Stop sending e-mails\",\"removeHint\":\"Hodi forgets these settings\",\"removeButton\":\"Remove\",\"removed\":\"Settings removed\",\"serverIntro\":\"The mail server’s address and its security, given by your e-mail provider (Gmail, OVH, Infomaniak…). STARTTLS goes with port 587, TLS with 465.\",\"loginIntro\":\"The mail server’s user name and password, often your e-mail address and its password. Leave it empty if the server asks for none. Once saved, the password is never shown again.\",\"senderIntro\":\"The address Hodi’s e-mails come from, for example no-reply@example.com. The mail server must accept it.\",\"toFill\":\"To fill in\"},\"logout\":\"Sign out\",\"notifications\":{\"title\":\"Alerts\",\"intro\":\"How the server lets you know of each thing: by e-mail to your address, in push on your devices, or both. Everything also stays in <i>Notifications</i>.\",\"core\":\"Server\",\"thisDevice\":\"This device\",\"device\":\"Push on this device\",\"deviceHint\":\"Push notifications arrive here\",\"email\":\"E-mail\",\"push\":\"Push\",\"choice\":\"{{kind}}: {{way}}\",\"noMailTitle\":\"The server’s e-mail isn’t set up\",\"noMailText\":\"E-mail notifications stay off until then.\",\"configure\":\"Set up\",\"emptyTitle\":\"Nothing to tell for now\",\"emptyText\":\"Installed plugins add here what they can tell you.\",\"denied\":\"Notifications are blocked for Hodi in this browser.\",\"unsupported\":\"This browser can’t receive notifications. On an iPhone, add Hodi to the home screen.\",\"failed\":\"Couldn’t turn push on for this device.\",\"loadFailed\":\"Couldn’t load the notifications.\",\"saveFailed\":\"Couldn’t save this choice.\",\"weeklyReport\":{\"label\":\"Weekly report\",\"hint\":\"On Monday at 08:00, the week’s numbers\"},\"codeRequest\":{\"label\":\"Code requests\",\"hint\":\"When someone forgot their password\"}},\"inbox\":{\"intro\":\"What the server tells you. Requests to handle stay at the top, in orange, until you deal with them.\",\"waiting\":\"To handle\",\"earlier\":\"Earlier\",\"open\":\"See\",\"openName\":\"See: {{title}}\",\"emptyTitle\":\"Nothing yet\",\"emptyHint\":\"What the server tells you lands here.\",\"choose\":\"Choose how you’re told\"}}"), se = {
+}, ae = /*#__PURE__*/ JSON.parse("{\"title\":\"Server\",\"nav\":\"The server’s sections\",\"backToApp\":\"Back to Hodi\",\"support\":\"Support Hodi\",\"supportHint\":\"Free and ad-free\",\"backToServer\":\"Back to the server\",\"groups\":{\"settings\":\"Settings\"},\"titles\":{\"overview\":\"Overview\",\"accounts\":\"Accounts\",\"general\":\"General\",\"content\":\"Content\",\"backups\":\"Backups\",\"mail\":\"E-mail\",\"plugins\":\"Plugins\",\"notifications\":\"Alerts\",\"inbox\":\"To do\",\"blocks\":\"Blocks\"},\"pluginsIntro\":\"More features, for the whole server, from Hodi’s registry or a file. Each plugin runs apart, with its own data. Only verified plugins add pages to Hodi.\",\"hints\":{\"overview\":\"Totals, who is online\",\"accounts\":\"E-mails and their profiles\",\"general\":\"Hodi’s address and the home page\",\"content\":\"Durations and sources\",\"backups\":\"Copies of the whole database\",\"mail\":\"The server that sends e-mails\",\"notifications\":\"E-mail and push, for each kind\",\"inbox\":\"Requests to deal with\",\"inboxWaiting_one\":\"{{count}} request to handle\",\"inboxWaiting_other\":\"{{count}} requests to handle\",\"blocks\":\"Blocked sources, addresses\"},\"overview\":{\"intro\":\"The server in totals, beside the period before. The server counts, it doesn’t look: never what a person reads.\",\"period\":\"Period\",\"span\":{\"days\":\"{{count}} d\",\"yearShort\":\"1 yr\",\"all\":\"All\",\"year\":\"1 year\"},\"metrics\":{\"visits\":\"Visits / day\",\"articles\":\"Articles read\",\"hours\":\"Hours of reading\",\"videos\":\"Videos watched\",\"shares\":\"Shares\"},\"hoursUnit\":\"h\",\"byDay\":\"{{metric}}, day by day\",\"legend\":{\"days_one\":\"This day\",\"days_other\":\"These {{count}} days\",\"daysBefore_one\":\"The day before\",\"daysBefore_other\":\"The {{count}} days before\",\"year\":\"These 12 months\",\"yearBefore\":\"The 12 months before\",\"all\":\"Since the start\"},\"online\":\"Online now\",\"live\":\"Live\",\"onlineEmpty\":\"Nobody right now\",\"device\":{\"phone\":\"Phone\",\"tablet\":\"Tablet\",\"computer\":\"Computer\"},\"profiles_one\":\"Profile\",\"profiles_other\":\"Profiles\",\"adults\":\"Adults\",\"young\":\"Teens and children\",\"added\":\"+{{count}} in {{span}}\",\"addedAll\":\"+{{count}} in all\",\"top\":{\"topics\":\"Most read topics\",\"sources\":\"Most read sources\",\"share\":\"Share of reading\",\"read\":\"Articles read\"},\"nothing\":\"Nothing read in this period\",\"health\":{\"title\":\"Server health\",\"sources\":\"Source feeds\",\"sourcesOk\":\"{{count}} of {{count}} up to date\",\"sourcesFailing\":\"{{failing}} failing of {{count}}\",\"backup\":\"Last backup\",\"noBackup\":\"None\",\"mail\":\"E-mail\",\"mailOn\":\"Set up\",\"mailOff\":\"Not set up\",\"plugins\":\"Plugins\",\"pluginsOn_one\":\"{{count}} working\",\"pluginsOn_other\":\"{{count}} working\",\"noPlugins\":\"None\",\"version\":\"Version\"},\"dates\":{\"title\":\"Choose dates\",\"from\":\"From\",\"to\":\"To\",\"previous\":\"Previous month\",\"next\":\"Next month\",\"apply\":\"Apply\",\"clear\":\"Back to 7 days\"},\"pluginFailed\":\"This plugin could not be shown.\"},\"people\":{\"searchAccounts\":\"Search accounts\",\"accountsMeta_one\":\"{{count}} account\",\"accountsMeta_other\":\"{{count}} accounts\",\"noProfile\":\"No profile\",\"noMatchAccounts\":\"No account matches.\",\"backToAccounts\":\"Back to accounts\",\"failed\":\"The list could not be loaded.\",\"account\":{\"intro\":\"The server sees the account, never what is read with it nor its settings.\",\"section\":\"Account\",\"email\":\"E-mail\",\"role\":\"Role\",\"roles\":{\"member\":\"Adult\",\"none\":\"No profile\"},\"serverAdmin\":\"Server admin\",\"lastSeen\":\"Last seen\",\"never\":\"Never\",\"lastSeenValue\":\"{{date}} · {{time}}\",\"devices\":\"Signed-in devices\",\"created\":\"Created on\",\"reset\":\"Forgotten password\",\"resetLabel\":\"Make a code\",\"resetOnRequest\":\"Only once the person asks for one.\",\"own\":\"Yours changes in Settings › My account\",\"deleteSection\":\"Delete or block\",\"serverAdminSection\":\"Server admin\",\"makeServerAdmin\":\"Make server admin\",\"serverAdminHint\":\"Runs Server as you do: accounts, backups, plugins\",\"serverAdminButton\":\"Make admin\",\"delete\":\"Delete this account\",\"deleteHint\":\"Its profile and all it holds go with it\",\"deleteButton\":\"Delete\",\"confirmDelete\":{\"title\":\"Delete this account?\",\"message\":\"<b>{{email}}</b> is deleted at once with its profile, saved articles, reading, shares and statistics. Backup copies forget it within {{days}} at most. <b>This can’t be undone.</b>\"},\"codeAsked\":\"Code asked\",\"codeAskedTitle\":\"Code asked on {{date}} at {{time}}\",\"codeAskedText\":\"{{name}} forgot their password and this server sends no e-mail. Make them a code, then pass it on in person or by message.\",\"block\":\"Block this account\",\"blockHint\":\"Deleted, and its e-mail can never come back\",\"blockButton\":\"Block\",\"confirmBlock\":{\"title\":\"Block this account?\",\"message\":\"<b>{{email}}</b> is erased at once, as with <i>Delete</i>, and this address can never make an account on this server again. At sign-in, the person reads <i>This account was blocked on this server</i>. <b>There is no going back.</b>\"}}},\"general\":{\"intro\":\"Hodi’s address, which the e-mails’ links open, and the public home page. A browser that never opened Hodi lands on that site, for example your presentation page; everyone else lands on <i>Sign in</i>. Then what holds for every account.\",\"addresses\":\"Addresses\",\"invalid\":\"Write a full address, with https://.\",\"saved\":\"Address saved\",\"failed\":\"The address could not be saved.\",\"loadFailed\":\"These settings could not be loaded.\",\"appUrl\":{\"label\":\"Hodi’s address\",\"none\":\"Not given yet\",\"intro\":\"The address Hodi opens at, as people type it in a browser. The e-mails’ links lead there: without it, <i>Forgot password</i> doesn’t show on <i>Sign in</i>.\",\"field\":\"Hodi’s address\",\"placeholder\":\"https://hodi.example.com\"},\"publicHome\":{\"label\":\"Public home page\",\"none\":\"None: Sign in opens\",\"intro\":\"Someone who never opened Hodi in their browser lands on this site, for example your presentation page. Leave it empty to open <i>Sign in</i>.\",\"field\":\"Site address\",\"placeholder\":\"https://example.com\"}},\"content\":{\"intro\":\"How long the server keeps what it fetches, and how many sources it may follow. Short durations keep the database light; a saved article always keeps its text.\",\"durations\":\"Durations\",\"sources\":\"Sources\",\"less\":\"Less\",\"more\":\"More\",\"saved\":\"Setting saved\",\"failed\":\"The setting could not be saved.\",\"loadFailed\":\"The settings could not be loaded.\",\"bounds\":\"From {{min}} to {{max}} days, {{byDefault}} by default.\",\"articleDays\":{\"label\":\"Articles\",\"title\":\"How long articles stay\",\"intro\":\"How many days an article stays in the feed, the search and the topics.\"},\"videoDays\":{\"label\":\"Videos\",\"title\":\"How long videos stay\",\"intro\":\"How many days a video or an episode stays in <i>Videos</i>. A video takes almost no room: its title and its picture.\"},\"textDays\":{\"label\":\"Article text\",\"title\":\"How long texts stay\",\"intro\":\"How many days the server keeps the text of an article read in Hodi, and its pictures. A saved article always keeps its own.\"},\"maxSources\":{\"label\":\"Sources on the server\",\"title\":\"Sources on the server\",\"intro\":\"How many sources the server may follow, all accounts together: it fetches each one. If it already follows more, it keeps them, but nobody can add any.\",\"toggle\":\"Limit sources\",\"toggleHint\":\"Otherwise everyone adds as many as they like.\",\"unlimited\":\"Unlimited\"},\"validation\":{\"label\":\"Review sources\",\"hint\":\"A source added waits in To do before it enters the catalogue\",\"failed\":\"The setting couldn’t be saved. Try again in a moment.\"}},\"backups\":{\"intro\":\"Every night, a copy of the whole database and of the plugins’ data. It holds everyone’s data: your password protects it, and keeping one off the server is wise. A single account’s copy is in <i>Settings › My account</i>.\",\"settings\":\"Settings\",\"kept\":\"Copies kept\",\"keptValue_one\":\"{{count}} copy\",\"keptValue_other\":\"{{count}} copies\",\"keptIntro\":\"How many copies the server keeps: the oldest goes when a new one comes. Deleted data stays at most this many days in the copies.\",\"keptBounds\":\"From {{min}} to {{max}}, {{byDefault}} by default.\",\"now\":\"Back up now\",\"nowHint\":\"Before an update, for instance\",\"nowButton\":\"Back up\",\"done\":\"Copy made\",\"failed\":\"The copy could not be made.\",\"saved\":\"Setting saved\",\"saveFailed\":\"The setting could not be saved.\",\"loadFailed\":\"The copies could not be loaded.\",\"list_one\":\"{{count}} copy · {{size}}\",\"list_other\":\"{{count}} copies · {{size}}\",\"empty\":\"No copy yet\",\"when\":\"{{date}} · {{time}}\",\"download\":\"Download\",\"downloadLabel\":\"Download the copy of {{date}}\",\"downloadTitle\":\"Download the copy\",\"downloadIntro\":\"The copy of <b>{{date}} at {{time}}</b> holds everyone’s data. The account’s password protects it.\",\"downloadFailed\":\"The copy could not be downloaded.\",\"more_one\":\"See the other one\",\"more_other\":\"See the {{count}} others\",\"less\":\"Less\",\"more2\":\"More\",\"restore\":\"Restore\",\"restoreLabel\":\"Restore the copy of {{date}}\",\"restoreTitle\":\"Restore the copy\",\"restoreIntro\":\"The whole server goes back to <b>{{date}} at {{time}}</b>: accounts, profiles, reading, the plugins’ data. What changed since is lost, but Hodi first keeps a copy of how things are now. What was deleted since stays deleted: an account, a profile. A plugin removed since does not come back: its data stays 30 days, time to install it again. Then Hodi restarts, and people sign in again if needed.\",\"restoreFailed\":\"The copy could not be restored.\",\"restoring\":\"Restoring the copy of {{date}} at {{time}}\"},\"mail\":{\"intro\":\"The server Hodi sends its e-mails through: <i>Forgot password</i> and the plugins’ ones. Until it is set, Hodi sends none and that link doesn’t show on <i>Sign in</i>.\",\"server\":\"Mail server\",\"notSet\":\"Not set yet\",\"set\":\"Set up\",\"host\":\"Server\",\"hostValue\":\"{{host}}:{{port}} · {{security}}\",\"security\":\"Security\",\"securities\":{\"starttls\":\"STARTTLS\",\"tls\":\"TLS\",\"none\":\"None\"},\"port\":\"Port\",\"user\":\"User name\",\"userPlaceholder\":\"Empty if the server asks for none\",\"noUser\":\"None\",\"password\":\"Password\",\"passwordKept\":\"Unchanged\",\"sender\":\"Sender\",\"dialogTitle\":\"Mail server\",\"dialogIntro\":\"These settings come from your e-mail provider (Gmail, OVH, Infomaniak…). STARTTLS goes with port 587, TLS with 465.\",\"saved\":\"Settings saved\",\"saveFailed\":\"Couldn’t save the settings.\",\"invalid\":\"A field isn’t valid: check the server, the port and the sender’s address.\",\"loadFailed\":\"Couldn’t load the settings.\",\"test\":\"Send a test\",\"testHint\":\"An e-mail to this account’s address\",\"testButton\":\"Send\",\"testSent\":\"Test sent to {{email}}\",\"failedUnreachable\":\"The server doesn’t answer: check the server, the port and the security.\",\"failedAuth\":\"The server refuses the user name or the password.\",\"failedRefused\":\"The server refuses the e-mail: check the sender’s address.\",\"remove\":\"Stop sending e-mails\",\"removeHint\":\"Hodi forgets these settings\",\"removeButton\":\"Remove\",\"removed\":\"Settings removed\",\"serverIntro\":\"The mail server’s address and its security, given by your e-mail provider (Gmail, OVH, Infomaniak…). STARTTLS goes with port 587, TLS with 465.\",\"loginIntro\":\"The mail server’s user name and password, often your e-mail address and its password. Leave it empty if the server asks for none. Once saved, the password is never shown again.\",\"senderIntro\":\"The address Hodi’s e-mails come from, for example no-reply@example.com. The mail server must accept it.\",\"toFill\":\"To fill in\"},\"notifications\":{\"title\":\"Alerts\",\"intro\":\"How the server lets you know of each thing: by e-mail to your address, in push on your devices, or both. Everything also stays in <i>Notifications</i>.\",\"core\":\"Server\",\"thisDevice\":\"This device\",\"device\":\"Push on this device\",\"deviceHint\":\"Push notifications arrive here\",\"email\":\"E-mail\",\"push\":\"Push\",\"choice\":\"{{kind}}: {{way}}\",\"noMailTitle\":\"The server’s e-mail isn’t set up\",\"noMailText\":\"E-mail notifications stay off until then.\",\"configure\":\"Set up\",\"emptyTitle\":\"Nothing to tell for now\",\"emptyText\":\"Installed plugins add here what they can tell you.\",\"denied\":\"Notifications are blocked for Hodi in this browser.\",\"unsupported\":\"This browser can’t receive notifications. On an iPhone, add Hodi to the home screen.\",\"failed\":\"Couldn’t turn push on for this device.\",\"loadFailed\":\"Couldn’t load the notifications.\",\"saveFailed\":\"Couldn’t save this choice.\",\"weeklyReport\":{\"label\":\"Weekly report\",\"hint\":\"On Monday at 08:00, the week’s numbers\"},\"codeRequest\":{\"label\":\"Code requests\",\"hint\":\"When someone forgot their password\"},\"sourceReview\":{\"label\":\"Sources to review\",\"hint\":\"When a source added waits for a decision\"},\"sourceReport\":{\"label\":\"Reported sources\",\"hint\":\"When an account reports a source\"},\"shareReport\":{\"label\":\"Reported shares\",\"hint\":\"When an account reports a share it received\"}},\"inbox\":{\"intro\":\"What the server asks you to do. A request dealt with moves to <i>Handled</i>, where it stays 7 days.\",\"emptyTitle\":\"Nothing yet\",\"emptyHint\":\"What the server asks you to do lands here.\",\"handledEmptyTitle\":\"Nothing handled\",\"handledEmptyHint\":\"A request dealt with stays here 7 days.\",\"choose\":\"Choose how you’re told\",\"meta_one\":\"{{count}} to handle\",\"meta_other\":\"{{count}} to handle\",\"filter\":\"Filter by kind\",\"kinds\":{\"all\":\"All\",\"source\":\"Sources\",\"code\":\"Passwords\",\"plugin\":\"Plugins\",\"handled\":\"Handled\",\"report\":\"Reports\"},\"failed\":\"Couldn’t load To do\",\"back\":\"Back to To do\",\"noneTitle\":\"Nothing to handle\",\"noneHint\":\"Pick a request in the list.\",\"handled\":\"Handled on {{date}}\",\"source\":{\"kinds\":{\"article\":\"Articles\",\"video\":\"Videos\",\"podcast\":\"Podcasts\"},\"topics\":\"{{name}}’s topics\",\"teen\":\"Suits teens\",\"teenHint\":\"Parents may give it to a teen\",\"child\":\"Suits children\",\"childHint\":\"Parents may give it to a child\",\"refuse\":\"Refuse\",\"refuseTitle\":\"Refuse {{name}}?\",\"refuseText\":\"<b>{{name}}</b> doesn’t join the server’s catalogue. It can be asked for again in 30 days.\",\"accept\":\"Accept\",\"accepted\":\"{{name}} accepted into the catalogue\",\"refused\":\"{{name}} refused\",\"failed\":\"The decision couldn’t be saved. Try again in a moment.\",\"what\":\"The source\",\"topicsLabel\":\"Its topics\",\"young\":\"For young readers\"},\"report\":{\"what\":\"The source\",\"why\":\"The reasons\",\"count_one\":\"{{count}} report\",\"count_other\":\"{{count}} reports\",\"ignore\":\"Ignore\",\"unlist\":\"Take out of the catalogue\",\"unlistTitle\":\"Take {{name}} out of the catalogue?\",\"unlistText\":\"<b>{{name}}</b> is no longer offered. Those who read it keep it in <i>My sources</i>.\",\"ignored\":\"Report ignored\",\"unlisted\":\"{{name}} is out of the catalogue\",\"failed\":\"This choice could not be saved\"},\"share\":{\"what\":\"The share\",\"note\":\"Their note\",\"why\":\"The reason\",\"sender\":\"Sent by\",\"senderGone\":\"Account deleted since\",\"senderHint\":\"Block or delete their account from its page\",\"openAccount\":\"See the account\",\"ignore\":\"Ignore\",\"ignored\":\"Report ignored\",\"failed\":\"This choice could not be saved\"}},\"blocks\":{\"intro\":\"The sites blocked for illegal content, and the way back for an account blocked by mistake.\",\"unblock\":\"Unblock\",\"sources\":{\"section\":\"Blocked sources\",\"search\":\"Search a domain\",\"since\":\"Blocked on {{date}}\",\"emptyTitle\":\"No blocked source\",\"emptyText\":\"A site blocked from To do comes here.\",\"confirmTitle\":\"Unblock this domain?\",\"confirmText\":\"Someone may add <b>{{domain}}</b> again. Nothing that was erased comes back.\",\"done\":\"{{domain}} is unblocked\"},\"emails\":{\"section\":\"Blocked accounts\",\"title\":\"Unblock an address\",\"hint\":\"For an account blocked by mistake\",\"intro\":\"The server does not keep blocked addresses: type the one of the account to let back.\",\"field\":\"Its e-mail\",\"confirmTitle\":\"Unblock this address?\",\"confirmText\":\"<b>{{email}}</b> may make an account on this server again. The erased account does not come back.\",\"done\":\"Address unblocked\",\"notBlocked\":\"This address was not blocked.\"},\"block\":{\"section\":\"Illegal content\",\"label\":\"Block this site\",\"hint\":\"Everywhere, for everyone\",\"short\":\"Block\",\"button\":\"Block everywhere\",\"title\":\"Block {{name}}?\",\"done\":\"{{target}} is blocked\",\"textDomain\":\"The whole domain <b>{{target}}</b> is blocked: its feed is no longer read, and nobody can add it again.\",\"textFeed\":\"This feed of <b>{{host}}</b> is blocked alone: the rest of the site is untouched, and nobody can add it again.\",\"erased_one\":\"Its source leaves every account’s list, with everything read of it on the server.\",\"erased_other\":\"Its {{count}} sources leave every account’s list, with everything read of them on the server.\",\"account\":\"The account that added it is blocked, without you knowing which.\",\"final\":\"<b>There is no going back.</b>\",\"failed\":\"The block could not be prepared. Try again in a moment.\"}}}"), oe = {
 	linkFallback: "The button doesn’t work? Copy this link:",
 	sentBy: "Sent by Hodi",
 	test: {
@@ -1697,13 +1551,28 @@ var e = {
 	},
 	invite: {
 		subject: "{{name}} invites you to Hodi",
-		title: "Join the {{household}} household",
-		text: "{{name}} invites you to the {{household}} household on Hodi. With this code you make your own account and your profile is added to it. It works for 24 hours, once.",
+		title: "Your invitation to Hodi",
+		text: "{{name}} invites you to Hodi. With this code you make your own account. It works for 24 hours, once.",
 		code: "Your code: {{code}}",
-		button: "Join the household",
+		button: "Create my account",
 		note: "If you don’t know this person, ignore this e-mail: without the code, nothing happens."
+	},
+	sourceReview: {
+		eyebrow: "Server",
+		title: "Source to review: {{name}}",
+		text: "{{name}} was just added. It stays out of the catalogue until it is accepted in To do."
+	},
+	sourceReport: {
+		eyebrow: "Server",
+		title: "Source reported: {{name}}",
+		text: "Someone reported {{name}}. Keep it or take it out of the catalogue in To do."
+	},
+	shareReport: {
+		eyebrow: "Server",
+		title: "Share reported",
+		text: "Someone reported a share they received. Ignore it or act on the account that sent it in To do."
 	}
-}, ce = {
+}, se = {
 	title: "Forgot password",
 	intro: "Enter your account’s e-mail. You get an 8-character code there, then you choose a new password.",
 	send: "Send a code",
@@ -1729,7 +1598,7 @@ var e = {
 	ask: "Ask for it",
 	askedIntro: "The server’s admin got your request. Once they pass you the code, enter it here. It works for 24 hours, and once.",
 	askedIntroTyped: "The 8 characters the server’s admin passed you. The code works for 24 hours, and once."
-}, le = {
+}, ce = {
 	failed: "Two-step verification couldn’t start. Try again in a moment.",
 	scan: {
 		app: "Install an authenticator app on your phone: Google Authenticator, Microsoft Authenticator, 1Password, Aegis…",
@@ -1758,7 +1627,7 @@ var e = {
 		title: "Protect your account",
 		intro: "This account runs the whole server. On top of the password, it will ask for a code from your phone each time you sign in on a new device.",
 		helpTitle: "Why is it required?",
-		help: "The server’s account can create and delete households and accounts, install plugins and restore backups. A stolen password isn’t enough to take it: your phone is needed too."
+		help: "The server’s account can create and delete accounts, install plugins and restore backups. A stolen password isn’t enough to take it: your phone is needed too."
 	},
 	account: {
 		row: "Two-step verification",
@@ -1808,16 +1677,201 @@ var e = {
 		message: "This account is protected by two-step verification. Type the 6-digit code the app shows for Hodi.",
 		button: "Continue"
 	}
-}, ue = {
-	title: "Hodi - News for the whole family, free and everywhere",
-	description: "Your favourite news sites, sorted by topic, all in one place. A profile for everyone, and the household shares what’s worth reading."
+}, le = { remove: "Remove {{name}}" }, ue = {
+	title: "My account",
+	sectionsButton: "Sections",
+	sections: {
+		profile: "Profile",
+		"sign-in": "Sign-in",
+		region: "Region",
+		ai: "AI and credits",
+		stats: "Statistics",
+		data: "Data",
+		children: "My children"
+	},
+	intros: {
+		profile: "The name, photo and colour others see, and Hodi's language.",
+		"sign-in": "How you sign in, and the devices where the account is open.",
+		region: "The time zone says when a day starts: the statistics', the <i>Daily summary</i>'s and the badges'.",
+		data: "A copy of everything Hodi keeps about the account, or deleting it.",
+		ai: "Each purple button is a call to the AI, paid with this account's API key: nothing goes without a click. Calls count over a rolling 24 hours, with no cap: the key is yours.",
+		children: "The teens’ and children’s accounts you run: each signs in with their username and the password you choose."
+	}
 }, de = {
-	title: "You no longer have a household",
-	text: "Your account <b>{{email}}</b> is in no household any more, but it still exists: you find it in <i>My account</i>. To join a household, sign out, then type in <i>I have a code</i> the one an adult of it gives you.",
-	deleteMessage: "<b>{{email}}</b> is erased right away. Backup copies forget it within {{days}} at most.",
-	account: "My account",
-	accountIntro: "How you sign in, your devices and everything Hodi keeps about you."
-}, fe = { remove: "Remove {{name}}" }, pe = {
+	create: {
+		title: "Add a child",
+		passwordTitle: "{{name}}’s password",
+		button: "Create",
+		done: "{{name}}’s account created",
+		handleTaken: "This username is taken: go back to pick another one.",
+		failed: "The account couldn’t be created. Try again."
+	},
+	addCard: "A teen or a child, who signs in with their own username.",
+	addButton: "Add",
+	password: {
+		label: "Password",
+		hint: "Signs in with @{{handle}}",
+		none: "No password yet for @{{handle}}",
+		change: "Change",
+		choose: "Choose",
+		title: "{{name}}’s password",
+		intro: "Their devices sign in with <b>@{{handle}}</b> and this password. Those that used the old one sign in again.",
+		confirmTitle: "Change {{name}}’s password?",
+		confirmText: "To confirm, type the password you sign in with.",
+		saved: "{{name}}’s password saved",
+		actionLabel: "{{name}}’s password"
+	},
+	loadFailed: "Couldn’t load your children.",
+	parents: {
+		title: "Parents",
+		leave: "Step back",
+		waiting: "Invitation sent, waiting for an answer",
+		cancel: "Cancel",
+		cancelLabel: "Cancel {{name}}’s invitation",
+		second: "Invite a second parent",
+		inviteTitle: "Invite a parent",
+		inviteIntro: "Their username, from an account that already exists on this server. If they accept, they get the same rights as you over <b>{{name}}</b>.",
+		handle: "Username",
+		handlePlaceholder: "marie",
+		send: "Invite",
+		sent: "Invitation sent to {{name}}",
+		unknown: "This account does not exist.",
+		already: "This account is a parent already.",
+		full: "Two parents at most.",
+		tooMany: "Too many tries: try again in a minute.",
+		failed: "That didn’t work. Try again.",
+		leaveTitle: "Stop being {{name}}’s parent?",
+		leaveText: "You no longer run <b>{{name}}</b>: their other parent keeps everything. To be a parent again, they will have to invite you.",
+		left: "You’re no longer {{name}}’s parent",
+		since: "parent since {{date}}",
+		leaveLabel: "Stop being {{name}}’s parent"
+	},
+	invitations: {
+		title: "{{from}} asks you to be {{name}}’s parent",
+		text: "If you accept, you have the same rights as <b>{{from}}</b> over <b>{{name}}</b>: their sources, hours and password.",
+		accept: "Accept",
+		refuse: "Refuse",
+		accepted: "You’re {{name}}’s parent",
+		refused: "Request refused",
+		failed: "That didn’t work. Try again.",
+		acceptLabel: "Accept being {{name}}’s parent",
+		refuseLabel: "Refuse being {{name}}’s parent"
+	},
+	parentalCode: {
+		section: "On a shared device",
+		title: "Parental code",
+		hintOff: "Not chosen yet",
+		hintOn: "Asked to open this profile on a shared device",
+		code: "Code",
+		codeValue: "Forgotten? The account’s password stands in",
+		changeLabel: "Change the parental code",
+		dialogTitle: "The parental code",
+		dialogIntro: "Six digits, asked to open this profile from <i>Who’s reading?</i> on a device where a teen or a child is signed in. Never on devices only you use. If forgotten, the account’s password stands in for it.",
+		newCode: "New code",
+		onTitle: "Save this parental code?",
+		onText: "It will be asked to open this profile from <i>Who’s reading?</i>, on every device where a teen or a child is signed in.",
+		offTitle: "Turn off the parental code?",
+		offText: "This profile will open again without a code from <i>Who’s reading?</i>, on the devices where a teen or a child is signed in.",
+		off: "Turn off",
+		hintAdvised: "Advised, not chosen yet"
+	},
+	listTitle: "Children"
+}, fe = {
+	title: "Catalogue",
+	parts: "Sections",
+	intro: "This topic’s sources on the server, all approved by the admin. <i>Add</i> puts one in <i>My sources</i>, where it stays ticked here; <i>Remove</i> takes it out.",
+	mine: "in your sources",
+	add: "Add {{name}} to your sources",
+	remove: "Take {{name}} out of your sources",
+	openSite: "Open the site",
+	added: "{{name}} added to your sources",
+	removed: "{{name}} taken out of your sources",
+	addFailed: "The source could not be added. Try again in a moment.",
+	browse: "Browse the catalogue",
+	empty: {
+		title: "No source",
+		text: "Nothing matches your search."
+	},
+	searchIn: "Search for a source in {{topic}}",
+	sort: {
+		title: "Sort the sources",
+		label: "Sort: {{sort}}",
+		az: "A to Z",
+		za: "Z to A",
+		popular: "Most popular",
+		unpopular: "Least popular"
+	}
+}, pe = {
+	add: "Add",
+	remove: "Remove",
+	moreTopics_one: "{{count}} more topic",
+	moreTopics_other: "{{count}} more topics",
+	low: "Little read",
+	addTitle: "Add a source",
+	addText: "From its link, or found with the AI.",
+	ask: "Ask",
+	askTitle: "Ask for a source",
+	askText: "The parents approve it before it arrives."
+}, me = {
+	button: "Report",
+	label: "Report {{name}}",
+	title: "Report {{name}}",
+	intro: "Tell the server’s admin why <b>{{name}}</b> does not belong here. They will not know it came from you.",
+	reasons: {
+		illegal: {
+			label: "Illegal",
+			hint: "Content the law forbids"
+		},
+		hateful: {
+			label: "Hateful",
+			hint: "Hate, harassment, violence"
+		},
+		misleading: {
+			label: "Misleading",
+			hint: "False news, scams"
+		},
+		other: {
+			label: "Something else",
+			hint: "It does not suit this server"
+		}
+	},
+	reasonsLabel: "Why?",
+	send: "Send",
+	sent: "Report sent",
+	failed: "The report could not be sent"
+}, he = {
+	button: "Report",
+	label: "Report {{name}}’s share",
+	title: "Report this share",
+	intro: "Only the server’s admin sees it, without your name being shown. Nothing changes for <b>{{name}}</b> until they decide.",
+	reasonsLabel: "The reason",
+	reasons: {
+		harassment: {
+			label: "Harassment",
+			hint: "Insisting, threats or humiliation"
+		},
+		hateful: {
+			label: "Hateful",
+			hint: "Insults or rejects people for who they are"
+		},
+		spam: {
+			label: "Spam",
+			hint: "Mass sending or advertising"
+		},
+		other: {
+			label: "Other",
+			hint: "Another reason worth the admin’s attention"
+		}
+	},
+	send: "Report",
+	sent: "Share reported",
+	already: "You already reported this share",
+	tooMany: "You reached 5 reports today. Try again tomorrow.",
+	failed: "The report could not be sent",
+	mute: "Stop receiving their shares",
+	muteLabel: "Stop receiving {{name}}’s shares",
+	muted: "You no longer receive {{name}}’s shares"
+}, ge = {
 	common: e,
 	language: t,
 	app: n,
@@ -1867,23 +1921,26 @@ var e = {
 	sync: K,
 	toast: q,
 	settings: J,
-	pin: Y,
-	addSource: X,
-	suggest: Z,
-	sources: Q,
-	ai: $,
-	push: ee,
-	passwordChange: te,
-	hourCycle: ne,
-	confirm: re,
-	dialogIntro: ie,
-	plugins: ae,
-	server: oe,
-	mail: se,
-	forgot: ce,
-	twoFactor: le,
-	seo: ue,
-	noHousehold: de,
-	choiceField: fe
+	addSource: Y,
+	suggest: X,
+	sources: Z,
+	ai: Q,
+	push: $,
+	passwordChange: ee,
+	hourCycle: te,
+	confirm: ne,
+	dialogIntro: re,
+	plugins: ie,
+	server: ae,
+	mail: oe,
+	forgot: se,
+	twoFactor: ce,
+	choiceField: le,
+	accountPage: ue,
+	children: de,
+	catalogue: fe,
+	sourceCard: pe,
+	report: me,
+	shareReport: he
 };
-export { X as addSource, $ as ai, o as aiKey, n as app, v as card, fe as choiceField, e as common, re as confirm, x as count, z as dailySummary, pe as default, ie as dialogIntro, w as feed, V as followed, ce as forgot, G as game, k as help, O as history, ne as hourCycle, i as join, t as language, f as limits, T as lists, r as login, se as mail, u as nav, de as noHousehold, y as notFound, _ as offline, A as pane, a as password, te as passwordChange, Y as pin, ae as plugins, c as profileForm, d as profiles, C as pull, ee as push, P as questions, j as reader, s as regions, m as requests, E as resume, D as saved, U as search, ue as seo, oe as server, J as settings, l as setup, L as share, F as shareMenu, I as shareTo, H as shares, h as shortcuts, Q as sources, M as speech, S as state, W as stats, B as stories, Z as suggest, N as summary, K as sync, b as time, q as toast, g as tour, le as twoFactor, R as videos, p as young };
+export { ue as accountPage, Y as addSource, Q as ai, o as aiKey, n as app, v as card, fe as catalogue, de as children, le as choiceField, e as common, ne as confirm, x as count, z as dailySummary, ge as default, re as dialogIntro, w as feed, V as followed, se as forgot, G as game, k as help, O as history, te as hourCycle, i as join, t as language, f as limits, T as lists, r as login, oe as mail, u as nav, y as notFound, _ as offline, A as pane, a as password, ee as passwordChange, ie as plugins, c as profileForm, d as profiles, C as pull, $ as push, P as questions, j as reader, s as regions, me as report, m as requests, E as resume, D as saved, U as search, ae as server, J as settings, l as setup, L as share, F as shareMenu, he as shareReport, I as shareTo, H as shares, h as shortcuts, pe as sourceCard, Z as sources, M as speech, S as state, W as stats, B as stories, X as suggest, N as summary, K as sync, b as time, q as toast, g as tour, ce as twoFactor, R as videos, p as young };

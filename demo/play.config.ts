@@ -1,10 +1,14 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+// Copied into Hodi's web folder by build.sh: the app reads its limits from config.yml, as Hodi's own build does.
+import { hodiConfig } from '../config-plugin.ts'
+
+const config = hodiConfig(`${import.meta.dirname}/../../config.yml`)
 
 // The playground's bundle: every component, drawn again by Hodi's own code each time a control changes. A module,
 // so that what the app loads only when needed stays in files of its own.
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), config],
   // Each render's dialog is alone in its window (dialog-stack.ts), never stops the page from scrolling
   // (remove-scroll.tsx), and the question before deleting stays open after a click (confirm.ts).
   resolve: {

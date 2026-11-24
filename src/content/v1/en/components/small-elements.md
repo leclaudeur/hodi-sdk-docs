@@ -1,7 +1,7 @@
 ---
 title: "Small elements"
-description: "Chips, filters, a source's avatar and a household's."
-intro: "The small elements that go with a row or a title: a chip, a filter, a source's or a household's avatar. Like Hodi's captions and metadata, chips are written in the mono font."
+description: "Chips, filters and a source's avatar."
+intro: "The small elements that go with a row or a title: a chip, a filter or a source's avatar. Like Hodi's captions and metadata, chips are written in the mono font."
 order: 6
 icon: "tag"
 topic: "sport"
@@ -56,7 +56,7 @@ import { FilterChip } from 'hodi:sdk'
 
 ## SourceAvatar
 
-A source's icon, taken from its site, or its initials when the site has none. It is never round: round is kept for people and households.
+A source's icon, taken from its site, or its initials when the site has none. It is never round: round is kept for people.
 
 ```tsx title="web/index.tsx" render="sourceavatar" play="sourceavatar"
 import { SourceAvatar } from 'hodi:sdk'
@@ -74,25 +74,3 @@ import { SourceAvatar } from 'hodi:sdk'
 | `sourceId` | `string` | The source's id, as an article gives it. |
 | `sourceName` | `string` | The source's name, whose initials the avatar takes when it has no icon. |
 | `size?` | `18 \| 20 \| 22 \| 26 \| 44` | The avatar's size, in px. It is 18 by default. |
-
-## HouseholdAvatar
-
-A household's photo, or its initial when it has no photo. It is round, like a profile on the _Who's in?_ screen.
-
-```tsx title="web/index.tsx" render="householdavatar" play="householdavatar"
-import { HouseholdAvatar } from 'hodi:sdk'
-
-<HouseholdAvatar
-  name="Smith"
-  photo={household.photo}
-  size={64}
-/>
-```
-
-<!-- prettier-ignore -->
-| Props | Type | |
-| --- | --- | --- |
-| `name` | `string` | The household's name, whose initial the avatar takes when it has no photo. |
-| `photo` | `string \| null` | The address of the household's photo (`household.photo`), or `null`. |
-| `size` | `number` | The avatar's width, in px, ring included. |
-| `preview?` | `string \| null` | A photo the person just chose but hasn't sent yet. It shows in place of `photo`. |

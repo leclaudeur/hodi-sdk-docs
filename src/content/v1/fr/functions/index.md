@@ -18,7 +18,7 @@ import { askToConfirm, usePluginApi } from 'hodi:sdk'
 const api = usePluginApi()
 askToConfirm({
   title: 'Vider l’historique ?',
-  message: 'Les 30 derniers bonjours de ce foyer seront effacés.',
+  message: 'Les 30 derniers bonjours de ce profil seront effacés.',
   label: 'Vider',
   onConfirm: () => api('/history', { method: 'DELETE' })
 })

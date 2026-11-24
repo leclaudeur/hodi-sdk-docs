@@ -113,7 +113,7 @@ Pour tout le reste, la partie serveur passe par `ctx`, le contexte que Hodi donn
 | Lire ou écrire ses données | Avec `ctx.db`, qui donne accès à sa base de données. |
 | Lire ses réglages | Avec `ctx.settings()`, qui renvoie la valeur choisie pour chaque réglage. |
 | Lire la page d'un site | Avec `ctx.fetchText()`. Il faut la permission `network`. |
-| Poser une question à l'IA du foyer | Avec `ctx.ai.ask()`. Il faut la permission `ai`. |
+| Poser une question à l'IA de la personne qui clique | Avec `ctx.ai.ask()`. Il faut la permission `ai`. |
 | Écrire une ligne dans le journal | Avec `ctx.log()`, pour suivre ce que fait le plugin. |
 
 Hodi vérifie chaque appel : le plugin n'obtient que ce que ses [permissions](/fr/guide/manifest/#les-permissions) lui ouvrent. [Le contexte serveur](/fr/guide/server-context/) décrit tout ce que `ctx` contient.
@@ -233,7 +233,7 @@ Voici ce qui se passe, dans l'ordre, pendant cet appel :
 6. La route ne reçoit aucun cookie.
 7. Sa réponse revient à la partie web, en JSON.
 
-`request.who` dit qui demande, tel que Hodi l'a vérifié : le profil de la personne, son foyer, si la personne est adulte, ado ou enfant, et si elle est admin. La route n'a donc rien à vérifier elle-même. La route ne reçoit jamais de cookie ni de jeton : le plugin ne peut pas se faire passer pour la personne.
+`request.who` dit qui demande, tel que Hodi l'a vérifié : le profil de la personne, si elle est adulte, ado ou enfant, si elle est l'admin du serveur, et son compte. La route n'a donc rien à vérifier elle-même. La route ne reçoit jamais de cookie ni de jeton : le plugin ne peut pas se faire passer pour la personne.
 
 ## Les textes du plugin
 

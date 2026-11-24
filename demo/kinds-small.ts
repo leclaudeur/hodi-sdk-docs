@@ -64,19 +64,3 @@ export const sourceavatar: Kind = {
     ]
   })
 }
-
-export const householdavatar: Kind = {
-  controls: {
-    name: text('name', words('Dupont', 'Smith')),
-    size: seg('size', ['44', '64'], '64')
-  },
-  code: state => ({
-    body: [
-      h('HouseholdAvatar', [
-        ['name', s(str(state, 'name'))],
-        ['photo', e('household.photo')],
-        ['size', e(str(state, 'size'))]
-      ])
-    ]
-  })
-}

@@ -43,7 +43,7 @@ Voici chaque champ de `plugin.json`, avec son type et son rôle. Chaque champ a 
 | `version` | `string` | Le numéro de version, comme `1.2.0`. |
 | `description` | `string` | Une phrase qui dit ce que fait le plugin, 280 caractères au plus. |
 | `api` | `2` | La version de l'API des plugins pour laquelle le plugin est écrit. |
-| `audience?` | `'admin' \| 'all'` | Qui voit le plugin dans un foyer. `all` par défaut. |
+| `audience?` | `'admin' \| 'all'` | Qui voit le plugin : l'admin du serveur ou chaque profil. `all` par défaut. |
 | `settings?` | `Setting[]` | Les réglages du plugin, que l'admin du serveur change. |
 | `permissions?` | `Permissions` | Ce que le plugin a le droit de faire, en plus de garder ses données. |
 | `menu?` | `{ group, after? }` | Où placer l'entrée du plugin dans Réglages. |
@@ -107,15 +107,15 @@ Hodi ne charge pas un plugin écrit pour une autre version de l'API : le code de
 
 ### `audience`
 
-Le champ `audience` dit quels profils d'un foyer voient le plugin : la page du plugin dans Réglages, ses cartes et ses boutons. Hodi applique la même règle aux [routes](/fr/guide/server-context/#les-routes) du plugin : une personne qui ne voit pas le plugin ne peut pas non plus appeler ses routes.
+Le champ `audience` dit quels profils voient le plugin : la page du plugin dans Réglages, ses cartes et ses boutons. Hodi applique la même règle aux [routes](/fr/guide/server-context/#les-routes) du plugin : une personne qui ne voit pas le plugin ne peut pas non plus appeler ses routes.
 
 Le champ `audience` a deux valeurs possibles :
 
 <!-- prettier-ignore -->
 | Valeur | Qui voit le plugin |
 | --- | --- |
-| `"all"` | Chaque profil du foyer : adultes, ados et enfants. C'est la valeur par défaut. |
-| `"admin"` | L'admin du foyer seulement. |
+| `"all"` | Chaque profil du serveur : adultes, ados et enfants. C'est la valeur par défaut. |
+| `"admin"` | L'admin du serveur seulement. |
 
 Avec `"all"`, une route peut quand même adapter sa réponse à la personne qui demande : `request.who.kind` vaut `"adult"`, `"teen"` ou `"child"`.
 
@@ -280,19 +280,18 @@ Ces trois permissions marchent pour n'importe quel plugin, signé ou non :
 
 ### Les permissions des plugins signés
 
-Ces six permissions touchent aux comptes des gens, ou coûtent de l'argent au foyer. Seul un plugin signé, relu par le mainteneur de Hodi, obtient ces permissions :
+Ces cinq permissions touchent aux comptes des gens, ou coûtent de l'argent à la personne qui clique. Seul un plugin signé, relu par le mainteneur de Hodi, obtient ces permissions :
 
 <!-- prettier-ignore -->
 | Permission | Type | Ce que la permission ouvre |
 | --- | --- | --- |
-| `ai` | `boolean` | Poser une question à l'IA du foyer, une seule par clic sur le bouton IA du plugin, avec `ctx.ai.ask()`. |
-| `notify` | `boolean` | Envoyer une notification sur les appareils d'une personne, 10 par jour au plus, avec `ctx.notify()`. |
+| `ai` | `boolean` | Poser une question à l'IA de la personne qui clique, une seule par clic sur le bouton IA du plugin, avec `ctx.ai.ask()`. |
+| `notify` | `boolean` | Envoyer une notification sur les appareils d'une personne, 10 par jour et 3 par heure au plus, avec `ctx.notify()`. |
 | `mail` | `boolean` | Envoyer un e-mail par le serveur d'e-mail de Hodi, 50 par heure au plus, avec `ctx.mail`. |
 | `accounts` | `boolean` | Créer des comptes, les retrouver et vérifier un mot de passe, avec `ctx.accounts`. |
-| `households` | `boolean` | Lister et créer des foyers, et suspendre ou supprimer ceux qu'il a créés, avec `ctx.households`. |
 | `signIn` | `boolean` | Connecter quelqu'un depuis une route publique, et refuser une connexion avec `checkSignIn`. |
 
-Un plugin non signé qui demande `notify`, `mail`, `accounts`, `households` ou `signIn` est refusé à l'installation. Un plugin non signé qui demande `ai` s'installe quand même, mais sans l'IA : le bouton IA du plugin ne répond pas.
+Un plugin non signé qui demande `notify`, `mail`, `accounts` ou `signIn` est refusé à l'installation. Un plugin non signé qui demande `ai` s'installe quand même, mais sans l'IA : le bouton IA du plugin ne répond pas.
 
 En développement, avec `hodi-plugin dev`, le plugin garde toutes ses permissions, même sans signature. Chaque permission se teste donc avant de demander la signature.
 
@@ -312,11 +311,11 @@ Le champ `menu` dit où placer l'entrée du plugin dans Réglages. Ce champ ne s
 - `group` : le groupe de Réglages, comme `you` pour _Toi_.
 - `after` : l'entrée de Hodi juste avant, comme `stats`.
 
-Sans `menu`, ou avec un groupe inconnu, l'entrée du plugin va à la fin du groupe _Foyer_. [`page`](/fr/guide/slots/settings/) liste les six groupes et leurs entrées.
+Sans `menu`, ou avec un groupe inconnu, l'entrée du plugin va à la fin du groupe _Toi_. [`page`](/fr/guide/slots/settings/) liste les cinq groupes et leurs entrées.
 
 ### `feeds`
 
-Le champ `feeds` déclare les flux d'articles que le plugin propose, 5 au plus. Un foyer suit ces flux comme n'importe quelle autre source. [`feeds`](/fr/guide/slots/feeds/) montre un exemple complet.
+Le champ `feeds` déclare les flux d'articles que le plugin propose, 5 au plus. Chacun suit ces flux comme n'importe quelle autre source. [`feeds`](/fr/guide/slots/feeds/) montre un exemple complet.
 
 ### `serverNotifications`
 
